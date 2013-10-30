@@ -183,7 +183,7 @@ function updateGraph() {
           <select onmouseup="checkJobCount();" id="jobs" multiple="true"
                   name="job_id[]"
                   size="7"
-                  style="width:330px;">{html_options options=$jobs selected=$job_ids}</select>
+                  style="width:440px; height:280px">{html_options options=$jobs selected=$job_ids}</select>
 
           <div style="font-size:x-small;">Select up to 3 jobs</div>
         </td>
