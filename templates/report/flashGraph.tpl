@@ -221,12 +221,11 @@ function updateGraph() {
             <tr>
               <td align="right" valign="middle">Interval:</td>
               <td valign="top"><select id="interval" name="interval" onchange="checkInterval();">
-                <option {if $interval eq 0}selected="true"{/if} value="0">Auto</option>
                 <option {if $interval eq 1}selected="true"{/if} value="1">Max</option>
                 <option {if $interval eq 300}selected="true"{/if} value="300">5 Minutes</option>
                 <option {if $interval eq 900}selected="true"{/if} value="900">15 Minutes</option>
                 <option {if $interval eq 1800}selected="true"{/if} value="1800">30 Minutes</option>
-                <option {if $interval eq 3600}selected="true"{/if} value="3600">1 Hour</option>
+                <option {if $interval eq 3600 or $interval eq 0}selected="true"{/if} value="3600">1 Hour</option>
                 <option {if $interval eq 10800}selected="true"{/if} value="10800">3 Hours</option>
                 <option {if $interval eq 21600}selected="true"{/if} value="21600">6 Hours</option>
                 <option {if $interval eq 43200}selected="true"{/if} value="43200">12 Hours</option>
