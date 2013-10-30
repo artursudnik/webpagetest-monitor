@@ -65,13 +65,13 @@
   }
   $smarty->assign('canChangeScript',$canChangeScript);
 
-  if (!$result['WPTBandwidthDown'])
+  if (!$result['WPTBandwidthDown'] && $result['WPTBandwidthDown'] != 0)
     $result['WPTBandwidthDown'] = 1500;
-  if (!$result['WPTBandwidthUp'])
+  if (!$result['WPTBandwidthUp'] && $result['WPTBandwidthUp'] != 0)
     $result['WPTBandwidthUp'] = 384;
-  if (!$result['WPTBandwidthLatency'])
+  if (!$result['WPTBandwidthLatency'] && $result['WPTBandwidthLatency'] != 0)
     $result['WPTBandwidthLatency'] = 50;
-  if (!$result['WPTBandwidthPacketLoss'])
+  if (!$result['WPTBandwidthPacketLoss'] && $result['WPTBandwidthPacketLoss'] != 0)
     $result['WPTBandwidthPacketLoss'] = 0;
 
   $q = Doctrine_Query::create()->from('WPTScript s')->orderBy('s.Label');
