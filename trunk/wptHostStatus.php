@@ -14,7 +14,7 @@
       $cache = false;
     }
   }
-  $ec2TesterStatus = getEC2TesterStatus($cache);
+  //$ec2TesterStatus = getEC2TesterStatus($cache);
 
   foreach($testers as &$tester){
     foreach($tester['Agents'] as $key=>&$agent){
