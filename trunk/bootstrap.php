@@ -17,11 +17,11 @@
   $logins = parse_ini_file("settings/bootstrap.ini");
 
 
-  if (($logins===false)||(!$logins['login'])||(!$logins['password'])||(!$logins['database'])){
+  if (($logins===false)||(!$logins['login'])||(!$logins['password'])||(!$logins['database'])||(!$logins['dbserver'])){
     $dsn= 'sqlite:///'.dirname(__FILE__).'/db/wpt_monitor.sqlite';
   }
   else{
-    $dsn= 'mysql://'.$logins['login'].':'.$logins['password'].'@localhost/'.$logins['database'];
+    $dsn= 'mysql://'.$logins['login'].':'.$logins['password'].'@'.$logins['dbserver'].'/'.$logins['database'];
   }
 
 
