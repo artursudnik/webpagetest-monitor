@@ -11,6 +11,7 @@ color: white;
 }
 </style>
 {/literal}
+<iframe src="keepAlive.php" style="display:none"></iframe>
 <div id="wptAuthBar">Welcome, <a href="editUser.php?user_id={$smarty.session.ls_id}">{$smarty.session.ls_user}</a> &nbsp;|&nbsp; <a href="{$smarty.server.PHP_SELF}?ls_logout" rel="">Logout</a><br>{include_php file='utcDateTime.php'}</div>
 
 <div id="header">
