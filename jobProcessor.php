@@ -44,5 +44,7 @@
   updateQueueProcessRate();
   checkTesterRatioAndEmailAlert();
 
+  session_destroy();
+
 ?>
  
