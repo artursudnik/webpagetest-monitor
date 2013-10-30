@@ -62,18 +62,18 @@
             {if $eo == "even"} {assign var="eo" value="odd"} {else} {assign var="eo" value= "even"}{/if}
             {assign value="#98fb98" var="bgcolor"}
             <tr class="{$eo}">
-              <td nowrap="true">{$user}</td>
+              <td nowrap="nowrap">{$user}</td>
               <td align="right">{if isset($runRateInfo.jobsPerUser[$user])}{$runRateInfo.jobsPerUser[$user]}{else}0{/if}</td>
               <td align="right">{if isset($runRateInfo.activeJobsPerUser[$user])}{$runRateInfo.activeJobsPerUser[$user]}{else}0{/if}</td>
-              <td align="right" nowrap="true">{if isset($runRateInfo.runRatePerUser[$user])}{$runRateInfo.runRatePerUser[$user]|number_format}{else}0{/if}</td>
+              <td align="right" nowrap="nowrap">{if isset($runRateInfo.runRatePerUser[$user])}{$runRateInfo.runRatePerUser[$user]|number_format}{else}0{/if}</td>
             </tr>
           {/foreach}
             <tr><td colspan="4"><hr></td></tr>
             <tr class="even" style="font-weight:bold;">
               <td align="right">Total</td>
               <td align="right">{$runRateInfo.totalJobs}</td>
-              <td align="right" nowrap="true">{$runRateInfo.totalActiveJobs}</td>
-              <td align="right" nowrap="true">{$runRateInfo.hourlyRunRate}</td>
+              <td align="right" nowrap="nowrap">{$runRateInfo.totalActiveJobs}</td>
+              <td align="right" nowrap="nowrap">{$runRateInfo.hourlyRunRate}</td>
             </tr>
           </table>
           <br>
@@ -93,7 +93,7 @@
               <th align="right">Last Work</th>
             </thead>
             {foreach from=$testers item=tester}
-              <tr><a name="{$tester.id}"></a> <td colspan="10" nowrap="true" bgcolor="#f5f5dc"><h4 style="font-size: medium;">{$tester.id}</h4></td></tr>
+              <tr><a name="{$tester.id}"></a> <td colspan="10" nowrap="nowrap" bgcolor="#f5f5dc"><h4 style="font-size: medium;">{$tester.id}</h4></td></tr>
                 {assign var="eo" value="odd"}
                 {foreach from=$tester.Agents item=agent}
                   {if $eo == "even"} {assign var="eo" value="odd"} {else} {assign var="eo" value= "even"}{/if}

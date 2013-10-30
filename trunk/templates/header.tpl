@@ -1,5 +1,5 @@
 {literal}
-<style>
+<style type="text/css">
 #wptAuthBar {
 color: white;
 height: 18px;
