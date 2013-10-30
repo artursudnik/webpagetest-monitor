@@ -29,4 +29,3 @@
 //
 //  $configDsn= 'sqlite:///'.dirname(__FILE__).'/db/config.sqlite';
 //  $configConn = Doctrine_Manager::connection($configDsn, 'config');
-?>
