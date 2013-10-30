@@ -14,3 +14,6 @@ chown www-data:www-data templates_c
 
 touch graph/cache
 chown www-data:www-data graph/cache
+
+touch db/wpt_monitor.sqlite
+chown www-data:www-data db/wpt_monitor.sqlite
