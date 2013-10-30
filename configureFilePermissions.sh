@@ -1,4 +1,5 @@
 #!/bin/sh
+
 touch jobProcessor_log.html
 chown www-data:www-data jobProcessor_log.html
 
