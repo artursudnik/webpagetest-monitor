@@ -204,6 +204,11 @@ function getLocationThreshold($host, $location) {
   if (!$queueThreshold = $result['QueueThreshold']) {
     $queueThreshold = 0;
   }
+
+  if (function_exists('logOutput')) {
+	logOutput("[INFO] [ProcessJob] [getLocationThreshold] host: $host location: $location threshold: $queueThreshold");
+  }
+ 
   $q->free(true);
   return $queueThreshold;
 }
