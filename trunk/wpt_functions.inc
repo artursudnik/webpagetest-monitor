@@ -1091,7 +1091,7 @@ function checkQueueGrowthCountAndEmailAlert(){
   }
   if (isset($message)){
     sendEmailAlert($siteContactEmailAddress, $message);
-    logOutput('[INFO] [checkQueueGrowthCountAndEmailAlert] Alert message sent:\n' . $message );
+    logOutput("[INFO] [checkQueueGrowthCountAndEmailAlert] Alert message sent:\n" . $message );
   }
 }
 
@@ -1214,7 +1214,7 @@ function checkTesterRatioAndEmailAlert(){
   }
   if ($message){
     sendEmailAlert($siteContactEmailAddress, $message);
-    logOutput('[INFO] [checkTesterRatioAndEmailAlert] Alert message sent:\n' . $message );
+    logOutput("[INFO] [checkTesterRatioAndEmailAlert] Alert message sent:\n" . $message );
     echo $message;
   }
 }
