@@ -14,7 +14,17 @@
 
   spl_autoload_register(array('Doctrine_Core', 'modelsAutoload'));
 
-  $dsn= 'sqlite:///'.dirname(__FILE__).'/db/wpt_monitor.sqlite';
+  $logins = parse_ini_file("settings/bootstrap.ini");
+
+
+  if (($logins===false)||(!$logins['login'])||(!$logins['password'])){
+    $dsn= 'sqlite:///'.dirname(__FILE__).'/db/wpt_monitor.sqlite';
+  }
+  else{
+    $dsn= 'mysql://'.$logins['login'].':'.$logins['password'].'@localhost/wpt_monitor';
+  }
+
+
   $dataConn = Doctrine_Manager::connection($dsn,'data');
 //
 //  $configDsn= 'sqlite:///'.dirname(__FILE__).'/db/config.sqlite';
