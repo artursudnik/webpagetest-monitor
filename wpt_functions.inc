@@ -378,8 +378,11 @@ function processJobsForUser($userId, $jobId = null, $force = false, $runLabel=""
     $result = $q->fetchArray();
   } else {
     $q = Doctrine_Query::create()->from('WPTJob j')
-        ->where('j.UserId = ?',$userId)->setHydrationMode(Doctrine_Core::HYDRATE_ARRAY);
-    $result = $q->fetchArray();
+        ->where('j.UserId = ?',$userId)
+		->andWhere('active = 1')
+		->andWhere('(lastrun is NULL or lastrun + frequency*60 < ?)', time())->setHydrationMode(Doctrine_Core::HYDRATE_ARRAY)
+		->orderBy('lastrun');
+	$result = $q->fetchArray();
   }
   
   logOutput("[DEBUG] [processJobsForUsers] before looping through results: " .timestamp()." mem: ". intval(memory_get_usage() / 1024));
