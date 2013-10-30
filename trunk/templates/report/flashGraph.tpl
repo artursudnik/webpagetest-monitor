@@ -48,10 +48,10 @@ function adjustTimeFrame(){
   if (ival > 43200)interval = 43200;
   if (ival > 86400)interval = 86400;
   if (currentInterval < interval) {
-    intervalElement.value = interval;
+    //intervalElement.value = interval;
   }
 
-  disableIntervalOptionsBelow(interval);
+  //disableIntervalOptionsBelow(interval);
 }
 function checkInterval() {
   intervalElement = document.getElementById('interval');
@@ -90,10 +90,10 @@ function checkInterval() {
   if (ival > 86400)interval = 86400;
 
   if (currentInterval < interval) {
-    intervalElement.value = interval;
+    //intervalElement.value = interval;
   }
 
-  disableIntervalOptionsBelow(interval);
+  //disableIntervalOptionsBelow(interval);
 
 }
 function disableIntervalOptionsBelow(value) {
