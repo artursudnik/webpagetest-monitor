@@ -144,7 +144,7 @@ if (isset($fieldsToDisplay) && sizeof($fieldsToDisplay) > 0) {
   }
 } else {
   //  $fields = $availFields;
-  $fields["FV_Doc"] = $availFields['FV_Doc'];
+  $fields["RV_Fully"] = $availFields['RV_Fully'];
   foreach ($fields as $key => $field) {
     $fieldsToDisplay[] = $key;
   }
