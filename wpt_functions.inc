@@ -389,8 +389,10 @@ function processJobsForUser($userId, $jobId = null, $force = false, $runLabel=""
       // Check current queue size for the jobs configured location
       // If it's greater than the threshold then skip the job submission.
       $skipJobSubmission = false;
+      $locationFound = false;
       foreach ($locationInformation as $location){
         if ( $location['hostURL'] == $row['Host'] && $location['id'] == $row['Location'] ){
+          $locationFound = true;
           $queueSize = $location['PendingTests'];
           $threshold = getLocationThreshold($location['hostURL'],$location['id']);
 
@@ -403,6 +405,11 @@ function processJobsForUser($userId, $jobId = null, $force = false, $runLabel=""
       }
       if ($skipJobSubmission)
         continue;
+
+      if (!$locationFound AND $row['Active'] != 0) {
+        logOutput("[INFO] [ProcessJob] Skipping job due to lack of location: ".$row['Location']." jobID: ".$row['Id']);
+        continue;
+      }
 
       $id = $row['Id'];
       $label = $row['Label'];
