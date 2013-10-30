@@ -19,12 +19,45 @@ function getResultsDataAvg($startDateTime, $endDateTime, $interval, $datas, $fie
     //    $entry['Id'] = $id;
     $entry['Date'] = $pointer;
     foreach ($fields as $field) {
-      $entry[$field] = getAverage($pointer, $interval, $datas, $field);
+      $entry[$field] = getMedian($pointer, $interval, $datas, $field);
     }
     $data[] = $entry;
     $pointer += $interval;
   }
   return $data;
+}
+
+function getMedian($startAt, $increment, &$data, $field) {
+  $numberOfElements = 0;
+  $tmpData = array();
+  
+  foreach ($data as $r) {
+    if ($r['Date'] > $startAt && ($r['Date'] < $startAt + $increment)) {
+      $tmpData[] = $r[$field];
+    }
+  }
+  
+  $numberOfElements = count($tmpData);
+  
+  sort($tmpData);
+  
+  if ($numberOfElements > 0) {
+    if( $numberOfElements == 1) {
+      $result = $tmpData[0];
+    } else {
+      if($numberOfElements%2) {
+        $result = $tmpData[($numberOfElements - 1)/2];
+      } else {
+        $result = ($tmpData[($numberOfElements-1)/2] + $tmpData[$numberOfElements/2])/2;
+      }
+    }
+  } else {
+    $result = NULL;
+  }
+  
+  unset($tmpData);
+  
+  return $result;
 }
 
 /**
