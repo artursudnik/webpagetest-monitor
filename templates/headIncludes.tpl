@@ -1,3 +1,4 @@
+<title>WebPageTest Monitor</title>
 <link rel="stylesheet" href="css/pagestyle.css" type="text/css">
 <link rel="stylesheet" href="css/button.css" type="text/css">
 

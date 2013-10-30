@@ -3,7 +3,7 @@
 <head>
 {include file="headIncludes.tpl"}
 {literal}
-<style>
+<style type="text/css">
   label {
     width: 15em;
     float: none;
