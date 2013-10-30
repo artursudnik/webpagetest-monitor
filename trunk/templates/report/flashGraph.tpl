@@ -118,8 +118,8 @@ function checkJobCount() {
   if ($('#jobs').val() == null) {
     alert('Please select job(s)');
     return false;
-  } else  if ($('#jobs').val().length > 3) {
-    alert('Please Select 3 or less jobs');
+  } else  if ($('#jobs').val().length > 8) {
+    alert('Please Select 8 or less jobs');
     return false;
   } else {
     return true;
