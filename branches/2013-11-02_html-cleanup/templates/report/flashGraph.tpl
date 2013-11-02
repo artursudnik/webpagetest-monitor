@@ -216,7 +216,7 @@ function updateGraph() {
             </tr>
             <tr id="endTimeSelect">
               <td style="text-align:right">End:</td>
-              <td nowrap="true">{html_select_date start_year='2010' onchange='checkInterval();' prefix='end' time=$endTime} {html_select_time prefix='end' time=$endTime display_minutes=false display_seconds=false}</td>
+              <td>{html_select_date start_year='2010' onchange='checkInterval();' prefix='end' time=$endTime} {html_select_time prefix='end' time=$endTime display_minutes=false display_seconds=false}</td>
             </tr>
             <tr>
               <td valign="middle" style="text-align:right">Interval:</td>
@@ -248,7 +248,7 @@ function updateGraph() {
             </tr>
           </table>
         </td>
-        <td nowrap="true" style="vertical-align:top; padding:0%">
+        <td style="vertical-align:top; padding:0%">
           <table width=100% cellpadding="0" cellspacing="0">
             <tr>
               <td colspan="1" style="text-align:right">
@@ -308,7 +308,7 @@ function updateGraph() {
         </td>
       </tr>
       <tr>
-        <td colspan="2" nowrap="true">
+        <td colspan="2">
           <div style="font-size:x-small;">
             {html_checkboxes name="fields" options=$availFieldKeysFV selected=$fieldsToDisplay separator=" "}<br>
             {html_checkboxes name="fields" options=$availFieldKeysRV selected=$fieldsToDisplay separator=" "}
