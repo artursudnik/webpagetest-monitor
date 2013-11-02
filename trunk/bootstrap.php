@@ -13,9 +13,10 @@
   $manager->setAttribute(Doctrine_Core::ATTR_MODEL_LOADING, Doctrine_Core::MODEL_LOADING_CONSERVATIVE);
 
   spl_autoload_register(array('Doctrine_Core', 'modelsAutoload'));
-
-  $logins = parse_ini_file("settings/bootstrap.ini");
-
+  
+  if(file_exists("settings/bootstrap.ini")) {
+    $logins = parse_ini_file("settings/bootstrap.ini");
+  }
 
   if (($logins===false)||(!$logins['login'])||(!$logins['password'])||(!$logins['database'])||(!$logins['dbserver'])){
     $dsn= 'sqlite:///'.dirname(__FILE__).'/db/wpt_monitor.sqlite';
