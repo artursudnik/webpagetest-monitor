@@ -323,7 +323,7 @@ function updateGraph() {
               <td><input id="reportButton" type="button" name="action"
                                                     onclick="updateReport();" value="Report"
                                                     style="margin:0px;margin-right:3px;"></td>
-              <td align="center"><input type="button" name="action" onclick="downloadData();" value="Download""></td>
+              <td align="center"><input type="button" name="action" onclick="downloadData();" value="Download"></td>
               <td><input type="reset" value="Reset" style="margin:0px;"></td>
             </tr>
           </table>
