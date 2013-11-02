@@ -25,6 +25,17 @@ textarea {overflow-x: hidden;width: 400px;height: 100px;padding: 3px;}
 
 #addthis {float:right; padding: 5px 25px; clear:both; }
 
+#wptAuthBar {
+    color: white;
+    height: 18px;
+    text-align: right;
+    width: 1100px;
+}
+#wptAuthBar a {
+    color: white;
+}
+
+
 /* Header */
 #header {height: 100px;}
 .logo {width: 222px;margin: 0;padding-top: 15px; float:left;}
