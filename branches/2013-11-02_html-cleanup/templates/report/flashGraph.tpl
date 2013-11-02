@@ -219,7 +219,7 @@ function updateGraph() {
               <td>{html_select_date start_year='2010' onchange='checkInterval();' prefix='end' time=$endTime} {html_select_time prefix='end' time=$endTime display_minutes=false display_seconds=false}</td>
             </tr>
             <tr>
-              <td valign="middle" style="text-align:right">Interval:</td>
+              <td style="text-align:right">Interval:</td>
               <td><select id="interval" name="interval" onchange="checkInterval();">
                 <option {if $interval eq 1}selected="selected"{/if} value="1">Max</option>
                 <option {if $interval eq 300}selected="selected"{/if} value="300">5 Minutes</option>
@@ -249,7 +249,7 @@ function updateGraph() {
           </table>
         </td>
         <td style="vertical-align:top; padding:0%">
-          <table cellpadding="0" cellspacing="0" style="float: right">
+          <table style="float: right">
             <tr>
               <td colspan="1" style="text-align:right">
                 Filter Using:
@@ -314,7 +314,7 @@ function updateGraph() {
             {html_checkboxes name="fields" options=$availFieldKeysRV selected=$fieldsToDisplay separator=" "}
           </div>
         </td>
-        <td colspan="2">
+        <td>
           <table style="cellpadding:0px;cellspacing:0px;margin:0px;border-spacing:0px">
             <tr>
               <td><input id="graphButton" type="button" name="action"
@@ -323,7 +323,7 @@ function updateGraph() {
               <td><input id="reportButton" type="button" name="action"
                                                     onclick="updateReport();" value="Report"
                                                     style="margin:0px;margin-right:3px;"></td>
-              <td align="center"><input type="button" name="action" onclick="downloadData();" value="Download"></td>
+              <td><input type="button" name="action" onclick="downloadData();" value="Download"></td>
               <td><input type="reset" value="Reset" style="margin:0px;"></td>
             </tr>
           </table>
