@@ -27,7 +27,7 @@ function smarty_function_html_select_tree($params, $template) {
     $i = $t['level'];
     $output .= '<option value="' . $t['id'] . '"';
     if ($t['id'] == $selected) {
-      $output .= ' selected="true" ';
+      $output .= ' selected="selected" ';
     }
     $output .= '>';
     if ($t['level'] > 0) {
