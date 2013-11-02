@@ -177,7 +177,7 @@ function updateGraph() {
   <form name="updateForm" class="cmxform" action="flashGraph.php" id="updateForm" onsubmit="validateForm();">
     {if isset($cacheKey)}<input type="hidden" value="{$cacheKey}" name="cacheKey">{/if}
     <input type="hidden" name="act" value="">
-    <table style="width=100%" border="0">
+    <table style="width:100%">
       <tr>
         <td>
           <select onmouseup="checkJobCount();" id="jobs" multiple="multiple"
