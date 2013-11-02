@@ -177,9 +177,9 @@ function updateGraph() {
   <form name="updateForm" class="cmxform" action="flashGraph.php" id="updateForm" onsubmit="validateForm();">
     {if isset($cacheKey)}<input type="hidden" value="{$cacheKey}" name="cacheKey">{/if}
     <input type="hidden" name="act" value="">
-    <table width="100%" border="0">
+    <table style="width=100%" border="0">
       <tr>
-        <td align="left">
+        <td>
           <select onmouseup="checkJobCount();" id="jobs" multiple="true"
                   name="job_id[]"
                   size="7"
@@ -187,7 +187,7 @@ function updateGraph() {
 
           <div style="font-size:x-small;">Select up to 3 jobs</div>
         </td>
-        <td align="left" style="vertical-align:top">
+        <td style="vertical-align:top">
           <input id="startTime" type="hidden" name="startTime">
           <input id="endTime" type="hidden" name="endTime">
           <table>
@@ -309,7 +309,7 @@ function updateGraph() {
       </tr>
       <tr>
         <td colspan="2" nowrap="true">
-          <div align="left" style="font-size:x-small;">
+          <div style="font-size:x-small;">
             {html_checkboxes name="fields" options=$availFieldKeysFV selected=$fieldsToDisplay separator=" "}<br>
             {html_checkboxes name="fields" options=$availFieldKeysRV selected=$fieldsToDisplay separator=" "}
           </div>
@@ -324,7 +324,7 @@ function updateGraph() {
                                                     onclick="updateReport();" value="Report"
                                                     style="margin:0px;margin-right:3px;"></td>
               <td align="center"><input type="button" name="action" onclick="downloadData();" value="Download""></td>
-              <td align="left"><input type="reset" value="Reset" style="margin:0px;"></td>
+              <td><input type="reset" value="Reset" style="margin:0px;"></td>
             </tr>
           </table>
         </td>
