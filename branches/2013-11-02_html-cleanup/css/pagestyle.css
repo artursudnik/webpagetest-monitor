@@ -33,10 +33,10 @@ textarea {overflow-x: hidden;width: 400px;height: 100px;padding: 3px;}
 
 /* Nav */
 #nav_bkg {background-color: #000;}
-#nav {height: 30px;line-height: 1em;text-transform: uppercase;font-size: 16px; clear:both; background: url(http://cdn.webpagetest.org/images/gloss30.png?v=2) repeat-x;}
-#nav li {float: left;height: inherit;}
-#nav li a {display: block;height: 18px;color: #fff;padding: 6px 20px;text-decoration: none;}
-#nav li.current a {text-decoration:underline; color: #f1c52e; }
+.nav {height: 30px;line-height: 1em;text-transform: uppercase;font-size: 16px; clear:both; background: url(http://cdn.webpagetest.org/images/gloss30.png?v=2) repeat-x;}
+.nav li {float: left;height: inherit;}
+.nav li a {display: block;height: 18px;color: #fff;padding: 6px 20px;text-decoration: none;}
+.nav li.current a {text-decoration:underline; color: #f1c52e; }
 
 .test_menu {height: 24px;width: 975px;background-color: #2f2f2f;padding-left: 5px; margin-top: 12px; line-height: 24px;}
 .test_menu li {float: left;height: inherit;}
