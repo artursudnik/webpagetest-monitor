@@ -190,7 +190,7 @@ function updateGraph() {
         <td style="vertical-align:top">
           <input id="startTime" type="hidden" name="startTime">
           <input id="endTime" type="hidden" name="endTime">
-          <table>
+          <table style="width: 315px">
             <tr>
               <td style="text-align:right">Time Frame:</td>
               <td>
@@ -249,7 +249,7 @@ function updateGraph() {
           </table>
         </td>
         <td style="vertical-align:top; padding:0%">
-          <table width=100% cellpadding="0" cellspacing="0">
+          <table cellpadding="0" cellspacing="0" style="float: right">
             <tr>
               <td colspan="1" style="text-align:right">
                 Filter Using:
