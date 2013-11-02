@@ -408,6 +408,7 @@ function updateGraph() {
 </div>
 </div>
 </div>
+</div>
 {literal}
 
 </body>
