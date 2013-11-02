@@ -410,8 +410,6 @@ function updateGraph() {
 </div>
 </div>
 {literal}
-
-</body>
 <script type="text/javascript">
   /**
    *Called when the chart inits
@@ -433,4 +431,5 @@ function updateGraph() {
   starth.addEventListener('change',checkInterval, false);
 </script>
 {/literal}
+</body>
 </html>
