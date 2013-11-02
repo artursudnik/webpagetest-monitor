@@ -432,7 +432,7 @@ function timezonechoice($selectedzone) {
 
   asort($zonen);
   $structure = '';
-  $structure .= "<option " . ((('UTC') == $selectedzone) ? 'selected="selected "' : '') . " value=\"" . ('UTC') . "\">GMT</option>"; //Timezone
+  $structure .= "<option " . ((('UTC') == $selectedzone) ? 'selected="selected"' : '') . " value=\"" . ('UTC') . "\">GMT</option>"; //Timezone
 
   foreach ($zonen AS $zone) {
     extract($zone);
@@ -447,12 +447,12 @@ function timezonechoice($selectedzone) {
         if (!empty($subcity) != '') {
           $city = $city . '/' . $subcity;
         }
-        $structure .= "<option " . ((($continent . '/' . $city) == $selectedzone) ? 'selected="selected "' : '') . " value=\"" . ($continent . '/' . $city) . "\">" . str_replace('_', ' ', $city) . "</option>"; //Timezone
+        $structure .= "<option " . ((($continent . '/' . $city) == $selectedzone) ? 'selected="selected"' : '') . " value=\"" . ($continent . '/' . $city) . "\">" . str_replace('_', ' ', $city) . "</option>"; //Timezone
       } else {
         if (!empty($subcity) != '') {
           $city = $city . '/' . $subcity;
         }
-        $structure .= "<option " . (($continent == $selectedzone) ? 'selected="selected "' : '') . " value=\"" . $continent . "\">" . $continent . "</option>"; //Timezone
+        $structure .= "<option " . (($continent == $selectedzone) ? 'selected="selected"' : '') . " value=\"" . $continent . "\">" . $continent . "</option>"; //Timezone
       }
 
       $selectcontinent = $continent;
