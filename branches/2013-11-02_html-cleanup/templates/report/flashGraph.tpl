@@ -180,7 +180,7 @@ function updateGraph() {
     <table style="width=100%" border="0">
       <tr>
         <td>
-          <select onmouseup="checkJobCount();" id="jobs" multiple="true"
+          <select onmouseup="checkJobCount();" id="jobs" multiple="multiple"
                   name="job_id[]"
                   size="7"
                   style="width:440px; height:280px">{html_options options=$jobs selected=$job_ids}</select>
