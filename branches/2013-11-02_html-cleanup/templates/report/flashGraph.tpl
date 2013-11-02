@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>WebPageTest Monitor - Reports</title>
 {include file="headIncludes.tpl"}
 {literal}
 <style type="text/css">
