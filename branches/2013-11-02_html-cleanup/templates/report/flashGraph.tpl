@@ -192,7 +192,7 @@ function updateGraph() {
           <input id="endTime" type="hidden" name="endTime">
           <table>
             <tr>
-              <td align="right">Time Frame:</td>
+              <td style="text-align:right">Time Frame:</td>
               <td>
                 <select id="timeFrame" name="timeFrame" onchange="adjustTimeFrame();">
                 <option {if $timeFrame eq 0}selected="true"{/if} value="0">Manual</option>
@@ -211,15 +211,15 @@ function updateGraph() {
             </tr>
 
             <tr id="startTimeSelect">
-              <td align="right">Start:</td>
+              <td style="text-align:right">Start:</td>
               <td>{html_select_date start_year='2010' onchange='checkInterval();' prefix='start' time=$startTime} {html_select_time prefix='start' time=$startTime display_minutes=false display_seconds=false}</td>
             </tr>
             <tr id="endTimeSelect">
-              <td align="right">End:</td>
+              <td style="text-align:right">End:</td>
               <td nowrap="true">{html_select_date start_year='2010' onchange='checkInterval();' prefix='end' time=$endTime} {html_select_time prefix='end' time=$endTime display_minutes=false display_seconds=false}</td>
             </tr>
             <tr>
-              <td align="right" valign="middle">Interval:</td>
+              <td valign="middle" style="text-align:right">Interval:</td>
               <td><select id="interval" name="interval" onchange="checkInterval();">
                 <option {if $interval eq 1}selected="true"{/if} value="1">Max</option>
                 <option {if $interval eq 300}selected="true"{/if} value="300">5 Minutes</option>
@@ -236,7 +236,7 @@ function updateGraph() {
               </td>
             </tr>
             <tr>
-              <td colspan="1" align="right">
+              <td colspan="1" style="text-align:right">
                 Chart type:
               </td>
               <td>
@@ -248,10 +248,10 @@ function updateGraph() {
             </tr>
           </table>
         </td>
-        <td align="right" nowrap="true" style="vertical-align:top; padding:0%;">
+        <td nowrap="true" style="vertical-align:top; padding:0%">
           <table width=100% cellpadding="0" cellspacing="0">
             <tr>
-              <td colspan="1" align="right">
+              <td colspan="1" style="text-align:right">
                 Filter Using:
               </td>
               <td><select name="adjustUsing">
@@ -274,7 +274,7 @@ function updateGraph() {
               </select></td>
             </tr>
             <tr>
-              <td align="right">
+              <td style="text-align:right">
                 Percentile:
               </td>
               <td><select name="percentile">
@@ -289,19 +289,19 @@ function updateGraph() {
               </td>
             </tr>
             <tr>
-              <td align="right">Trim above:</td>
+              <td style="text-align:right">Trim above:</td>
               <td><input class="number" id="trimAbove" type="text"
                          name="trimAbove" size="6" value="{$trimAbove}">
               </td>
             </tr>
             <tr>
-              <td align="right">Trim below:</td>
+              <td style="text-align:right">Trim below:</td>
               <td><input class="number" id="trimBelow" type="text"
                          name="trimBelow" size="6" value="{$trimBelow}">
               </td>
             </tr>
             <tr>
-              <td align="right" colspan="2">
+              <td colspan="2" style="text-align:right">
               </td>
             </tr>
           </table>
@@ -317,10 +317,10 @@ function updateGraph() {
         <td colspan="2">
           <table style="cellpadding:0px;cellspacing:0px;margin:0px;border-spacing:0px">
             <tr>
-              <td align="right"><input id="graphButton" type="button" name="action"
+              <td><input id="graphButton" type="button" name="action"
                                                     onclick="updateGraph();" value="Graph"
                                                     style="margin:0px;margin-right:3px;"></td>
-              <td align="right"><input id="reportButton" type="button" name="action"
+              <td><input id="reportButton" type="button" name="action"
                                                     onclick="updateReport();" value="Report"
                                                     style="margin:0px;margin-right:3px;"></td>
               <td align="center"><input type="button" name="action" onclick="downloadData();" value="Download""></td>
@@ -380,7 +380,7 @@ function updateGraph() {
     </script>
     {/literal}
     {/if}
-      <div align="right"><input type="button" value="Save" onclick="exportGraph();"></div><br>
+      <div><input type="button" value="Save" onclick="exportGraph();"></div><br>
     {/if}
 {/if}
     {*<a href="javascript:document.getElementById('abbreviations').style.visibility='visible';">+</a>*}
