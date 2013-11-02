@@ -10,7 +10,7 @@
 //  }
   $q = Doctrine_Query::create()->from('User u')->setHydrationMode(Doctrine_Core::HYDRATE_ARRAY);
   $result = $q->fetchArray();
-  echo "<form action=\"\" name=impUser><select name=impId onChange=\"document.impUser.submit()\">";
+  echo "<form action=\"\" name=\"impUser\"><select name=impId onChange=\"document.impUser.submit()\">";
   foreach($result as $user){
     if($user['Id'] == $_SESSION['ls_impersonate_id']){
       $selected='selected';
