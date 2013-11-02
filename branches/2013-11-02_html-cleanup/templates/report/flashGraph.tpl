@@ -179,7 +179,7 @@ function updateGraph() {
     <input type="hidden" name="act" value="">
     <table width="100%" border=0>
       <tr>
-        <td align="left" valign="top">
+        <td align="left">
           <select onmouseup="checkJobCount();" id="jobs" multiple="true"
                   name="job_id[]"
                   size="7"
@@ -187,7 +187,7 @@ function updateGraph() {
 
           <div style="font-size:x-small;">Select up to 3 jobs</div>
         </td>
-        <td valign="top" align="left">
+        <td align="left" style="vertical-align:top">
           <input id="startTime" type="hidden" name="startTime">
           <input id="endTime" type="hidden" name="endTime">
           <table>
@@ -220,7 +220,7 @@ function updateGraph() {
             </tr>
             <tr>
               <td align="right" valign="middle">Interval:</td>
-              <td valign="top"><select id="interval" name="interval" onchange="checkInterval();">
+              <td><select id="interval" name="interval" onchange="checkInterval();">
                 <option {if $interval eq 1}selected="true"{/if} value="1">Max</option>
                 <option {if $interval eq 300}selected="true"{/if} value="300">5 Minutes</option>
                 <option {if $interval eq 900}selected="true"{/if} value="900">15 Minutes</option>
@@ -248,7 +248,7 @@ function updateGraph() {
             </tr>
           </table>
         </td>
-        <td valign="top" align="right" nowrap="true" style="padding:0%;">
+        <td align="right" nowrap="true" style="vertical-align:top; padding:0%;">
           <table width=100% cellpadding="0" cellspacing="0">
             <tr>
               <td colspan="1" align="right">
@@ -317,14 +317,14 @@ function updateGraph() {
         <td colspan="2">
           <table style="cellpadding:0px;cellspacing:0px;margin:0px;border-spacing:0px">
             <tr>
-              <td align="right" valign="top"><input id="graphButton" type="button" name="action"
+              <td align="right"><input id="graphButton" type="button" name="action"
                                                     onclick="updateGraph();" value="Graph"
                                                     style="margin:0px;margin-right:3px;"></td>
-              <td align="right" valign="top"><input id="reportButton" type="button" name="action"
+              <td align="right"><input id="reportButton" type="button" name="action"
                                                     onclick="updateReport();" value="Report"
                                                     style="margin:0px;margin-right:3px;"></td>
-              <td align="center" valign="top"><input type="button" name="action" onclick="downloadData();" value="Download""></td>
-              <td align="left" valign="top"><input type="reset" value="Reset" style="margin:0px;"></td>
+              <td align="center"><input type="button" name="action" onclick="downloadData();" value="Download""></td>
+              <td align="left"><input type="reset" value="Reset" style="margin:0px;"></td>
             </tr>
           </table>
         </td>
@@ -341,7 +341,7 @@ function updateGraph() {
   base = loc.substring(0,loc.indexOf(".php")+4);
 
   document.getElementById('shareUrl').value=base+'?___k={$cryptQueryString}'</script>
-  {*<td align="center" valign="top"><input type="button" name="action" onclick="shareReport();" value="Share"></td>*}
+  {*<td align="center"><input type="button" name="action" onclick="shareReport();" value="Share"></td>*}
 {/if}
     {assign var="changeNoteFileName" value=""}
 {if $action eq 'graph'}
