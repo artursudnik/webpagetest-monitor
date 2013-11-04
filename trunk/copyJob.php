@@ -18,8 +18,9 @@
     $q->free(true);
     if ( $job ){
       $newJob = $job->copy(false);
-      $newJob['Label'] = $newJob['Label']." ( COPY )";
+      $newJob['Label'] = $newJob['Label']." (COPY)";
       $newJob['Active']=false;
+      $newJob['Lastrun'] = null;
       $newJob->save();
     }
   }
