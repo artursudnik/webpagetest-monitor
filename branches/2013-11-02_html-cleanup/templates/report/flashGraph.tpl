@@ -115,17 +115,18 @@ function validateForm() {
 }
 // Limit number of jobs to select
 function checkJobCount() {
-
+  var maxJobs = 8;
   if ($('#jobs').val() == null) {
     alert('Please select job(s)');
     return false;
-  } else  if ($('#jobs').val().length > 8) {
-    alert('Please Select 8 or less jobs');
+  } else  if ($('#jobs').val().length > maxJobs) {
+    alert('Please Select '+maxJobs+' or less jobs');
     return false;
   } else {
     return true;
   }
 }
+
 
 function updateReport() {
   if (!validateForm()) {

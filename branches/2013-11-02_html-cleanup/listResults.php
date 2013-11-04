@@ -150,7 +150,7 @@ try
     $q->whereIn( 'r.WPTJob.WPTJobFolderId', $folderIds );
   } else {
     // $q->andWhere('s.UserId = ?', $user_id);
-    $q->andWhere( 'r.WPTJob.UserId = ?', $user_id );
+    $q->andWhere( 'j.UserId = ?', $user_id );
   }
 
   if ( $resultsFilterField && $resultsFilterValue ) {
