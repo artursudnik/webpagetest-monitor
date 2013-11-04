@@ -297,9 +297,10 @@ function getTestersInformation($host = null){
   $testerInformation = array();
   foreach( $hosts as $host){
     $testerInfo = array();
-    $resultXml = file_get_contents($host['HostURL'] . "/getTesters.php?f=xml");
+    $resultXml = @file_get_contents($host['HostURL'] . "/getTesters.php?f=xml");
     if (!$resultXml) {
       logOutput("[ERROR] [getTestersInformation] Failed to retrieve testers information");
+      continue;
     }
     $xml = new SimpleXMLElement($resultXml);
     
@@ -353,8 +354,9 @@ function getLocationInformation($host = null) {
   $locations = array();
   foreach ($hosts as $host) {
     $location = array();
-    $resultXml = file_get_contents($host['HostURL'] . "/getLocations.php?f=xml");
+    $resultXml = @file_get_contents($host['HostURL'] . "/getLocations.php?f=xml");
     if (!$resultXml) {
+        logOutput("[ERROR] [getTestersInformation] Failed to retrieve locations information");
       continue;
     }
     $xml = new SimpleXMLElement($resultXml);
@@ -387,7 +389,6 @@ function getLocationInformation($host = null) {
       ->groupBy('j.Location');
 
   $result = $q->fetchArray();
-
   foreach ($result as $res){
     $locations["'".$res['Location']."'"]['runRate'] = $res['runrate'];
   }
@@ -399,7 +400,7 @@ function getLocationInformation($host = null) {
 function logOutput($msg, $file="jobProcessor_log.html") {
   $timeStamp = date("m/d/Y h:i:s");
   $a = "";
-  $m = "[ " . $timeStamp . " ] " . $msg . "\n";
+  $m = "[" . $timeStamp . "] " . $msg . "\n";
   if (!($fp = fopen($file, 'a'))) {
     echo "[ERROR] [logOutput] Cannot open log file";
   } else {
