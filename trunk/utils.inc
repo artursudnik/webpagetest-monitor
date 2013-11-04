@@ -300,6 +300,7 @@ function getTestersInformation($host = null){
     $resultXml = file_get_contents($host['HostURL'] . "/getTesters.php?f=xml");
     if (!$resultXml) {
       logOutput("[ERROR] [getTestersInformation] Failed to retrieve testers information");
+      continue;
     }
     $xml = new SimpleXMLElement($resultXml);
     
@@ -387,7 +388,6 @@ function getLocationInformation($host = null) {
       ->groupBy('j.Location');
 
   $result = $q->fetchArray();
-
   foreach ($result as $res){
     $locations["'".$res['Location']."'"]['runRate'] = $res['runrate'];
   }
