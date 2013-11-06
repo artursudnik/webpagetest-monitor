@@ -1,8 +1,8 @@
 <?php
 
-function getDelaysForLocationsAggregated() {
+function getDelaysForLocationsAggregated($options = array()) {
     $conn = Doctrine_Manager::getInstance()->getCurrentConnection();
-    $pdo = $conn->execute("
+    $query = "
         SELECT Location, Agent, count(*) NumberOfJobs, MAX(delayedJobs.delay) AS MaximumDelay
         FROM (
             SELECT 
@@ -13,7 +13,32 @@ function getDelaysForLocationsAggregated() {
             WHERE j.active = 1 AND (lastrun IS NULL OR lastrun + frequency*60 < UNIX_TIMESTAMP())
         ) delayedJobs
         GROUP BY Agent, Location
-    ");
+    ";
+    $order = '';
+    if($options['sort']) {
+        if($options['sort'] == 'delay'); {
+            $order = 'ORDER BY MaximumDelay';
+        }
+        if(key_exists('sortDir', $options)) {
+            switch ($options['sortDir']) {
+                case 'asc':
+                    $order .= ' ASC';
+                    break;
+                case 'desc':
+                    $order .= ' DESC';
+                    break;
+                default:
+                    
+                    break;
+            }
+        }
+    } else {
+        $order = ' ORDER BY Location';
+    }
+    
+    $query .= $order;
+    
+    $pdo = $conn->execute($query);
     $pdo->setFetchMode(Doctrine_Core::FETCH_ASSOC);
     return $locations = $pdo->fetchAll();
 }
