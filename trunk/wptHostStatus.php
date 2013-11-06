@@ -31,6 +31,11 @@
   $smarty->assign('locations',$locations);
   $smarty->assign('testers',$testers);
   $smarty->assign('runRateInfo',$runRateInfo);
-  $smarty->assign('delayedLocationsAggregated', getDelaysForLocationsAggregated());
+  $smarty->assign('delayedLocationsAggregated', getDelaysForLocationsAggregated(
+    array(
+        sort    => 'delay',
+        sortDir => 'desc'
+    )
+  ));
   $smarty->display('host/wptHostStatus.tpl');
 ?>
