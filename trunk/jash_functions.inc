@@ -36,6 +36,12 @@ function getDelaysForLocationsAggregated($options = array()) {
         $order = ' ORDER BY Location';
     }
     
+    if($order) {
+        $order .= ', Location';
+    } else {
+        $order = 'ORDER BY Location';
+    }
+    
     $query .= $order;
     
     $pdo = $conn->execute($query);
