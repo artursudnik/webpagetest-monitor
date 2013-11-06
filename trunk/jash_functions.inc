@@ -32,9 +32,7 @@ function getDelaysForLocationsAggregated($options = array()) {
                     break;
             }
         }
-    } else {
-        $order = ' ORDER BY Location';
-    }
+    } 
     
     if($order) {
         $order .= ', Location';
