@@ -256,22 +256,42 @@ function updateGraph() {
                 Filter Using:
               </td>
               <td><select name="adjustUsing">
-                <option value="AvgFirstViewFirstByte"
-                        {if $adjustUsing eq 'AvgFirstViewFirstByte'}selected="true"{/if}>Time to first byte
-                </option>
-                <option value="AvgFirstViewStartRender"
-                        {if $adjustUsing eq 'AvgFirstViewStartRender'}selected="true"{/if}>Start Render
-                </option>
-                <option value="AvgFirstViewDocCompleteTime"
-                        {if $adjustUsing eq 'AvgFirstViewDocCompleteTime'}selected="true"{/if}>Doc Time
-                </option>
-                <option value="AvgFirstViewDomTime"
-                        {if $adjustUsing eq 'AvgFirstViewDomTime'}selected="true"{/if}>Dom
-                  Time
-                </option>
-                <option value="AvgFirstViewFullyLoadedTime"
-                        {if $adjustUsing eq 'AvgFirstViewFullyLoadedTime'}selected="true"{/if}>Fully Loaded
-                </option>
+                <optgroup label="First view">
+                    <option value="AvgFirstViewFirstByte"
+                            {if $adjustUsing eq 'AvgFirstViewFirstByte'}selected="true"{/if}>Time to first byte
+                    </option>
+                    <option value="AvgFirstViewStartRender"
+                            {if $adjustUsing eq 'AvgFirstViewStartRender'}selected="true"{/if}>Start Render
+                    </option>
+                    <option value="AvgFirstViewDocCompleteTime"
+                            {if $adjustUsing eq 'AvgFirstViewDocCompleteTime'}selected="true"{/if}>Doc Time
+                    </option>
+                    <option value="AvgFirstViewDomTime"
+                            {if $adjustUsing eq 'AvgFirstViewDomTime'}selected="true"{/if}>Dom
+                      Time
+                    </option>
+                    <option value="AvgFirstViewFullyLoadedTime"
+                            {if $adjustUsing eq 'AvgFirstViewFullyLoadedTime'}selected="true"{/if}>Fully Loaded
+                    </option>
+                </optgroup>
+                <optgroup label="Repeat view">
+                    <option value="AvgRepeatViewFirstByte"
+                            {if $adjustUsing eq 'AvgRepeatViewFirstByte'}selected="true"{/if}>Time to first byte
+                    </option>
+                    <option value="AvgRepeatViewStartRender"
+                            {if $adjustUsing eq 'AvgRepeatViewStartRender'}selected="true"{/if}>Start Render
+                    </option>
+                    <option value="AvgRepeatViewDocCompleteTime"
+                            {if $adjustUsing eq 'AvgRepeatViewDocCompleteTime'}selected="true"{/if}>Doc Time
+                    </option>
+                    <option value="AvgRepeatViewDomTime"
+                            {if $adjustUsing eq 'AvgRepeatViewDomTime'}selected="true"{/if}>Dom
+                      Time
+                    </option>
+                    <option value="AvgRepeatViewFullyLoadedTime"
+                            {if $adjustUsing eq 'AvgRepeatViewFullyLoadedTime'}selected="true"{/if}>Fully Loaded
+                    </option>
+                </optgroup>                
               </select></td>
             </tr>
             <tr>
