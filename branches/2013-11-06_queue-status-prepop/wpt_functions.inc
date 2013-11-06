@@ -1234,6 +1234,9 @@ function updateLocations($id){
       echo "no host";exit;
     }
 
+echo '<pre>'.print_r($locationsArray, 1).'</pre>';
+die();
+
     // Update information from getLocations call
     foreach($locationsArray as $key=>$loc){
       $locationId = $loc['id'];

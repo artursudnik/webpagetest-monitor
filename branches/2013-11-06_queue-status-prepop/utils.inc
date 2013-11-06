@@ -349,9 +349,25 @@ function getLocationInformation($host = null) {
     $hosts[] = $host;
   }
 
-  $locationTable = Doctrine_Core::getTable('WPTLocation');
+    $q = Doctrine_Query::create()
+        ->from('WPTLocation l')
+        ->setHydrationMode(Doctrine_Core::HYDRATE_ARRAY);
+        
+    $locations = array();
+    
+    foreach ($q->fetchArray() as $key => $loc) {
+        $loc['id'] = $loc['Location'];
+        
+        $loc['GreenLimit'] = $loc['QueueThresholdGreenLimit'];
+        unset($loc['QueueThresholdGreenLimit']);
+        $loc['YellowLimit'] = $loc['QueueThresholdYellowLimit'];
+        unset($loc['QueueThresholdYellowLimit']);
+        $loc['RedLimit'] = $loc['QueueThresholdRedLimit'];
+        unset($loc['QueueThresholdRedLimit']);
+        
+        $locations["'".$loc['Location']."'"] = $loc;
+    }
 
-  $locations = array();
   foreach ($hosts as $host) {
     $location = array();
     $resultXml = @file_get_contents($host['HostURL'] . "/getLocations.php?f=xml");
@@ -372,15 +388,10 @@ function getLocationInformation($host = null) {
       $location['PendingTestsLowPriority'] = $loc->PendingTests->LowPriority;
       $location['AgentCount'] = $testerInformation['"'.$id.'"']['AgentCount'];
       $loc = $locationTable->findOneByLocation($loc->id);
-      if (!$location['GreenLimit'] = $loc['QueueThresholdGreenLimit']) {
-        $location['GreenLimit'] = 15;
-      }
-      if (!$location['YellowLimit'] = $loc['QueueThresholdYellowLimit']) {
-        $location['YellowLimit'] = 30;
-      }
       $locations["'".$id."'"] = $location;
     }
   }
+
   //SELECT location, firstviewonly, runs, frequency, (runs * (2-(firstviewonly is not null))*60/frequency) as runrate FROM `wptjob` WHERE active group by location;
   $q = Doctrine_Query::create()->select('j.Location, j.FirstViewOnly, SUM(j.Runs * (2-(FirstViewOnly is not null)) * 60/j.Frequency) as runrate')
       ->from('WPTJob j')
