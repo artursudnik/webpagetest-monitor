@@ -3,6 +3,7 @@
   include_once('monitor.inc');
   include_once('ec2_functions.inc');
   include_once('utils.inc');
+  require_once('jash_functions.inc');
   $testers = getTestersInformation();
   $locations = getLocationInformation();
   $runRateInfo = getCurrentRunRateInfo();
@@ -30,5 +31,11 @@
   $smarty->assign('locations',$locations);
   $smarty->assign('testers',$testers);
   $smarty->assign('runRateInfo',$runRateInfo);
+  $smarty->assign('delayedLocationsAggregated', getDelaysForLocationsAggregated(
+    array(
+        sort    => 'delay',
+        sortDir => 'desc'
+    )
+  ));
   $smarty->display('host/wptHostStatus.tpl');
 ?>

@@ -48,35 +48,34 @@
             {/foreach}
           </table>
           <br>
-          <h2 class="cufon-dincond_black">User Status</h2>
-          <table class="pretty" style="border-collapse::collapse" width="100%">
-            <thead>
-            <th align="left">Username</th>
-            <th align="right">Jobs</th>
-            <th align="right">Active Jobs</th>
-            <th align="right">Run Rate *</th>
-            </thead>
-            {assign var="eo" value="odd"}
-          {*{foreach $runRateInfo.runRatePerUser as $user=>$runRate}*}
-            {foreach $runRateInfo.users as $user}
-            {if $eo == "even"} {assign var="eo" value="odd"} {else} {assign var="eo" value= "even"}{/if}
-            {assign value="#98fb98" var="bgcolor"}
-            <tr class="{$eo}">
-              <td nowrap="nowrap">{$user}</td>
-              <td align="right">{if isset($runRateInfo.jobsPerUser[$user])}{$runRateInfo.jobsPerUser[$user]}{else}0{/if}</td>
-              <td align="right">{if isset($runRateInfo.activeJobsPerUser[$user])}{$runRateInfo.activeJobsPerUser[$user]}{else}0{/if}</td>
-              <td align="right" nowrap="nowrap">{if isset($runRateInfo.runRatePerUser[$user])}{$runRateInfo.runRatePerUser[$user]|number_format}{else}0{/if}</td>
-            </tr>
-          {/foreach}
-            <tr><td colspan="4"><hr></td></tr>
-            <tr class="even" style="font-weight:bold;">
-              <td align="right">Total</td>
-              <td align="right">{$runRateInfo.totalJobs}</td>
-              <td align="right" nowrap="nowrap">{$runRateInfo.totalActiveJobs}</td>
-              <td align="right" nowrap="nowrap">{$runRateInfo.hourlyRunRate}</td>
-            </tr>
+          {if $delayedLocationsAggregated}
+          <h2>Queue Delays</h2>
+          <table class="pretty">
+              <thead>
+                  <th>Location</th>
+                  <th>Agent</th>
+                  <th>#jobs</th>
+                  <th>Maximum delay<br>of job</th>
+                  <th></th>
+              </thead>
+              <tbody>
+                  {foreach from=$delayedLocationsAggregated item=delayedLocation}
+                  {if $eo == "even"} {assign var="eo" value="odd"} {else} {assign var="eo" value= "even"}{/if}
+                  {assign value="#98fb98" var="bgcolor"}
+                  {if $delayedLocation.MaximumDelay > 60}{assign value="yellow" var=bgcolor}{/if}
+                  {if $delayedLocation.MaximumDelay > 300}{assign value="red" var=bgcolor}{/if}
+                  <tr class="{$eo}">
+                      <td>{$delayedLocation.Location}</td>
+                      <td>{$delayedLocation.Agent}</td>
+                      <td style="text-align: center">{$delayedLocation.NumberOfJobs}</td>
+                      <td style="text-align: center">{$delayedLocation.MaximumDelay}</td>
+                      <td style="opacity:0.6;background-color:{$bgcolor}"></td>
+                  </tr>
+                  {/foreach}
+              </tbody>
           </table>
           <br>
+          {/if}
           <br>
           <h2 class="cufon-dincond_black">Tester Status</h2>
           <table class="pretty" style="border-collapse:collapse" width="100%">
@@ -113,6 +112,35 @@
                   </tr>
                 {/foreach}
             {/foreach}
+          </table>
+          <br>
+          <h2 class="cufon-dincond_black">User Status</h2>
+          <table class="pretty" style="border-collapse::collapse" width="100%">
+            <thead>
+            <th align="left">Username</th>
+            <th align="right">Jobs</th>
+            <th align="right">Active Jobs</th>
+            <th align="right">Run Rate *</th>
+            </thead>
+            {assign var="eo" value="odd"}
+          {*{foreach $runRateInfo.runRatePerUser as $user=>$runRate}*}
+            {foreach $runRateInfo.users as $user}
+            {if $eo == "even"} {assign var="eo" value="odd"} {else} {assign var="eo" value= "even"}{/if}
+            {assign value="#98fb98" var="bgcolor"}
+            <tr class="{$eo}">
+              <td nowrap="nowrap">{$user}</td>
+              <td align="right">{if isset($runRateInfo.jobsPerUser[$user])}{$runRateInfo.jobsPerUser[$user]}{else}0{/if}</td>
+              <td align="right">{if isset($runRateInfo.activeJobsPerUser[$user])}{$runRateInfo.activeJobsPerUser[$user]}{else}0{/if}</td>
+              <td align="right" nowrap="nowrap">{if isset($runRateInfo.runRatePerUser[$user])}{$runRateInfo.runRatePerUser[$user]|number_format}{else}0{/if}</td>
+            </tr>
+          {/foreach}
+            <tr><td colspan="4"><hr></td></tr>
+            <tr class="even" style="font-weight:bold;">
+              <td align="right">Total</td>
+              <td align="right">{$runRateInfo.totalJobs}</td>
+              <td align="right" nowrap="nowrap">{$runRateInfo.totalActiveJobs}</td>
+              <td align="right" nowrap="nowrap">{$runRateInfo.hourlyRunRate}</td>
+            </tr>
           </table>
           <br>
 
