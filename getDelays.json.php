@@ -24,5 +24,4 @@ require_once('bootstrap.php');
             'count'     => count($locations),
             'locations' => $locations
         )
-        , JSON_UNESCAPED_UNICODE
     );
