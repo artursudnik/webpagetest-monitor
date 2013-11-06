@@ -257,6 +257,7 @@ function updateGraph() {
                 Filter Using:
               </td>
               <td><select name="adjustUsing">
+                <optgroup label="First view">
                 <option value="AvgFirstViewFirstByte"
                         {if $adjustUsing eq 'AvgFirstViewFirstByte'}selected="selected"{/if}>Time to first byte
                 </option>
@@ -273,6 +274,25 @@ function updateGraph() {
                 <option value="AvgFirstViewFullyLoadedTime"
                         {if $adjustUsing eq 'AvgFirstViewFullyLoadedTime'}selected="selected"{/if}>Fully Loaded
                 </option>
+                </optgroup>
+                <optgroup label="Repeat view">
+                    <option value="AvgRepeatViewFirstByte"
+                            {if $adjustUsing eq 'AvgRepeatViewFirstByte'}selected="true"{/if}>Time to first byte
+                    </option>
+                    <option value="AvgRepeatViewStartRender"
+                            {if $adjustUsing eq 'AvgRepeatViewStartRender'}selected="true"{/if}>Start Render
+                    </option>
+                    <option value="AvgRepeatViewDocCompleteTime"
+                            {if $adjustUsing eq 'AvgRepeatViewDocCompleteTime'}selected="true"{/if}>Doc Time
+                    </option>
+                    <option value="AvgRepeatViewDomTime"
+                            {if $adjustUsing eq 'AvgRepeatViewDomTime'}selected="true"{/if}>Dom
+                      Time
+                    </option>
+                    <option value="AvgRepeatViewFullyLoadedTime"
+                            {if $adjustUsing eq 'AvgRepeatViewFullyLoadedTime'}selected="true"{/if}>Fully Loaded
+                    </option>
+                </optgroup>                
               </select></td>
             </tr>
             <tr>
