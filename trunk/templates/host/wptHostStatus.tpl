@@ -48,6 +48,7 @@
             {/foreach}
           </table>
           <br>
+          {if $delayedLocationsAggregated}
           <h2>Queue Delays</h2>
           <table class="pretty">
               <thead>
@@ -74,6 +75,7 @@
               </tbody>
           </table>
           <br>
+          {/if}
           <h2 class="cufon-dincond_black">User Status</h2>
           <table class="pretty" style="border-collapse::collapse" width="100%">
             <thead>
