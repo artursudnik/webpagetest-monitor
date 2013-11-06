@@ -48,6 +48,32 @@
             {/foreach}
           </table>
           <br>
+          <h2>Queue Delays</h2>
+          <table class="pretty">
+              <thead>
+                  <th>Location</th>
+                  <th>Agent</th>
+                  <th>#jobs</th>
+                  <th>Maximum delay<br>of job</th>
+                  <th></th>
+              </thead>
+              <tbody>
+                  {foreach from=$delayedLocationsAggregated item=delayedLocation}
+                  {if $eo == "even"} {assign var="eo" value="odd"} {else} {assign var="eo" value= "even"}{/if}
+                  {assign value="#98fb98" var="bgcolor"}
+                  {if $delayedLocation.MaximumDelay > 60}{assign value="yellow" var=bgcolor}{/if}
+                  {if $delayedLocation.MaximumDelay > 300}{assign value="red" var=bgcolor}{/if}
+                  <tr class="{$eo}">
+                      <td>{$delayedLocation.Location}</td>
+                      <td>{$delayedLocation.Agent}</td>
+                      <td style="text-align: center">{$delayedLocation.NumberOfJobs}</td>
+                      <td style="text-align: center">{$delayedLocation.MaximumDelay}</td>
+                      <td style="opacity:0.6;background-color:{$bgcolor}"></td>
+                  </tr>
+                  {/foreach}
+              </tbody>
+          </table>
+          <br>
           <h2 class="cufon-dincond_black">User Status</h2>
           <table class="pretty" style="border-collapse::collapse" width="100%">
             <thead>
