@@ -387,7 +387,6 @@ function getLocationInformation($host = null) {
       $location['PendingTestsHighPriority'] = $loc->PendingTests->HighPriority;
       $location['PendingTestsLowPriority'] = $loc->PendingTests->LowPriority;
       $location['AgentCount'] = $testerInformation['"'.$id.'"']['AgentCount'];
-      $loc = $locationTable->findOneByLocation($loc->id);
       $locations["'".$id."'"] = $location;
     }
   }
