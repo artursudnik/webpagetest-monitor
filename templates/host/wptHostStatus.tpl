@@ -68,7 +68,7 @@
                       <td>{$delayedLocation.Location}</td>
                       <td>{$delayedLocation.Agent}</td>
                       <td style="text-align: center">{$delayedLocation.NumberOfJobs}</td>
-                      <td style="text-align: center">{$delayedLocation.MaximumDelay}</td>
+                      <td style="text-align: center">{$delayedLocation.MaximumDelay|time_difference}</td>
                       <td style="opacity:0.6;background-color:{$bgcolor}"></td>
                   </tr>
                   {/foreach}
