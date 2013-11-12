@@ -29,7 +29,7 @@
   $wptResultsDir=dirname(__FILE__)."/wpt_results/";
 
   require($baseDir . '/lib/Smarty-3.0.6/libs/Smarty.class.php');
-
+  require_once('smartyPlugins.inc');
 
   // create object
   $smarty = new Smarty;
