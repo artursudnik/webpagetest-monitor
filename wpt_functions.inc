@@ -463,16 +463,16 @@ function processJobsForUser($userId, $jobId = null, $force = false, $runLabel=""
           $latency = 50;
           $plr = 0;
 
-          if ( $row['WPTBandwidthDown'])
+          if (is_numeric($row['WPTBandwidthDown']))
             $bwDown = $row['WPTBandwidthDown'];
 
-          if ( $row['WPTBandwidthUp'])
+          if (is_numeric($row['WPTBandwidthUp']))
             $bwUp = $row['WPTBandwidthUp'];
 
-          if ( $row['WPTBandwidthLatency'])
+          if (is_numeric($row['WPTBandwidthLatency']))
             $latency = $row['WPTBandwidthLatency'];
 
-          if ( $row['WPTBandwidthPacketLoss'])
+          if (is_numeric($row['WPTBandwidthPacketLoss']))
             $plr = $row['WPTBandwidthPacketLoss'];
 
           $format = "xml";
