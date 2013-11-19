@@ -2,7 +2,7 @@
 
 function smarty_modifier_time_difference($timestamp) {
     if (!is_numeric($timestamp)) {
-        return 'error: '.$timestamp.' must be numeric';
+        return $timestamp;
     }
 
     $d_start = new DateTime(date('Y-m-d H:i:s', 0));
