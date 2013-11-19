@@ -457,11 +457,11 @@ function processJobsForUser($userId, $jobId = null, $force = false, $runLabel=""
 //          }
           // Default DSL settings
 
-          $private = 1;
-          $bwDown = 1500;
-          $bwUp = 384;
-          $latency = 50;
-          $plr = 0;
+          $private = null;
+          $bwDown = null;
+          $bwUp = null;
+          $latency = null;
+          $plr = null;
 
           if (is_numeric($row['WPTBandwidthDown']))
             $bwDown = $row['WPTBandwidthDown'];
