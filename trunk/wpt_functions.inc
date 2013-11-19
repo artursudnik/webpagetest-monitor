@@ -457,7 +457,7 @@ function processJobsForUser($userId, $jobId = null, $force = false, $runLabel=""
 //          }
           // Default DSL settings
 
-          $private = null;
+          $private = 1;
           $bwDown = null;
           $bwUp = null;
           $latency = null;
