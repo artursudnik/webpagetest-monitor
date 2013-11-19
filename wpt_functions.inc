@@ -478,25 +478,27 @@ function processJobsForUser($userId, $jobId = null, $force = false, $runLabel=""
           $format = "xml";
 
           logOutput("[DEBUG] [processJobsForUsers] before submitWPTRequest: " .timestamp()." mem: ". intval(memory_get_usage() / 1024));
+          
             $wptRes = submitWPTRequest(
-            $row['Host'] .$wptRuntest,
-            $url,
-            $row['Label'],
-            $row['Location'],
-            $row['Runs'],
-            $row['FirstViewOnly'],
-            $row['Video'],
-            $navscript,
-            $authenticate,
-            $authuser,
-            $authpassword,
-            $format,
-            $private,
-            $bwDown,
-            $bwUp,
-            $latency,
-            $plr,
-            $priority);
+                $row['Host'] .$wptRuntest,
+                $url,
+                $row['Label'],
+                $row['Location'],
+                $row['Runs'],
+                $row['FirstViewOnly'],
+                $row['Video'],
+                $navscript,
+                $authenticate,
+                $authuser,
+                $authpassword,
+                $format,
+                $private,
+                $bwDown,
+                $bwUp,
+                $latency,
+                $plr,
+                $priority
+            );
 
           $wptResultId = $wptRes['wptResultId'];
           $wptResultText = $wptRes['statusText'];
@@ -508,24 +510,24 @@ function processJobsForUser($userId, $jobId = null, $force = false, $runLabel=""
           }else{
             $wptResult['Status'] = "100";
           }
-          $wptResult['WPTResultId'] = $wptResultId;
-          $wptResult['WPTHost'] = $row['Host'];
-          $wptResult['DownloadResultXml'] = $row['DownloadResultXml'];
-          $wptResult['DownloadDetails'] = $row['DownloadDetails'];
-          $wptResult['MaxDownloadAttempts'] = $row['MaxDownloadAttempts'];
-          $wptResult['Runs'] = $row['Runs'];
-          $wptResult['RunToUseForAverage'] = $row['RunToUseForAverage'];
-          $wptResult['FirstStatusUpdate'] = current_seconds();
-          $wptResult['LastStatusUpdate'] = current_seconds();
-          $wptResult['MultiStep'] = $script['MultiStep']; 
-          $wptResult['Validate'] = $script['Validate'];
-          $wptResult['ValidationRequest'] = $script['ValidationRequest'];
-          $wptResult['ValidationType'] = $script['ValidationType'];
-          $wptResult['ValidationMarkAs'] = $script['ValidationMarkAs'];
-          $wptResult['ValidationMarkAsElse'] = $script['ValidationMarkAsElse'];
-          $wptResult['WPTBandwidthDown'] = $bwDown;
-          $wptResult['WPTBandwidthUp'] = $bwUp;
-          $wptResult['WPTBandwidthLatency'] = $latency;
+          $wptResult['WPTResultId']             = $wptResultId;
+          $wptResult['WPTHost']                 = $row['Host'];
+          $wptResult['DownloadResultXml']       = $row['DownloadResultXml'];
+          $wptResult['DownloadDetails']         = $row['DownloadDetails'];
+          $wptResult['MaxDownloadAttempts']     = $row['MaxDownloadAttempts'];
+          $wptResult['Runs']                    = $row['Runs'];
+          $wptResult['RunToUseForAverage']      = $row['RunToUseForAverage'];
+          $wptResult['FirstStatusUpdate']       = current_seconds();
+          $wptResult['LastStatusUpdate']        = current_seconds();
+          $wptResult['MultiStep']               = $script['MultiStep']; 
+          $wptResult['Validate']                = $script['Validate'];
+          $wptResult['ValidationRequest']       = $script['ValidationRequest'];
+          $wptResult['ValidationType']          = $script['ValidationType'];
+          $wptResult['ValidationMarkAs']        = $script['ValidationMarkAs'];
+          $wptResult['ValidationMarkAsElse']    = $script['ValidationMarkAsElse'];
+          $wptResult['WPTBandwidthDown']        = $bwDown;
+          $wptResult['WPTBandwidthUp']          = $bwUp;
+          $wptResult['WPTBandwidthLatency']     = $latency;
           $wptResult['WPTBandwidthPacketLoss'] = $plr;
 
           $wptResult->save();
