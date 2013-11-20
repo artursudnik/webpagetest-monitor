@@ -42,7 +42,7 @@
   $wptLocs = array();
   foreach ($wptLocations as $loc) {
     $key = $loc['Location'];
-    $wptLocs[$loc->WPTHost['HostURL'] . ' ' . $key] = $loc->WPTHost['HostURL'] . ' ' . $key;
+    $wptLocs[$loc->WPTHost['HostURL'] . ' ' . $key] = $loc['Label'] .' (' .  $key. ' '. $loc->WPTHost['HostURL']. ')';
   }
 
   if (isset($jobId)) {
