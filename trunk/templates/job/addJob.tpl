@@ -92,7 +92,7 @@
           <form method="post" class="cmxform" action="updateJob.php" name="updateForm" id="updateForm"
                 onsubmit="return validateUpdateForm()">
             <input type="hidden" name="id" value="{$job.Id}">
-            <table align="center" width="80%">
+            <table style="text-align: left; width: 80% ">
               <tr>
                 <td align="right"><label title="Folder in which to place this job.">Folder</label></td>
                 <td>
