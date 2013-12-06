@@ -254,6 +254,7 @@ function updateGraph() {
                 <td>
                     <select id="aggregateMethod" name="aggregateMethod">
                         <option value="avg"  {if $aggregateMethod eq  "avg"}selected="selected"{/if}>Average</option>
+                        <option value="25th" {if $aggregateMethod eq "25th"}selected="selected"{/if}>25th percentile</option>
                         <option value="50th" {if $aggregateMethod eq "50th"}selected="selected"{/if}>50th percentile</option>
                         <option value="75th" {if $aggregateMethod eq "75th"}selected="selected"{/if}>75th percentile</option>
                         <option value="90th" {if $aggregateMethod eq "90th"}selected="selected"{/if}>90th percentile</option>
