@@ -13,7 +13,7 @@ function getResultsDataAvg($startDateTime, $endDateTime, $interval, $datas, $fie
   $percentile = null;
   switch ($aggregateMethod) {
       case 'avg':
-          throw new Exception("Average not implemented", 1);
+          // throw new Exception("Average not implemented", 1);
           break;
       case '25th':
           $percentile=25;
@@ -48,7 +48,11 @@ function getResultsDataAvg($startDateTime, $endDateTime, $interval, $datas, $fie
     //    $entry['Id'] = $id;
     $entry['Date'] = $pointer;
     foreach ($fields as $field) {
-      $entry[$field] = getPercentile($pointer, $interval, $datas, $field, $percentile);
+      if($aggregateMethod == "avg") {
+        $entry[$field] = getAverage($pointer, $interval, $datas, $field, $percentile);
+      }else {
+        $entry[$field] = getPercentile($pointer, $interval, $datas, $field, $percentile);          
+      }
     }
     $data[] = $entry;
     $pointer += $interval;
