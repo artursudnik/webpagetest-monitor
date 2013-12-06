@@ -19,7 +19,7 @@ function getResultsDataAvg($startDateTime, $endDateTime, $interval, $datas, $fie
     //    $entry['Id'] = $id;
     $entry['Date'] = $pointer;
     foreach ($fields as $field) {
-      $entry[$field] = getMedian($pointer, $interval, $datas, $field);
+      $entry[$field] = getPercentile($pointer, $interval, $datas, $field, 50);
     }
     $data[] = $entry;
     $pointer += $interval;
