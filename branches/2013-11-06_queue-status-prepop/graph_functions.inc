@@ -60,6 +60,35 @@ function getMedian($startAt, $increment, &$data, $field) {
   return $result;
 }
 
+function getPercentile($startAt, $increment, &$data, $field, $percentile) {
+  if ($percentile < 0 OR $percentile > 100) {
+      throw new Exception("$percentile have to be bigger than 0 and smaller than 100", 1);
+  }
+  $numberOfElements = 0;
+  $tmpData = array();
+  
+  foreach ($data as $r) {
+    if ($r['Date'] > $startAt && ($r['Date'] < $startAt + $increment)) {
+      $tmpData[] = $r[$field];
+    }
+  }
+  
+  $numberOfElements = count($tmpData);
+  
+  sort($tmpData);
+  
+  if ($numberOfElements > 0) {
+      $percentilePosition = ($numberOfElements-1)*$percentile/100;
+      $n1 = floor($percentilePosition);
+      $n2 = ceil($percentilePosition);
+      $value = $tmpData[$n1] + ($tmpData[$n2] - $tmpData[$n1]) * $percentile/100;
+      return $value;
+  } else {
+      return null;
+  }
+}
+
+
 /**
  * Format data in the amchart specific format
  *
