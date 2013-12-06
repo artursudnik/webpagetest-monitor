@@ -16,6 +16,13 @@ $smarty->assign('action',$action );
 // Default chart time
 $smarty->assign('chartType', 'Line');
 
+if (isset($_GET['aggregateMethod'])) {
+	$_SESSION['aggregateMethod'] = $_GET['aggregateMethod'];
+} elseif(!isset($_SESSION['aggregateMethod'])) {
+	$_SESSION['aggregateMethod'] = "50th";
+}
+
+$smarty->assign('aggregateMethod', $_SESSION['aggregateMethod']);
 // Show only active jobs
 // Show inactive jobs
   if ( isset($_REQUEST['showInactiveJobsGraph']) ) {
