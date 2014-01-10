@@ -17,5 +17,8 @@ AddDefaultCharset UTF-8
 		Header set Cache-Control "no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
 		Header set Pragma "no-cache"
 	</FilesMatch>
+	<FilesMatch "\.(php|html|htm)$">
+		Header set X-UA-Compatible IE=edge
+	</FilesMatch>
 </IfModule>
 </IfModule>
