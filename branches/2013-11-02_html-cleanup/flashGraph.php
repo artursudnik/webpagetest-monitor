@@ -16,6 +16,13 @@ $smarty->assign('action',$action );
 // Default chart time
 $smarty->assign('chartType', 'Line');
 
+if (isset($_GET['aggregateMethod'])) {
+	$_SESSION['aggregateMethod'] = $_GET['aggregateMethod'];
+} elseif(!isset($_SESSION['aggregateMethod'])) {
+	$_SESSION['aggregateMethod'] = "50th";
+}
+
+$smarty->assign('aggregateMethod', $_SESSION['aggregateMethod']);
 // Show only active jobs
 // Show inactive jobs
   if ( isset($_REQUEST['showInactiveJobsGraph']) ) {
@@ -342,11 +349,11 @@ if ($_REQUEST['act'] == 'graph') {
       if ($chartType == "scatter") {
         $xml = $scatterChartTemplate;
         $xml .= "<data>";
-        $xml .= getDataAsAmChartScatterXml($userId, $jobIds, $availFields, $fields, $startDateTime, $endDateTime, $percentile, $trimAbove, $adjustUsing, $trimBelow, $interval);
+        $xml .= getDataAsAmChartScatterXml($userId, $jobIds, $availFields, $fields, $startDateTime, $endDateTime, $percentile, $trimAbove, $adjustUsing, $trimBelow, $interval, $_SESSION['aggregateMethod']);
       } else {
         $xml = $lineChartTemplate;
         $xml .= "<data>";
-        $xml .= getDataAsAmChartLineXml($userId, $jobIds, $availFields, $fields, $startDateTime, $endDateTime, $percentile, $trimAbove, $adjustUsing, $trimBelow, $interval);
+        $xml .= getDataAsAmChartLineXml($userId, $jobIds, $availFields, $fields, $startDateTime, $endDateTime, $percentile, $trimAbove, $adjustUsing, $trimBelow, $interval, $_SESSION['aggregateMethod']);
       }
       $xml .= "</data>";
       $xml .= "</settings>";
