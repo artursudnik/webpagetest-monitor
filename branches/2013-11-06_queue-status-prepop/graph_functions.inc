@@ -9,7 +9,36 @@
  * @param  $datas
  * @return array
  */
-function getResultsDataAvg($startDateTime, $endDateTime, $interval, $datas, $fields) {
+function getResultsDataAvg($startDateTime, $endDateTime, $interval, $datas, $fields, $aggregateMethod) {
+  $percentile = null;
+  switch ($aggregateMethod) {
+      case 'avg':
+          // throw new Exception("Average not implemented", 1);
+          break;
+      case '25th':
+          $percentile=25;
+          break;
+      case '50th':
+          $percentile=50;
+          break;
+      case '75th':
+          $percentile=75;
+          break;
+      case '90th':
+          $percentile=90;
+          break;
+      case '95th':
+          $percentile=95;
+          break;
+      case '99th':
+          $percentile=99;
+          break;
+          
+      default:
+          throw new Exception("Unknown aggregate method: $aggregateMethod", 1);
+          break;
+  }
+  
   $pointer = $startDateTime;
 //  $id = $datas[0]['Id'];
   $data = array();
@@ -19,7 +48,11 @@ function getResultsDataAvg($startDateTime, $endDateTime, $interval, $datas, $fie
     //    $entry['Id'] = $id;
     $entry['Date'] = $pointer;
     foreach ($fields as $field) {
-      $entry[$field] = getMedian($pointer, $interval, $datas, $field);
+      if($aggregateMethod == "avg") {
+        $entry[$field] = getAverage($pointer, $interval, $datas, $field, $percentile);
+      }else {
+        $entry[$field] = getPercentile($pointer, $interval, $datas, $field, $percentile);          
+      }
     }
     $data[] = $entry;
     $pointer += $interval;
@@ -114,7 +147,8 @@ function getDataAsAmChartLineXml($userId,
                                  $trimAbove,
                                  $adjustUsing,
                                  $trimBelow,
-                                 $interval) {
+                                 $interval,
+                                 $aggregateMethod) {
   $dbFields = "r.Date";
   foreach ($availFields as $field) {
     $dbFields .= ",r." . $field;
@@ -144,7 +178,7 @@ function getDataAsAmChartLineXml($userId,
     $datas = getGraphData($userId, $jobId, $start, $end, $percentile, $trimAbove, $adjustUsing, $trimBelow, $dbFields);
 
     if ($interval > 1) {
-      $datas = getResultsDataAvg($start, $end, $interval, $datas, $fields);
+      $datas = getResultsDataAvg($start, $end, $interval, $datas, $fields, $aggregateMethod);
     }
 
     foreach ($fields as $key => $field) {
@@ -192,7 +226,8 @@ function getDataAsAmChartScatterXml($userId,
                                     $trimAbove,
                                     $adjustUsing,
                                     $trimBelow,
-                                    $interval) {
+                                    $interval,
+                                    $aggregateMethod) {
   $dbFields = "r.Date";
 
   foreach ($availFields as $field) {
@@ -213,7 +248,7 @@ function getDataAsAmChartScatterXml($userId,
     $datas = getGraphData($userId, $jobId, $start, $end, $percentile, $trimAbove, $adjustUsing, $trimBelow, $dbFields);
 
     if ($interval > 1) {
-      $datas = getResultsDataAvg($start, $end, $interval, $datas, $fields);
+      $datas = getResultsDataAvg($start, $end, $interval, $datas, $fields, $aggregateMethod);
     }
     foreach ($fields as $key => $field) {
       $xmlGraphData = "";
