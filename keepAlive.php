@@ -4,7 +4,7 @@
 ?>
 <html>
 	<head>
-		<meta http-equiv="refresh" content="300" />
+		<meta http-equiv="refresh" content="550" />
 	</head>
 	<body>
 		<?php echo date('d/m/Y - H:i:s'); ?>
