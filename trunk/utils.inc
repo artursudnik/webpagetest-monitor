@@ -562,8 +562,11 @@ function getPermissionLevel($table, $folderId){
 
     $q = Doctrine_Query::create()
         ->select('f.Label, j.Label')
-        ->from($table . 'Folder' . ' f')
-        ->leftJoin('f.' . $table . ' j');
+        ->from($table . 'Folder' . ' f');
+        /**
+         * Seems to be unnecessary. Removed during optimizations by Artur Sudnik on 2014-04-03
+         */
+        //->leftJoin('f.' . $table . ' j');
 
     $treeObject = $folderTable->getTree();
     $treeObject->setBaseQuery($q);
@@ -611,8 +614,11 @@ function hasPermission($table, $folderId, $permissionLevel) {
 
     $q = Doctrine_Query::create()
         ->select('f.Label, j.Label')
-        ->from($table . 'Folder' . ' f')
-        ->leftJoin('f.' . $table . ' j');
+        ->from($table . 'Folder' . ' f');
+        /**
+         * Seems to be unnecessary. Removed during optimizations by Artur Sudnik on 2014-04-03
+         */
+//        ->leftJoin('f.' . $table . ' j');
 
     $treeObject = $folderTable->getTree();
     $treeObject->setBaseQuery($q);
