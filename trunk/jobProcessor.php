@@ -30,10 +30,12 @@
     // Process results for all
     processResultsForAll();
 
-    $jobs = Doctrine_Core::getTable('WPTJob')->findAll();
-    foreach($jobs as $job){
-      processAlertsForJob($job['Id']);
-    }
+    logOutput('[Warning] [jobProcessor] Processing alerts for jobs disabled.');
+
+//    $jobs = Doctrine_Core::getTable('WPTJob')->findAll();
+//    foreach($jobs as $job){
+//      processAlertsForJob($job['Id']);
+//    }
 
   } catch (Exception $e) {
     error_log("[WPTMonitor] Failed while Listing Users: " . $wptResultId . " message: " . $e->getMessage());
