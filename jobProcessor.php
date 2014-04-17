@@ -42,9 +42,11 @@
     logOutput('[ERROR] [jobProcessor] Exception : ' . $e->getMessage());
   }
 
+  logOutput('[Warning] [jobProcessor] updating queue process rate disabled');
+//  updateQueueProcessRate();
 
-  updateQueueProcessRate();
-  checkTesterRatioAndEmailAlert();
+  logOutput('[Warning] [jobProcessor] checking tester ratio disabled');
+//  checkTesterRatioAndEmailAlert();
 
   session_destroy();
 
