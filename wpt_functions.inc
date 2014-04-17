@@ -664,13 +664,19 @@ function processResultsForAll( $resultId = null ) {
         // Check for empty run
         $headersLocation = $xml->data->run[$runToUse - 1]->firstView->rawData->headers;
         // TODO: Remove Strangeloop specific code, or make this feature generic.
-        $headers = file_get_contents($headersLocation);
+        if($headersLocation) {
+            $headers = file_get_contents($headersLocation);
+        }
         $request57 = strpos($headers,"Request 6:");
 
         $pageDataLocation = $xml->data->run[0]->firstView->rawData->pageData;
-        $pageData = file_get_contents($pageDataLocation);
+        if($pageDataLocation){
+            $pageData = file_get_contents($pageDataLocation);
+        }
         $pageDataLocationRepeatView = $xml->data->run[0]->repeatView->rawData->pageData;
-        $pageDataRepeatView = file_get_contents($pageDataLocationRepeatView );
+        if ($pageDataLocationRepeatView) {
+          $pageDataRepeatView = file_get_contents($pageDataLocationRepeatView );
+        }
 
         if ( $pageData ){
           $lines = explode("\n",$pageData);
@@ -766,24 +772,28 @@ function processResultsForAll( $resultId = null ) {
           $validationMarkAs = $result['ValidationMarkAs'];
           $validationMarkAsElse = $result['ValidationMarkAsElse'];
           $requestData = retrieveRequestsData($requestDataLocation );
-          $requestDataRepeatView = retrieveRequestsData($requestDataLocationRepeatView );
+          if($requestDataLocationRepeatView){
+              $requestDataRepeatView = retrieveRequestsData($requestDataLocationRepeatView );
+          }
           $requestDataArray[] = $requestData;
           $requestDataArray[] = $requestDataRepeatView;
           $result['ValidationState'] = $validationMarkAsElse;
           foreach($requestDataArray as $reqData){
-            foreach ($reqData as $request){
-              if ( preg_match($validationRequest, $request['url']) ){
-                if ( $validationType == VALIDATION_TYPE_MATCH ){
-                  $result['ValidationState'] = $validationMarkAs;
-                  break;
-                } else {
-                  if ($validationType == VALIDATION_TYPE_NOMATCH){
-                    break;
-                  } else {
-                    $result['ValidationState'] = $validationMarkAs;
+            if(is_array($reqData)){
+                foreach ($reqData as $request){
+                  if ( preg_match($validationRequest, $request['url']) ){
+                    if ( $validationType == VALIDATION_TYPE_MATCH ){
+                      $result['ValidationState'] = $validationMarkAs;
+                      break;
+                    } else {
+                      if ($validationType == VALIDATION_TYPE_NOMATCH){
+                        break;
+                      } else {
+                        $result['ValidationState'] = $validationMarkAs;
+                      }
+                    }
                   }
                 }
-              }
             }
           }
         }
