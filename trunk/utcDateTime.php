@@ -4,7 +4,7 @@
     document.getElementById('timeZoneForm').submit();
   }
 </script>
-<form id="timeZoneForm" action="">
+<form id="timeZoneForm">
   <?php
     include_once 'utils.inc';
     if (array_key_exists('edited_user_timezone', $_REQUEST) && !empty($_REQUEST['edited_user_timezone'])) {
