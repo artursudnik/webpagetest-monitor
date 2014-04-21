@@ -1,5 +1,6 @@
 $(document).ready(function() {
   $("#updateForm").validate();
+  onloadInit();
 });
 function onloadInit() {
   checkInterval();

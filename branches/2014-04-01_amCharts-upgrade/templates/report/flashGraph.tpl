@@ -13,7 +13,7 @@
 <script type="text/javascript" src="js/reports/flashGraph.js"></script>
 {/literal}
 </head>
-<body onload="onloadInit();">
+<body>
 <div class="page">
 {include file='header.tpl'}
 {include file='navbar.tpl'}
