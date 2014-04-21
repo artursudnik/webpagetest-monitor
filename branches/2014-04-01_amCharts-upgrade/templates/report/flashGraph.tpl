@@ -273,10 +273,5 @@
 </div>
 </div>
 </div>
-{literal}
-<script type="text/javascript">
-
-</script>
-{/literal}
 </body>
 </html>
