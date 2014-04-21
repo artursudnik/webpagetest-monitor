@@ -2,10 +2,14 @@ $(document).ready(function() {
   $("#updateForm").validate();
   onloadInit();
 });
+
+
 function onloadInit() {
   checkInterval();
   adjustTimeFrame();
 }
+
+
 function adjustTimeFrame(){
   timeFrameElement = document.getElementById('timeFrame');
   timeFrameValue = timeFrameElement[timeFrameElement.selectedIndex].value;
@@ -41,6 +45,8 @@ function adjustTimeFrame(){
 
   //disableIntervalOptionsBelow(interval);
 }
+
+
 function checkInterval() {
   intervalElement = document.getElementById('interval');
   currentInterval = intervalElement.options[intervalElement.selectedIndex].value;
@@ -84,6 +90,8 @@ function checkInterval() {
   //disableIntervalOptionsBelow(interval);
 
 }
+
+
 function disableIntervalOptionsBelow(value) {
   // First reenable all of them
   intervalElement = document.getElementById('interval');
@@ -96,10 +104,14 @@ function disableIntervalOptionsBelow(value) {
     }
   }
 }
+
+
 function validateForm() {
 
   return checkJobCount();
 }
+
+
 // Limit number of jobs to select
 function checkJobCount() {
   var maxJobs = 8;
@@ -122,6 +134,8 @@ function updateReport() {
   document.updateForm.act.value="report";
   document.updateForm.submit();
 }
+
+
 function downloadData() {
   if (!validateForm()) {
     return false;
@@ -129,6 +143,8 @@ function downloadData() {
   document.updateForm.act.value="download";
   document.updateForm.submit();
 }
+
+
 function updateGraph() {
   if (!validateForm()) {
     return false;
