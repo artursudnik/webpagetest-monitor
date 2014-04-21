@@ -1,5 +1,5 @@
 <div id="nav_bkg">
-  <ul id="nav" class="cufon-dincond_black">
+  <ul class="cufon-dincond_black nav">
     <li><a href="index.php">Home</a></li>
     <li><a href="listJobs.php?currentPage=1">Jobs</a></li>
     <li><a href="listScripts.php?currentPage=1">Scripts</a></li>
@@ -15,7 +15,7 @@
 </div>
 {if $smarty.session.ls_admin}
 <div>
-  <ul id="nav" class="cufon-dincond_black">
+  <ul class="cufon-dincond_black nav">
     <li><a href="editConfig.php">Config</a></li>
     <li><a href="listHosts.php">Hosts</a></li>
     <li><a href="listLocations.php">Locations</a></li>
