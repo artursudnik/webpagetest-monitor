@@ -1,6 +1,7 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
+<title>WebPageTest Monitor - Reports</title>
 {include file="headIncludes.tpl"}
 {literal}
 <style type="text/css">
@@ -163,87 +164,87 @@ function updateGraph() {
   <table>
     <tr>
       <td>
-        <form name="folderForm" action="">
+        <form name="folderForm">
         <a href="listFolders.php?folder=Job"><b>Folder:</b></a> <select name="folderId" onchange="document.folderForm.submit();">
       {html_select_tree permission=$smarty.const.PERMISSION_READ shares=$shares tree=$folderTree selected=$folderId}
   </select>
   </form>
   </td>
     <td>
-    <form action="" name="showInactiveJobsForm">
+    <form name="showInactiveJobsForm">
         <input type="hidden" name="showInactiveJobsGraph" value="0">
-      <input id="showInactiveJobs" type="checkbox" name="showInactiveJobsGraph" value="1" {if $showInactiveJobsGraph}checked="true"{/if} onclick="document.showInactiveJobsForm.submit()"><label for="showInactiveJobs"> Show Inactive Jobs</label>
+      <input id="showInactiveJobs" type="checkbox" name="showInactiveJobsGraph" value="1" {if $showInactiveJobsGraph}checked="checked"{/if} onclick="document.showInactiveJobsForm.submit()"><label for="showInactiveJobs"> Show Inactive Jobs</label>
     </form>
   </td></tr></table>
   <form name="updateForm" class="cmxform" action="flashGraph.php" id="updateForm" onsubmit="validateForm();">
     {if isset($cacheKey)}<input type="hidden" value="{$cacheKey}" name="cacheKey">{/if}
     <input type="hidden" name="act" value="">
-    <table width="100%" border=0>
+    <table style="width:100%">
       <tr>
-        <td align="left" valign="top">
-          <select onchange="checkJobCount();" id="jobs" multiple="true"
+        <td>
+          <select onchange="checkJobCount();" id="jobs" multiple="multiple"
                   name="job_id[]"
                   size="7"
                   style="width:440px; height:280px">{html_options options=$jobs selected=$job_ids}</select>
 
           <div style="font-size:x-small;">Select up to 3 jobs</div>
         </td>
-        <td valign="top" align="left">
+        <td style="vertical-align:top">
           <input id="startTime" type="hidden" name="startTime">
           <input id="endTime" type="hidden" name="endTime">
-          <table>
+          <table style="width: 315px">
             <tr>
-              <td align="right">Time Frame:</td>
+              <td style="text-align:right">Time Frame:</td>
               <td>
                 <select id="timeFrame" name="timeFrame" onchange="adjustTimeFrame();">
-                <option {if $timeFrame eq 0}selected="true"{/if} value="0">Manual</option>
-                <option {if $timeFrame eq 900}selected="true"{/if} value="900">15 Minutes</option>
-                <option {if $timeFrame eq 1800}selected="true"{/if} value="1800">30 Minutes</option>
-                <option {if $timeFrame eq 3600}selected="true"{/if} value="3600">1 Hour</option>
-                <option {if $timeFrame eq 10800}selected="true"{/if} value="10800">3 Hours</option>
-                <option {if $timeFrame eq 21600}selected="true"{/if} value="21600">6 Hours</option>
-                <option {if $timeFrame eq 43200}selected="true"{/if} value="43200">12 Hours</option>
-                <option {if $timeFrame eq 86400}selected="true"{/if} value="86400">Day</option>
-                <option {if $timeFrame eq 604800}selected="true"{/if} value="604800">Week</option>
-                <option {if $timeFrame eq 1209600}selected="true"{/if} value="1209600">2 Weeks</option>
-                <option {if $timeFrame eq 2419200}selected="true"{/if} value="2419200">4 weeks</option>
+                <option {if $timeFrame eq 0}selected="selected"{/if} value="0">Manual</option>
+                <option {if $timeFrame eq 900}selected="selected"{/if} value="900">15 Minutes</option>
+                <option {if $timeFrame eq 1800}selected="selected"{/if} value="1800">30 Minutes</option>
+                <option {if $timeFrame eq 3600}selected="selected"{/if} value="3600">1 Hour</option>
+                <option {if $timeFrame eq 10800}selected="selected"{/if} value="10800">3 Hours</option>
+                <option {if $timeFrame eq 21600}selected="selected"{/if} value="21600">6 Hours</option>
+                <option {if $timeFrame eq 43200}selected="selected"{/if} value="43200">12 Hours</option>
+                <option {if $timeFrame eq 86400}selected="selected"{/if} value="86400">Day</option>
+                <option {if $timeFrame eq 604800}selected="selected"{/if} value="604800">Week</option>
+                <option {if $timeFrame eq 1209600}selected="selected"{/if} value="1209600">2 Weeks</option>
+                <option {if $timeFrame eq 2419200}selected="selected"{/if} value="2419200">4 weeks</option>
                 </select>
               </td>
             </tr>
 
             <tr id="startTimeSelect">
-              <td align="right">Start:</td>
+              <td style="text-align:right">Start:</td>
               <td>{html_select_date start_year='2010' onchange='checkInterval();' prefix='start' time=$startTime} {html_select_time prefix='start' time=$startTime display_minutes=false display_seconds=false}</td>
             </tr>
             <tr id="endTimeSelect">
-              <td align="right">End:</td>
-              <td nowrap="true">{html_select_date start_year='2010' onchange='checkInterval();' prefix='end' time=$endTime} {html_select_time prefix='end' time=$endTime display_minutes=false display_seconds=false}</td>
+              <td style="text-align:right">End:</td>
+              <td>{html_select_date start_year='2010' onchange='checkInterval();' prefix='end' time=$endTime} {html_select_time prefix='end' time=$endTime display_minutes=false display_seconds=false}</td>
             </tr>
             <tr>
-              <td align="right" valign="middle">Interval:</td>
-              <td valign="top"><select id="interval" name="interval" onchange="checkInterval();">
-                <option {if $interval eq 1}selected="true"{/if} value="1">Max</option>
-                <option {if $interval eq 300}selected="true"{/if} value="300">5 Minutes</option>
-                <option {if $interval eq 900}selected="true"{/if} value="900">15 Minutes</option>
-                <option {if $interval eq 1800}selected="true"{/if} value="1800">30 Minutes</option>
-                <option {if $interval eq 3600 or $interval eq 0}selected="true"{/if} value="3600">1 Hour</option>
-                <option {if $interval eq 10800}selected="true"{/if} value="10800">3 Hours</option>
-                <option {if $interval eq 21600}selected="true"{/if} value="21600">6 Hours</option>
-                <option {if $interval eq 43200}selected="true"{/if} value="43200">12 Hours</option>
-                <option {if $interval eq 86400}selected="true"{/if} value="86400">Daily</option>
-                <option {if $interval eq 604800}selected="true"{/if} value="604800">Weekly</option>
+              <td style="text-align:right">Interval:</td>
+              <td><select id="interval" name="interval" onchange="checkInterval();">
+                <option {if $interval eq 1}selected="selected"{/if} value="1">Max</option>
+                <option {if $interval eq 300}selected="selected"{/if} value="300">5 Minutes</option>
+                <option {if $interval eq 900}selected="selected"{/if} value="900">15 Minutes</option>
+                <option {if $interval eq 1800}selected="selected"{/if} value="1800">30 Minutes</option>
+                <option {if $interval eq 3600 or $interval eq 0}selected="selected"{/if} value="3600">1 Hour</option>
+                <option {if $interval eq 10800}selected="selected"{/if} value="10800">3 Hours</option>
+                <option {if $interval eq 21600}selected="selected"{/if} value="21600">6 Hours</option>
+                <option {if $interval eq 43200}selected="selected"{/if} value="43200">12 Hours</option>
+                <option {if $interval eq 86400}selected="selected"{/if} value="86400">Daily</option>
+                <option {if $interval eq 604800}selected="selected"{/if} value="604800">Weekly</option>
               </select>&nbsp;
               {*{if $intervalAuto}{$intervalAuto}{/if}*}
               </td>
             </tr>
             <tr>
-              <td colspan="1" align="right">
+              <td colspan="1" style="text-align:right">
                 Chart type:
               </td>
               <td>
                 <select id="chartType" name="chartType" >
-                  <option {if $chartType eq "Line"}selected="true"{/if} value="line">Line</option>
-                  <option {if $chartType eq "scatter"}selected="true" {/if} value="scatter">Scatter</option>
+                  <option {if $chartType eq "Line"}selected="selected"{/if} value="line">Line</option>
+                  <option {if $chartType eq "scatter"}selected="selected" {/if} value="scatter">Scatter</option>
                 </select>
               </td>
             </tr>
@@ -265,30 +266,30 @@ function updateGraph() {
             </tr>
           </table>
         </td>
-        <td valign="top" align="right" nowrap="true" style="padding:0%;">
-          <table width=100% cellpadding="0" cellspacing="0">
+        <td style="vertical-align:top; padding:0%">
+          <table style="float: right">
             <tr>
-              <td colspan="1" align="right">
+              <td colspan="1" style="text-align:right">
                 Filter Using:
               </td>
               <td><select name="adjustUsing">
                 <optgroup label="First view">
-                    <option value="AvgFirstViewFirstByte"
-                            {if $adjustUsing eq 'AvgFirstViewFirstByte'}selected="true"{/if}>Time to first byte
-                    </option>
-                    <option value="AvgFirstViewStartRender"
-                            {if $adjustUsing eq 'AvgFirstViewStartRender'}selected="true"{/if}>Start Render
-                    </option>
-                    <option value="AvgFirstViewDocCompleteTime"
-                            {if $adjustUsing eq 'AvgFirstViewDocCompleteTime'}selected="true"{/if}>Doc Time
-                    </option>
-                    <option value="AvgFirstViewDomTime"
-                            {if $adjustUsing eq 'AvgFirstViewDomTime'}selected="true"{/if}>Dom
-                      Time
-                    </option>
-                    <option value="AvgFirstViewFullyLoadedTime"
-                            {if $adjustUsing eq 'AvgFirstViewFullyLoadedTime'}selected="true"{/if}>Fully Loaded
-                    </option>
+                <option value="AvgFirstViewFirstByte"
+                        {if $adjustUsing eq 'AvgFirstViewFirstByte'}selected="selected"{/if}>Time to first byte
+                </option>
+                <option value="AvgFirstViewStartRender"
+                        {if $adjustUsing eq 'AvgFirstViewStartRender'}selected="selected"{/if}>Start Render
+                </option>
+                <option value="AvgFirstViewDocCompleteTime"
+                        {if $adjustUsing eq 'AvgFirstViewDocCompleteTime'}selected="selected"{/if}>Doc Time
+                </option>
+                <option value="AvgFirstViewDomTime"
+                        {if $adjustUsing eq 'AvgFirstViewDomTime'}selected="selected"{/if}>Dom
+                  Time
+                </option>
+                <option value="AvgFirstViewFullyLoadedTime"
+                        {if $adjustUsing eq 'AvgFirstViewFullyLoadedTime'}selected="selected"{/if}>Fully Loaded
+                </option>
                 </optgroup>
                 <optgroup label="Repeat view">
                     <option value="AvgRepeatViewFirstByte"
@@ -311,57 +312,57 @@ function updateGraph() {
               </select></td>
             </tr>
             <tr>
-              <td align="right">
+              <td style="text-align:right">
                 Percentile:
               </td>
               <td><select name="percentile">
-                <option {if $percentile eq "1"}selected="true"{/if} value="1">Max</option>
-                <option {if $percentile eq "0.95"}selected="true"{/if} value="0.95">95th</option>
-                <option {if $percentile eq "0.9"}selected="true"{/if} value="0.9">90th</option>
-                <option {if $percentile eq "0.8"}selected="true"{/if} value="0.8">80th</option>
-                <option {if $percentile eq "0.7"}selected="true"{/if} value="0.7">70th</option>
-                <option {if $percentile eq "0.6"}selected="true"{/if} value="0.6">60th</option>
-                <option {if $percentile eq "0.5"}selected="true"{/if} value="0.5">50th</option>
+                <option {if $percentile eq "1"}selected="selected"{/if} value="1">Max</option>
+                <option {if $percentile eq "0.95"}selected="selected"{/if} value="0.95">95th</option>
+                <option {if $percentile eq "0.9"}selected="selected"{/if} value="0.9">90th</option>
+                <option {if $percentile eq "0.8"}selected="selected"{/if} value="0.8">80th</option>
+                <option {if $percentile eq "0.7"}selected="selected"{/if} value="0.7">70th</option>
+                <option {if $percentile eq "0.6"}selected="selected"{/if} value="0.6">60th</option>
+                <option {if $percentile eq "0.5"}selected="selected"{/if} value="0.5">50th</option>
               </select>
               </td>
             </tr>
             <tr>
-              <td align="right">Trim above:</td>
+              <td style="text-align:right">Trim above:</td>
               <td><input class="number" id="trimAbove" type="text"
                          name="trimAbove" size="6" value="{$trimAbove}">
               </td>
             </tr>
             <tr>
-              <td align="right">Trim below:</td>
+              <td style="text-align:right">Trim below:</td>
               <td><input class="number" id="trimBelow" type="text"
                          name="trimBelow" size="6" value="{$trimBelow}">
               </td>
             </tr>
             <tr>
-              <td align="right" colspan="2">
+              <td colspan="2" style="text-align:right">
               </td>
             </tr>
           </table>
         </td>
       </tr>
       <tr>
-        <td colspan="2" nowrap="true">
-          <div align="left" style="font-size:x-small;">
+        <td colspan="2">
+          <div style="font-size:x-small;">
             {html_checkboxes name="fields" options=$availFieldKeysFV selected=$fieldsToDisplay separator=" "}<br>
             {html_checkboxes name="fields" options=$availFieldKeysRV selected=$fieldsToDisplay separator=" "}
           </div>
         </td>
-        <td colspan="2">
+        <td>
           <table style="cellpadding:0px;cellspacing:0px;margin:0px;border-spacing:0px">
             <tr>
-              <td align="right" valign="top"><input id="graphButton" type="button" name="action"
+              <td><input id="graphButton" type="button" name="action"
                                                     onclick="updateGraph();" value="Graph"
                                                     style="margin:0px;margin-right:3px;"></td>
-              <td align="right" valign="top"><input id="reportButton" type="button" name="action"
+              <td><input id="reportButton" type="button" name="action"
                                                     onclick="updateReport();" value="Report"
                                                     style="margin:0px;margin-right:3px;"></td>
-              <td align="center" valign="top"><input type="button" name="action" onclick="downloadData();" value="Download"></td>
-              <td align="left" valign="top"><input type="reset" value="Reset" style="margin:0px;"></td>
+              <td><input type="button" name="action" onclick="downloadData();" value="Download"></td>
+              <td><input type="reset" value="Reset" style="margin:0px;"></td>
             </tr>
           </table>
         </td>
@@ -378,7 +379,7 @@ function updateGraph() {
   base = loc.substring(0,loc.indexOf(".php")+4);
 
   document.getElementById('shareUrl').value=base+'?___k={$cryptQueryString}'</script>
-  {*<td align="center" valign="top"><input type="button" name="action" onclick="shareReport();" value="Share"></td>*}
+  {*<td align="center"><input type="button" name="action" onclick="shareReport();" value="Share"></td>*}
 {/if}
     {assign var="changeNoteFileName" value=""}
 {if $action eq 'graph'}
@@ -417,7 +418,7 @@ function updateGraph() {
     </script>
     {/literal}
     {/if}
-      <div align="right"><input type="button" value="Save" onclick="exportGraph();"></div><br>
+      <div><input type="button" value="Save" onclick="exportGraph();"></div><br>
     {/if}
 {/if}
     {*<a href="javascript:document.getElementById('abbreviations').style.visibility='visible';">+</a>*}
@@ -445,9 +446,8 @@ function updateGraph() {
 </div>
 </div>
 </div>
+</div>
 {literal}
-
-</body>
 <script type="text/javascript">
   /**
    *Called when the chart inits
@@ -469,4 +469,5 @@ function updateGraph() {
   starth.addEventListener('change',checkInterval, false);
 </script>
 {/literal}
+</body>
 </html>

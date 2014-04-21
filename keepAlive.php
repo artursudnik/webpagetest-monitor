@@ -4,6 +4,7 @@
 ?>
 <html>
 	<head>
+	    <title>Keep alive session</title>
 		<meta http-equiv="refresh" content="550" />
 	</head>
 	<body>
