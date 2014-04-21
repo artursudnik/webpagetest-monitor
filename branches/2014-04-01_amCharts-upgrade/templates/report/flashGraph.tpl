@@ -3,6 +3,7 @@
 <head>
 {include file="headIncludes.tpl"}
 {literal}
+<link rel="stylesheet" href="css/reports/flashGraph.css" type="text/css">
 <style type="text/css">
   label {
     width: 15em;
@@ -243,43 +244,7 @@
 {/if}
     {assign var="changeNoteFileName" value=""}
 {if $action eq 'graph'}
-    {if $graphDataFile}
-    {if $chartType eq "scatter"}
-
-    {literal}
-      <script type="text/javascript" src="lib/amcharts/amxy/swfobject.js"></script>
-      <div style="width:auto;" align="center" id="flashcontent"><strong>You need to upgrade your Flash
-        Player</strong></div>
-
-    <script type="text/javascript">
-    // <![CDATA[
-    var so = new SWFObject("lib/amcharts/amxy/amxy.swf", "amchart", "100%", "600", "8", "#E2E2E2");
-    so.addVariable("chart_id", "amchart"); // if you have more then one chart in one page, set different chart_id for each chart
-    so.addVariable("path", "lib/amcharts/amxy");
-    so.addVariable("settings_file", escape('{/literal}{$graphDataFile}{literal}'),escape('{/literal}{$changeNoteFileName}{literal}'));
-    so.write("flashcontent");
-    // ]]>
-    </script>
-    {/literal}
-    {else}
-    {literal}
-      <script type="text/javascript" src="lib/amcharts/amline/swfobject.js"></script>
-      <div style="width:auto;" align="center" id="flashcontent"><strong>You need to upgrade your Flash
-        Player</strong></div>
-
-    <script type="text/javascript">
-    // <![CDATA[
-    var so = new SWFObject("lib/amcharts/amline/amline.swf", "amchart", "100%", "600", "8", "#E2E2E2");
-    so.addVariable("chart_id", "amchart"); // if you have more then one chart in one page, set different chart_id for each chart
-    so.addVariable("path", "lib/amcharts/amline");
-    so.addVariable("settings_file", escape('{/literal}{$graphDataFile}{literal}'),escape('{/literal}{$changeNoteFileName}{literal}'));
-    so.write("flashcontent");
-    // ]]>
-    </script>
-    {/literal}
-    {/if}
-      <div align="right"><input type="button" value="Save" onclick="exportGraph();"></div><br>
-    {/if}
+<div id="graph"></div>
 {/if}
     {*<a href="javascript:document.getElementById('abbreviations').style.visibility='visible';">+</a>*}
     <div id="abbreviations" style="visibility:visible;">
@@ -310,20 +275,6 @@
 
 </body>
 <script type="text/javascript">
-  /**
-   *Called when the chart inits
-   */
-  var flashMovie;
-  function amChartInited(chart_id) {
-    flashMovie = document.getElementById(chart_id);
-    document.getElementById("chartfinished").value = chart_id;
-  }
-  function reloadData() {
-    return flashMovie.reloadAll();
-  }
-  function exportGraph() {
-    flashMovie.exportImage();
-  }
   endh = document.getElementsByName("endHour")[0];
   starth = document.getElementsByName("startHour")[0];
   endh.addEventListener('change',checkInterval, false);
