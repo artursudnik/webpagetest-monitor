@@ -275,10 +275,7 @@
 
 </body>
 <script type="text/javascript">
-  endh = document.getElementsByName("endHour")[0];
-  starth = document.getElementsByName("startHour")[0];
-  endh.addEventListener('change',checkInterval, false);
-  starth.addEventListener('change',checkInterval, false);
+
 </script>
 {/literal}
 </html>
