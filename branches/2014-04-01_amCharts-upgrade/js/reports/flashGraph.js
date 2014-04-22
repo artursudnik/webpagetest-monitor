@@ -5,8 +5,8 @@
         $("#updateForm").validate();
         onloadInit();
       
-        endh = document.getElementsByName("endHour")[0];
-        starth = document.getElementsByName("startHour")[0];
+        var endh = document.getElementsByName("endHour")[0];
+        var starth = document.getElementsByName("startHour")[0];
         endh.addEventListener('change',checkInterval, false);
         starth.addEventListener('change',checkInterval, false);
     });
