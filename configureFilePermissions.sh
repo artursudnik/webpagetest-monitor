@@ -10,7 +10,8 @@ touch temp
 chown -R www-data:www-data temp
 
 touch templates_c
-chown -R www-data:www-data templates_c
+chown www-data:www-data templates_c
+chown www-data:www-data templates_c/*.tpl.php
 
 touch graph/cache
 chown -R www-data:www-data graph/cache
