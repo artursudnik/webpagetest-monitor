@@ -248,7 +248,15 @@
 {/if}
     {assign var="changeNoteFileName" value=""}
 {if $action eq 'graph'}
-<div id="graph"></div>
+
+<div id="graphContainer" style="position: relative">
+    <div id="graph"></div>
+    <div id="graphOverlay" style="opacity: 0.5; display:none; position: absolute; top:0; width: 100%; height:100%; background-color: #999; text-align: center; font-size: 200px;">
+        <div style="padding-top: 30%;">
+            Working...
+        </div>
+    </div>
+</div>
 {/if}
     {*<a href="javascript:document.getElementById('abbreviations').style.visibility='visible';">+</a>*}
     <div id="abbreviations" style="visibility:visible;">
