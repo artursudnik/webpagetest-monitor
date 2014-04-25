@@ -9,6 +9,28 @@
         var starth = document.getElementsByName("startHour")[0];
         endh.addEventListener('change',checkInterval, false);
         starth.addEventListener('change',checkInterval, false);
+
+        $('#graphJSONButton').on('click', function(e){
+            var serializedFormData = $('#updateForm').serialize();
+            var button = this;     
+
+            $(button).attr('disabled', 'disabled');
+            $('#graphOverlay').show();
+            $.ajax({
+                url: 'jash/flashGraph.json.php',
+                data: serializedFormData,
+                method: "POST"
+            }).done(function(data){
+                $(button).removeAttr('disabled');
+                $('#graphOverlay').hide();
+                console.log(data);
+            }).error(function(e){
+                $(button).removeAttr('disabled');
+                $('#graphOverlay').hide();
+                console.error(e);
+            });
+        });
+        
     });
     
     
