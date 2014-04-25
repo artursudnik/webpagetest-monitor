@@ -210,14 +210,14 @@
         </td>
       </tr>
       <tr>
-        <td colspan="2">
+        <td>
           <div style="font-size:x-small;">
             {html_checkboxes name="fields" options=$availFieldKeysFV selected=$fieldsToDisplay separator=" "}<br>
             {html_checkboxes name="fields" options=$availFieldKeysRV selected=$fieldsToDisplay separator=" "}
           </div>
         </td>
-        <td>
-          <table style="cellpadding:0px;cellspacing:0px;margin:0px;border-spacing:0px">
+        <td colspan="2">
+          <table style="float:right;cellpadding:0px;cellspacing:0px;margin:0px;border-spacing:0px">
             <tr>
               <td><input id="graphButton" type="button" name="action"
                                                     onclick="updateGraph();" value="Graph"
@@ -226,7 +226,8 @@
                                                     onclick="updateReport();" value="Report"
                                                     style="margin:0px;margin-right:3px;"></td>
               <td><input type="button" name="action" onclick="downloadData();" value="Download"></td>
-              <td><input type="reset" value="Reset" style="margin:0px;"></td>
+              <td><input type="reset" value="Reset"></td>
+              <td><input type="button" id="graphJSONButton" value="Update Graph" style="margin:0px;"/></td>
             </tr>
           </table>
         </td>
