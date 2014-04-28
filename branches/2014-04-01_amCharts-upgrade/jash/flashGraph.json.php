@@ -8,6 +8,13 @@ header('Cache-Control: public', TRUE);
 
 $requestData = $_POST;
 
+$response = array(
+    'status'    => null,
+    'message'   => null,
+    'results'   => null
+);
+
+
 $response = array();
 
 $sanitizedData = sanitizeData($requestData);
@@ -19,6 +26,8 @@ $sanitizedData = addTimestamps($sanitizedData);
 
 FB::log($requestData);
 FB::log($sanitizedData);
+    $response['status'] = 200;
+    $response['message'] = 'OK';
 
 echo json_encode($response);
 
