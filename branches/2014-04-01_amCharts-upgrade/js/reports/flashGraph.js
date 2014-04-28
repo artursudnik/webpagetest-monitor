@@ -14,23 +14,23 @@
             var serializedFormData = $('#updateForm').serialize();
             var button = this;     
 
-            $(button).attr('disabled', 'disabled');
-            $('#graphOverlay').show();
-            $.ajax({
-                url: 'jash/flashGraph.json.php',
-                data: serializedFormData,
-                method: "POST"
-            }).done(function(data){
+            $.when(
+                $.ajax({
+                    url: 'jash/flashGraph.json.php',
+                    data: serializedFormData,
+                    method: "POST"
+                }).done(function(data){
+                    console.info('recieved data from the server');
+                }),
+                $(button).attr('disabled', 'disabled'),
+                $('#graphOverlay').fadeIn(100)
+            ).fail(function(){
+                alert('Error getting data from the server');
+            }).always(function(){
                 $(button).removeAttr('disabled');
-                $('#graphOverlay').hide();
-                console.log(data);
-            }).error(function(e){
-                $(button).removeAttr('disabled');
-                $('#graphOverlay').hide();
-                console.error(e);
+                $('#graphOverlay').fadeOut();
             });
         });
-        
     });
     
     
