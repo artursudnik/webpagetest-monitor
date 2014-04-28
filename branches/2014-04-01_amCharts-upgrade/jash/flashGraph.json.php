@@ -14,6 +14,7 @@ $sanitizedData = sanitizeData($requestData);
 
 
 $sanitizedData['fields'] = mapFields($requestData['fields']);
+$sanitizedData['fields'] = serializeFields($sanitizedData['fields']);
 $sanitizedData = addTimestamps($sanitizedData);
 
 FB::log($requestData);
@@ -86,4 +87,14 @@ function addTimestamps($requestArray) {
     $requestArray[endTimestamp]   = mktime($requestArray['endHour'], 0, 0,   $requestArray['endMonth'],   $requestArray['endDay'],   $requestArray['endYear']);
     
     return $requestArray;
+}
+
+function serializeFields($fieldsArray){
+    $serializedFields = "r.date";
+    
+    foreach ($fieldsArray as $key => $value) {
+        $serializedFields .= ", r.".$value;
+    }
+    
+    return $serializedFields;
 }
