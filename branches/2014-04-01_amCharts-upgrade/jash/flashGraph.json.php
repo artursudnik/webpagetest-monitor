@@ -35,6 +35,8 @@ function sanitizeData($requestArray) {
     $resultArray['endYear']    = filter_var((int)$requestArray['endYear'],    FILTER_VALIDATE_INT);
     $resultArray['endHour']    = filter_var((int)$requestArray['endHour'],    FILTER_VALIDATE_INT, array('default' => 0, 'min_range' => 0, 'max_range' => 23));
 
+    $resultArray['timeFrame']  = filter_var((int)$requestArray['timeFrame'],    FILTER_VALIDATE_INT, array('default' => 0, 'min_range' => 0, 'max_range' => 2419200));
+
     $resultArray['interval']   = filter_var((int)$requestArray['interval'],   FILTER_VALIDATE_INT, array('default' => 3600, 'min_range' => 1));
     
     $resultArray['percentile'] = filter_var((float)$requestArray['percentile'], FILTER_VALIDATE_FLOAT, array('default' => 1, 'min_range' => 0, 'max_range' => 1));
@@ -46,6 +48,8 @@ function sanitizeData($requestArray) {
     foreach ($requestArray['job_id'] as $key => $value) {
         $resultArray[job_id][] = (int) $value;
     }
+    
+    $resultArray['adjustUsing'] = $requestArray['adjustUsing'];
     
     return $resultArray;
 }
