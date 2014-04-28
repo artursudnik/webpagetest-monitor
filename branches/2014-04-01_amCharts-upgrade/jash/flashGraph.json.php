@@ -52,6 +52,16 @@ try {
             $sanitizedData['trimBelow'], 
             $fieldsSerialized
         ); 
+        
+        $singleSamplesData[$jobId] = getResultsDataAvg(
+            $sanitizedData['startTimestamp'], 
+            $sanitizedData['endTimestamp'], 
+            $sanitizedData['interval'], 
+            $singleSamplesData[$jobId], 
+            $fieldsArray, 
+            $sanitizedData['aggregateMethod']
+        );
+        
     }
     $response['status'] = 200;
     $response['message'] = 'OK';
