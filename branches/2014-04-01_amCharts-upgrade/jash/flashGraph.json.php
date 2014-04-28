@@ -133,7 +133,7 @@ function addTimestamps($requestArray) {
     
     if($requestArray['timeFrame'] == 0){
         $requestArray['startTimestamp'] = mktime($requestArray['startHour'], 0, 0, $requestArray['startMonth'], $requestArray['startDay'], $requestArray['startYear']);
-        $requestArray['endTimestamp']   = mktime($requestArray['endHour'], 0, 0,   $requestArray['endMonth'],   $requestArray['endDay'],   $requestArray['endYear']);
+        $requestArray['endTimestamp']   = mktime($requestArray['endHour'], 59, 59,   $requestArray['endMonth'],   $requestArray['endDay'],   $requestArray['endYear']);
     } else {
         $requestArray['endTimestamp'] = gmdate('U') + 3600;
         $requestArray['startTimestamp'] = $requestArray['endTimestamp'] - $requestArray['timeFrame'];
