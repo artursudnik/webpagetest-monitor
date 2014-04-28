@@ -50,7 +50,6 @@ try {
             $sanitizedData['trimAbove'], 
             $sanitizedData['adjustUsing'], // adjustUsing
             $sanitizedData['trimBelow'], 
-            $sanitizedData['fields'], 
             $fieldsSerialized
         ); 
     }
