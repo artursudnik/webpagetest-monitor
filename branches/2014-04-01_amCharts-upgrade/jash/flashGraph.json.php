@@ -15,8 +15,6 @@ $response = array(
 );
 
 
-$response = array();
-
 $sanitizedData = sanitizeData($requestData);
 
 
