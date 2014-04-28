@@ -10,8 +10,6 @@ $requestData = $_POST;
 
 $response = array();
 
-echo json_encode($response);
-
 $sanitizedData = sanitizeData($requestData);
 
 
@@ -21,6 +19,9 @@ $sanitizedData = addTimestamps($sanitizedData);
 FB::log($requestData);
 FB::log($sanitizedData);
 
+echo json_encode($response);
+
+die();
 function sanitizeData($requestArray) {
     $resultArray = array();
     
