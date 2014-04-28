@@ -14,14 +14,21 @@
             var serializedFormData = $('#updateForm').serialize();
             var button = this;     
 
-            $.when(
-                $.ajax({
+            var ajaxRequestPromise = $.ajax({
                     url: 'jash/flashGraph.json.php',
                     data: serializedFormData,
                     method: "POST"
                 }).done(function(data){
                     console.info('recieved data from the server');
-                }),
+                if(data.status !== 200) {
+                    console.error(data.status, data.message);
+                } else {
+                    console.info(data.status, data.message);
+                }
+            }); 
+            
+            $.when(
+                ajaxRequestPromise,
                 $(button).attr('disabled', 'disabled'),
                 $('#graphOverlay').fadeIn(100)
             ).fail(function(){
