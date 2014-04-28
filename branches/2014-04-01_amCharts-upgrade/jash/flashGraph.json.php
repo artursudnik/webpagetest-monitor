@@ -15,7 +15,7 @@ $response = array(
     'results'   => null
 );
 
-if(getCurrentUserId() === null) {
+if(null === $userId = getCurrentUserId()) {
     $response['message'] = 'Not logged in.';
     $response['status']  = 401;
     echo json_encode($response);
