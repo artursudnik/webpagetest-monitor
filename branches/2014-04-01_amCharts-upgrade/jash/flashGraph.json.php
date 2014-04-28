@@ -28,7 +28,9 @@ $sanitizedData = sanitizeData($requestData);
 
 
 $sanitizedData['fields'] = mapFields($requestData['fields']);
+$fieldsArray = $sanitizedData['fields'];
 $sanitizedData['fields'] = serializeFields($sanitizedData['fields']);
+$fieldsSerialized = $sanitizedData['fields'];
 $sanitizedData = addTimestamps($sanitizedData);
 
 FB::log($requestData);
@@ -48,7 +50,8 @@ try {
             $sanitizedData['trimAbove'], 
             $sanitizedData['adjustUsing'], // adjustUsing
             $sanitizedData['trimBelow'], 
-            $sanitizedData['fields']
+            $sanitizedData['fields'], 
+            $fieldsSerialized
         ); 
     }
     $response['status'] = 200;
