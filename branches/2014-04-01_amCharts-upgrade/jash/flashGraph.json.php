@@ -3,6 +3,7 @@ chdir('..');
 include 'monitor.inc';
 include_once 'graph_functions.inc';
 include_once 'firephp/0.3.2/fb.php';
+include_once ('utils.inc');
 header('Content-Type: application/json');
 header('Cache-Control: public', TRUE);
 
@@ -13,6 +14,14 @@ $response = array(
     'message'   => null,
     'results'   => null
 );
+
+if(getCurrentUserId() === null) {
+    $response['message'] = 'Not logged in.';
+    $response['status']  = 401;
+    echo json_encode($response);
+    die();
+}
+
 
 
 $sanitizedData = sanitizeData($requestData);
