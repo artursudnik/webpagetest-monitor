@@ -23,6 +23,11 @@ FB::log($sanitizedData);
 echo json_encode($response);
 
 die();
+
+/**
+ * FUNCTIONS DECLARATIONS
+ */
+
 function sanitizeData($requestArray) {
     $resultArray = array();
     
