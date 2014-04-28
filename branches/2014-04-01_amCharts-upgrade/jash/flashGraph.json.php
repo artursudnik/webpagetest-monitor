@@ -33,8 +33,33 @@ $sanitizedData = addTimestamps($sanitizedData);
 
 FB::log($requestData);
 FB::log($sanitizedData);
+
+try {
+    
+    $singleSamplesData = array();
+    
+    foreach ($sanitizedData['job_id'] as $key => $jobId) {
+        $singleSamplesData[$jobId] = getGraphData(
+            $userId, 
+            $jobId, //jobId
+            $sanitizedData['startTimestamp'], 
+            $sanitizedData['endTimestamp'], 
+            $sanitizedData['percentile'], 
+            $sanitizedData['trimAbove'], 
+            $sanitizedData['adjustUsing'], // adjustUsing
+            $sanitizedData['trimBelow'], 
+            $sanitizedData['fields']
+        ); 
+    }
     $response['status'] = 200;
     $response['message'] = 'OK';
+    
+} catch(exception $e) {
+    FB::log($e);
+    $response['status'] = 500;
+    $response['message'] = $e->getMessage();
+    setHttpResponseCode(500);
+}
 
 echo json_encode($response);
 
