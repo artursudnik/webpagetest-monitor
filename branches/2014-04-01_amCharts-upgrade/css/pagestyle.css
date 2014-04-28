@@ -193,7 +193,7 @@ table.pretty tr.odd { background: white; }
 #feeds li {margin: 2px 10px 2px 25px; display: block; overflow: hidden; width: 100%; }
 #feeds li.morefeeds {margin:0;}
 
-input[type="submit"] {
+/*input[type="submit"] {
 -moz-border-radius:4px 4px 4px 4px;
 border:1px solid #daa520;
 color:#000000;
@@ -229,7 +229,7 @@ text-shadow:0 1px 0 #999999;
 
 input[type="button"]:disabled{
     background-color: #e2e2e2;
-}
+}*/
 
 /*a:hover {background:#DDDDDD; text-decoration:none;} *//*BG color is a must for IE6*/
 a.tooltip span {display:none; padding:2px 3px; margin-left:8px; width:330px; text-align:left; }
@@ -242,6 +242,6 @@ p { clear: both; }
 em { font-weight: bold; padding-right: 1em; vertical-align: top; }
 
 [disabled] {
-color:#f5f5f5;
-background-color:#a9a9a9;
+color:#aaa;
+/*background-color:#a9a9a9;*/
 }
