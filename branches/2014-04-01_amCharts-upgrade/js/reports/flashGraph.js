@@ -9,8 +9,21 @@
         var starth = document.getElementsByName("startHour")[0];
         endh.addEventListener('change',checkInterval, false);
         starth.addEventListener('change',checkInterval, false);
-
-
+    
+        
+        function showChart(){
+            var d = $.Deferred();
+            
+            if($("#graphContainer").is(":hidden")){
+                $("#graphContainer").slideDown(200, function(){
+                    d.resolve();
+                });
+            } else {
+                d.resolve();
+            }
+            
+            return d.promise();
+        }
 
         function getChartData(params){
             var d = $.Deferred();
@@ -46,6 +59,7 @@
                 }),
                 $(button).attr('disabled', 'disabled'),
                 $('#graphOverlay').fadeIn(100)
+                ,showChart()
             ).fail(function(a, b, c){
                 alert('Error getting data from the server\n'+a.message+' ('+a.status+')');
             }).always(function(a, b, c){
