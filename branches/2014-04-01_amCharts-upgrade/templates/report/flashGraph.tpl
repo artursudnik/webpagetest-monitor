@@ -247,7 +247,7 @@
   {*<td align="center"><input type="button" name="action" onclick="shareReport();" value="Share"></td>*}
 {/if}
     {assign var="changeNoteFileName" value=""}
-{if $action eq 'graph'}
+</form>
 
 <div id="graphContainer" style="position: relative">
     <div id="graph"></div>
@@ -257,7 +257,6 @@
         </div>
     </div>
 </div>
-{/if}
     {*<a href="javascript:document.getElementById('abbreviations').style.visibility='visible';">+</a>*}
     <div id="abbreviations" style="visibility:visible;">
       <table class="pretty">
@@ -278,7 +277,6 @@
         </tr>
       </table>
     </div>
-  </form>
 </div>
 </div>
 </div>
