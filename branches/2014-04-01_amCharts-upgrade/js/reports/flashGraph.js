@@ -51,7 +51,7 @@
         
         function getChartDataWithGUIBehavior(params){
             var d = $.Deferred();
-            var button = this;     
+            var button = $("#graphJSONButton");     
 
             $.when(
                 getChartData(params),
