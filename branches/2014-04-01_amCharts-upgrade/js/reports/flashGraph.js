@@ -19,14 +19,19 @@
                 data: params,
                 method: "POST"
             }).done(function(data){
-                console.info('recieved data from the server');
                 if(data.status !== 200) {
-                    console.error(data.status, data.message);
-                    d.reject();
+                    d.reject({
+                        status:  data.status,
+                        message: data.message
+                    });
                 } else {
-                    console.info(data.status, data.message);
                     d.resolve(data.results);
                 }
+            }).error(function(jqxhr, err){
+                d.reject({
+                    status: jqxhr.status,
+                    message: jqxhr.statusText
+                });
             }); 
             return d.promise();
         }     
@@ -37,18 +42,13 @@
             
             $.when(
                 getChartData(serializedFormData).done(function(d){
-                    console.info('getChartData done');
-                    console.log(d);
                     return d;
                 }),
                 $(button).attr('disabled', 'disabled'),
                 $('#graphOverlay').fadeIn(100)
-            ).fail(function(){
-                alert('Error getting data from the server');
+            ).fail(function(a, b, c){
+                alert('Error getting data from the server\n'+a.message+' ('+a.status+')');
             }).always(function(a, b, c){
-                console.log(a);
-                console.log(b);
-                console.log(c);
                 $(button).removeAttr('disabled');
                 $('#graphOverlay').fadeOut();
             });
