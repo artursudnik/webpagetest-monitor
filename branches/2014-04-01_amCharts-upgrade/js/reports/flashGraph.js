@@ -42,7 +42,7 @@
             
             $.when(
                 getChartData(serializedFormData).done(function(d){
-                    return d;
+                    console.log(d);
                 }),
                 $(button).attr('disabled', 'disabled'),
                 $('#graphOverlay').fadeIn(100)
