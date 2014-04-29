@@ -1,5 +1,6 @@
 (function(window, $){
         
+    var chart = {};
     
     $(document).ready(function() {
         $("#updateForm").validate();
@@ -81,9 +82,51 @@
             getChartDataWithGUIBehavior(serializedFormData)
             .done(function(d){
                 console.log(d);
+                drawChart(chart, d);
             });
         });
     });
+    
+    function drawChart(chart, data) {
+        
+        // http://jsfiddle.net/martynasma/j9gUu/10/
+        
+        var chartData = [];
+        
+        var numberOfSeries = 0;
+        var previousJobId = null;
+        
+        for(var i in data) {
+            if(previousJobId !== null) {
+                if(data[previousJobId].dataSet.length !== data[i].dataSet.length) {
+                    console.error('not equal datasets');
+                }
+            }
+            previousJobId = i;
+            numberOfSeries++;
+        }
+        
+        for(var i=0; i<data[previousJobId].dataSet.length; i++) {
+            var tmpPoint = {};
+            tmpPoint['date'] = data[previousJobId].dataSet[i].Date;
+            for(var j in data) {
+                // tmpPoint[j]
+            }
+            chartData.push(tmpPoint);
+        }
+        
+        console.log(chartData);
+
+        try{
+
+        } catch(e){
+            console.error(e);
+        }
+        
+        
+        console.log(chart);
+        
+    }
     
     function onloadInit() {
       checkInterval();
