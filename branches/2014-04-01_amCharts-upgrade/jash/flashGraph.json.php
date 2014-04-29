@@ -40,7 +40,12 @@ try {
     
     $singleSamplesData = array();
     
+    $jobTable = Doctrine_Core::getTable('WPTJob');
+    
     foreach ($sanitizedData['job_id'] as $key => $jobId) {
+        
+        $job = $jobTable->find($jobId);
+        
         $singleSamplesData[$jobId] = getGraphData(
             $userId, 
             $jobId, //jobId
@@ -53,13 +58,17 @@ try {
             $fieldsSerialized
         ); 
         
-        $singleSamplesData[$jobId] = getResultsDataAvg(
-            $sanitizedData['startTimestamp'], 
-            $sanitizedData['endTimestamp'], 
-            $sanitizedData['interval'], 
-            $singleSamplesData[$jobId], 
-            $fieldsArray, 
-            $sanitizedData['aggregateMethod']
+        $singleSamplesData[$jobId] = array(
+            jobId   => $job['Id'],
+            jobName => $job['Label'],
+            dataSet => getResultsDataAvg(
+                $sanitizedData['startTimestamp'], 
+                $sanitizedData['endTimestamp'], 
+                $sanitizedData['interval'], 
+                $singleSamplesData[$jobId], 
+                $fieldsArray, 
+                $sanitizedData['aggregateMethod']
+            )
         );
         
     }
