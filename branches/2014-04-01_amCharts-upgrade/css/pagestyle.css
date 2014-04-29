@@ -55,7 +55,7 @@ textarea {overflow-x: hidden;width: 400px;height: 100px;padding: 3px;}
 .test_menu li.current a {color: #f1c52e; display: block; text-decoration:underline; }
 
 /* Main */
-#main {position: relative; padding: 0; background: #e2e2e2 url(http://cdn.webpagetest.org/images/main-bkg.png) no-repeat bottom;}
+#main {position: relative; padding: 0; background: #e2e2e2;}
 .translucent {background: url(http://cdn.webpagetest.org/images/20pct.png) repeat; padding: 10px; }
 
 .content-wrap {margin: 0 auto;}
