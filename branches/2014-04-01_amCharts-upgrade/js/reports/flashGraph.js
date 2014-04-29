@@ -11,7 +11,7 @@
         starth.addEventListener('change',checkInterval, false);
     
         
-        function showChart(){
+        function showChartContainer(){
             var d = $.Deferred();
             
             if($("#graphContainer").is(":hidden")){
@@ -57,7 +57,7 @@
                 getChartData(params),
                 $(button).attr('disabled', 'disabled'),
                 $('#graphOverlay').fadeIn(100)
-                ,showChart()
+                ,showChartContainer()
             ).done(function(data){
                 d.resolve(data);
             }).fail(function(a, b, c){
