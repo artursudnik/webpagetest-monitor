@@ -33,8 +33,8 @@ $sanitizedData['fields'] = serializeFields($sanitizedData['fields']);
 $fieldsSerialized = $sanitizedData['fields'];
 $sanitizedData = addTimestamps($sanitizedData);
 
-FB::log($requestData);
-FB::log($sanitizedData);
+// FB::log($requestData);
+// FB::log($sanitizedData);
 
 try {
     
@@ -157,7 +157,7 @@ function addTimestamps($requestArray) {
     } else {
         $requestArray['endTimestamp'] = gmdate('U') + 3600;
         $requestArray['startTimestamp'] = $requestArray['endTimestamp'] - $requestArray['timeFrame'];
-        FB::log($requestArray['endTimestamp'] - $requestArray['startTimestamp']);
+        // FB::log($requestArray['endTimestamp'] - $requestArray['startTimestamp']);
     }
     
     $keysToDelete = array(
