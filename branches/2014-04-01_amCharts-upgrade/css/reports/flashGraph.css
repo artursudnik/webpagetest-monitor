@@ -1,3 +1,7 @@
+#graphContainer{
+    display: none;
+}
+
 #graph{
     height: 600px;
     background-color: #fff;
