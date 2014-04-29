@@ -13,19 +13,22 @@
 
 
         function getChartData(params){
+            var d = $.Deferred();
             var ajaxRequestPromise = $.ajax({
                     url: 'jash/flashGraph.json.php',
                     data: params,
                     method: "POST"
                 }).done(function(data){
                     console.info('recieved data from the server');
-                if(data.status !== 200) {
-                    console.error(data.status, data.message);
-                } else {
-                    console.info(data.status, data.message);
-                }
+                    if(data.status !== 200) {
+                        console.error(data.status, data.message);
+                        d.reject();
+                    } else {
+                        console.info(data.status, data.message);
+                        d.resolve(data.results);
+                    }
             }); 
-            return ajaxRequestPromise;
+            return d.promise();
         }     
         
         $('#graphJSONButton').on('click', function(e){
@@ -33,14 +36,19 @@
             var button = this;     
             
             $.when(
-                getChartData(serializedFormData).done(function(){
+                getChartData(serializedFormData).done(function(d){
                     console.info('getChartData done');
+                    console.log(d);
+                    return d;
                 }),
                 $(button).attr('disabled', 'disabled'),
                 $('#graphOverlay').fadeIn(100)
             ).fail(function(){
                 alert('Error getting data from the server');
-            }).always(function(){
+            }).always(function(a, b, c){
+                console.log(a);
+                console.log(b);
+                console.log(c);
                 $(button).removeAttr('disabled');
                 $('#graphOverlay').fadeOut();
             });
