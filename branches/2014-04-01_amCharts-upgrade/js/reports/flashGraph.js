@@ -49,28 +49,41 @@
             return d.promise();
         }     
         
-        $('#graphJSONButton').on('click', function(e){
-            var serializedFormData = $('#updateForm').serializeArray();
+        function getChartDataWithGUIBehavior(params){
+            var d = $.Deferred();
             var button = this;     
-            if(!checkJobCount()) {
-                return;
-            }
+
             $.when(
-                getChartData(serializedFormData).done(function(d){
-                    console.log(d);
-                }),
+                getChartData(params),
                 $(button).attr('disabled', 'disabled'),
                 $('#graphOverlay').fadeIn(100)
                 ,showChart()
-            ).fail(function(a, b, c){
+            ).done(function(data){
+                d.resolve(data);
+            }).fail(function(a, b, c){
                 alert('Error getting data from the server\n'+a.message+' ('+a.status+')');
+                d.reject(a);
             }).always(function(a, b, c){
                 $(button).removeAttr('disabled');
                 $('#graphOverlay').fadeOut();
             });
+            
+            return d.promise();
+        }
+        
+        $('#graphJSONButton').on('click', function(e){
+            var serializedFormData = $('#updateForm').serializeArray();
+            
+            if(!checkJobCount()) {
+                return;
+            }
+            
+            getChartDataWithGUIBehavior(serializedFormData)
+            .done(function(d){
+                console.log(d);
+            });
         });
     });
-    
     
     function onloadInit() {
       checkInterval();
