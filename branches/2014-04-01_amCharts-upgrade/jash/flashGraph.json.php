@@ -74,6 +74,7 @@ try {
     }
     $response['status'] = 200;
     $response['message'] = 'OK';
+    $response['results'] = $singleSamplesData;
     
 } catch(exception $e) {
     FB::log($e);
