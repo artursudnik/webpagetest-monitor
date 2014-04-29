@@ -38,7 +38,7 @@ FB::log($sanitizedData);
 
 try {
     
-    $singleSamplesData = array();
+    $resultDataset = array();
     
     $jobTable = Doctrine_Core::getTable('WPTJob');
     
@@ -46,7 +46,7 @@ try {
         
         $job = $jobTable->find($jobId);
         
-        $singleSamplesData[$jobId] = getGraphData(
+        $resultDataset[$jobId] = getGraphData(
             $userId, 
             $jobId, //jobId
             $sanitizedData['startTimestamp'], 
@@ -58,14 +58,14 @@ try {
             $fieldsSerialized
         ); 
         
-        $singleSamplesData[$jobId] = array(
+        $resultDataset[$jobId] = array(
             jobId   => $job['Id'],
             jobName => $job['Label'],
             dataSet => getResultsDataAvg(
                 $sanitizedData['startTimestamp'], 
                 $sanitizedData['endTimestamp'], 
                 $sanitizedData['interval'], 
-                $singleSamplesData[$jobId], 
+                $resultDataset[$jobId], 
                 $fieldsArray, 
                 $sanitizedData['aggregateMethod']
             )
@@ -74,7 +74,7 @@ try {
     }
     $response['status'] = 200;
     $response['message'] = 'OK';
-    $response['results'] = $singleSamplesData;
+    $response['results'] = $resultDataset;
     
 } catch(exception $e) {
     FB::log($e);
