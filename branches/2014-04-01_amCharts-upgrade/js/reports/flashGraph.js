@@ -10,13 +10,12 @@
         endh.addEventListener('change',checkInterval, false);
         starth.addEventListener('change',checkInterval, false);
 
-        $('#graphJSONButton').on('click', function(e){
-            var serializedFormData = $('#updateForm').serialize();
-            var button = this;     
 
+
+        function getChartData(params){
             var ajaxRequestPromise = $.ajax({
                     url: 'jash/flashGraph.json.php',
-                    data: serializedFormData,
+                    data: params,
                     method: "POST"
                 }).done(function(data){
                     console.info('recieved data from the server');
@@ -26,9 +25,17 @@
                     console.info(data.status, data.message);
                 }
             }); 
+            return ajaxRequestPromise;
+        }     
+        
+        $('#graphJSONButton').on('click', function(e){
+            var serializedFormData = $('#updateForm').serializeArray();
+            var button = this;     
             
             $.when(
-                ajaxRequestPromise,
+                getChartData(serializedFormData).done(function(){
+                    console.info('getChartData done');
+                }),
                 $(button).attr('disabled', 'disabled'),
                 $('#graphOverlay').fadeIn(100)
             ).fail(function(){
