@@ -52,7 +52,9 @@
         $('#graphJSONButton').on('click', function(e){
             var serializedFormData = $('#updateForm').serializeArray();
             var button = this;     
-            
+            if(!checkJobCount()) {
+                return;
+            }
             $.when(
                 getChartData(serializedFormData).done(function(d){
                     console.log(d);
