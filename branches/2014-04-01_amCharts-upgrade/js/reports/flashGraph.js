@@ -121,8 +121,10 @@
             var tmpPoint = {};
             tmpPoint['date'] = data.series[previousJobId].dataSet[i].DateFormatted;
             tmpPoint['timestamp'] = data.series[previousJobId].dataSet[i].UnixTimestamp;
-            for(var j in data.series) {
-                // tmpPoint[j]
+            for(var j in data.jobs) {
+                for (var k=0; k < data.metrics.length; k++) {
+                  tmpPoint[data.metrics[k] + "-" + data.jobs[j]] = data.series[data.jobs[j]].dataSet[i][data.metrics[k]];
+                };
             }
             chartData.push(tmpPoint);
         }
