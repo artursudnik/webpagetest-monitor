@@ -105,7 +105,8 @@
     function convertData2avgCharts (data) {
         var chartData = [];
         var seriesToJobNameMap = {};        
-        var seriesToMetricNameMap = {};        
+        var seriesToMetricNameMap = {};
+        var valueFields = [];        
         var numberOfSeries = 0;
         var previousJobId = null;
         
@@ -135,12 +136,14 @@
             for(var i=0; i < data.jobs.length; i++) {
                 seriesToJobNameMap[data.metrics[k] + "-" + data.jobs[i]] = data.series[data.jobs[i]].jobName;
                 seriesToMetricNameMap[data.metrics[k] + "-" + data.jobs[i]] = data.metrics[k];
+                valueFields.push(data.metrics[k] + "-" + data.jobs[i]);
             }
         }
         
         return {
             getJobName    : function(seriesName){return seriesToJobNameMap[seriesName];},
             getMetricName : function(seriesName){return seriesToMetricNameMap[seriesName];},
+            valueFields: valueFields,
             series: chartData
         };
     }
