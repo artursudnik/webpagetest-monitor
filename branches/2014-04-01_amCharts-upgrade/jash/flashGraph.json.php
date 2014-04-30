@@ -98,6 +98,14 @@ function getResultsDataAvgMod($startDateTime, $endDateTime, $interval, $datas, $
         $results[$key]['UnixTimestamp'] = $value['Date'];
         $results[$key]['DateFormatted'] = date('Y-m-d H:i:s T (O)', $value['Date']);
         unset($results[$key]['Date']);
+        
+        foreach (getMetricsFieldsMappingsDb2Form() as $dbFieldName => $formFieldName) {
+            if(key_exists($dbFieldName, $value)){
+                $results[$key][mapMetricFieldDb2Form($dbFieldName)] = $value[$dbFieldName];
+                unset($results[$key][$dbFieldName]);
+            }
+        }
+        
     }
     
     return $results;
