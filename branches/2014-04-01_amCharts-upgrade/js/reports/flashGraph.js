@@ -149,6 +149,8 @@
         
         // http://jsfiddle.net/martynasma/j9gUu/10/
         
+        var getMetricName = data.getMetricName || function(a) {return 'No getMetricName function';};
+        var getJobName    = data.getJobName ||    function(a) {return 'No getJobName function';};
         
         $("#graph").html(JSON.stringify(data));
 
