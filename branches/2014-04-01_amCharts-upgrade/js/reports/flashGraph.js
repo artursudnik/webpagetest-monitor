@@ -107,9 +107,9 @@
         var numberOfSeries = 0;
         var previousJobId = null;
         
-        for(var i in data) {
+        for(var i in data.series) {
             if(previousJobId !== null) {
-                if(data[previousJobId].dataSet.length !== data[i].dataSet.length) {
+                if(data.series[previousJobId].dataSet.length !== data.series[i].dataSet.length) {
                     console.error('not equal datasets');
                 }
             }
@@ -117,11 +117,11 @@
             numberOfSeries++;
         }
         
-        for(var i=0; i<data[previousJobId].dataSet.length; i++) {
+        for(var i=0; i<data.series[previousJobId].dataSet.length; i++) {
             var tmpPoint = {};
-            tmpPoint['date'] = data[previousJobId].dataSet[i].DateFormatted;
-            tmpPoint['timestamp'] = data[previousJobId].dataSet[i].UnixTimestamp;
-            for(var j in data) {
+            tmpPoint['date'] = data.series[previousJobId].dataSet[i].DateFormatted;
+            tmpPoint['timestamp'] = data.series[previousJobId].dataSet[i].UnixTimestamp;
+            for(var j in data.series) {
                 // tmpPoint[j]
             }
             chartData.push(tmpPoint);
