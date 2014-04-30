@@ -102,8 +102,6 @@
     function convertData2avgCharts (data) {
         var chartData = [];
         
-        var fields = getFormMetricFields();
-        
         var numberOfSeries = 0;
         var previousJobId = null;
         
