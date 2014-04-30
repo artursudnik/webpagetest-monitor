@@ -142,13 +142,20 @@ function mapFields($fieldsArray) {
     
     $mappedArray = array();
     
-    $availFields = getMetricsFieldsMappingsForm2Db();
-    
     foreach ($fieldsArray as $key => $value) {
-        $mappedArray[] = $availFields[$value];
+        $mappedArray[] = mapMetricFieldForm2Db($value);
     }
     
     return $mappedArray;
+}
+
+function mapMetricFieldForm2Db($fieldName) {
+    $mappingArray = getMetricsFieldsMappingsForm2Db();
+    if(key_exists($fieldName, $mappingArray)) {
+        return $mappingArray[$fieldName];
+    }else {
+        throw new Exception("Unknow form field name $fieldName", 1);
+    }
 }
 
 function getMetricsFieldsMappingsForm2Db() {
