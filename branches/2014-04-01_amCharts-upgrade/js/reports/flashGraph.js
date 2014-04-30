@@ -12,66 +12,6 @@
         starth.addEventListener('change',checkInterval, false);
     
         
-        function showChartContainer(){
-            var d = $.Deferred();
-            
-            if($("#graphContainer").is(":hidden")){
-                $("#graphContainer").slideDown(200, function(){
-                    d.resolve();
-                });
-            } else {
-                d.resolve();
-            }
-            
-            return d.promise();
-        }
-
-        function getChartData(params){
-            var d = $.Deferred();
-            var ajaxRequestPromise = $.ajax({
-                url: 'jash/flashGraph.json.php',
-                data: params,
-                method: "POST"
-            }).done(function(data){
-                if(data.status !== 200) {
-                    d.reject({
-                        status:  data.status,
-                        message: data.message
-                    });
-                } else {
-                    d.resolve(data.results);
-                }
-            }).error(function(jqxhr, err){
-                d.reject({
-                    status: jqxhr.status,
-                    message: jqxhr.statusText
-                });
-            }); 
-            return d.promise();
-        }     
-        
-        function getChartDataWithGUIBehavior(params){
-            var d = $.Deferred();
-            var button = $("#graphJSONButton");     
-
-            $.when(
-                getChartData(params),
-                $(button).attr('disabled', 'disabled'),
-                $('#graphOverlay').fadeIn(100)
-                ,showChartContainer()
-            ).done(function(data){
-                d.resolve(data);
-            }).fail(function(a, b, c){
-                alert('Error getting data from the server\n'+a.message+' ('+a.status+')');
-                d.reject(a);
-            }).always(function(a, b, c){
-                $(button).removeAttr('disabled');
-                $('#graphOverlay').fadeOut();
-            });
-            
-            return d.promise();
-        }
-        
         $('#graphJSONButton').on('click', function(e){
             var serializedFormData = $('#updateForm').serializeArray();
             
@@ -87,6 +27,69 @@
             });
         });
     });
+
+
+        
+    function showChartContainer(){
+        var d = $.Deferred();
+        
+        if($("#graphContainer").is(":hidden")){
+            $("#graphContainer").slideDown(200, function(){
+                d.resolve();
+            });
+        } else {
+            d.resolve();
+        }
+        
+        return d.promise();
+    }
+
+    function getChartData(params){
+        var d = $.Deferred();
+        var ajaxRequestPromise = $.ajax({
+            url: 'jash/flashGraph.json.php',
+            data: params,
+            method: "POST"
+        }).done(function(data){
+            if(data.status !== 200) {
+                d.reject({
+                    status:  data.status,
+                    message: data.message
+                });
+            } else {
+                d.resolve(data.results);
+            }
+        }).error(function(jqxhr, err){
+            d.reject({
+                status: jqxhr.status,
+                message: jqxhr.statusText
+            });
+        }); 
+        return d.promise();
+    }     
+    
+    function getChartDataWithGUIBehavior(params){
+        var d = $.Deferred();
+        var button = $("#graphJSONButton");     
+
+        $.when(
+            getChartData(params),
+            $(button).attr('disabled', 'disabled'),
+            $('#graphOverlay').fadeIn(100)
+            ,showChartContainer()
+        ).done(function(data){
+            d.resolve(data);
+        }).fail(function(a, b, c){
+            alert('Error getting data from the server\n'+a.message+' ('+a.status+')');
+            d.reject(a);
+        }).always(function(a, b, c){
+            $(button).removeAttr('disabled');
+            $('#graphOverlay').fadeOut();
+        });
+        
+        return d.promise();
+    }
+
 
 /**
  *  Returns all possible names of metric fields 
