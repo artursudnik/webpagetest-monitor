@@ -81,6 +81,7 @@
             
             getChartDataWithGUIBehavior(serializedFormData)
             .done(function(d){
+                d = convertData2avgCharts(d);
                 console.log(d);
                 drawChart(chart, d);
             });
@@ -94,11 +95,14 @@
         return ['FV_TTFB', 'FV_Render', 'FV_Doc', 'FV_Dom', 'FV_Fully', 'RV_TTFB', 'RV_Render', 'RV_Doc', 'RV_Dom', 'RV_Fully'];
     }
     
-    function drawChart(chart, data) {
-        
-        // http://jsfiddle.net/martynasma/j9gUu/10/
-        
+/**
+ * Converts data returned by server to format that can be consumed by AmCharts Serial chart 
+ * @param {Array} data
+ */    
+    function convertData2avgCharts (data) {
         var chartData = [];
+        
+        var fields = getFormMetricFields();
         
         var numberOfSeries = 0;
         var previousJobId = null;
@@ -122,6 +126,13 @@
             }
             chartData.push(tmpPoint);
         }
+        return chartData;
+    }
+    
+    function drawChart(chart, data) {
+        
+        // http://jsfiddle.net/martynasma/j9gUu/10/
+        
         
         $("#graph").html(JSON.stringify(data));
 
