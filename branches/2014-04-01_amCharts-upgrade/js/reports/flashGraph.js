@@ -123,7 +123,7 @@
             chartData.push(tmpPoint);
         }
         
-        console.log(chartData);
+        $("#graph").html(JSON.stringify(data));
 
         try{
 
