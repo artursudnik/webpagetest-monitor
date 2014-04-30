@@ -61,7 +61,7 @@ try {
         $resultDataset[$jobId] = array(
             jobId   => $job['Id'],
             jobName => $job['Label'],
-            dataSet => getResultsDataAvg(
+            dataSet => getResultsDataAvgMod(
                 $sanitizedData['startTimestamp'], 
                 $sanitizedData['endTimestamp'], 
                 $sanitizedData['interval'], 
@@ -91,6 +91,18 @@ die();
  * FUNCTIONS DECLARATIONS
  */
 
+function getResultsDataAvgMod($startDateTime, $endDateTime, $interval, $datas, $fields, $aggregateMethod) {
+    $results = getResultsDataAvg($startDateTime, $endDateTime, $interval, $datas, $fields, $aggregateMethod);
+    
+    foreach ($results as $key => $value) {
+        $results[$key]['UnixTimestamp'] = $value['Date'];
+        $results[$key]['DateFormatted'] = date('Y-m-d H:i:s T (O)', $value['Date']);
+        unset($results[$key]['Date']);
+    }
+    
+    return $results;
+}
+ 
 function sanitizeData($requestArray) {
     $resultArray = array();
     
