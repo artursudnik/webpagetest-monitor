@@ -142,23 +142,28 @@ function mapFields($fieldsArray) {
     
     $mappedArray = array();
     
-    $availFields = array();
-    $availFields['FV_TTFB']     = "AvgFirstViewFirstByte";
-    $availFields['FV_Render']   = "AvgFirstViewStartRender";
-    $availFields['FV_Doc']      = "AvgFirstViewDocCompleteTime";
-    $availFields['FV_Dom']      = "AvgFirstViewDomTime";
-    $availFields['FV_Fully']    = "AvgFirstViewFullyLoadedTime";
-    $availFields['RV_TTFB']     = "AvgRepeatViewFirstByte";
-    $availFields['RV_Render']   = "AvgRepeatViewStartRender";
-    $availFields['RV_Doc']      = "AvgRepeatViewDocCompleteTime";
-    $availFields['RV_Dom']      = "AvgRepeatViewDomTime";
-    $availFields['RV_Fully']    = "AvgRepeatViewFullyLoadedTime";
+    $availFields = getMetricsFieldsMappingsForm2Db();
     
     foreach ($fieldsArray as $key => $value) {
         $mappedArray[] = $availFields[$value];
     }
     
     return $mappedArray;
+}
+
+function getMetricsFieldsMappingsForm2Db() {
+    return array(
+        'FV_TTFB'     => 'AvgFirstViewFirstByte',
+        'FV_Render'   => 'AvgFirstViewStartRender',
+        'FV_Doc'      => 'AvgFirstViewDocCompleteTime',
+        'FV_Dom'      => 'AvgFirstViewDomTime',
+        'FV_Fully'    => 'AvgFirstViewFullyLoadedTime',
+        'RV_TTFB'     => 'AvgRepeatViewFirstByte',
+        'RV_Render'   => 'AvgRepeatViewStartRender',
+        'RV_Doc'      => 'AvgRepeatViewDocCompleteTime',
+        'RV_Dom'      => 'AvgRepeatViewDomTime',
+        'RV_Fully'    => 'AvgRepeatViewFullyLoadedTime'    
+    );
 }
 
 function addTimestamps($requestArray) {
