@@ -86,6 +86,13 @@
             });
         });
     });
+
+/**
+ *  Returns all possible names of metric fields 
+ */
+    function getFormMetricFields(){
+        return ['FV_TTFB', 'FV_Render', 'FV_Doc', 'FV_Dom', 'FV_Fully', 'RV_TTFB', 'RV_Render', 'RV_Doc', 'RV_Dom', 'RV_Fully'];
+    }
     
     function drawChart(chart, data) {
         
