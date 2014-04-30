@@ -101,7 +101,8 @@
  */    
     function convertData2avgCharts (data) {
         var chartData = [];
-        
+        var seriesToJobNameMap = {};        
+        var seriesToMetricNameMap = {};        
         var numberOfSeries = 0;
         var previousJobId = null;
         
@@ -126,7 +127,19 @@
             }
             chartData.push(tmpPoint);
         }
-        return chartData;
+        
+        for (var k=0; k < data.metrics.length; k++) {
+            for(var i=0; i < data.jobs.length; i++) {
+                seriesToJobNameMap[data.metrics[k] + "-" + data.jobs[i]] = data.series[data.jobs[i]].jobName;
+                seriesToMetricNameMap[data.metrics[k] + "-" + data.jobs[i]] = data.metrics[k];
+            }
+        }
+        
+        return {
+            getJobName    : function(seriesName){return seriesToJobNameMap[seriesName];},
+            getMetricName : function(seriesName){return seriesToMetricNameMap[seriesName];},
+            series: chartData
+        };
     }
     
     function drawChart(chart, data) {
