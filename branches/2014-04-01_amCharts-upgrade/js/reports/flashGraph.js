@@ -108,7 +108,8 @@
         
         for(var i=0; i<data[previousJobId].dataSet.length; i++) {
             var tmpPoint = {};
-            tmpPoint['date'] = data[previousJobId].dataSet[i].Date;
+            tmpPoint['date'] = data[previousJobId].dataSet[i].DateFormatted;
+            tmpPoint['timestamp'] = data[previousJobId].dataSet[i].UnixTimestamp;
             for(var j in data) {
                 // tmpPoint[j]
             }
