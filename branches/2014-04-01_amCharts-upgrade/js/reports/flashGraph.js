@@ -3,6 +3,10 @@
     var chart = {};
     
     $(document).ready(function() {
+        var act = "";
+        if(typeof action !== "undefined") {
+            act = action;
+        };
         $("#updateForm").validate();
         onloadInit();
       
@@ -26,6 +30,16 @@
                 drawChart(chart, d);
             });
         });
+        
+        console.log(act);
+        if(act && act === "graph") {
+            if(getJobCount() > 0){
+                setTimeout(function(){
+                    $('#graphJSONButton').trigger("click");
+                }, 50);
+                console.log("clicking button");
+            }
+        }
     });
 
 
@@ -312,6 +326,15 @@
       }
     }
     
+    function getJobCount(){
+        var val = $('#jobs').val();
+        var count;
+        
+        if(val === null) {count = 0;}
+        else {count = val.length;}
+        
+        return count;
+    }
     
     function updateReport() {
       if (!validateForm()) {

@@ -282,5 +282,12 @@
 </div>
 </div>
 </div>
+{if $action eq 'graph'}
+{literal}
+    <script type="text/javascript">
+        var action = "graph";
+    </script>
+{/literal}
+{/if}
 </body>
 </html>
