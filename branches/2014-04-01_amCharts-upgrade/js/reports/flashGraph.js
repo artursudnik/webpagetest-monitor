@@ -189,16 +189,6 @@
         var getJobName    = data.getJobName ||    function(a) {return 'No getJobName function';};
         
         drawTable(data);
-
-        try{
-
-        } catch(e){
-            console.error(e);
-        }
-        
-        
-        console.log(chart);
-        
     }
     
     function onloadInit() {
