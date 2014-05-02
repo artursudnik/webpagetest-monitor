@@ -6,3 +6,36 @@
     height: 600px;
     background-color: #fff;
 }
+
+
+
+/*
+ * Following is only for testing purposes
+ */
+
+#graph{
+    overflow: scroll;
+    padding: 2px;
+}
+
+    #graph table{
+        border-collapse: collapse;
+    }
+    
+        #graph table th,
+        #graph table td {
+            border: 1px #CCCCCC solid;
+        }
+        
+        #graph table th,
+        #graph table td {
+            text-align: center;
+        }
+    
+        #graph table .date {
+            width: 200px;
+        }
+    
+        #graph table .metric {
+            width: 110px;
+        }

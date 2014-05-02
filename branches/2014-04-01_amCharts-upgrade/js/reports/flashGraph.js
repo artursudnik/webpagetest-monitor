@@ -149,13 +149,46 @@
     }
     
     function drawChart(chart, data) {
-        
+
+        function drawTable(data) {
+            var table = $(document.createElement('table'));
+    
+            var headerRow = $(document.createElement('tr'));
+            
+            headerRow.append("<th class=\"date\">Date</th>");
+            
+            for(var i in data.valueFields) {
+                headerRow.append("<th class=\"metric\">"+ getJobName(data.valueFields[i]) + " " + getMetricName(data.valueFields[i]) + "</th>");
+            }
+    
+            table.append(headerRow);
+    
+            var row;
+    
+            for(var i in data.series) {
+                row = $(document.createElement("tr"));
+                row.append(
+                        $(document.createElement("td")).addClass("date").html(data.series[i].date)
+                );
+                for(var j in data.valueFields) {
+                    row.append(
+                        $(document.createElement("td")).addClass("metric").html(data.series[i][data.valueFields[j]])  
+                    );
+                }
+                table.append(row);
+            }
+    
+            $("#graph").html("");
+    
+            $("#graph").append(table);
+            
+        }
         // http://jsfiddle.net/martynasma/j9gUu/10/
         
         var getMetricName = data.getMetricName || function(a) {return 'No getMetricName function';};
         var getJobName    = data.getJobName ||    function(a) {return 'No getJobName function';};
         
-        $("#graph").html(JSON.stringify(data));
+        drawTable(data);
 
         try{
 
