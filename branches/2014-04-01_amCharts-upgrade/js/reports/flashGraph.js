@@ -365,6 +365,8 @@
     
     //exporting functions to global namespace
     window.updateGraph      = updateGraph;
+    window.updateReport     = updateReport;
+    window.downloadData     = downloadData;
     window.checkJobCount    = checkJobCount;
     window.checkInterval    = checkInterval;
     window.adjustTimeFrame  = adjustTimeFrame;
