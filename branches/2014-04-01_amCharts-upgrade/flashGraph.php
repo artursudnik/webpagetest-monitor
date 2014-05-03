@@ -209,7 +209,7 @@ if ($_REQUEST['act'] == 'report') {
   $changeNotes = getChangeNoteData($userId, $jobIds, $startDateTime, $endDateTime);
   // Add change notes
   $smarty->assign('changeNotes',$changeNotes);
-  
+
   $timeStamps = array();
 //  foreach($series as $ser){
 //    $timeStamps[]=$ser['Date'];

@@ -172,7 +172,7 @@
                     <option value="AvgRepeatViewFullyLoadedTime"
                             {if $adjustUsing eq 'AvgRepeatViewFullyLoadedTime'}selected="true"{/if}>Fully Loaded
                     </option>
-                </optgroup>                
+                </optgroup>
               </select></td>
             </tr>
             <tr>

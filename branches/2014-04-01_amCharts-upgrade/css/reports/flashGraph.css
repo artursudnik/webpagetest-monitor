@@ -21,21 +21,21 @@
     #graph table{
         border-collapse: collapse;
     }
-    
+
         #graph table th,
         #graph table td {
             border: 1px #CCCCCC solid;
         }
-        
+
         #graph table th,
         #graph table td {
             text-align: center;
         }
-    
+
         #graph table .date {
             width: 200px;
         }
-    
+
         #graph table .metric {
             width: 110px;
         }
