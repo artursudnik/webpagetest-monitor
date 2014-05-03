@@ -17,18 +17,7 @@
 
 
         $('#graphJSONButton').on('click', function(e){
-            var serializedFormData = $('#updateForm').serializeArray();
-
-            if(!checkJobCount()) {
-                return;
-            }
-
-            getChartDataWithGUIBehavior(serializedFormData)
-            .done(function(d){
-                d = convertData2avgCharts(d);
-                console.log(d);
-                drawChart(chart, d);
-            });
+            submitFormAJAX();
         });
 
         console.log(act);
@@ -42,7 +31,23 @@
         }
     });
 
+    function submitFormAJAX() {
+        var deferred=$.Deferred();
+            var serializedFormData = $('#updateForm').serializeArray();
 
+            if(!checkJobCount()) {
+                return;
+            }
+
+            getChartDataWithGUIBehavior(serializedFormData)
+            .done(function(d){
+                d = convertData2avgCharts(d);
+                console.log(d);
+                drawChart(chart, d);
+                deferred.resolve();
+            });
+        return deferred.promise();
+    }
 
     function showChartContainer(){
         var d = $.Deferred();
