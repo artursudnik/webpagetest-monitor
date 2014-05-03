@@ -170,10 +170,20 @@
             var headerRow = $(document.createElement('tr'))
                 .addClass("header");
 
-            headerRow.append("<th class=\"date\">Date</th>");
+            headerRow.append(
+                $(document.createElement('th'))
+                    .addClass("date")
+                    .html("Date")
+            );
 
             for(var i in data.valueFields) {
-                headerRow.append("<th class=\"metric\">"+ getJobName(data.valueFields[i]) + " " + getMetricName(data.valueFields[i]) + "</th>");
+                headerRow.append(
+                    $(document.createElement("th"))
+                        .addClass("metric")
+                        .html(
+                            getJobName(data.valueFields[i]) + " " + getMetricName(data.valueFields[i])
+                        )
+                );
             }
 
             table.append(headerRow);
@@ -189,11 +199,20 @@
                 row = $(document.createElement("tr"));
                 row.addClass(evenOddClass);
                 row.append(
-                        $(document.createElement("td")).addClass("date").html(data.series[i].date)
+                        $(document.createElement("td"))
+                            .addClass("date")
+                            .html(
+                                data.series[i].date
+                            )
                 );
+
                 for(var j in data.valueFields) {
                     row.append(
-                        $(document.createElement("td")).addClass("metric").html(data.series[i][data.valueFields[j]])
+                        $(document.createElement("td"))
+                            .addClass("metric")
+                            .html(
+                                data.series[i][data.valueFields[j]]
+                            )
                     );
                 }
                 table.append(row);
