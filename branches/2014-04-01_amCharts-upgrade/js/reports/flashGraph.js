@@ -1,7 +1,7 @@
 (function(window, $){
-        
+
     var chart = {};
-    
+
     $(document).ready(function() {
         var act = "";
         if(typeof action !== "undefined") {
@@ -9,20 +9,20 @@
         };
         $("#updateForm").validate();
         onloadInit();
-      
+
         var endh = document.getElementsByName("endHour")[0];
         var starth = document.getElementsByName("startHour")[0];
         endh.addEventListener('change',checkInterval, false);
         starth.addEventListener('change',checkInterval, false);
-    
-        
+
+
         $('#graphJSONButton').on('click', function(e){
             var serializedFormData = $('#updateForm').serializeArray();
-            
+
             if(!checkJobCount()) {
                 return;
             }
-            
+
             getChartDataWithGUIBehavior(serializedFormData)
             .done(function(d){
                 d = convertData2avgCharts(d);
@@ -30,7 +30,7 @@
                 drawChart(chart, d);
             });
         });
-        
+
         console.log(act);
         if(act && act === "graph") {
             if(getJobCount() > 0){
@@ -43,10 +43,10 @@
     });
 
 
-        
+
     function showChartContainer(){
         var d = $.Deferred();
-        
+
         if($("#graphContainer").is(":hidden")){
             $("#graphContainer").slideDown(200, function(){
                 d.resolve();
@@ -54,7 +54,7 @@
         } else {
             d.resolve();
         }
-        
+
         return d.promise();
     }
 
@@ -78,13 +78,13 @@
                 status: jqxhr.status,
                 message: jqxhr.statusText
             });
-        }); 
+        });
         return d.promise();
-    }     
-    
+    }
+
     function getChartDataWithGUIBehavior(params){
         var d = $.Deferred();
-        var button = $("#graphJSONButton");     
+        var button = $("#graphJSONButton");
 
         $.when(
             getChartData(params),
@@ -100,30 +100,30 @@
             $(button).removeAttr('disabled');
             $('#graphOverlay').fadeOut();
         });
-        
+
         return d.promise();
     }
 
 
 /**
- *  Returns all possible names of metric fields 
+ *  Returns all possible names of metric fields
  */
     function getFormMetricFields(){
         return ['FV_TTFB', 'FV_Render', 'FV_Doc', 'FV_Dom', 'FV_Fully', 'RV_TTFB', 'RV_Render', 'RV_Doc', 'RV_Dom', 'RV_Fully'];
     }
-    
+
 /**
- * Converts data returned by server to format that can be consumed by AmCharts Serial chart 
+ * Converts data returned by server to format that can be consumed by AmCharts Serial chart
  * @param {Array} data
- */    
+ */
     function convertData2avgCharts (data) {
         var chartData = [];
-        var seriesToJobNameMap = {};        
+        var seriesToJobNameMap = {};
         var seriesToMetricNameMap = {};
-        var valueFields = [];        
+        var valueFields = [];
         var numberOfSeries = 0;
         var previousJobId = null;
-        
+
         for(var i in data.series) {
             if(previousJobId !== null) {
                 if(data.series[previousJobId].dataSet.length !== data.series[i].dataSet.length) {
@@ -133,7 +133,7 @@
             previousJobId = i;
             numberOfSeries++;
         }
-        
+
         for(var i=0; i<data.series[previousJobId].dataSet.length; i++) {
             var tmpPoint = {};
             tmpPoint['date'] = data.series[previousJobId].dataSet[i].DateFormatted;
@@ -145,7 +145,7 @@
             }
             chartData.push(tmpPoint);
         }
-        
+
         for (var k=0; k < data.metrics.length; k++) {
             for(var i=0; i < data.jobs.length; i++) {
                 seriesToJobNameMap[data.metrics[k] + "-" + data.jobs[i]] = data.series[data.jobs[i]].jobName;
@@ -153,7 +153,7 @@
                 valueFields.push(data.metrics[k] + "-" + data.jobs[i]);
             }
         }
-        
+
         return {
             getJobName    : function(seriesName){return seriesToJobNameMap[seriesName];},
             getMetricName : function(seriesName){return seriesToMetricNameMap[seriesName];},
@@ -161,24 +161,24 @@
             series: chartData
         };
     }
-    
+
     function drawChart(chart, data) {
 
         function drawTable(data) {
             var table = $(document.createElement('table'));
-    
+
             var headerRow = $(document.createElement('tr'));
-            
+
             headerRow.append("<th class=\"date\">Date</th>");
-            
+
             for(var i in data.valueFields) {
                 headerRow.append("<th class=\"metric\">"+ getJobName(data.valueFields[i]) + " " + getMetricName(data.valueFields[i]) + "</th>");
             }
-    
+
             table.append(headerRow);
-    
+
             var row;
-    
+
             for(var i in data.series) {
                 row = $(document.createElement("tr"));
                 row.append(
@@ -186,50 +186,50 @@
                 );
                 for(var j in data.valueFields) {
                     row.append(
-                        $(document.createElement("td")).addClass("metric").html(data.series[i][data.valueFields[j]])  
+                        $(document.createElement("td")).addClass("metric").html(data.series[i][data.valueFields[j]])
                     );
                 }
                 table.append(row);
             }
-    
+
             $("#graph").html("");
-    
+
             $("#graph").append(table);
-            
+
         }
         // http://jsfiddle.net/martynasma/j9gUu/10/
-        
+
         var getMetricName = data.getMetricName || function(a) {return 'No getMetricName function';};
         var getJobName    = data.getJobName ||    function(a) {return 'No getJobName function';};
-        
+
         drawTable(data);
     }
-    
+
     function onloadInit() {
       checkInterval();
       adjustTimeFrame();
     }
-    
-    
+
+
     function adjustTimeFrame(){
       timeFrameElement = document.getElementById('timeFrame');
       timeFrameValue = timeFrameElement[timeFrameElement.selectedIndex].value;
-    
+
       startSelectElement = document.getElementById('startTimeSelect');
       endSelectElement = document.getElementById('endTimeSelect');
-    
+
       if ( timeFrameValue > 0 ){
         startSelectElement.style.visibility='hidden';
         endSelectElement.style.visibility='hidden';
       } else {
         startSelectElement.style.visibility='visible';
         endSelectElement.style.visibility='visible';
-    
+
       }
-    
+
       currentInterval = intervalElement.options[intervalElement.selectedIndex].value;
       intervalElement = document.getElementById('interval');
-    
+
       ival = timeFrameValue / 150;
       interval = 0;
       if (ival > 300)  interval = 300;
@@ -243,11 +243,11 @@
       if (currentInterval < interval) {
         //intervalElement.value = interval;
       }
-    
+
       //disableIntervalOptionsBelow(interval);
     }
-    
-    
+
+
     function checkInterval() {
       intervalElement = document.getElementById('interval');
       currentInterval = intervalElement.options[intervalElement.selectedIndex].value;
@@ -260,7 +260,7 @@
       startHourElement = document.getElementsByName('startHour')[0];
       startHour = startHourElement.options[startHourElement.selectedIndex].value;
       start = ((new Date(startYear, startMonth, startDay, startHour)).getTime()) / 1000;
-    
+
       endMonthElement = document.getElementsByName('endMonth')[0];
       endMonth = endMonthElement.options[endMonthElement.selectedIndex].value;
       endDayElement = document.getElementsByName('endDay')[0];
@@ -270,9 +270,9 @@
       endHourElement = document.getElementsByName('endHour')[0];
       endHour = endHourElement.options[endHourElement.selectedIndex].value;
       end = ((new Date(endYear, endMonth, endDay, endHour)).getTime()) / 1000;
-    
+
       span = end - start;
-    
+
       ival = span / 150;
       interval = 0;
       if (ival > 300)  interval = 300;
@@ -283,16 +283,16 @@
       if (ival > 21600)interval = 21600;
       if (ival > 43200)interval = 43200;
       if (ival > 86400)interval = 86400;
-    
+
       if (currentInterval < interval) {
         //intervalElement.value = interval;
       }
-    
+
       //disableIntervalOptionsBelow(interval);
-    
+
     }
-    
-    
+
+
     function disableIntervalOptionsBelow(value) {
       // First reenable all of them
       intervalElement = document.getElementById('interval');
@@ -305,13 +305,13 @@
         }
       }
     }
-    
-    
+
+
     function validateForm() {
       return checkJobCount();
     }
-    
-    
+
+
     // Limit number of jobs to select
     function checkJobCount() {
       var maxJobs = 8;
@@ -325,17 +325,17 @@
         return true;
       }
     }
-    
+
     function getJobCount(){
         var val = $('#jobs').val();
         var count;
-        
+
         if(val === null) {count = 0;}
         else {count = val.length;}
-        
+
         return count;
     }
-    
+
     function updateReport() {
       if (!validateForm()) {
         return false;
@@ -343,8 +343,8 @@
       document.updateForm.act.value="report";
       document.updateForm.submit();
     }
-    
-    
+
+
     function downloadData() {
       if (!validateForm()) {
         return false;
@@ -352,8 +352,8 @@
       document.updateForm.act.value="download";
       document.updateForm.submit();
     }
-    
-    
+
+
     function updateGraph() {
       if (!validateForm()) {
         return false;
@@ -362,7 +362,7 @@
       document.updateForm.act.value="graph";
       document.updateForm.submit();
     }
-    
+
     //exporting functions to global namespace
     window.updateGraph      = updateGraph;
     window.updateReport     = updateReport;
@@ -370,5 +370,5 @@
     window.checkJobCount    = checkJobCount;
     window.checkInterval    = checkInterval;
     window.adjustTimeFrame  = adjustTimeFrame;
-    
+
 })(window, jQuery);
