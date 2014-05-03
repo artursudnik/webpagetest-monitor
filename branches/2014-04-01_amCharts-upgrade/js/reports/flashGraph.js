@@ -24,7 +24,13 @@
         if(act && act === "graph") {
             if(getJobCount() > 0){
                 setTimeout(function(){
-                    submitFormAJAX();
+                    submitFormAJAX().done(function(){
+                        $('html, body').animate({
+                            'scrollTop': $("#main").offset().top},
+                            'slow',
+                            'swing'
+                        );
+                    });
                 }, 50);
                 console.log("clicking button");
             }
