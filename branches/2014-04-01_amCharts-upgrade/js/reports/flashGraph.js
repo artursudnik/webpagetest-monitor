@@ -210,9 +210,10 @@
                     row.append(
                         $(document.createElement("td"))
                             .addClass("metric")
-                            .html(
-                                data.series[i][data.valueFields[j]]
-                            )
+                            .html(function(value){
+                                if(value) return (value/1000).toFixed(3);
+                                else      return null;
+                            }(data.series[i][data.valueFields[j]]))
                     );
                 }
                 table.append(row);
