@@ -22,9 +22,13 @@
         border-collapse: collapse;
     }
 
+        #graph table tr.odd {
+            background-color: #f9f9f9;
+        }
+
         #graph table th,
         #graph table td {
-            border: 1px #CCCCCC solid;
+            border: 1px #eee solid;
         }
 
         #graph table th,

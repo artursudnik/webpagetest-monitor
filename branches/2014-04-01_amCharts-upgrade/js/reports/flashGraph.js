@@ -167,7 +167,8 @@
         function drawTable(data) {
             var table = $(document.createElement('table'));
 
-            var headerRow = $(document.createElement('tr'));
+            var headerRow = $(document.createElement('tr'))
+                .addClass("header");
 
             headerRow.append("<th class=\"date\">Date</th>");
 
@@ -178,9 +179,15 @@
             table.append(headerRow);
 
             var row;
-
+            var evenOddClass = "";
             for(var i in data.series) {
+                if(i % 2) {
+                    evenOddClass = "odd";
+                }else {
+                    evenOddClass = "even";
+                }
                 row = $(document.createElement("tr"));
+                row.addClass(evenOddClass);
                 row.append(
                         $(document.createElement("td")).addClass("date").html(data.series[i].date)
                 );
