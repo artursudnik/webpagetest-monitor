@@ -24,7 +24,7 @@
         if(act && act === "graph") {
             if(getJobCount() > 0){
                 setTimeout(function(){
-                    $('#graphJSONButton').trigger("click");
+                    submitFormAJAX();
                 }, 50);
                 console.log("clicking button");
             }
