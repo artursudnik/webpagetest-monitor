@@ -20,7 +20,6 @@
             submitFormAJAX();
         });
 
-        console.log(act);
         if(act && act === "graph") {
             if(getJobCount() > 0){
                 setTimeout(function(){
@@ -31,7 +30,6 @@
                     );
                     submitFormAJAX();
                 }, 50);
-                console.log("clicking button");
             }
         }
     });
@@ -47,7 +45,6 @@
         getChartDataWithGUIBehavior(serializedFormData)
         .done(function(d){
             d = convertData2avgCharts(d);
-            console.log(d);
             drawChart(chart, d);
             deferred.resolve();
         });
@@ -137,7 +134,7 @@
         for(var i in data.series) {
             if(previousJobId !== null) {
                 if(data.series[previousJobId].dataSet.length !== data.series[i].dataSet.length) {
-                    console.error('not equal datasets');
+                    throw "Not equal datasets";
                 }
             }
             previousJobId = i;
