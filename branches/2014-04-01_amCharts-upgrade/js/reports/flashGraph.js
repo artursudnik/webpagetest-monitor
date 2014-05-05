@@ -252,6 +252,22 @@
 
         var getMetricName = data.getMetricName || function(a) {return 'No getMetricName function';};
         var getJobName    = data.getJobName ||    function(a) {return 'No getJobName function';};
+        var graphs = [];
+
+        for(var i in data.valueFields){
+            graphs.push({
+                id:data.valueFields[i],
+                balloonText: "[[category]]<br /><b><span style='font-size:14px;'>"+getMetricName(data.valueFields[i])+": [[value]]</span></b>",
+                bullet: "round",
+                bulletSize: 1,
+                bulletBorderAlpha: 1,
+                bulletColor:"#FFFFFF",
+                hideBulletsCount: 0,
+                title: getJobName(data.valueFields[i]) + " " + getMetricName(data.valueFields[i]),
+                valueField: data.valueFields[i],
+                useLineColorForBulletBorder:true
+            });
+        }
 
         chart = AmCharts.makeChart("graph", {
             type: "serial",
@@ -263,18 +279,7 @@
                 dashLength: 1,
                 position: "left"
             }],
-            graphs: [{
-                id:"g1",
-                balloonText: "[[category]]<br /><b><span style='font-size:14px;'>"+getMetricName(data.valueFields[0])+": [[value]]</span></b>",
-                bullet: "round",
-                bulletSize: 1,
-                bulletBorderAlpha: 1,
-                bulletColor:"#FFFFFF",
-                hideBulletsCount: 0,
-                title: getJobName(data.valueFields[0]) + " " + getMetricName(data.valueFields[0]),
-                valueField: data.valueFields[0],
-                useLineColorForBulletBorder:true
-            }],
+            graphs: graphs,
             chartScrollbar: {
                 autoGridCount: true,
                 // graph: "g1",
