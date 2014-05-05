@@ -58,7 +58,7 @@
             }
             drawChart(chart, d);
             deferred.resolve();
-            
+
         })
         .fail(function(a){
             deferred.reject(a.message);
@@ -254,48 +254,48 @@
         var getJobName    = data.getJobName ||    function(a) {return 'No getJobName function';};
 
         chart = AmCharts.makeChart("graph", {
-            "type": "serial",
-            "theme": "none",
-            "pathToImages": "js/amcharts/images/",
-            "dataProvider": data.series,
-            "valueAxes": [{
-                "axisAlpha": 0.2,
-                "dashLength": 1,
-                "position": "left"
+            type: "serial",
+            theme: "none",
+            pathToImages: "js/amcharts/images/",
+            dataProvider: data.series,
+            valueAxes: [{
+                axisAlpha: 0.2,
+                dashLength: 1,
+                position: "left"
             }],
-            "graphs": [{
-                "id":"g1",
-                "balloonText": "[[category]]<br /><b><span style='font-size:14px;'>"+getMetricName(data.valueFields[0])+": [[value]]</span></b>",
-                "bullet": "round",
+            graphs: [{
+                id:"g1",
+                balloonText: "[[category]]<br /><b><span style='font-size:14px;'>"+getMetricName(data.valueFields[0])+": [[value]]</span></b>",
+                bullet: "round",
                 bulletSize: 1,
-                "bulletBorderAlpha": 1,
-                "bulletColor":"#FFFFFF",
-                "hideBulletsCount": 0,
-                "title": getJobName(data.valueFields[0]) + " " + getMetricName(data.valueFields[0]),
-                "valueField": data.valueFields[0],
-                "useLineColorForBulletBorder":true
+                bulletBorderAlpha: 1,
+                bulletColor:"#FFFFFF",
+                hideBulletsCount: 0,
+                title: getJobName(data.valueFields[0]) + " " + getMetricName(data.valueFields[0]),
+                valueField: data.valueFields[0],
+                useLineColorForBulletBorder:true
             }],
-            "chartScrollbar": {
-                "autoGridCount": true,
-                // "graph": "g1",
+            chartScrollbar: {
+                autoGridCount: true,
+                // graph: "g1",
                 "scrollbarHeight": 40
             },
-            "chartCursor": {
-                "cursorPosition": "mouse",
+            chartCursor: {
+                cursorPosition: "mouse",
                 categoryBalloonDateFormat: "MMM DD JJ:NN:SS"
             },
-            "categoryField": "date",
+            categoryField: "date",
             dataDateFormat: "YYYY-MM-DD JJ:NN:SS",
-            "categoryAxis": {
-                "parseDates": true,
+            categoryAxis: {
+                parseDates: true,
                 minPeriod: "ss",
                 //categoryFunction: function(category, dataItem, categoryAxis){return new Date(dataItem*1000);},
-                //"axisColor": "#DADADA",
-                //"dashLength": 1,
-                "minorGridEnabled": true
+                //axisColor: "#DADADA",
+                //dashLength: 1,
+                minorGridEnabled: true
             },
             legend: {
-                
+
             }
         });
 
