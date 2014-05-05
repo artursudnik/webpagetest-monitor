@@ -299,6 +299,12 @@
             }
         });
 
+        chart.addListener("clickGraphItem", function(e){
+            var dataContext = e.item.dataContext;
+            var valueField = e.graph.valueField;
+            console.log("Clicked", getJobName(valueField) + " " + getMetricName(valueField) + ": ", dataContext[valueField]);
+        });
+
         // drawTable(data);
     }
 
