@@ -127,17 +127,17 @@
     }
 
 
-/**
- *  Returns all possible names of metric fields
- */
+    /**
+     *  Returns all possible names of metric fields
+     */
     function getFormMetricFields(){
         return ['FV_TTFB', 'FV_Render', 'FV_Doc', 'FV_Dom', 'FV_Fully', 'RV_TTFB', 'RV_Render', 'RV_Doc', 'RV_Dom', 'RV_Fully'];
     }
 
-/**
- * Converts data returned by server to format that can be consumed by AmCharts Serial chart
- * @param {Array} data
- */
+    /**
+     * Converts data returned by server to format that can be consumed by AmCharts Serial chart
+     * @param {Array} data
+     */
     function convertData2avgCharts (data) {
         var chartData = [];
         var seriesToJobNameMap = {};
@@ -156,9 +156,9 @@
             numberOfSeries++;
         }
 
-/**
- *  Iterate all points and then all series to put all series in different fields but in one data serie
- */
+        /**
+         *  Iterate all points and then all series to put all series in different fields but in one data serie
+         */
         for(var i=0; i<data.series[previousJobId].dataSet.length; i++) {
             var tmpPoint = {};
             tmpPoint['date'] = data.series[previousJobId].dataSet[i].DateFormatted;
@@ -257,9 +257,9 @@
         var getJobName    = data.getJobName ||    function(a) {return 'No getJobName function';};
         var graphs = [];
 
-/**
- *  Prepare graphs configs for all data series
- */
+        /**
+         *  Prepare graphs configs for all data series
+         */
         for(var i in data.valueFields){
             graphs.push({
                 id:data.valueFields[i],
