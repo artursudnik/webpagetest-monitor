@@ -56,7 +56,7 @@
                 deferred.reject(e);
                 return;
             }
-            drawChart(chart, d);
+            drawChart(d);
             deferred.resolve();
 
         })
@@ -186,7 +186,7 @@
         };
     }
 
-    function drawChart(chart, data) {
+    function drawChart(data) {
 
         function drawTable(data) {
             var table = $(document.createElement('table'));
@@ -467,5 +467,7 @@
     window.checkJobCount    = checkJobCount;
     window.checkInterval    = checkInterval;
     window.adjustTimeFrame  = adjustTimeFrame;
+
+    window.getChart      = function(){return chart;};
 
 })(window, jQuery);
