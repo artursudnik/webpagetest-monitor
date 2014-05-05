@@ -156,6 +156,9 @@
             numberOfSeries++;
         }
 
+/**
+ *  Iterate all points and then all series to put all series in different fields but in one data serie
+ */
         for(var i=0; i<data.series[previousJobId].dataSet.length; i++) {
             var tmpPoint = {};
             tmpPoint['date'] = data.series[previousJobId].dataSet[i].DateFormatted;
@@ -254,6 +257,9 @@
         var getJobName    = data.getJobName ||    function(a) {return 'No getJobName function';};
         var graphs = [];
 
+/**
+ *  Prepare graphs configs for all data series
+ */
         for(var i in data.valueFields){
             graphs.push({
                 id:data.valueFields[i],
