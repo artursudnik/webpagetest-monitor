@@ -17,7 +17,10 @@
 
 
         $('#graphJSONButton').on('click', function(e){
-            submitFormAJAX();
+            submitFormAJAX()
+            .fail(function(e){
+                console.error(e);
+            });
         });
 
         if(act && act === "graph") {
@@ -28,7 +31,10 @@
                         'slow',
                         'swing'
                     );
-                    submitFormAJAX();
+                    submitFormAJAX()
+                    .fail(function(e){
+                        console.error(e);
+                    });
                 }, 50);
             }
         }
@@ -44,9 +50,18 @@
 
         getChartDataWithGUIBehavior(serializedFormData)
         .done(function(d){
-            d = convertData2avgCharts(d);
+            try {
+                d = convertData2avgCharts(d);
+            } catch(e) {
+                deferred.reject(e);
+                return;
+            }
             drawChart(chart, d);
             deferred.resolve();
+            
+        })
+        .fail(function(a){
+            deferred.reject(a.message);
         });
         return deferred.promise();
     }
