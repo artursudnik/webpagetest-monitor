@@ -267,9 +267,10 @@
                 "id":"g1",
                 "balloonText": "[[category]]<br /><b><span style='font-size:14px;'>"+getMetricName(data.valueFields[0])+": [[value]]</span></b>",
                 "bullet": "round",
+                bulletSize: 1,
                 "bulletBorderAlpha": 1,
                 "bulletColor":"#FFFFFF",
-                "hideBulletsCount": 50,
+                "hideBulletsCount": 0,
                 "title": getJobName(data.valueFields[0]) + " " + getMetricName(data.valueFields[0]),
                 "valueField": data.valueFields[0],
                 "useLineColorForBulletBorder":true
