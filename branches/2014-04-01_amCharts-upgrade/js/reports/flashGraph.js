@@ -1,6 +1,6 @@
 (function(window, $){
 
-    var chart = {};
+    var chart;
 
     $(document).ready(function() {
         var act = "";
@@ -274,47 +274,57 @@
                 useLineColorForBulletBorder:true
             });
         }
-
-        chart = AmCharts.makeChart("graph", {
-            type: "serial",
-            theme: "none",
-            pathToImages: "js/amcharts/images/",
-            dataProvider: data.series,
-            valueAxes: [{
-                axisAlpha: 0.2,
-                dashLength: 1,
-                position: "left"
-            }],
-            graphs: graphs,
-            chartScrollbar: {
-                autoGridCount: true,
-                // graph: "g1",
-                "scrollbarHeight": 40
-            },
-            chartCursor: {
-                cursorPosition: "mouse",
-                categoryBalloonDateFormat: "MMM DD JJ:NN:SS"
-            },
-            categoryField: "date",
-            dataDateFormat: "YYYY-MM-DD JJ:NN:SS",
-            categoryAxis: {
-                parseDates: true,
-                minPeriod: "ss",
-                //categoryFunction: function(category, dataItem, categoryAxis){return new Date(dataItem*1000);},
-                //axisColor: "#DADADA",
-                //dashLength: 1,
-                minorGridEnabled: true
-            },
-            legend: {
-
-            }
-        });
-
-        chart.addListener("clickGraphItem", function(e){
-            var dataContext = e.item.dataContext;
-            var valueField = e.graph.valueField;
-            console.log("Clicked", getJobName(valueField) + " " + getMetricName(valueField) + ": ", dataContext[valueField]);
-        });
+        if(chart){    
+            /**
+             *  If a chart is already instantiated new data provider is set and the chart redrawn. 
+             */    
+            chart.dataProvider = data.series;
+            chart.graphs = graphs;
+            chart.validateData();
+        } else {
+            // chart is instantiated from scratch
+            chart = AmCharts.makeChart("graph", {
+                type: "serial",
+                theme: "none",
+                pathToImages: "js/amcharts/images/",
+                dataProvider: data.series,
+                zoomOutOnDataUpdate: false,
+                valueAxes: [{
+                    axisAlpha: 0.2,
+                    dashLength: 1,
+                    position: "left"
+                }],
+                graphs: graphs,
+                chartScrollbar: {
+                    autoGridCount: true,
+                    // graph: "g1",
+                    "scrollbarHeight": 40
+                },
+                chartCursor: {
+                    cursorPosition: "mouse",
+                    categoryBalloonDateFormat: "MMM DD JJ:NN:SS"
+                },
+                categoryField: "date",
+                dataDateFormat: "YYYY-MM-DD JJ:NN:SS",
+                categoryAxis: {
+                    parseDates: true,
+                    minPeriod: "ss",
+                    //categoryFunction: function(category, dataItem, categoryAxis){return new Date(dataItem*1000);},
+                    //axisColor: "#DADADA",
+                    //dashLength: 1,
+                    minorGridEnabled: true
+                },
+                legend: {
+    
+                }
+            });
+    
+            chart.addListener("clickGraphItem", function(e){
+                var dataContext = e.item.dataContext;
+                var valueField = e.graph.valueField;
+                console.log("Clicked", getJobName(valueField) + " " + getMetricName(valueField) + ": ", dataContext[valueField]);
+            });
+        }
 
         // drawTable(data);
     }
