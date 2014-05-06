@@ -142,6 +142,7 @@
         var chartData = [];
         var seriesToJobNameMap = {};
         var seriesToMetricNameMap = {};
+        var seriesToJobIdMap ={};
         var valueFields = [];
         var numberOfSeries = 0;
         var previousJobId = null;
@@ -177,6 +178,7 @@
             for(var i=0; i < data.jobs.length; i++) {
                 seriesToJobNameMap[data.metrics[k] + "-" + data.jobs[i]] = data.series[data.jobs[i]].jobName;
                 seriesToMetricNameMap[data.metrics[k] + "-" + data.jobs[i]] = data.metrics[k];
+                seriesToJobIdMap[data.metrics[k] + "-" + data.jobs[i]] = data.jobs[i];
                 valueFields.push(data.metrics[k] + "-" + data.jobs[i]);
             }
         }
@@ -184,6 +186,7 @@
         return {
             getJobName    : function(seriesName){return seriesToJobNameMap[seriesName];},
             getMetricName : function(seriesName){return seriesToMetricNameMap[seriesName];},
+            getJobId      : function(seriesName){return seriesToJobIdMap[seriesName];},
             valueFields: valueFields,
             series: chartData
         };
@@ -255,6 +258,7 @@
 
         var getMetricName = data.getMetricName || function(a) {return 'No getMetricName function';};
         var getJobName    = data.getJobName ||    function(a) {return 'No getJobName function';};
+        var getJobId      = data.getJobId ||      function(a) {return 'No getJobId function';};
         var graphs = [];
 
         /**
