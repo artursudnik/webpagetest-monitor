@@ -166,7 +166,7 @@
             for(var j in data.jobs) {
                 for (var k=0; k < data.metrics.length; k++) {
                     if(data.series[data.jobs[j]].dataSet[i][data.metrics[k]]){
-                        tmpPoint[data.metrics[k] + "-" + data.jobs[j]] = data.series[data.jobs[j]].dataSet[i][data.metrics[k]];
+                        tmpPoint[data.metrics[k] + "-" + data.jobs[j]] = (data.series[data.jobs[j]].dataSet[i][data.metrics[k]]/1000).toFixed(2);
                     }
                 };
             }
