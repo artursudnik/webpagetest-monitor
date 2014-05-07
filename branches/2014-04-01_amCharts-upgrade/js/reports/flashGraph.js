@@ -352,7 +352,9 @@
             chart.addListener("clickGraphItem", function(e){
                 var dataContext = e.item.dataContext;
                 var valueField = e.graph.valueField;
-                console.log(getResultsURL(dataContext.getJobId(valueField), dataContext.timestamp, dataContext.getInterval()));
+                var resultsURL = getResultsURL(dataContext.getJobId(valueField), dataContext.timestamp, dataContext.getInterval());
+                window.open(resultsURL);
+                
             });
         }
 
