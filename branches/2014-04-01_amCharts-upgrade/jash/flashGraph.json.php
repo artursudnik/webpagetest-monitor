@@ -76,8 +76,8 @@ try {
     $response['message'] = 'OK';
     $response['results']['series'] = $resultDataset;
     $response['results']['metrics'] = $requestData['fields'];
-    $response['results']['jobs']    = $requestData['job_id'];
-    $response['results']['interval'] = $requestData['interval'];
+    $response['results']['jobs']    = $sanitizedData['job_id'];
+    $response['results']['interval'] = $sanitizedData['interval'];
     $response['results']['datarange'] = array(
         'start' => $sanitizedData['startTimestamp'],
         'end'   => $sanitizedData['endTimestamp'],
