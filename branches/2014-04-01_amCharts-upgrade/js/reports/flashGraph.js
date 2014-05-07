@@ -170,6 +170,25 @@
         }
 
         /**
+         *  Functions to be put on every data point to be accessible from click event handler 
+         */
+        var getJobName    = function(seriesName){
+            return seriesToJobNameMap[seriesName];
+        };
+            
+        var getMetricName = function(seriesName){
+            return seriesToMetricNameMap[seriesName];
+        };
+        var getJobId      = function(seriesName){
+            return seriesToJobIdMap[seriesName];
+        };
+        
+        var getInterval   = function(){
+            return data.interval;  
+        };
+
+
+        /**
          *  Iterate all points and then all series to put all series in different fields but in one data serie
          */
         for(var i=0; i<data.series[previousJobId].dataSet.length; i++) {
@@ -180,6 +199,10 @@
                 for (var k=0; k < data.metrics.length; k++) {
                     if(data.series[data.jobs[j]].dataSet[i][data.metrics[k]]){
                         tmpPoint[data.metrics[k] + "-" + data.jobs[j]] = (data.series[data.jobs[j]].dataSet[i][data.metrics[k]]/1000).toFixed(2);
+                        tmpPoint.getJobId      = getJobId;
+                        tmpPoint.getJobName    = getJobName;
+                        tmpPoint.getMetricName = getMetricName;
+                        tmpPoint.getInterval   = getInterval;
                     }
                 };
             }
