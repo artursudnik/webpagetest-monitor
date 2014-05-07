@@ -352,10 +352,22 @@
             chart.addListener("clickGraphItem", function(e){
                 var dataContext = e.item.dataContext;
                 var valueField = e.graph.valueField;
-                console.log("Clicked", getJobName(valueField) + " " + getMetricName(valueField) + ": ", dataContext[valueField]);
+                console.log(getResultsURL(dataContext.getJobId(valueField), dataContext.timestamp, dataContext.getInterval()));
             });
         }
 
+        function getResultsURL(jobId, startDateTime, interval){
+            "listResults.php?currentPage=1&filterField=WPTJob.Id&filterValue=90&startDateTime=1399460400&endDateTime=1399464000";
+            var params = {
+                currentPage: 1,
+                filterField: "WPTJob.Id",
+                filterValue: jobId,
+                startDateTime: startDateTime,
+                endDateTime: startDateTime + interval
+            };
+            console.log(params);
+            return "listResults.php?"+$.param(params);
+        }
         // drawTable(data);
     }
 
