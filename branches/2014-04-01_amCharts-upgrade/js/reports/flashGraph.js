@@ -174,6 +174,9 @@
             chartData.push(tmpPoint);
         }
 
+        /**
+         *  Iterate all jobs and metrics to create mappings between value fields names and other data 
+         */
         for (var k=0; k < data.metrics.length; k++) {
             for(var i=0; i < data.jobs.length; i++) {
                 seriesToJobNameMap[data.metrics[k] + "-" + data.jobs[i]] = data.series[data.jobs[i]].jobName;
