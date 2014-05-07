@@ -328,7 +328,7 @@
                 chartScrollbar: {
                     autoGridCount: true,
                     // graph: "g1",
-                    "scrollbarHeight": 40
+                    "scrollbarHeight": 20
                 },
                 chartCursor: {
                     cursorPosition: "mouse",
