@@ -158,6 +158,18 @@
         }
 
         /**
+         *  Iterate all jobs and metrics to create mappings between value fields names and other data 
+         */
+        for (var k=0; k < data.metrics.length; k++) {
+            for(var i=0; i < data.jobs.length; i++) {
+                seriesToJobNameMap[data.metrics[k] + "-" + data.jobs[i]] = data.series[data.jobs[i]].jobName;
+                seriesToMetricNameMap[data.metrics[k] + "-" + data.jobs[i]] = data.metrics[k];
+                seriesToJobIdMap[data.metrics[k] + "-" + data.jobs[i]] = data.jobs[i];
+                valueFields.push(data.metrics[k] + "-" + data.jobs[i]);
+            }
+        }
+
+        /**
          *  Iterate all points and then all series to put all series in different fields but in one data serie
          */
         for(var i=0; i<data.series[previousJobId].dataSet.length; i++) {
@@ -172,18 +184,6 @@
                 };
             }
             chartData.push(tmpPoint);
-        }
-
-        /**
-         *  Iterate all jobs and metrics to create mappings between value fields names and other data 
-         */
-        for (var k=0; k < data.metrics.length; k++) {
-            for(var i=0; i < data.jobs.length; i++) {
-                seriesToJobNameMap[data.metrics[k] + "-" + data.jobs[i]] = data.series[data.jobs[i]].jobName;
-                seriesToMetricNameMap[data.metrics[k] + "-" + data.jobs[i]] = data.metrics[k];
-                seriesToJobIdMap[data.metrics[k] + "-" + data.jobs[i]] = data.jobs[i];
-                valueFields.push(data.metrics[k] + "-" + data.jobs[i]);
-            }
         }
 
         return {
