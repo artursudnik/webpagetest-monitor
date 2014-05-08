@@ -323,7 +323,8 @@
                     axisAlpha: 0.2,
                     dashLength: 1,
                     position: "left",
-                    minimum: 0
+                    minimum: 0,
+                    unit: "s"
                 }],
                 graphs: graphs,
                 chartScrollbar: {
