@@ -322,7 +322,8 @@
                 valueAxes: [{
                     axisAlpha: 0.2,
                     dashLength: 1,
-                    position: "left"
+                    position: "left",
+                    minimum: 0
                 }],
                 graphs: graphs,
                 chartScrollbar: {
