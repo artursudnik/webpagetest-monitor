@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
 <head>
 <title>WebPageTest Monitor - Reports</title>
 {include file="headIncludes.tpl"}
@@ -249,7 +253,11 @@
     {assign var="changeNoteFileName" value=""}
 </form>
 
-<div id="graphContainer" style="position: relative">
+<div id="incompMessages">
+    <div class="message">
+        Warning! Your version of Internet Explorer does not support saving graph to file. Use any other modern browser or version 10 or greater of IE.
+    </div>
+</div><div id="graphContainer" style="position: relative">
     <div id="graph"></div>
     <div id="graphOverlay" style="opacity: 0.5; display:none; position: absolute; top:0; width: 100%; height:100%; background-color: #999; text-align: center; font-size: 200px;">
         <div style="padding-top: 30%;">

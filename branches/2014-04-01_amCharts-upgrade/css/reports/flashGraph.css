@@ -43,3 +43,22 @@
         #graph table .metric {
             width: 110px;
         }
+
+#incompMessages {
+    margin: 20px 0 0;
+    text-align: center;
+    color: #f00;
+    font-weight: bold;
+}
+
+#incompMessages .message {
+    display: none;
+}
+
+html.ie6 #incompMessages .message, 
+html.ie7 #incompMessages .message, 
+html.ie8 #incompMessages .message, 
+html.ie9 #incompMessages .message 
+{
+    display: block;
+}
