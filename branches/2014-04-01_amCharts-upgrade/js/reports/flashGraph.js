@@ -3,6 +3,7 @@
     var chart;
 
     $(document).ready(function() {
+        "use strict";
         var act = "";
         if(typeof action !== "undefined") {
             act = action;
@@ -41,6 +42,7 @@
     });
 
     function submitFormAJAX() {
+        "use strict";
         var deferred=$.Deferred();
         var serializedFormData = $('#updateForm').serializeArray();
 
@@ -67,6 +69,7 @@
     }
 
     function showChartContainer(){
+        "use strict";
         var d = $.Deferred();
 
         if($("#graphContainer").is(":hidden")){
@@ -81,6 +84,7 @@
     }
 
     function getChartData(params){
+        "use strict";
         var d = $.Deferred();
         var ajaxRequestPromise = $.ajax({
             url: 'jash/flashGraph.json.php',
@@ -105,6 +109,7 @@
     }
 
     function getChartDataWithGUIBehavior(params){
+        "use strict";
         var d = $.Deferred();
         var button = $("#graphJSONButton");
 
@@ -131,6 +136,7 @@
      *  Returns all possible names of metric fields
      */
     function getFormMetricFields(){
+        "use strict";
         return ['FV_TTFB', 'FV_Render', 'FV_Doc', 'FV_Dom', 'FV_Fully', 'RV_TTFB', 'RV_Render', 'RV_Doc', 'RV_Dom', 'RV_Fully'];
     }
 
@@ -139,6 +145,7 @@
      * @param {Array} data
      */
     function convertData2avgCharts (data) {
+        "use strict";
         var chartData = [];
         var seriesToJobNameMap = {};
         var seriesToMetricNameMap = {};
@@ -219,7 +226,7 @@
     }
 
     function drawChart(data) {
-
+        "use strict";
         function drawTable(data) {
             var table = $(document.createElement('table'));
 
@@ -377,6 +384,7 @@
     }
 
     function onloadInit() {
+      "use strict";
       checkInterval();
       adjustTimeFrame();
     }
