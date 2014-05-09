@@ -269,7 +269,6 @@
             Working...
         </div>
     </div>
-</div>
     <div id="abbreviations" style="visibility:visible;">
       <table class="pretty">
         <tr style="font-size:x-small;">
@@ -289,6 +288,8 @@
         </tr>
       </table>
     </div>
+</div>
+
 </div>
 </div>
 </div>

@@ -1,10 +1,10 @@
 #graphContainer{
     display: none;
+    background-color: #fff;
 }
 
 #graph{
     height: 600px;
-    background-color: #fff;
 }
 
 
