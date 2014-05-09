@@ -270,7 +270,6 @@
         </div>
     </div>
 </div>
-    {*<a href="javascript:document.getElementById('abbreviations').style.visibility='visible';">+</a>*}
     <div id="abbreviations" style="visibility:visible;">
       <table class="pretty">
         <tr style="font-size:x-small;">
