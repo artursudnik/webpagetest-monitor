@@ -227,67 +227,6 @@
 
     function drawChart(data) {
         "use strict";
-        function drawTable(data) {
-            var table = $(document.createElement('table'));
-
-            var headerRow = $(document.createElement('tr'))
-                .addClass("header");
-
-            headerRow.append(
-                $(document.createElement('th'))
-                    .addClass("date")
-                    .html("Date")
-            );
-
-            for(var i in data.valueFields) {
-                headerRow.append(
-                    $(document.createElement("th"))
-                        .addClass("metric")
-                        .html(
-                            getJobName(data.valueFields[i]) + " " + getMetricName(data.valueFields[i])
-                        )
-                );
-            }
-
-            table.append(headerRow);
-
-            var row;
-            var evenOddClass = "";
-            for(var i in data.series) {
-                if(i % 2) {
-                    evenOddClass = "odd";
-                }else {
-                    evenOddClass = "even";
-                }
-                row = $(document.createElement("tr"));
-                row.addClass(evenOddClass);
-                row.append(
-                        $(document.createElement("td"))
-                            .addClass("date")
-                            .html(
-                                data.series[i].date
-                            )
-                );
-
-                for(var j in data.valueFields) {
-                    row.append(
-                        $(document.createElement("td"))
-                            .addClass("metric")
-                            .html(function(value){
-                                if(value) return (value/1000).toFixed(3);
-                                else      return null;
-                            }(data.series[i][data.valueFields[j]]))
-                    );
-                }
-                table.append(row);
-            }
-
-            $("#graph").html("");
-
-            $("#graph").append(table);
-
-        }
-        // http://jsfiddle.net/martynasma/j9gUu/10/
 
         var getMetricName = data.getMetricName || function(a) {return 'No getMetricName function';};
         var getJobName    = data.getJobName ||    function(a) {return 'No getJobName function';};
