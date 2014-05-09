@@ -432,6 +432,7 @@
 
     // Limit number of jobs to select
     function checkJobCount() {
+      "use strict";
       var maxJobs = 8;
       if ($('#jobs').val() == null) {
         alert('Please select job(s)');
@@ -445,6 +446,7 @@
     }
 
     function getJobCount(){
+        "use strict";
         var val = $('#jobs').val();
         var count;
 
@@ -473,6 +475,7 @@
 
 
     function updateGraph() {
+      "use strict";
       if (!validateForm()) {
         return false;
       }
