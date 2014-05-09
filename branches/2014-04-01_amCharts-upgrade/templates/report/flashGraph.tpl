@@ -18,6 +18,10 @@
 </style>
 <script type="text/javascript" src="js/amcharts/amcharts.js"></script>
 <script type="text/javascript" src="js/amcharts/serial.js"></script>
+<script type="text/javascript" src="js/amcharts/exporting/amexport.js"></script>
+<script type="text/javascript" src="js/amcharts/exporting/rgbcolor.js"></script>
+<script type="text/javascript" src="js/amcharts/exporting/canvg.js"></script>
+<script type="text/javascript" src="js/amcharts/exporting/filesaver.js"></script>
 <script type="text/javascript" src="js/reports/flashGraph.js"></script>
 {/literal}
 </head>

@@ -348,7 +348,8 @@
                 },
                 legend: {
     
-                }
+                },
+                exportConfig : {}
             });
     
             chart.addListener("clickGraphItem", function(e){
