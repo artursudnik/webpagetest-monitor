@@ -257,7 +257,8 @@
     <div class="message">
         Warning! Your version of Internet Explorer does not support saving graph to file. Use any other modern browser or version 10 or greater of IE.
     </div>
-</div><div id="graphContainer" style="position: relative">
+</div>
+<div id="graphContainer" style="position: relative">
     <div id="graph"></div>
     <div id="graphOverlay" style="opacity: 0.5; display:none; position: absolute; top:0; width: 100%; height:100%; background-color: #999; text-align: center; font-size: 200px;">
         <div style="padding-top: 30%;">
