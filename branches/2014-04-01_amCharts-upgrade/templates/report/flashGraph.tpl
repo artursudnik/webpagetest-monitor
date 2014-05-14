@@ -64,7 +64,7 @@
         <td style="vertical-align:top">
           <input id="startTime" type="hidden" name="startTime">
           <input id="endTime" type="hidden" name="endTime">
-          <table style="width: 315px">
+          <table style="width: 330px">
             <tr>
               <td style="text-align:right">Time Frame:</td>
               <td>
