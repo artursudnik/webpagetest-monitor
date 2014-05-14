@@ -283,6 +283,7 @@
                 chartCursor: {
                     cursorPosition: "mouse",
                     categoryBalloonDateFormat: "MMM DD JJ:NN:SS"
+                    ,cursorAlpha: 0.5
                     ,graphBulletSize: 2
                 },
                 categoryField: "date",
