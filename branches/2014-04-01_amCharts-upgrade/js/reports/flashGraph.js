@@ -275,7 +275,7 @@
                 graphs: graphs,
                 chartScrollbar: {
                     autoGridCount: true,
-                    // graph: "g1",
+                    graph: data.valueFields[0],
                     "scrollbarHeight": 20
                 },
                 chartCursor: {
