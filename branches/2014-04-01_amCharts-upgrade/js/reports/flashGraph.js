@@ -277,6 +277,8 @@
                     autoGridCount: true,
                     graph: data.valueFields[0],
                     "scrollbarHeight": 20
+                    ,hideResizeGrips: true
+                    ,updateOnReleaseOnly: true
                 },
                 chartCursor: {
                     cursorPosition: "mouse",
