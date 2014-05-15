@@ -59,9 +59,9 @@ try {
         );
 
         $resultDataset[$jobId] = array(
-            jobId   => $job['Id'],
-            jobName => $job['Label'],
-            dataSet => getResultsDataAvgMod(
+            'jobId'   => $job['Id'],
+            'jobName' => $job['Label'],
+            'dataSet' => getResultsDataAvgMod(
                 $sanitizedData['startTimestamp'],
                 $sanitizedData['endTimestamp'],
                 $sanitizedData['interval'],
@@ -140,9 +140,9 @@ function sanitizeData($requestArray) {
     $resultArray['trimBelow']  = filter_var(       $requestArray['trimBelow'],  FILTER_VALIDATE_FLOAT, array('default' => null, 'min_range' => 0, 'max_range' => 1));
 
     $resultArray['aggregateMethod'] = $requestArray['aggregateMethod'];
-    $resultArray[job_id] = array();
+    $resultArray['job_id'] = array();
     foreach ($requestArray['job_id'] as $key => $value) {
-        $resultArray[job_id][] = (int) $value;
+        $resultArray['job_id'][] = (int) $value;
     }
 
     $resultArray['adjustUsing'] = $requestArray['adjustUsing'];
