@@ -252,12 +252,24 @@
                 useLineColorForBulletBorder:true
             });
         }
+        
+        var chartScrollbar = {
+                    autoGridCount: true,
+                    graph: data.valueFields[0],
+                    "scrollbarHeight": 20
+                    ,hideResizeGrips: true
+                    ,updateOnReleaseOnly: true
+            };
+        
         if(chart){    
             /**
              *  If a chart is already instantiated new data provider is set and the chart redrawn. 
              */    
             chart.dataProvider = data.series;
             chart.graphs = graphs;
+            
+            chart.chartScrollbar = chartScrollbar;
+            
             chart.validateData();
         } else {
             // chart is instantiated from scratch
@@ -275,13 +287,7 @@
                     unit: "s"
                 }],
                 graphs: graphs,
-                chartScrollbar: {
-                    autoGridCount: true,
-                    graph: data.valueFields[0],
-                    "scrollbarHeight": 20
-                    ,hideResizeGrips: true
-                    ,updateOnReleaseOnly: true
-                },
+                chartScrollbar: chartScrollbar,
                 chartCursor: {
                     cursorPosition: "mouse",
                     categoryBalloonDateFormat: "MMM DD JJ:NN:SS"
