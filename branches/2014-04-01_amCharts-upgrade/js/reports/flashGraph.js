@@ -54,11 +54,13 @@
         .done(function(d){
             try {
                 d = convertData2avgCharts(d);
+                drawChart(d);
             } catch(e) {
+                alert('Error occured while drawing chart: ' + e);
                 deferred.reject(e);
                 return;
             }
-            drawChart(d);
+            
             deferred.resolve();
 
         })
