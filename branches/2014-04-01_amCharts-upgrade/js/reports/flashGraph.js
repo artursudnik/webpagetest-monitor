@@ -299,7 +299,7 @@
                     minorGridEnabled: true
                 },
                 legend: {
-    
+                    fontSize: 9
                 },
                 exportConfig : {}
             });
