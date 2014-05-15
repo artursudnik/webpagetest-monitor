@@ -151,35 +151,6 @@ function sanitizeData($requestArray) {
     return $resultArray;
 }
 
-function addTimestamps($requestArray) {
-
-    if($requestArray['timeFrame'] == 0){
-        $requestArray['startTimestamp'] = mktime($requestArray['startHour'], 0, 0, $requestArray['startMonth'], $requestArray['startDay'], $requestArray['startYear']);
-        $requestArray['endTimestamp']   = mktime($requestArray['endHour'], 59, 59,   $requestArray['endMonth'],   $requestArray['endDay'],   $requestArray['endYear']);
-    } else {
-        $requestArray['endTimestamp'] = gmdate('U') + 3600;
-        $requestArray['startTimestamp'] = $requestArray['endTimestamp'] - $requestArray['timeFrame'];
-        // FB::log($requestArray['endTimestamp'] - $requestArray['startTimestamp']);
-    }
-
-    $keysToDelete = array(
-        'startHour',
-        'startDay',
-        'startMonth',
-        'startYear',
-        'endHour',
-        'endDay',
-        'endMonth',
-        'endYear'
-    );
-
-    foreach ($keysToDelete as $key => $value) {
-        unset($requestArray[$value]);
-    }
-
-    return $requestArray;
-}
-
 function serializeFields($fieldsArray){
     $serializedFields = "r.date";
 
