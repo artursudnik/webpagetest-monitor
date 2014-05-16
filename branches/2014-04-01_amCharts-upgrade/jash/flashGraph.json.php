@@ -122,23 +122,23 @@ function getResultsDataAvgMod($startDateTime, $endDateTime, $interval, $datas, $
 function sanitizeData($requestArray) {
     $resultArray = array();
 
-    $resultArray['startDay']   = filter_var((int)$requestArray['startDay'],   FILTER_VALIDATE_INT, array('default' => 0, 'min_range' => 1, 'max_range' => 31));
-    $resultArray['startMonth'] = filter_var((int)$requestArray['startMonth'], FILTER_VALIDATE_INT, array('default' => 0, 'min_range' => 1, 'max_range' => 12));
+    $resultArray['startDay']   = filter_var((int)$requestArray['startDay'],   FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 1, 'max_range' => 31)));
+    $resultArray['startMonth'] = filter_var((int)$requestArray['startMonth'], FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 1, 'max_range' => 12)));
     $resultArray['startYear']  = filter_var((int)$requestArray['startYear'],  FILTER_VALIDATE_INT);
-    $resultArray['startHour']  = filter_var((int)$requestArray['startHour'],  FILTER_VALIDATE_INT, array('default' => 0, 'min_range' => 0, 'max_range' => 23));
+    $resultArray['startHour']  = filter_var((int)$requestArray['startHour'],  FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 0, 'max_range' => 23)));
 
-    $resultArray['endDay']     = filter_var((int)$requestArray['endDay'],     FILTER_VALIDATE_INT, array('default' => 0, 'min_range' => 1, 'max_range' => 31));
-    $resultArray['endMonth']   = filter_var((int)$requestArray['endMonth'],   FILTER_VALIDATE_INT, array('default' => 0, 'min_range' => 1, 'max_range' => 12));
+    $resultArray['endDay']     = filter_var((int)$requestArray['endDay'],     FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 1, 'max_range' => 31)));
+    $resultArray['endMonth']   = filter_var((int)$requestArray['endMonth'],   FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 1, 'max_range' => 12)));
     $resultArray['endYear']    = filter_var((int)$requestArray['endYear'],    FILTER_VALIDATE_INT);
-    $resultArray['endHour']    = filter_var((int)$requestArray['endHour'],    FILTER_VALIDATE_INT, array('default' => 0, 'min_range' => 0, 'max_range' => 23));
+    $resultArray['endHour']    = filter_var((int)$requestArray['endHour'],    FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 0, 'max_range' => 23)));
 
-    $resultArray['timeFrame']  = filter_var((int)$requestArray['timeFrame'],    FILTER_VALIDATE_INT, array('default' => 0, 'min_range' => 0, 'max_range' => 2419200));
+    $resultArray['timeFrame']  = filter_var((int)$requestArray['timeFrame'],    FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 0, 'max_range' => 2419200)));
 
-    $resultArray['interval']   = filter_var((int)$requestArray['interval'],   FILTER_VALIDATE_INT, array('default' => 3600, 'min_range' => 1));
+    $resultArray['interval']   = filter_var((int)$requestArray['interval'],   FILTER_VALIDATE_INT, array('options' =>array('default' => 3600, 'min_range' => 1)));
 
-    $resultArray['percentile'] = filter_var((float)$requestArray['percentile'], FILTER_VALIDATE_FLOAT, array('default' => 1, 'min_range' => 0, 'max_range' => 1));
-    $resultArray['trimAbove']  = filter_var(       $requestArray['trimAbove'],  FILTER_VALIDATE_FLOAT, array('default' => null, 'min_range' => 0, 'max_range' => 1));
-    $resultArray['trimBelow']  = filter_var(       $requestArray['trimBelow'],  FILTER_VALIDATE_FLOAT, array('default' => null, 'min_range' => 0, 'max_range' => 1));
+    $resultArray['percentile'] = filter_var((float)$requestArray['percentile'], FILTER_VALIDATE_FLOAT, array('options' =>array('default' => 1, 'min_range' => 0, 'max_range' => 1)));
+    $resultArray['trimAbove']  = filter_var(       $requestArray['trimAbove'],  FILTER_VALIDATE_FLOAT, array('options' =>array('default' => null, 'min_range' => 0, 'max_range' => 1)));
+    $resultArray['trimBelow']  = filter_var(       $requestArray['trimBelow'],  FILTER_VALIDATE_FLOAT, array('options' =>array('default' => null, 'min_range' => 0, 'max_range' => 1)));
 
     $resultArray['aggregateMethod'] = $requestArray['aggregateMethod'];
     $resultArray['job_id'] = array();
