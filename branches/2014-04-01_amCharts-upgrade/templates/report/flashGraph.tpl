@@ -227,6 +227,7 @@
         <td colspan="2">
           <table style="float:right;cellpadding:0px;cellspacing:0px;margin:0px;border-spacing:0px">
             <tr>
+              <td><input id="histogramButton" type="button" name="histogramButton" value="Histogram" /></td>
               <td><input id="graphButton" type="button" name="action"
                                                     onclick="updateGraph();" value="Graph"
                                                     style="margin:0px;margin-right:3px;"></td>
