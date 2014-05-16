@@ -1,4 +1,5 @@
 <?php
+$start = microtime(1);
 chdir('..');
 include 'monitor.inc';
 include_once 'graph_functions.inc';
@@ -54,7 +55,7 @@ $response = array(
 
 $response['results'] = $result;
 
-$response['processingTime'] = microtime(1) - $_SERVER['REQUEST_TIME_FLOAT'];
+$response['processingTime'] = microtime(1) - $start;
 
 echo json_encode($response);
 
