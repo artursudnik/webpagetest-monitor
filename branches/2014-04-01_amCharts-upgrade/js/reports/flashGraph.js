@@ -34,8 +34,13 @@
                     return getHistogramDataForJob(this); 
                 }))
                 .done(function(){
-                    button.removeAttr('disabled');
                     console.log(arguments);
+                })
+                .always(function(){
+                    button.removeAttr('disabled');
+                })
+                .fail(function(){
+                    console.error(arguments);
                 });                
             }catch(e){
                 alert("Error: " + e);
