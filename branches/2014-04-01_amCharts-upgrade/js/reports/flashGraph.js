@@ -80,7 +80,7 @@
                 deferred.resolve(data.results);
             }
         }).error(function(jqxhr, err){
-            d.reject({
+            deferred.reject({
                 status: jqxhr.status,
                 message: jqxhr.statusText
             });
