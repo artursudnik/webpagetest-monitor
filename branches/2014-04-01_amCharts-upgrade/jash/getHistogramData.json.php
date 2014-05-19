@@ -71,6 +71,7 @@ function sanitizeData($requestArray) {
     $currentMi = (int)date("i");
     $currentS = (int)date("s");
         
+    $resultArray['timeFrame']  = filter_var((int)$requestArray['timeFrame'],    FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 0, 'max_range' => 2419200)));
     
     $resultArray['startDay']   = @filter_var($requestArray['startDay'],   FILTER_VALIDATE_INT, array('options' => array('default' => 1, 'min_range' => 1, 'max_range' => 31)));
     $resultArray['startMonth'] = @filter_var($requestArray['startMonth'], FILTER_VALIDATE_INT, array('options' => array('default' => 1, 'min_range' => 1, 'max_range' => 12)));
