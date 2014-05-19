@@ -1,9 +1,9 @@
 var wptmonitor = (function(window, $, wptmonitor){
     "use strict";
-        
+
     $(document).ready(function(){
         $('#histogramButton').on('click', function(e){
-            var button = $(this); 
+            var button = $(this);
             button.attr('disabled', 'disabled');
             var selectedJobs = $.makeArray($('#updateForm select#jobs option:selected').map(function(){return this.value;}));
 
@@ -14,14 +14,14 @@ var wptmonitor = (function(window, $, wptmonitor){
                 });
             }catch(e){
                 alert("Error: " + e);
-            }            
+            }
         });
     });
-  
-  
+
+
     function showHistogramContainer(){
         var deferred = $.Deferred();
-        
+
         if($("#histogramsContainer").is(":hidden")){
             $("#histogramsContainer").slideDown(200, function(){
                 deferred.resolve();
@@ -29,10 +29,10 @@ var wptmonitor = (function(window, $, wptmonitor){
         } else {
             deferred.resolve();
         }
-                
+
         return deferred.promise();
     }
-  
+
     function drawHistogramForJobs(jobId) {
         var deferred = $.Deferred();
         getHistogramDataForJobs(jobId)
@@ -44,20 +44,20 @@ var wptmonitor = (function(window, $, wptmonitor){
         .fail(function(e){
             deferred.reject(e);
         });
-        
+
         return deferred.promise();
     }
-      
+
     function getHistogramDataForJobs(jobId) {
         var deferred = $.Deferred();
         $.when.apply($, $(jobId).map(function(){
-                    return getHistogramDataForJob(this); 
+                    return getHistogramDataForJob(this);
                 }))
                 .done(function(){
                     deferred.resolve(convertHistogramData(arguments));
                 })
                 .always(function(){
-                    
+
                 })
                 .fail(function(e){
                     deferred.reject(e);
@@ -69,18 +69,18 @@ var wptmonitor = (function(window, $, wptmonitor){
     function convertHistogramData(data) {
         return data;
     }
- 
+
     function getHistogramDataForJob(jobId) {
         "use strict";
         var deferred = $.Deferred();
-        
+
         var params = getFormParams();
-        
+
         params.job = jobId;
-        
+
         $.ajax({
            url: 'jash/getHistogramData.json.php',
-           data: params 
+           data: params
         }).done(function(data){
             if(data.status !== 200) {
                 deferred.reject({
@@ -96,15 +96,15 @@ var wptmonitor = (function(window, $, wptmonitor){
                 message: jqxhr.statusText
             });
         });
-        
+
         return deferred.promise();
-    }    
-    
+    }
+
     
     function getFormParams() {
         var result = {};
         var form = $("#updateForm")[0];
-        
+
         result = {
             startYear  : $('select[name="startYear"]').val(),
             startMonth : $('select[name="startMonth"]').val(),
@@ -119,10 +119,10 @@ var wptmonitor = (function(window, $, wptmonitor){
                 return $(this).val();
             }))
         };
-        
+
         return result;
     };
-    
-    wptmonitor.histograms = {initialized: true};  
+
+    wptmonitor.histograms = {initialized: true};
     return wptmonitor;
 })(window, jQuery, wptmonitor || {});

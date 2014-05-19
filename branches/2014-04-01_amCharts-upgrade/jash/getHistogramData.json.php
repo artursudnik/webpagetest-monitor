@@ -26,24 +26,24 @@ if(null === $userId = getCurrentUserId()) {
 
 try{
     $requestDataSanitized = sanitizeData($requestData);
-    
+
     $requestDataSanitized = addTimestamps($requestDataSanitized);
-    
+
     $bucketWidth = $requestDataSanitized['width'];
-    
+
     if(!is_array($requestData['field'])) {
         $requestData['field'] = array($requestData['field']);
     }
-    
+
     $fields = array();
-    
+
     foreach ($requestData['field'] as $key => $fieldName) {
         $fields[] = mapMetricFieldForm2Db($fieldName);
     }
-    
-    
+
+
     $result = array();
-    
+
     foreach ($fields as $key => $field) {
         $q = Doctrine_Query::create()
         ->select("($field - $field%$bucketWidth) as bucket, count(*) as count")->from('WPTResult r')
@@ -57,16 +57,16 @@ try{
         ->andWhere('r.WPTJobId = ?', $requestDataSanitized['job'])
         ->groupBy("bucket")
         ->orderBy("bucket");
-          
+
         $result[] = $q->fetchArray();
     }
-    
+
     $response = array(
                     'status'  => 200,
                     'message' => 'OK'
                 );
-    
-    $response['results'] = $result;    
+
+    $response['results'] = $result;
 } catch(exception $e) {
     FB::log($e);
     $response['status'] = 500;
@@ -83,16 +83,16 @@ die();
 
 function sanitizeData($requestArray) {
     $resultArray = array();
-    
+
     $currentY = (int)date("Y");
     $currentMo = (int)date("n");
     $currentD = (int)date("j");
     $currentH = (int)date("G");
     $currentMi = (int)date("i");
     $currentS = (int)date("s");
-        
+
     $resultArray['timeFrame']  = @filter_var((int)$requestArray['timeFrame'],    FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 0, 'max_range' => 2419200)));
-    
+
     $resultArray['startDay']   = @filter_var($requestArray['startDay'],   FILTER_VALIDATE_INT, array('options' => array('default' => 1, 'min_range' => 1, 'max_range' => 31)));
     $resultArray['startMonth'] = @filter_var($requestArray['startMonth'], FILTER_VALIDATE_INT, array('options' => array('default' => 1, 'min_range' => 1, 'max_range' => 12)));
     $resultArray['startYear']  = @filter_var($requestArray['startYear'],  FILTER_VALIDATE_INT, array('options' => array('default' => 1970, 'min_range' => 1970)));

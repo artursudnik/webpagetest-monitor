@@ -60,9 +60,9 @@ var wptmonitor = (function(window, $, wptmonitor){
                     deferred.reject(e);
                     return;
                 }
-                
+
                 deferred.resolve();
-    
+
             })
             .fail(function(a){
                 deferred.reject(a.message);
@@ -169,7 +169,7 @@ var wptmonitor = (function(window, $, wptmonitor){
         }
 
         /**
-         *  Iterate all jobs and metrics to create mappings between value fields names and other data 
+         *  Iterate all jobs and metrics to create mappings between value fields names and other data
          */
         for (var k=0; k < data.metrics.length; k++) {
             for(var i=0; i < data.jobs.length; i++) {
@@ -181,21 +181,21 @@ var wptmonitor = (function(window, $, wptmonitor){
         }
 
         /**
-         *  Functions to be put on every data point to be accessible from click event handler 
+         *  Functions to be put on every data point to be accessible from click event handler
          */
         var getJobName    = function(seriesName){
             return seriesToJobNameMap[seriesName];
         };
-            
+
         var getMetricName = function(seriesName){
             return seriesToMetricNameMap[seriesName];
         };
         var getJobId      = function(seriesName){
             return seriesToJobIdMap[seriesName];
         };
-        
+
         var getInterval   = function(){
-            return data.interval;  
+            return data.interval;
         };
 
 
@@ -254,7 +254,7 @@ var wptmonitor = (function(window, $, wptmonitor){
                 useLineColorForBulletBorder:true
             });
         }
-        
+
         var chartScrollbar = {
                     autoGridCount: true,
                     graph: data.valueFields[0],
@@ -262,16 +262,16 @@ var wptmonitor = (function(window, $, wptmonitor){
                     ,hideResizeGrips: true
                     ,updateOnReleaseOnly: true
             };
-        
-        if(chart){    
+
+        if(chart){
             /**
-             *  If a chart is already instantiated new data provider is set and the chart redrawn. 
-             */    
+             *  If a chart is already instantiated new data provider is set and the chart redrawn.
+             */
             chart.dataProvider = data.series;
             chart.graphs = graphs;
-            
+
             chart.chartScrollbar = chartScrollbar;
-            
+
             chart.validateData();
         } else {
             // chart is instantiated from scratch
@@ -311,13 +311,13 @@ var wptmonitor = (function(window, $, wptmonitor){
                 },
                 exportConfig : {}
             });
-    
+
             chart.addListener("clickGraphItem", function(e){
                 var dataContext = e.item.dataContext;
                 var valueField = e.graph.valueField;
                 var resultsURL = getResultsURL(dataContext.getJobId(valueField), dataContext.timestamp, dataContext.getInterval());
                 window.open(resultsURL);
-                
+
             });
         }
 
@@ -507,8 +507,8 @@ var wptmonitor = (function(window, $, wptmonitor){
     window.adjustTimeFrame  = adjustTimeFrame;
 
     window.getChart      = function(){return chart;};
-    
+
     wptmonitor.graph = {initialized: true};
-    
+
     return wptmonitor;
 })(window, jQuery, wptmonitor || {});
