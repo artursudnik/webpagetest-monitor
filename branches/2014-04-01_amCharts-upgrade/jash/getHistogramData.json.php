@@ -35,6 +35,10 @@ try{
         $requestData['field'] = array($requestData['field']);
     }
 
+    $jobTable = Doctrine_Core::getTable('WPTJob');
+    $job = $jobTable->find($requestDataSanitized['job']);
+    $jobLabel = $job['Label'];
+
     $fields = array();
 
     foreach ($requestData['field'] as $key => $fieldName) {
@@ -58,7 +62,7 @@ try{
         ->groupBy("bucket")
         ->orderBy("bucket");
 
-        $result[] = $q->fetchArray();
+        $result[mapMetricFieldDb2Form($field)] = $q->fetchArray();
     }
 
     $response = array(
@@ -66,7 +70,8 @@ try{
                     'message' => 'OK'
                 );
 
-    $response['results'] = $result;
+    $response['results']['jobLabel'] = $jobLabel;
+    $response['results']['datasets'] = $result;
 } catch(exception $e) {
     FB::log($e);
     $response['status'] = 500;
