@@ -54,7 +54,7 @@ var wptmonitor = (function(window, $, wptmonitor){
                     return getHistogramDataForJob(this); 
                 }))
                 .done(function(){
-                    deferred.resolve(arguments);
+                    deferred.resolve(convertHistogramData(arguments));
                 })
                 .always(function(){
                     
@@ -64,6 +64,10 @@ var wptmonitor = (function(window, $, wptmonitor){
                     console.error(arguments);
                 });
         return deferred.promise();
+    }
+
+    function convertHistogramData(data) {
+        return data;
     }
  
     function getHistogramDataForJob(jobId) {
