@@ -23,6 +23,7 @@
 <script type="text/javascript" src="js/amcharts/exporting/canvg.js"></script>
 <script type="text/javascript" src="js/amcharts/exporting/filesaver.js"></script>
 <script type="text/javascript" src="js/reports/flashGraph.js"></script>
+<script type="text/javascript" src="js/reports/histograms.js"></script>
 {/literal}
 </head>
 <body>
