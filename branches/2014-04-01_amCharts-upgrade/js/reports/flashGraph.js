@@ -48,26 +48,27 @@ var wptmonitor = (function(window, $, wptmonitor){
         var serializedFormData = $('#updateForm').serializeArray();
 
         if(!checkJobCount()) {
-            return;
+            deferred.reject("No jobs selected");
+        } else {
+            getChartDataWithGUIBehavior(serializedFormData)
+            .done(function(d){
+                try {
+                    d = convertData2avgCharts(d);
+                    drawChart(d);
+                } catch(e) {
+                    alert('Error occured while drawing chart: ' + e);
+                    deferred.reject(e);
+                    return;
+                }
+                
+                deferred.resolve();
+    
+            })
+            .fail(function(a){
+                deferred.reject(a.message);
+            });
         }
 
-        getChartDataWithGUIBehavior(serializedFormData)
-        .done(function(d){
-            try {
-                d = convertData2avgCharts(d);
-                drawChart(d);
-            } catch(e) {
-                alert('Error occured while drawing chart: ' + e);
-                deferred.reject(e);
-                return;
-            }
-            
-            deferred.resolve();
-
-        })
-        .fail(function(a){
-            deferred.reject(a.message);
-        });
         return deferred.promise();
     }
 
