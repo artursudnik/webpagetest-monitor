@@ -1,3 +1,9 @@
+#histogramsContainer {
+    display: none;
+    background-color: #fff;
+    height: 600px;    
+}
+
 #graphContainer{
     display: none;
     background-color: #fff;

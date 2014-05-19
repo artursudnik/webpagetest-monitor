@@ -18,11 +18,27 @@ var wptmonitor = (function(window, $, wptmonitor){
         });
     });
   
+  
+    function showHistogramContainer(){
+        var deferred = $.Deferred();
+        
+        if($("#histogramsContainer").is(":hidden")){
+            $("#histogramsContainer").slideDown(200, function(){
+                deferred.resolve();
+            });
+        } else {
+            deferred.resolve();
+        }
+                
+        return deferred.promise();
+    }
+  
     function drawHistogramForJobs(jobId) {
         var deferred = $.Deferred();
         getHistogramDataForJobs(jobId)
         .done(function(data){
             deferred.resolve();
+            showHistogramContainer();
             console.log(data);
         })
         .fail(function(e){
@@ -49,7 +65,7 @@ var wptmonitor = (function(window, $, wptmonitor){
                 });
         return deferred.promise();
     }
-      
+ 
     function getHistogramDataForJob(jobId) {
         "use strict";
         var deferred = $.Deferred();
