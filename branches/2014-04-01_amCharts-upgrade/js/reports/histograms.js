@@ -8,23 +8,47 @@ var wptmonitor = (function(window, $, wptmonitor){
             var selectedJobs = $.makeArray($('#updateForm select#jobs option:selected').map(function(){return this.value;}));
 
             try{
-                $.when.apply($, $(selectedJobs).map(function(){
-                    return getHistogramDataForJob(this); 
-                }))
-                .done(function(){
-                    console.log(arguments);
-                })
+                drawHistogramForJobs(selectedJobs)
                 .always(function(){
                     button.removeAttr('disabled');
-                })
-                .fail(function(){
-                    console.error(arguments);
-                });                
+                });
             }catch(e){
                 alert("Error: " + e);
             }            
         });
     });
+  
+    function drawHistogramForJobs(jobId) {
+        var deferred = $.Deferred();
+        getHistogramDataForJobs(jobId)
+        .done(function(data){
+            deferred.resolve();
+            console.log(data);
+        })
+        .fail(function(e){
+            deferred.reject(e);
+        });
+        
+        return deferred.promise();
+    }
+      
+    function getHistogramDataForJobs(jobId) {
+        var deferred = $.Deferred();
+        $.when.apply($, $(jobId).map(function(){
+                    return getHistogramDataForJob(this); 
+                }))
+                .done(function(){
+                    deferred.resolve(arguments);
+                })
+                .always(function(){
+                    
+                })
+                .fail(function(e){
+                    deferred.reject(e);
+                    console.error(arguments);
+                });
+        return deferred.promise();
+    }
       
     function getHistogramDataForJob(jobId) {
         "use strict";
