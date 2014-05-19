@@ -1,5 +1,6 @@
 var wptmonitor = (function(window, $, wptmonitor){
-    
+    "use strict";
+        
     $(document).ready(function(){
         $('#histogramButton').on('click', function(e){
             var button = $(this); 
