@@ -30,10 +30,21 @@ $requestDataSanitized = addTimestamps($requestDataSanitized);
 
 $bucketWidth = $requestDataSanitized['width'];
 
-$field = mapMetricFieldForm2Db($requestData['field']);
+if(!is_array($requestData['field'])) {
+    $requestData['field'] = array($requestData['field']);
+}
+
+$fields = array();
+
+foreach ($requestData['field'] as $key => $fieldName) {
+	$fields[] = mapMetricFieldForm2Db($fieldName);
+}
 
 
-$q = Doctrine_Query::create()
+$result = array();
+
+foreach ($fields as $key => $field) {
+    $q = Doctrine_Query::create()
     ->select("($field - $field%$bucketWidth) as bucket, count(*) as count")->from('WPTResult r')
     ->where('r.ValidationState < ?', 2)
     ->andWhere("$field is not null")
@@ -46,7 +57,8 @@ $q = Doctrine_Query::create()
     ->groupBy("bucket")
     ->orderBy("bucket");
       
-$result = $q->fetchArray();
+    $result[] = $q->fetchArray();
+}
 
 $response = array(
                 'status'  => 200,
@@ -71,7 +83,7 @@ function sanitizeData($requestArray) {
     $currentMi = (int)date("i");
     $currentS = (int)date("s");
         
-    $resultArray['timeFrame']  = filter_var((int)$requestArray['timeFrame'],    FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 0, 'max_range' => 2419200)));
+    $resultArray['timeFrame']  = @filter_var((int)$requestArray['timeFrame'],    FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 0, 'max_range' => 2419200)));
     
     $resultArray['startDay']   = @filter_var($requestArray['startDay'],   FILTER_VALIDATE_INT, array('options' => array('default' => 1, 'min_range' => 1, 'max_range' => 31)));
     $resultArray['startMonth'] = @filter_var($requestArray['startMonth'], FILTER_VALIDATE_INT, array('options' => array('default' => 1, 'min_range' => 1, 'max_range' => 12)));
