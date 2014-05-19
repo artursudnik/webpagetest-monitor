@@ -53,6 +53,8 @@ var wptmonitor = (function(window, $, wptmonitor){
         });
         
         return deferred.promise();
-    }      
+    }    
+    
+    wptmonitor.histograms = {initialized: true};  
     return wptmonitor;
 })(window, jQuery, wptmonitor || {});

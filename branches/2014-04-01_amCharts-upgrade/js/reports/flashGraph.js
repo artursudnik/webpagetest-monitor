@@ -1,4 +1,4 @@
-(function(window, $){
+var wptmonitor = (function(window, $, wptmonitor){
 
     var chart;
 
@@ -506,5 +506,8 @@
     window.adjustTimeFrame  = adjustTimeFrame;
 
     window.getChart      = function(){return chart;};
-
-})(window, jQuery);
+    
+    wptmonitor.graph = {initialized: true};
+    
+    return wptmonitor;
+})(window, jQuery, wptmonitor || {});
