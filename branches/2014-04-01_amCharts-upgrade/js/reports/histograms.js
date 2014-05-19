@@ -71,7 +71,6 @@ var wptmonitor = (function(window, $, wptmonitor){
     }
 
     function getHistogramDataForJob(jobId) {
-        "use strict";
         var deferred = $.Deferred();
 
         var params = getFormParams();
