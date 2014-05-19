@@ -24,48 +24,56 @@ if(null === $userId = getCurrentUserId()) {
     die();
 }
 
-$requestDataSanitized = sanitizeData($requestData);
-
-$requestDataSanitized = addTimestamps($requestDataSanitized);
-
-$bucketWidth = $requestDataSanitized['width'];
-
-if(!is_array($requestData['field'])) {
-    $requestData['field'] = array($requestData['field']);
+try{
+    $requestDataSanitized = sanitizeData($requestData);
+    
+    $requestDataSanitized = addTimestamps($requestDataSanitized);
+    
+    $bucketWidth = $requestDataSanitized['width'];
+    
+    if(!is_array($requestData['field'])) {
+        $requestData['field'] = array($requestData['field']);
+    }
+    
+    $fields = array();
+    
+    foreach ($requestData['field'] as $key => $fieldName) {
+        $fields[] = mapMetricFieldForm2Db($fieldName);
+    }
+    
+    
+    $result = array();
+    
+    foreach ($fields as $key => $field) {
+        $q = Doctrine_Query::create()
+        ->select("($field - $field%$bucketWidth) as bucket, count(*) as count")->from('WPTResult r')
+        ->where('r.ValidationState < ?', 2)
+        ->andWhere("$field is not null")
+        ->andWhere("date > ?", $requestDataSanitized['startTimestamp'])
+        ->andWhere("date < ?", $requestDataSanitized['endTimestamp'])
+        ->andWhere('r.AvgFirstViewFirstByte > 0')
+        ->andWhere('r.AvgFirstViewDocCompleteTime > 0')
+        ->andWhere('r.AvgFirstViewDocCompleteTime != ?', '')
+        ->andWhere('r.WPTJobId = ?', $requestDataSanitized['job'])
+        ->groupBy("bucket")
+        ->orderBy("bucket");
+          
+        $result[] = $q->fetchArray();
+    }
+    
+    $response = array(
+                    'status'  => 200,
+                    'message' => 'OK'
+                );
+    
+    $response['results'] = $result;    
+} catch(exception $e) {
+    FB::log($e);
+    $response['status'] = 500;
+    $response['message'] = $e->getMessage();
+    setHttpResponseCode(500);
 }
 
-$fields = array();
-
-foreach ($requestData['field'] as $key => $fieldName) {
-	$fields[] = mapMetricFieldForm2Db($fieldName);
-}
-
-
-$result = array();
-
-foreach ($fields as $key => $field) {
-    $q = Doctrine_Query::create()
-    ->select("($field - $field%$bucketWidth) as bucket, count(*) as count")->from('WPTResult r')
-    ->where('r.ValidationState < ?', 2)
-    ->andWhere("$field is not null")
-    ->andWhere("date > ?", $requestDataSanitized['startTimestamp'])
-    ->andWhere("date < ?", $requestDataSanitized['endTimestamp'])
-    ->andWhere('r.AvgFirstViewFirstByte > 0')
-    ->andWhere('r.AvgFirstViewDocCompleteTime > 0')
-    ->andWhere('r.AvgFirstViewDocCompleteTime != ?', '')
-    ->andWhere('r.WPTJobId = ?', $requestDataSanitized['job'])
-    ->groupBy("bucket")
-    ->orderBy("bucket");
-      
-    $result[] = $q->fetchArray();
-}
-
-$response = array(
-                'status'  => 200,
-                'message' => 'OK'
-            );
-
-$response['results'] = $result;
 
 $response['processingTime'] = microtime(1) - $start;
 
