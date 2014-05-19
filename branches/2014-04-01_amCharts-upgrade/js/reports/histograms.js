@@ -73,10 +73,10 @@ var wptmonitor = (function(window, $, wptmonitor){
     function getHistogramDataForJob(jobId) {
         "use strict";
         var deferred = $.Deferred();
-        var params = {
-            field: 'FV_Fully',
-            job: jobId
-        };
+        
+        var params = getFormParams();
+        
+        params.job = jobId;
         
         $.ajax({
            url: 'jash/getHistogramData.json.php',
@@ -99,6 +99,29 @@ var wptmonitor = (function(window, $, wptmonitor){
         
         return deferred.promise();
     }    
+    
+    
+    function getFormParams() {
+        var result = {};
+        var form = $("#updateForm")[0];
+        
+        result = {
+            startYear  : $('select[name="startYear"]').val(),
+            startMonth : $('select[name="startMonth"]').val(),
+            startDay   : $('select[name="startDay"]').val(),
+            startHour  : $('select[name="startHour"]').val(),
+            endYear    : $('select[name="endYear"]').val(),
+            endMonth   : $('select[name="endMonth"]').val(),
+            endDay     : $('select[name="endDay"]').val(),
+            endHour    : $('select[name="endHour"]').val(),
+            timeFrame  : $("#timeFrame").val(),
+            field      : $.makeArray($("input[name='fields[]']:checked").map(function(){
+                return $(this).val();
+            }))
+        };
+        
+        return result;
+    };
     
     wptmonitor.histograms = {initialized: true};  
     return wptmonitor;
