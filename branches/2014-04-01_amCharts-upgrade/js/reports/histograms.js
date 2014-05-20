@@ -131,6 +131,12 @@ var wptmonitor = (function(window, $, wptmonitor){
         return result;
     };
 
-    wptmonitor.histograms = {initialized: true};
+    wptmonitor.histograms = {
+        initialized: true,
+        getChart: function() {
+            return chart;
+        }
+    };
+
     return wptmonitor;
 })(window, jQuery, wptmonitor || {});
