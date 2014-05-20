@@ -80,7 +80,29 @@ var wptmonitor = (function(window, $, wptmonitor){
     }
 
     function convertHistogramData(data) {
-        return data;
+
+        var dataConverted = {};
+        var minBucket = getMinBucket();
+        var maxBucket = getMaxBucket();
+        var bucketWidth = getBucketWidth();
+
+
+        for (var i=minBucket; i <= maxBucket; i+=bucketWidth) {
+          dataConverted[i] = {};
+        };
+
+        for(var jobIndex in data) {
+            for(var metricIndex in data[jobIndex].datasets){
+                for(var i in data[jobIndex].datasets[metricIndex].series){
+                    var count = data[jobIndex].datasets[metricIndex].series[i].count;
+                    var valueField = data[jobIndex].datasets[metricIndex].metric + data[jobIndex].jobId;
+
+                    dataConverted[data[jobIndex].datasets[metricIndex].series[i].bucket][valueField] = count;
+                }
+            }
+        }
+
+        return dataConverted;
 
         function getMinBucket() {
             var minBucket = null;
