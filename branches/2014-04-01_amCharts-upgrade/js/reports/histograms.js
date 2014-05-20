@@ -66,7 +66,8 @@ var wptmonitor = (function(window, $, wptmonitor){
                     return getHistogramDataForJob(this);
                 }))
                 .done(function(){
-                    deferred.resolve(convertHistogramData(arguments));
+                    var dataConverted = convertHistogramData(arguments);
+                    deferred.resolve(dataConverted);
                 })
                 .always(function(){
 
