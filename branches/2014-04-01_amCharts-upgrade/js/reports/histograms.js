@@ -5,6 +5,9 @@ var wptmonitor = (function(window, $, wptmonitor){
 
     $(document).ready(function(){
         $('#histogramButton').on('click', function(e){
+            if(getSelectedJobsCount() == 0){
+                return;
+            }
             var button = $(this);
             button.attr('disabled', 'disabled');
             var selectedJobs = $.makeArray($('#updateForm select#jobs option:selected').map(function(){return this.value;}));
@@ -108,6 +111,13 @@ var wptmonitor = (function(window, $, wptmonitor){
         return deferred.promise();
     }
 
+    function getSelectedJobsCount() {
+        var val = $('#jobs').val();
+        if(val == null) {
+            return 0;
+        }
+        return val.length;
+    }
 
     function getFormParams() {
         var result = {};
