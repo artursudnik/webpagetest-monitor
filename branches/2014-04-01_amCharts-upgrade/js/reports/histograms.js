@@ -80,6 +80,27 @@ var wptmonitor = (function(window, $, wptmonitor){
 
     function convertHistogramData(data) {
         return data;
+
+        function getMinBucket() {
+            var minBucket = null;
+            for(var i in data){
+                if(minBucket === null || minBucket > data[i].minBucket) {
+                    minBucket = data[i].minBucket;
+                }
+            }
+            return minBucket;
+        }
+
+        function getMaxBucket() {
+            var maxBucket = null;
+            for(var i in data){
+                if(maxBucket === null || maxBucket > data[i].maxBucket) {
+                    maxBucket = data[i].maxBucket;
+                }
+            }
+            return maxBucket;
+        }
+
     }
 
     function getHistogramDataForJob(jobId) {
