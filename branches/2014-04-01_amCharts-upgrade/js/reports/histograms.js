@@ -101,6 +101,19 @@ var wptmonitor = (function(window, $, wptmonitor){
             return maxBucket;
         }
 
+        function getBucketWidth() {
+            var bucketWidth = null;
+
+            for(var i in data){
+                if(bucketWidth !== null && bucketWidth !== data[i].bucketWidth) {
+                    throw "Different bucket widths in datasets";
+                }
+                bucketWidth = data[i].bucketWidth;
+            }
+
+            return bucketWidth;
+        }
+
     }
 
     function getHistogramDataForJob(jobId) {
