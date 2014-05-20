@@ -94,7 +94,7 @@ var wptmonitor = (function(window, $, wptmonitor){
         function getMaxBucket() {
             var maxBucket = null;
             for(var i in data){
-                if(maxBucket === null || maxBucket > data[i].maxBucket) {
+                if(maxBucket === null || maxBucket < data[i].maxBucket) {
                     maxBucket = data[i].maxBucket;
                 }
             }
