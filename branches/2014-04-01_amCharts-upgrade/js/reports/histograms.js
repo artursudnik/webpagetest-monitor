@@ -99,7 +99,7 @@ var wptmonitor = (function(window, $, wptmonitor){
         return deferred.promise();
     }
 
-    
+
     function getFormParams() {
         var result = {};
         var form = $("#updateForm")[0];
