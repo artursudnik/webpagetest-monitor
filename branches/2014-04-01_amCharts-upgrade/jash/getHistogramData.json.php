@@ -98,15 +98,15 @@ function sanitizeData($requestArray) {
 
     $resultArray['timeFrame']  = @filter_var((int)$requestArray['timeFrame'],    FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 0, 'max_range' => 2419200)));
 
-    $resultArray['startDay']   = @filter_var($requestArray['startDay'],   FILTER_VALIDATE_INT, array('options' => array('default' => 1, 'min_range' => 1, 'max_range' => 31)));
-    $resultArray['startMonth'] = @filter_var($requestArray['startMonth'], FILTER_VALIDATE_INT, array('options' => array('default' => 1, 'min_range' => 1, 'max_range' => 12)));
-    $resultArray['startYear']  = @filter_var($requestArray['startYear'],  FILTER_VALIDATE_INT, array('options' => array('default' => 1970, 'min_range' => 1970)));
-    $resultArray['startHour']  = @filter_var($requestArray['startHour'],  FILTER_VALIDATE_INT, array('options' => array('default' => 1, 'min_range' => 0, 'max_range' => 23)));
+    $resultArray['startDay']   = @filter_var((int)$requestArray['startDay'],   FILTER_VALIDATE_INT, array('options' => array('default' => 1, 'min_range' => 1, 'max_range' => 31)));
+    $resultArray['startMonth'] = @filter_var((int)$requestArray['startMonth'], FILTER_VALIDATE_INT, array('options' => array('default' => 1, 'min_range' => 1, 'max_range' => 12)));
+    $resultArray['startYear']  = @filter_var((int)$requestArray['startYear'],  FILTER_VALIDATE_INT, array('options' => array('default' => 1970, 'min_range' => 1970)));
+    $resultArray['startHour']  = @filter_var((int)$requestArray['startHour'],  FILTER_VALIDATE_INT, array('options' => array('default' => 1, 'min_range' => 0, 'max_range' => 23)));
 
-    $resultArray['endDay']     = @filter_var($requestArray['endDay'],     FILTER_VALIDATE_INT, array('options' => array('default' => $currentD, 'min_range' => 1, 'max_range' => 31)));
-    $resultArray['endMonth']   = @filter_var($requestArray['endMonth'],   FILTER_VALIDATE_INT, array('options' => array('default' => $currentMo, 'min_range' => 1, 'max_range' => 12)));
-    $resultArray['endYear']    = @filter_var($requestArray['endYear'],    FILTER_VALIDATE_INT, array('options' => array('default' => $currentY)));
-    $resultArray['endHour']    = @filter_var($requestArray['endHour'],    FILTER_VALIDATE_INT, array('options' => array('default' => $currentH, 'min_range' => 0, 'max_range' => 23)));
+    $resultArray['endDay']     = @filter_var((int)$requestArray['endDay'],     FILTER_VALIDATE_INT, array('options' => array('default' => $currentD, 'min_range' => 1, 'max_range' => 31)));
+    $resultArray['endMonth']   = @filter_var((int)$requestArray['endMonth'],   FILTER_VALIDATE_INT, array('options' => array('default' => $currentMo, 'min_range' => 1, 'max_range' => 12)));
+    $resultArray['endYear']    = @filter_var((int)$requestArray['endYear'],    FILTER_VALIDATE_INT, array('options' => array('default' => $currentY)));
+    $resultArray['endHour']    = @filter_var((int)$requestArray['endHour'],    FILTER_VALIDATE_INT, array('options' => array('default' => $currentH, 'min_range' => 0, 'max_range' => 23)));
 
     $resultArray['width']      = @filter_var((int)$requestArray['width'], FILTER_VALIDATE_INT, array('options' => array('default' => 100, 'min_range' => 10)));
     $resultArray['job']        = @filter_var((int)$requestArray['job'],   FILTER_VALIDATE_INT, array('options' => array('default' => 0, 'min_range' => 1)));
