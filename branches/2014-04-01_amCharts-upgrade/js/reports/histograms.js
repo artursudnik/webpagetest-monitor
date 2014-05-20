@@ -1,6 +1,8 @@
 var wptmonitor = (function(window, $, wptmonitor){
     "use strict";
 
+    var chart;
+
     $(document).ready(function(){
         $('#histogramButton').on('click', function(e){
             var button = $(this);
@@ -38,7 +40,9 @@ var wptmonitor = (function(window, $, wptmonitor){
         getHistogramDataForJobs(jobId)
         .done(function(data){
             deferred.resolve();
-            showHistogramContainer();
+            showHistogramContainer().done(function(){
+                drawChart(data);
+            });
             console.log(data);
         })
         .fail(function(e){
@@ -46,6 +50,11 @@ var wptmonitor = (function(window, $, wptmonitor){
         });
 
         return deferred.promise();
+
+        function drawChart(data) {
+            chart = [];
+        }
+
     }
 
     function getHistogramDataForJobs(jobId) {
