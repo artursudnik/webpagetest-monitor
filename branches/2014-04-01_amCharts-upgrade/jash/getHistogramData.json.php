@@ -94,6 +94,7 @@ try{
     $response['results']['datasets'] = $result;
     $response['results']['minBucket'] = $minBucket;
     $response['results']['maxBucket'] = $maxBucket;
+    $response['results']['bucketWidth'] = $bucketWidth;
 
 } catch(exception $e) {
     FB::log($e);
