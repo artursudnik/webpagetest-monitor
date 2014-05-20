@@ -48,6 +48,9 @@ try{
 
     $result = array();
 
+    $minBucket = null;
+    $maxBucket = null;
+
     foreach ($fields as $key => $field) {
         $q = Doctrine_Query::create()
         ->select("($field - $field%$bucketWidth) as bucket, count(*) as count")->from('WPTResult r')
@@ -62,7 +65,23 @@ try{
         ->groupBy("bucket")
         ->orderBy("bucket");
 
-        $result[mapMetricFieldDb2Form($field)] = $q->fetchArray();
+        $series = $q->fetchArray();
+
+        $result[] = array(
+            'series'    => $series,
+            'metric'    => mapMetricFieldDb2Form($field),
+            'minBucket' => $series[0]['bucket'],
+            'maxBucket' => $series[count($series)-1]['bucket']
+        );
+
+        if($minBucket === null or $minBucket > $series[0]['bucket']) {
+            $minBucket = $series[0]['bucket'];
+        }
+
+        if($maxBucket === null or $maxBucket < $series[count($series)-1]['bucket']) {
+            $maxBucket = $series[count($series)-1]['bucket'];
+        }
+
     }
 
     $response = array(
@@ -71,7 +90,11 @@ try{
                 );
 
     $response['results']['jobLabel'] = $jobLabel;
+    $response['results']['jobId'] = $requestDataSanitized['job'];
     $response['results']['datasets'] = $result;
+    $response['results']['minBucket'] = $minBucket;
+    $response['results']['maxBucket'] = $maxBucket;
+
 } catch(exception $e) {
     FB::log($e);
     $response['status'] = 500;
