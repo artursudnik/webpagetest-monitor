@@ -67,6 +67,12 @@ try{
 
         $series = $q->fetchArray();
 
+        //doctrine returns strings so we have to convert types to proper ones
+        foreach ($series as $key => $value) {
+            $series[$key]['bucket'] = (int)$series[$key]['bucket'];
+            $series[$key]['count']  = (int)$series[$key]['count'];
+        }
+
         $result[] = array(
             'series'    => $series,
             'metric'    => mapMetricFieldDb2Form($field),
