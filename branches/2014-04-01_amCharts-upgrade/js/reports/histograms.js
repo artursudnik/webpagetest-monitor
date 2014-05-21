@@ -54,10 +54,10 @@ var wptmonitor = (function(window, $, wptmonitor){
 
         return deferred.promise();
 
-        function drawChart(data) {
-            chart = [];
-        }
+    }
 
+    function drawChart(data) {
+        chart = [];
     }
 
     function getHistogramDataForJobs(jobId) {
