@@ -57,7 +57,55 @@ var wptmonitor = (function(window, $, wptmonitor){
     }
 
     function drawChart(data) {
-        chart = [];
+
+        var graphs = [];
+
+        for(var i in data.fields) {
+            var field = data.fields[i];
+            graphs.push({
+                title: data.fieldJobLabelMap[field] + " " + data.fieldMetricMap[field],
+                valueField: field,
+                type: 'column'
+            });
+        }
+
+        var chartScrollbar = {
+                    autoGridCount: true,
+                    "scrollbarHeight": 20
+                    ,hideResizeGrips: true
+            };
+
+        chart = AmCharts.makeChart("histogramsContainer", {
+            type: "serial",
+            theme: "none",
+            pathToImages: "js/amcharts/images/",
+            dataProvider: data.dataset,
+            zoomOutOnDataUpdate: false,
+            valueAxes: [{
+                axisAlpha: 0.2,
+                dashLength: 1,
+                position: "left",
+                minimum: 0,
+                // unit: "s"
+            }],
+            graphs: graphs,
+            chartScrollbar: chartScrollbar,
+            chartCursor: {
+                cursorPosition: "mouse",
+                categoryBalloonDateFormat: "MMM DD JJ:NN:SS"
+                ,cursorAlpha: 0.5
+                ,graphBulletSize: 2
+            },
+            categoryField: "bucket",
+            categoryAxis: {
+                minorGridEnabled: true,
+                minimum: 0
+            },
+            legend: {
+                fontSize: 9
+            },
+            exportConfig : {}
+        });
     }
 
     function getHistogramDataForJobs(jobId) {
