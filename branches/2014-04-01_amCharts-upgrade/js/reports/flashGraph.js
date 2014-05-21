@@ -28,18 +28,26 @@ var wptmonitor = (function(window, $, wptmonitor){
         if(act && act === "graph") {
             if(getJobCount() > 0){
                 setTimeout(function(){
-                    $('html, body').animate({
-                        'scrollTop': $("#main").offset().top},
-                        'slow',
-                        'swing'
-                    );
+
                     submitFormAJAX()
+                    .always(function(){
+                        setTimeout(scrollToForm, 100);
+                    })
                     .fail(function(e){
                         console.error(e);
                     });
                 }, 50);
             }
         }
+
+        function scrollToForm() {
+            $('html, body').animate({
+                'scrollTop': $("#main").offset().top},
+                'slow',
+                'swing'
+            );
+        }
+
     });
 
     function submitFormAJAX() {
@@ -77,7 +85,7 @@ var wptmonitor = (function(window, $, wptmonitor){
         var d = $.Deferred();
 
         if($("#graphContainer").is(":hidden")){
-            $("#graphContainer").slideDown(200, function(){
+            $("#graphContainer").slideDown(1000, function(){
                 d.resolve();
             });
         } else {
@@ -119,17 +127,19 @@ var wptmonitor = (function(window, $, wptmonitor){
 
         $.when(
             getChartData(params),
-            $(button).attr('disabled', 'disabled'),
-            $('#graphOverlay').fadeIn(100)
-            ,showChartContainer()
+            $(button).attr('disabled', 'disabled')
+            ,showChartContainer().done(function(){
+                $('#graphOverlay').fadeIn(100);
+            })
         ).done(function(data){
             d.resolve(data);
         }).fail(function(a, b, c){
             alert('Error getting data from the server\n'+a.message+' ('+a.status+')');
             d.reject(a);
         }).always(function(a, b, c){
-            $(button).removeAttr('disabled');
-            $('#graphOverlay').fadeOut();
+            $('#graphOverlay').fadeOut(600, function(){
+                $(button).removeAttr('disabled');
+            });
         });
 
         return d.promise();
