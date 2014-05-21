@@ -85,7 +85,9 @@ var wptmonitor = (function(window, $, wptmonitor){
         var minBucket = getMinBucket();
         var maxBucket = getMaxBucket();
         var bucketWidth = getBucketWidth();
-
+        var fields = [];
+        var fieldJobIdMap = {};
+        var fieldJobLabelMap = {};
 
         for (var i=minBucket; i <= maxBucket; i+=bucketWidth) {
           dataConverted[i] = {bucket: i};
@@ -99,6 +101,9 @@ var wptmonitor = (function(window, $, wptmonitor){
 
                     dataConverted[data[jobIndex].datasets[metricIndex].series[i].bucket][valueField] = count;
                 }
+                fields.push(valueField);
+                fieldJobIdMap[valueField] = data[jobIndex].jobId;
+                fieldJobLabelMap[valueField] = data[jobIndex].jobLabel;
             }
         }
 
@@ -106,7 +111,12 @@ var wptmonitor = (function(window, $, wptmonitor){
             return element;
         });
 
-        return dataConverted;
+        return {
+            dataset: dataConverted,
+            fields:  fields,
+            fieldJobIdMap: fieldJobIdMap,
+            fieldJobLabelMap: fieldJobLabelMap
+        };
 
         function getMinBucket() {
             var minBucket = null;
