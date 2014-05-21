@@ -73,6 +73,7 @@ try{
             $series[$key]['count']  = (int)$series[$key]['count'];
         }
 
+        //@TODO handle exception when $series is empty
         $result[] = array(
             'series'    => $series,
             'metric'    => mapMetricFieldDb2Form($field),
