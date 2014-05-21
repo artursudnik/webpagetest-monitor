@@ -95,7 +95,7 @@ var wptmonitor = (function(window, $, wptmonitor){
             for(var metricIndex in data[jobIndex].datasets){
                 for(var i in data[jobIndex].datasets[metricIndex].series){
                     var count = data[jobIndex].datasets[metricIndex].series[i].count;
-                    var valueField = data[jobIndex].datasets[metricIndex].metric + data[jobIndex].jobId;
+                    var valueField = data[jobIndex].datasets[metricIndex].metric + "-" + data[jobIndex].jobId;
 
                     dataConverted[data[jobIndex].datasets[metricIndex].series[i].bucket][valueField] = count;
                 }
