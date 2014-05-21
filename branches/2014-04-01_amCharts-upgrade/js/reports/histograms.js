@@ -88,7 +88,7 @@ var wptmonitor = (function(window, $, wptmonitor){
 
 
         for (var i=minBucket; i <= maxBucket; i+=bucketWidth) {
-          dataConverted[i] = {};
+          dataConverted[i] = {bucket: i};
         };
 
         for(var jobIndex in data) {
@@ -101,6 +101,10 @@ var wptmonitor = (function(window, $, wptmonitor){
                 }
             }
         }
+
+        dataConverted = $.map(dataConverted, function(element){
+            return element;
+        });
 
         return dataConverted;
 
