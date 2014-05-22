@@ -74,22 +74,34 @@ try{
         }
 
         //@TODO handle exception when $series is empty
-        $result[] = array(
-            'series'    => $series,
-            'metric'    => mapMetricFieldDb2Form($field),
-            'minBucket' => $series[0]['bucket'],
-            'maxBucket' => $series[count($series)-1]['bucket']
-        );
+        if(!empty($series)) {
+            $result[] = array(
+                'series'    => $series,
+                'metric'    => mapMetricFieldDb2Form($field),
+                'minBucket' => $series[0]['bucket'],
+                'maxBucket' => $series[count($series)-1]['bucket']
+            );
 
-        if($minBucket === null or $minBucket > $series[0]['bucket']) {
-            $minBucket = $series[0]['bucket'];
+            if($minBucket === null or $minBucket > $series[0]['bucket']) {
+                $minBucket = $series[0]['bucket'];
+            }
+
+            if($maxBucket === null or $maxBucket < $series[count($series)-1]['bucket']) {
+                $maxBucket = $series[count($series)-1]['bucket'];
+            }
+        }else {
+            $result[] = array(
+                'series'    => array(),
+                'metric'    => mapMetricFieldDb2Form($field),
+                'minBucket' => 0,
+                'maxBucket' => 0
+            );
+
         }
-
-        if($maxBucket === null or $maxBucket < $series[count($series)-1]['bucket']) {
-            $maxBucket = $series[count($series)-1]['bucket'];
-        }
-
     }
+
+    if($minBucket === null) $minBucket = 0;
+    if($maxBucket === null) $maxBucket = 0;
 
     $response = array(
                     'status'  => 200,
