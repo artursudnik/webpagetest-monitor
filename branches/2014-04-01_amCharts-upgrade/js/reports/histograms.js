@@ -145,6 +145,11 @@ var wptmonitor = (function(window, $, wptmonitor){
 
         for (var i=minBucket; i <= maxBucket; i+=bucketWidth) {
           dataConverted[i] = {bucket: i};
+          for(var j in data){
+              for(var k in data[j].fields){
+                  dataConverted[i][data[j].fields[k] + "-" + data[j].jobId] = 0;
+              }
+          }
         };
 
         for(var jobIndex in data) {
