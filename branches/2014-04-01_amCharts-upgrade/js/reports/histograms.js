@@ -28,7 +28,7 @@ var wptmonitor = (function(window, $, wptmonitor){
         var deferred = $.Deferred();
 
         if($("#histogramsContainer").is(":hidden")){
-            $("#histogramsContainer").slideDown(200, function(){
+            $("#histogramsContainer").slideDown(1000, function(){
                 deferred.resolve();
             });
         } else {
