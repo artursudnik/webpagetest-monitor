@@ -151,7 +151,7 @@ var wptmonitor = (function(window, $, wptmonitor){
         var fieldJobLabelMap = {};
         var fieldMetricMap = {};
 
-        for (var i=minBucket; i <= maxBucket; i+=bucketWidth) {
+        for (var i=minBucket-bucketWidth; i <= maxBucket; i+=bucketWidth) {
           dataConverted[i] = {bucket: i};
           for(var j in data){
               for(var k in data[j].fields){
