@@ -104,7 +104,10 @@ var wptmonitor = (function(window, $, wptmonitor){
                 minorGridEnabled: true,
                 title: 'time in seconds',
                 titleBold: false,
-                minimum: 0
+                minimum: 0,
+                categoryFunction: function(e){
+                    return (e/1000).toString();
+                }
             },
             legend: {
                 fontSize: 9
