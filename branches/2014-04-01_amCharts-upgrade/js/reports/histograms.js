@@ -82,6 +82,8 @@ var wptmonitor = (function(window, $, wptmonitor){
             dataProvider: data.dataset,
             zoomOutOnDataUpdate: false,
             valueAxes: [{
+                title: 'samples count',
+                titleBold: false,
                 axisAlpha: 0.2,
                 dashLength: 1,
                 position: "left",
@@ -99,6 +101,8 @@ var wptmonitor = (function(window, $, wptmonitor){
             categoryField: "bucket",
             categoryAxis: {
                 minorGridEnabled: true,
+                title: 'time in seconds',
+                titleBold: false,
                 minimum: 0
             },
             legend: {
