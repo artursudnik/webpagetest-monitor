@@ -98,6 +98,7 @@ try{
 
     $response['results']['jobLabel'] = $jobLabel;
     $response['results']['jobId'] = $requestDataSanitized['job'];
+    $response['results']['fields'] = $requestData['field'];
     $response['results']['datasets'] = $result;
     $response['results']['minBucket'] = $minBucket;
     $response['results']['maxBucket'] = $maxBucket;
