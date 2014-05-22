@@ -152,7 +152,7 @@ var wptmonitor = (function(window, $, wptmonitor){
         var fieldMetricMap = {};
 
         if(maxBucket > minBucket) {
-            for (var i=minBucket-bucketWidth; i <= maxBucket; i+=bucketWidth) {
+            for (var i=minBucket-bucketWidth; i <= maxBucket+bucketWidth; i+=bucketWidth) {
               dataConverted[i] = {bucket: i};
               for(var j in data){
                   for(var k in data[j].fields){
