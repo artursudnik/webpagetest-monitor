@@ -56,6 +56,7 @@ try{
         ->select("($field - $field%$bucketWidth) as bucket, count(*) as count")->from('WPTResult r')
         ->where('r.ValidationState < ?', 2)
         ->andWhere("$field is not null")
+        ->andWhere("$field < 60000")
         ->andWhere("date > ?", $requestDataSanitized['startTimestamp'])
         ->andWhere("date < ?", $requestDataSanitized['endTimestamp'])
         ->andWhere('r.AvgFirstViewFirstByte > 0')
