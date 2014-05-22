@@ -65,7 +65,8 @@ var wptmonitor = (function(window, $, wptmonitor){
             graphs.push({
                 title: data.fieldJobLabelMap[field] + " " + data.fieldMetricMap[field],
                 valueField: field,
-                type: 'column'
+                type: 'smoothedLine',
+                fillAlphas: 0.5
             });
         }
 
