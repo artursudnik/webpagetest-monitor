@@ -114,8 +114,13 @@ var wptmonitor = (function(window, $, wptmonitor){
                     return getHistogramDataForJob(this);
                 }))
                 .done(function(){
-                    var dataConverted = convertHistogramData(arguments);
-                    deferred.resolve(dataConverted);
+                    try{
+                        var dataConverted = convertHistogramData(arguments);
+                        deferred.resolve(dataConverted);
+                    }catch(e) {
+                        deferred.reject(e);
+                        throw e;
+                    }
                 })
                 .always(function(){
 
