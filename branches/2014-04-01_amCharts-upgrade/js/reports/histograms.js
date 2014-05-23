@@ -16,9 +16,13 @@ var wptmonitor = (function(window, $, wptmonitor){
                 drawHistogramForJobs(selectedJobs)
                 .always(function(){
                     button.removeAttr('disabled');
+                })
+                .fail(function(e){
+                    alert(e);
                 });
             }catch(e){
                 alert("Error: " + e);
+                button.removeAttr('disabled');
             }
         });
     });
@@ -135,7 +139,6 @@ var wptmonitor = (function(window, $, wptmonitor){
                 })
                 .fail(function(e){
                     deferred.reject(e);
-                    console.error(arguments);
                 });
         return deferred.promise();
     }
@@ -239,18 +242,13 @@ var wptmonitor = (function(window, $, wptmonitor){
            data: params
         }).done(function(data){
             if(data.status !== 200) {
-                deferred.reject({
-                    status:  data.status,
-                    message: data.message
-                });
+                deferred.reject(data.message);
             } else {
                 deferred.resolve(data.results);
             }
-        }).error(function(jqxhr, err){
-            deferred.reject({
-                status: jqxhr.status,
-                message: jqxhr.statusText
-            });
+        }).error(function(jqxhr, errorType, exception){
+            var errorMessage = exception || errorType;
+            deferred.reject(errorMessage);
         });
 
         return deferred.promise();
