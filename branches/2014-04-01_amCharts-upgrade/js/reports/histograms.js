@@ -153,6 +153,9 @@ var wptmonitor = (function(window, $, wptmonitor){
 
         if(maxBucket > minBucket) {
             for (var i=minBucket-bucketWidth; i <= maxBucket+bucketWidth; i+=bucketWidth) {
+              if(i < 0) {
+                  continue;
+              }
               dataConverted[i] = {bucket: i};
               for(var j in data){
                   for(var k in data[j].fields){
