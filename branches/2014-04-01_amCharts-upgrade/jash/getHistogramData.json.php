@@ -75,7 +75,6 @@ try{
             $series[$key]['count']  = (int)$series[$key]['count'];
         }
 
-        //@TODO handle exception when $series is empty
         if(!empty($series)) {
             $result[] = array(
                 'series'    => $series,
