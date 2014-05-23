@@ -52,8 +52,9 @@ try{
     $maxBucket = null;
 
     foreach ($fields as $key => $field) {
+        $select = "($field - $field%$bucketWidth) as bucket, count(*) as count";
         $q = Doctrine_Query::create()
-        ->select("($field - $field%$bucketWidth) as bucket, count(*) as count")->from('WPTResult r')
+        ->select($select)->from('WPTResult r')
         ->where('r.ValidationState < ?', 2)
         ->andWhere("$field is not null")
         ->andWhere("$field < 60000")
