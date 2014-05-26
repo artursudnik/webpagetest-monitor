@@ -134,12 +134,12 @@ die();
 function sanitizeData($requestArray) {
     $resultArray = array();
 
-    $currentY = (int)date("Y");
+    $currentY  = (int)date("Y");
     $currentMo = (int)date("n");
-    $currentD = (int)date("j");
-    $currentH = (int)date("G");
+    $currentD  = (int)date("j");
+    $currentH  = (int)date("G");
     $currentMi = (int)date("i");
-    $currentS = (int)date("s");
+    $currentS  = (int)date("s");
 
     $resultArray['timeFrame']  = @filter_var((int)$requestArray['timeFrame'],    FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 0, 'max_range' => 2419200)));
 
