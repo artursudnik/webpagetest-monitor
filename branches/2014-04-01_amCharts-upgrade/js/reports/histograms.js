@@ -44,11 +44,17 @@ var wptmonitor = (function(window, $, wptmonitor){
 
     function drawHistogramForJobs(jobId) {
         var deferred = $.Deferred();
-        getHistogramDataForJobs(jobId)
-        .done(function(data){
-            deferred.resolve();
+        var data;
+        $.when(
+            getHistogramDataForJobs(jobId),
             showHistogramContainer().done(function(){
-                drawChart(data);
+                $('#histogramOverlay').fadeIn(100);
+            })
+        )
+        .done(function(data){
+            drawChart(data);
+            $('#histogramOverlay').fadeOut(600, function(){
+                deferred.resolve();
             });
             console.log(data);
         })
@@ -80,7 +86,7 @@ var wptmonitor = (function(window, $, wptmonitor){
                     ,hideResizeGrips: true
             };
 
-        chart = AmCharts.makeChart("histogramsContainer", {
+        chart = AmCharts.makeChart("histogram", {
             type: "serial",
             theme: "none",
             pathToImages: "js/amcharts/images/",
