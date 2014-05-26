@@ -49,6 +49,7 @@ var wptmonitor = (function(window, $, wptmonitor){
             getHistogramDataForJobs(jobId),
             showHistogramContainer().done(function(){
                 $('#histogramOverlay').fadeIn(100);
+                scrollToForm();
             })
         )
         .done(function(data){
@@ -66,6 +67,14 @@ var wptmonitor = (function(window, $, wptmonitor){
 
         return deferred.promise();
 
+    }
+
+    function scrollToForm() {
+        $('html, body').animate({
+            'scrollTop': $("#main").offset().top},
+            'slow',
+            'swing'
+        );
     }
 
     function drawChart(data) {
