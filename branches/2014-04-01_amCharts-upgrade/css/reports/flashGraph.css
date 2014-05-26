@@ -16,7 +16,7 @@
     height: 600px;
 }
 
-#histogramOverlay, #charOverlay{
+#histogramOverlay, #graphOverlay{
     opacity: 0.5;
     display:none;
     position: absolute;
