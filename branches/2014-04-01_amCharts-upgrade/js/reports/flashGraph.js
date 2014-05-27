@@ -18,7 +18,13 @@ var wptmonitor = (function(window, $, wptmonitor){
 
 
         $('#graphJSONButton').on('click', function(e){
+            var chartContainerIsHidden = isChartContainerHidden();
             submitFormAJAX()
+            .done(function(){
+                if(chartContainerIsHidden){
+                    scrollToForm();
+                }
+            })
             .fail(function(e){
                 console.error(e);
             });
@@ -28,14 +34,7 @@ var wptmonitor = (function(window, $, wptmonitor){
         if(act && act === "graph") {
             if(getJobCount() > 0){
                 setTimeout(function(){
-
-                    submitFormAJAX()
-                    .always(function(){
-                        setTimeout(scrollToForm, 100);
-                    })
-                    .fail(function(e){
-                        console.error(e);
-                    });
+                    $('#graphJSONButton').trigger('click');
                 }, 50);
             }
         }
@@ -93,6 +92,10 @@ var wptmonitor = (function(window, $, wptmonitor){
         }
 
         return d.promise();
+    }
+
+    function isChartContainerHidden() {
+        return $("#graphContainer").is(":hidden");
     }
 
     function getChartData(params){
