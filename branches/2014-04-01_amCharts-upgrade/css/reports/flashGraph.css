@@ -37,41 +37,6 @@
     top: 0;
 }
 
-/*
- * Following is only for testing purposes
- */
-
-#graph{
-    overflow: scroll;
-    padding: 2px;
-}
-
-    #graph table{
-        border-collapse: collapse;
-    }
-
-        #graph table tr.odd {
-            background-color: #f9f9f9;
-        }
-
-        #graph table th,
-        #graph table td {
-            border: 1px #eee solid;
-        }
-
-        #graph table th,
-        #graph table td {
-            text-align: center;
-        }
-
-        #graph table .date {
-            width: 200px;
-        }
-
-        #graph table .metric {
-            width: 110px;
-        }
-
 #incompMessages {
     margin: 20px 0 0;
     text-align: center;
@@ -83,10 +48,10 @@
     display: none;
 }
 
-html.ie6 #incompMessages .message, 
-html.ie7 #incompMessages .message, 
-html.ie8 #incompMessages .message, 
-html.ie9 #incompMessages .message 
+html.ie6 #incompMessages .message,
+html.ie7 #incompMessages .message,
+html.ie8 #incompMessages .message,
+html.ie9 #incompMessages .message
 {
     display: block;
 }
