@@ -64,7 +64,7 @@ var wptmonitor = (function(window, $, wptmonitor){
                     deferred.resolve();
                 });
                 if(histogramContainerWasHidden){
-                    scrollToForm();
+                    scrollToGraph();
                 }
             }, 10);
             console.log(data);
@@ -81,6 +81,13 @@ var wptmonitor = (function(window, $, wptmonitor){
         $('html, body').animate({
             'scrollTop': $("#main").offset().top},
             'slow',
+            'swing'
+        );
+    }
+    function scrollToGraph() {
+        $('html, body').animate({
+            'scrollTop': $("#histogramsContainer").offset().top - $(window).height() + $("#histogramsContainer").height() },
+            1000,
             'swing'
         );
     }

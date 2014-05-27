@@ -22,7 +22,7 @@ var wptmonitor = (function(window, $, wptmonitor){
             submitFormAJAX()
             .done(function(){
                 if(chartContainerIsHidden){
-                    scrollToForm();
+                    scrollToGraph();
                 }
             })
             .fail(function(e){
@@ -43,6 +43,14 @@ var wptmonitor = (function(window, $, wptmonitor){
             $('html, body').animate({
                 'scrollTop': $("#main").offset().top},
                 'slow',
+                'swing'
+            );
+        }
+
+        function scrollToGraph() {
+            $('html, body').animate({
+                'scrollTop': $("#graphContainer").offset().top - $(window).height() + $("#graphContainer").height() },
+                1000,
                 'swing'
             );
         }
