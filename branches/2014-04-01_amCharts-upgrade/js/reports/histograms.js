@@ -25,6 +25,14 @@ var wptmonitor = (function(window, $, wptmonitor){
                 button.removeAttr('disabled');
             }
         });
+
+        $('#hideHistograms').click(function(){
+            $('#histogramsContainer').slideUp(function(){
+                $('#histogramOverlay').show();
+                $('#histogram').empty();
+                chart = null;
+            });
+        });
     });
 
 

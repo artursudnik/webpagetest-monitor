@@ -30,6 +30,13 @@ var wptmonitor = (function(window, $, wptmonitor){
             });
         });
 
+        $('#hideGraph').click(function(){
+            $('#graphContainer').slideUp(function(){
+                $('#graphOverlay').show();
+                $('#graph').empty();
+                chart = null;
+            });
+        });
 
         if(act && act === "graph") {
             if(getJobCount() > 0){

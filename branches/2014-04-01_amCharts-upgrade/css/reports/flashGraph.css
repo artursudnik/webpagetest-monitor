@@ -27,6 +27,16 @@
     font-size: 200px;
 }
 
+.hide{
+    cursor: pointer;
+    line-height: 0.8;
+    opacity: 0.7;
+    padding: 3px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
 /*
  * Following is only for testing purposes
  */
