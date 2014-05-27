@@ -28,6 +28,10 @@ var wptmonitor = (function(window, $, wptmonitor){
     });
 
 
+    function isHistogramContainerHidden() {
+        return $("#histogramsContainer").is(":hidden");
+    }
+
     function showHistogramContainer(){
         var deferred = $.Deferred();
 
@@ -45,11 +49,15 @@ var wptmonitor = (function(window, $, wptmonitor){
     function drawHistogramForJobs(jobId) {
         var deferred = $.Deferred();
         var data;
+        var histogramContainerWasHidden = isHistogramContainerHidden();
+
         $.when(
             getHistogramDataForJobs(jobId),
             showHistogramContainer().done(function(){
                 $('#histogramOverlay').fadeIn(100);
-                scrollToForm();
+                if(histogramContainerWasHidden){
+                    scrollToForm();
+                }
             })
         )
         .done(function(data){
