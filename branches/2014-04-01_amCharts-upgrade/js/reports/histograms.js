@@ -55,9 +55,6 @@ var wptmonitor = (function(window, $, wptmonitor){
             getHistogramDataForJobs(jobId),
             showHistogramContainer().done(function(){
                 $('#histogramOverlay').fadeIn(100);
-                if(histogramContainerWasHidden){
-                    scrollToForm();
-                }
             })
         )
         .done(function(data){
@@ -66,6 +63,9 @@ var wptmonitor = (function(window, $, wptmonitor){
                 $('#histogramOverlay').fadeOut(600, function(){
                     deferred.resolve();
                 });
+                if(histogramContainerWasHidden){
+                    scrollToForm();
+                }
             }, 10);
             console.log(data);
         })
