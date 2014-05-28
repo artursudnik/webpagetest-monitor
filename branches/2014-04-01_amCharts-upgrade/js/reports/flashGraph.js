@@ -30,7 +30,8 @@ var wptmonitor = (function(window, $, wptmonitor){
             });
         });
 
-        $('#hideGraph').click(function(){
+        $('#hideGraph').click(function(e){
+            e.preventDefault();
             $('#graphContainer').slideUp(function(){
                 $('#graphOverlay').show();
                 $('#graph').empty();

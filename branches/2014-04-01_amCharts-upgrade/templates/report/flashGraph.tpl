@@ -266,7 +266,7 @@
 </div>
 <div id="histogramsContainer" style="position: relative;">
     <div id="histogram"></div>
-    <div id="hideHistograms" class="hide">X</div>
+    <a href="#" id="hideHistograms" class="hide"><img src="img/silkicons/icons/cross.png" alt="Hide graph"/></a>
     <div id="histogramOverlay">
         <div style="padding-top: 30%;">
             Working...
@@ -275,7 +275,7 @@
 </div>
 <div id="graphContainer" style="position: relative">
     <div id="graph"></div>
-    <div id="hideGraph" class="hide">X</div>
+    <a href="#" id="hideGraph" class="hide"><img src="img/silkicons/icons/cross.png" alt="Hide graph"/></a>
     <div id="graphOverlay">
         <div style="padding-top: 30%;">
             Working...

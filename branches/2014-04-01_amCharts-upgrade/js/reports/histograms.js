@@ -26,7 +26,8 @@ var wptmonitor = (function(window, $, wptmonitor){
             }
         });
 
-        $('#hideHistograms').click(function(){
+        $('#hideHistograms').click(function(e){
+            e.preventDefault();
             $('#histogramsContainer').slideUp(function(){
                 $('#histogramOverlay').show();
                 $('#histogram').empty();

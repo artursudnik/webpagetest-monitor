@@ -28,10 +28,8 @@
 }
 
 .hide{
-    cursor: pointer;
+    display: block;
     line-height: 0.8;
-    opacity: 0.7;
-    padding: 3px;
     position: absolute;
     right: 0;
     top: 0;
