@@ -347,6 +347,10 @@ function getChangeNoteData($user_id, $jobIds, $startDateTime, $endDateTime) {
     return $result;
 }
 
+function getStatusesToNotInclude() {
+    return array(100, 404, 500, 501, 502, 503, 504, 999);
+}
+
 function getGraphData($user_id,
                       $job_id,
                       $startDateTime,
@@ -365,11 +369,12 @@ function getGraphData($user_id,
   $q = Doctrine_Query::create()->select($fields)->from('WPTResult r')
       ->where('r.ValidationState < ?', 2)
 //      ->andWhere('r.WPTJob.UserId = ?', $user_id)
-      ->andWhere('r.AvgFirstViewFirstByte > 0')
+      // ->andWhere('r.AvgFirstViewFirstByte > 0')
 //      ->andWhere('r.AvgFirstViewStartRender > 0')
-      ->andWhere('r.AvgFirstViewDocCompleteTime > 0')
-      ->andWhere('r.AvgFirstViewDocCompleteTime != ?', '')
+      // ->andWhere('r.AvgFirstViewDocCompleteTime > 0')
+      // ->andWhere('r.AvgFirstViewDocCompleteTime != ?', '')
       ->andWhere('r.WPTJobId = ?', $job_id)
+      ->andWhereNotIn('r.Status', getStatusesToNotInclude())
       ->andWhere('r.Date <= ?', $endDateTime)
       ->andWhere('r.Date >= ?', $startDateTime);
 
