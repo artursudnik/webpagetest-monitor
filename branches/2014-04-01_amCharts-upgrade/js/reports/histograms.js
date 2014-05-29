@@ -108,6 +108,7 @@ var wptmonitor = (function(window, $, wptmonitor){
         for(var i in data.fields) {
             var field = data.fields[i];
             graphs.push({
+                id: data.fields[i],
                 title: data.fieldJobLabelMap[field] + " " + data.fieldMetricMap[field],
                 valueField: field,
                 type: 'smoothedLine',
@@ -117,48 +118,60 @@ var wptmonitor = (function(window, $, wptmonitor){
 
         var chartScrollbar = {
                     autoGridCount: true,
+                    graph: data.fields[0],
                     "scrollbarHeight": 20
                     ,hideResizeGrips: true
+                    ,updateOnReleaseOnly: true
             };
 
-        chart = AmCharts.makeChart("histogram", {
-            type: "serial",
-            theme: "none",
-            pathToImages: "js/amcharts/images/",
-            dataProvider: data.dataset,
-            zoomOutOnDataUpdate: false,
-            valueAxes: [{
-                title: 'samples count',
-                titleBold: false,
-                axisAlpha: 0.2,
-                dashLength: 1,
-                position: "left",
-                minimum: 0,
-                // unit: "s"
-            }],
-            graphs: graphs,
-            chartScrollbar: chartScrollbar,
-            chartCursor: {
-                cursorPosition: "mouse",
-                categoryBalloonDateFormat: "MMM DD JJ:NN:SS"
-                ,cursorAlpha: 0.5
-                ,graphBulletSize: 2
-            },
-            categoryField: "bucket",
-            categoryAxis: {
-                minorGridEnabled: true,
-                title: 'time in seconds',
-                titleBold: false,
-                minimum: 0,
-                categoryFunction: function(e){
-                    return (e/1000).toString();
-                }
-            },
-            legend: {
-                fontSize: 9
-            },
-            exportConfig : {}
-        });
+        if(chart){
+            chart.dataProvider = data.dataset;
+            chart.graphs = graphs;
+
+            chart.chartScrollbar = chartScrollbar;
+
+            chart.validateData();
+        }else {
+            chart = AmCharts.makeChart("histogram", {
+                type: "serial",
+                theme: "none",
+                pathToImages: "js/amcharts/images/",
+                dataProvider: data.dataset,
+                zoomOutOnDataUpdate: false,
+                valueAxes: [{
+                    title: 'samples count',
+                    titleBold: false,
+                    axisAlpha: 0.2,
+                    dashLength: 1,
+                    position: "left",
+                    minimum: 0,
+                    // unit: "s"
+                }],
+                graphs: graphs,
+                chartScrollbar: chartScrollbar,
+                chartCursor: {
+                    cursorPosition: "mouse",
+                    categoryBalloonDateFormat: "MMM DD JJ:NN:SS"
+                    ,cursorAlpha: 0.5
+                    ,graphBulletSize: 2
+                },
+                categoryField: "bucket",
+                categoryAxis: {
+                    minorGridEnabled: true,
+                    title: 'time in seconds',
+                    titleBold: false,
+                    minimum: 0,
+                    categoryFunction: function(e){
+                        return (e/1000).toString();
+                    }
+                },
+                legend: {
+                    fontSize: 9
+                },
+                exportConfig : {}
+            });
+        }
+
     }
 
     function getHistogramDataForJobs(jobId) {
