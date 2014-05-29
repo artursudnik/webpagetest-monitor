@@ -57,6 +57,7 @@ try{
         ->select($select)->from('WPTResult r')
         ->where('r.ValidationState < ?', 2)
         // ->andWhere("$field is not null")
+        ->andWhere("$field > 0")
         ->andWhere("$field < 60000")
         ->andWhere("date > ?", $requestDataSanitized['startTimestamp'])
         ->andWhere("date < ?", $requestDataSanitized['endTimestamp'])
