@@ -10,6 +10,7 @@
 #graphContainer{
     display: none;
     background-color: #fff;
+    margin-top:10px;
 }
 
 #graph{
@@ -31,8 +32,8 @@
     display: block;
     line-height: 0.8;
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 1px;
+    top: 1px;
 }
 
 #incompMessages {
