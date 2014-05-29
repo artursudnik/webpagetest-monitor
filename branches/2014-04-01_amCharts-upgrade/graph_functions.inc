@@ -33,12 +33,12 @@ function getResultsDataAvg($startDateTime, $endDateTime, $interval, $datas, $fie
       case '99th':
           $percentile=99;
           break;
-          
+
       default:
           throw new Exception("Unknown aggregate method: $aggregateMethod", 1);
           break;
   }
-  
+
   $pointer = $startDateTime;
 //  $id = $datas[0]['Id'];
   $data = array();
@@ -51,7 +51,7 @@ function getResultsDataAvg($startDateTime, $endDateTime, $interval, $datas, $fie
       if($aggregateMethod == "avg") {
         $entry[$field] = getAverage($pointer, $interval, $datas, $field, $percentile);
       }else {
-        $entry[$field] = getPercentile($pointer, $interval, $datas, $field, $percentile);          
+        $entry[$field] = getPercentile($pointer, $interval, $datas, $field, $percentile);
       }
     }
     $data[] = $entry;
@@ -63,17 +63,17 @@ function getResultsDataAvg($startDateTime, $endDateTime, $interval, $datas, $fie
 function getMedian($startAt, $increment, &$data, $field) {
   $numberOfElements = 0;
   $tmpData = array();
-  
+
   foreach ($data as $r) {
     if ($r['Date'] > $startAt && ($r['Date'] < $startAt + $increment)) {
       $tmpData[] = $r[$field];
     }
   }
-  
+
   $numberOfElements = count($tmpData);
-  
+
   sort($tmpData);
-  
+
   if ($numberOfElements > 0) {
     if( $numberOfElements == 1) {
       $result = $tmpData[0];
@@ -87,9 +87,9 @@ function getMedian($startAt, $increment, &$data, $field) {
   } else {
     $result = NULL;
   }
-  
+
   unset($tmpData);
-  
+
   return $result;
 }
 
@@ -99,17 +99,17 @@ function getPercentile($startAt, $increment, &$data, $field, $percentile) {
   }
   $numberOfElements = 0;
   $tmpData = array();
-  
+
   foreach ($data as $r) {
     if ($r['Date'] > $startAt && ($r['Date'] < $startAt + $increment)) {
       $tmpData[] = $r[$field];
     }
   }
-  
+
   $numberOfElements = count($tmpData);
-  
+
   sort($tmpData);
-  
+
   if ($numberOfElements > 0) {
       $percentilePosition = ($numberOfElements-1)*$percentile/100;
       $n1 = floor($percentilePosition);
