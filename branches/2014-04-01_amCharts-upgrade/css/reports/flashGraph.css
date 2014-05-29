@@ -43,11 +43,19 @@
     font-weight: bold;
 }
 
-#incompMessages .message {
+#incompMessages {
     display: none;
 }
 
-html.ie6 #incompMessages .message,
+html.ie6 #incompMessages,
+html.ie7 #incompMessages,
+html.ie8 #incompMessages,
+html.ie9 #incompMessages
+{
+    display:block;
+}
+
+html.ie6 #incompMessages,
 html.ie7 #incompMessages .message,
 html.ie8 #incompMessages .message,
 html.ie9 #incompMessages .message
