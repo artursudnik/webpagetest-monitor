@@ -1,6 +1,7 @@
 #histogramsContainer {
     display: none;
     background-color: #fff;
+    margin-bottom:10px;
 }
 
 #histogram {
@@ -10,7 +11,6 @@
 #graphContainer{
     display: none;
     background-color: #fff;
-    margin-top:10px;
 }
 
 #graph{
