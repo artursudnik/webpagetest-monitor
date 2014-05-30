@@ -289,7 +289,7 @@ var wptmonitor = (function(window, $, wptmonitor){
                     graph: data.valueFields[0],
                     "scrollbarHeight": 20
                     ,hideResizeGrips: true
-                    ,updateOnReleaseOnly: true
+                    // ,updateOnReleaseOnly: true
             };
 
         if(chart){
@@ -299,6 +299,7 @@ var wptmonitor = (function(window, $, wptmonitor){
             chart.dataProvider = data.series;
             chart.graphs = graphs;
 
+            chart.removeChartScrollbar();
             chart.chartScrollbar = chartScrollbar;
 
             chart.validateData();
@@ -333,7 +334,7 @@ var wptmonitor = (function(window, $, wptmonitor){
                     //categoryFunction: function(category, dataItem, categoryAxis){return new Date(dataItem*1000);},
                     //axisColor: "#DADADA",
                     //dashLength: 1,
-                    minorGridEnabled: true
+                    // minorGridEnabled: true
                 },
                 legend: {
                     fontSize: 9
