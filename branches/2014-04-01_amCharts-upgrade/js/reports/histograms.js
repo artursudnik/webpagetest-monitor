@@ -125,13 +125,14 @@ var wptmonitor = (function(window, $, wptmonitor){
                     graph: data.fields[0],
                     "scrollbarHeight": 20
                     ,hideResizeGrips: true
-                    ,updateOnReleaseOnly: true
+                    // ,updateOnReleaseOnly: true
             };
 
         if(chart){
             chart.dataProvider = data.dataset;
             chart.graphs = graphs;
 
+            chart.removeChartScrollbar();
             chart.chartScrollbar = chartScrollbar;
 
             chart.validateData();
