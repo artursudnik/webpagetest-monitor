@@ -67,7 +67,11 @@ var wptmonitor = (function(window, $, wptmonitor){
             })
         )
         .done(function(data){
-            drawChart(data);
+            try{
+                drawChart(data);
+            }catch(e) {
+                deferred.reject(e);
+            }
             setTimeout(function(){
                 $('#histogramOverlay').fadeOut(600, function(){
                     deferred.resolve();
