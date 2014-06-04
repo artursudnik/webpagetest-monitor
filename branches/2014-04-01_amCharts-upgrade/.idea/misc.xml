@@ -12,11 +12,11 @@
             <SvnBranchConfiguration>
               <option name="branchUrls">
                 <list>
-                  <option value="http://code.webpagetest.org/svn/wptmonitor/releases" />
-                  <option value="http://code.webpagetest.org/svn/wptmonitor/tags" />
+                  <option value="https://webpagetest-monitor.googlecode.com/svn/branches" />
+                  <option value="https://webpagetest-monitor.googlecode.com/svn/tags" />
                 </list>
               </option>
-              <option name="trunkUrl" value="http://code.webpagetest.org/svn/wptmonitor/trunk" />
+              <option name="trunkUrl" value="https://webpagetest-monitor.googlecode.com/svn/trunk" />
             </SvnBranchConfiguration>
           </value>
         </entry>
