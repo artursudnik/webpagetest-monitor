@@ -70,17 +70,17 @@
               <td style="text-align:right">Time Frame:</td>
               <td>
                 <select id="timeFrame" name="timeFrame" onchange="adjustTimeFrame();">
-                <option {if $timeFrame eq 0}selected="selected"{/if} value="0">Manual</option>
-                <option {if $timeFrame eq 900}selected="selected"{/if} value="900">15 Minutes</option>
-                <option {if $timeFrame eq 1800}selected="selected"{/if} value="1800">30 Minutes</option>
-                <option {if $timeFrame eq 3600}selected="selected"{/if} value="3600">1 Hour</option>
-                <option {if $timeFrame eq 10800}selected="selected"{/if} value="10800">3 Hours</option>
-                <option {if $timeFrame eq 21600}selected="selected"{/if} value="21600">6 Hours</option>
-                <option {if $timeFrame eq 43200}selected="selected"{/if} value="43200">12 Hours</option>
-                <option {if $timeFrame eq 86400}selected="selected"{/if} value="86400">Day</option>
-                <option {if $timeFrame eq 604800}selected="selected"{/if} value="604800">Week</option>
-                <option {if $timeFrame eq 1209600}selected="selected"{/if} value="1209600">2 Weeks</option>
-                <option {if $timeFrame eq 2419200}selected="selected"{/if} value="2419200">4 weeks</option>
+                    <option {if $timeFrame eq 0}selected="selected"{/if} value="0">Manual</option>
+                    <option {if $timeFrame eq 900}selected="selected"{/if} value="900">15 Minutes</option>
+                    <option {if $timeFrame eq 1800}selected="selected"{/if} value="1800">30 Minutes</option>
+                    <option {if $timeFrame eq 3600}selected="selected"{/if} value="3600">1 Hour</option>
+                    <option {if $timeFrame eq 10800}selected="selected"{/if} value="10800">3 Hours</option>
+                    <option {if $timeFrame eq 21600}selected="selected"{/if} value="21600">6 Hours</option>
+                    <option {if $timeFrame eq 43200}selected="selected"{/if} value="43200">12 Hours</option>
+                    <option {if $timeFrame eq 86400}selected="selected"{/if} value="86400">Day</option>
+                    <option {if $timeFrame eq 604800}selected="selected"{/if} value="604800">Week</option>
+                    <option {if $timeFrame eq 1209600}selected="selected"{/if} value="1209600">2 Weeks</option>
+                    <option {if $timeFrame eq 2419200}selected="selected"{/if} value="2419200">4 weeks</option>
                 </select>
               </td>
             </tr>
@@ -95,17 +95,18 @@
             </tr>
             <tr>
               <td style="text-align:right">Interval:</td>
-              <td><select id="interval" name="interval" onchange="checkInterval();">
-                <option {if $interval eq 1}selected="selected"{/if} value="1">Max</option>
-                <option {if $interval eq 300}selected="selected"{/if} value="300">5 Minutes</option>
-                <option {if $interval eq 900}selected="selected"{/if} value="900">15 Minutes</option>
-                <option {if $interval eq 1800}selected="selected"{/if} value="1800">30 Minutes</option>
-                <option {if $interval eq 3600 or $interval eq 0}selected="selected"{/if} value="3600">1 Hour</option>
-                <option {if $interval eq 10800}selected="selected"{/if} value="10800">3 Hours</option>
-                <option {if $interval eq 21600}selected="selected"{/if} value="21600">6 Hours</option>
-                <option {if $interval eq 43200}selected="selected"{/if} value="43200">12 Hours</option>
-                <option {if $interval eq 86400}selected="selected"{/if} value="86400">Daily</option>
-                <option {if $interval eq 604800}selected="selected"{/if} value="604800">Weekly</option>
+              <td>
+                <select id="interval" name="interval" onchange="checkInterval();">
+                    <option {if $interval eq 1}selected="selected"{/if} value="1">Max</option>
+                    <option {if $interval eq 300}selected="selected"{/if} value="300">5 Minutes</option>
+                    <option {if $interval eq 900}selected="selected"{/if} value="900">15 Minutes</option>
+                    <option {if $interval eq 1800}selected="selected"{/if} value="1800">30 Minutes</option>
+                    <option {if $interval eq 3600 or $interval eq 0}selected="selected"{/if} value="3600">1 Hour</option>
+                    <option {if $interval eq 10800}selected="selected"{/if} value="10800">3 Hours</option>
+                    <option {if $interval eq 21600}selected="selected"{/if} value="21600">6 Hours</option>
+                    <option {if $interval eq 43200}selected="selected"{/if} value="43200">12 Hours</option>
+                    <option {if $interval eq 86400}selected="selected"{/if} value="86400">Daily</option>
+                    <option {if $interval eq 604800}selected="selected"{/if} value="604800">Weekly</option>
               </select>&nbsp;
               {*{if $intervalAuto}{$intervalAuto}{/if}*}
               </td>
@@ -147,22 +148,22 @@
               </td>
               <td><select name="adjustUsing">
                 <optgroup label="First view">
-                <option value="AvgFirstViewFirstByte"
-                        {if $adjustUsing eq 'AvgFirstViewFirstByte'}selected="selected"{/if}>Time to first byte
-                </option>
-                <option value="AvgFirstViewStartRender"
-                        {if $adjustUsing eq 'AvgFirstViewStartRender'}selected="selected"{/if}>Start Render
-                </option>
-                <option value="AvgFirstViewDocCompleteTime"
-                        {if $adjustUsing eq 'AvgFirstViewDocCompleteTime'}selected="selected"{/if}>Doc Time
-                </option>
-                <option value="AvgFirstViewDomTime"
-                        {if $adjustUsing eq 'AvgFirstViewDomTime'}selected="selected"{/if}>Dom
-                  Time
-                </option>
-                <option value="AvgFirstViewFullyLoadedTime"
-                        {if $adjustUsing eq 'AvgFirstViewFullyLoadedTime'}selected="selected"{/if}>Fully Loaded
-                </option>
+                    <option value="AvgFirstViewFirstByte"
+                            {if $adjustUsing eq 'AvgFirstViewFirstByte'}selected="selected"{/if}>Time to first byte
+                    </option>
+                    <option value="AvgFirstViewStartRender"
+                            {if $adjustUsing eq 'AvgFirstViewStartRender'}selected="selected"{/if}>Start Render
+                    </option>
+                    <option value="AvgFirstViewDocCompleteTime"
+                            {if $adjustUsing eq 'AvgFirstViewDocCompleteTime'}selected="selected"{/if}>Doc Time
+                    </option>
+                    <option value="AvgFirstViewDomTime"
+                            {if $adjustUsing eq 'AvgFirstViewDomTime'}selected="selected"{/if}>Dom
+                      Time
+                    </option>
+                    <option value="AvgFirstViewFullyLoadedTime"
+                            {if $adjustUsing eq 'AvgFirstViewFullyLoadedTime'}selected="selected"{/if}>Fully Loaded
+                    </option>
                 </optgroup>
                 <optgroup label="Repeat view">
                     <option value="AvgRepeatViewFirstByte"
