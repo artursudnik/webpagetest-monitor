@@ -224,7 +224,7 @@ var wptmonitor = (function(window, $, wptmonitor){
                       dataConverted[i][data[j].fields[k] + "-" + data[j].jobId] = 0;
                   }
               }
-            };
+            }
         }
 
         for(var jobIndex in data) {
@@ -341,7 +341,7 @@ var wptmonitor = (function(window, $, wptmonitor){
         };
 
         return result;
-    };
+    }
 
     wptmonitor.histograms = {
         initialized: true,
