@@ -176,7 +176,6 @@ var wptmonitor = (function(window, $, wptmonitor){
                 exportConfig : {}
             });
         }
-
     }
 
     function getHistogramDataForJobs(jobId) {
