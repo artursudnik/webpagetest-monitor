@@ -10,7 +10,7 @@ var wptmonitor = (function(window, $, wptmonitor){
             }
             var button = $(this);
             button.attr('disabled', 'disabled');
-            var selectedJobs = $.makeArray($('#updateForm select#jobs option:selected').map(function(){return this.value;}));
+            var selectedJobs = $.makeArray($('#updateForm').find('select#jobs option:selected').map(function(){return this.value;}));
 
             try{
                 drawHistogramForJobs(selectedJobs)
@@ -43,9 +43,9 @@ var wptmonitor = (function(window, $, wptmonitor){
 
     function showHistogramContainer(){
         var deferred = $.Deferred();
-
-        if($("#histogramsContainer").is(":hidden")){
-            $("#histogramsContainer").slideDown(1000, function(){
+        var container = $("#histogramsContainer");
+        if(container.is(":hidden")){
+            container.slideDown(1000, function(){
                 deferred.resolve();
             });
         } else {
@@ -57,7 +57,6 @@ var wptmonitor = (function(window, $, wptmonitor){
 
     function drawHistogramForJobs(jobId) {
         var deferred = $.Deferred();
-        var data;
         var histogramContainerWasHidden = isHistogramContainerHidden();
 
         $.when(
@@ -98,8 +97,9 @@ var wptmonitor = (function(window, $, wptmonitor){
         );
     }
     function scrollToGraph() {
+        var container = $("#histogramsContainer");
         $('html, body').animate({
-            'scrollTop': $("#histogramsContainer").offset().top - $(window).height() + $("#histogramsContainer").height() },
+            'scrollTop': container.offset().top - $(window).height() + container.height() },
             1000,
             'swing'
         );
