@@ -269,12 +269,11 @@ var wptmonitor = (function(window, $, wptmonitor){
         }
 
         var chartScrollbar = {
-                    autoGridCount: true,
-                    graph: data.valueFields[0],
-                    "scrollbarHeight": 20
-                    ,hideResizeGrips: true
-                    // ,updateOnReleaseOnly: true
-            };
+            autoGridCount    : true,
+            graph            : data.valueFields[0],
+            "scrollbarHeight": 20, hideResizeGrips: true
+            // ,updateOnReleaseOnly: true
+        };
 
         if(chart){
             /**
@@ -290,40 +289,36 @@ var wptmonitor = (function(window, $, wptmonitor){
         } else {
             // chart is instantiated from scratch
             chart = AmCharts.makeChart("graph", {
-                type: "serial",
-                theme: "none",
-                pathToImages: "js/amcharts/images/",
-                dataProvider: data.series,
+                type               : "serial",
+                theme              : "none",
+                pathToImages       : "js/amcharts/images/",
+                dataProvider       : data.series,
                 zoomOutOnDataUpdate: false,
-                valueAxes: [{
-                    axisAlpha: 0.2,
-                    dashLength: 1,
-                    position: "left",
-                    minimum: 0,
-                    unit: "s"
-                }],
-                graphs: graphs,
-                chartScrollbar: chartScrollbar,
-                chartCursor: {
-                    cursorPosition: "mouse",
-                    categoryBalloonDateFormat: "MMM DD JJ:NN:SS"
-                    ,cursorAlpha: 0.5
-                    ,graphBulletSize: 2
+                valueAxes          : [
+                    {
+                        axisAlpha : 0.2,
+                        dashLength: 1,
+                        position  : "left",
+                        minimum   : 0,
+                        unit      : "s"
+                    }
+                ],
+                graphs             : graphs,
+                chartScrollbar     : chartScrollbar,
+                chartCursor        : {
+                    cursorPosition           : "mouse",
+                    categoryBalloonDateFormat: "MMM DD JJ:NN:SS", cursorAlpha: 0.5, graphBulletSize: 2
                 },
-                categoryField: "date",
-                dataDateFormat: "YYYY-MM-DD JJ:NN:SS",
-                categoryAxis: {
+                categoryField      : "date",
+                dataDateFormat     : "YYYY-MM-DD JJ:NN:SS",
+                categoryAxis       : {
                     parseDates: true,
-                    minPeriod: "ss"
-                    //categoryFunction: function(category, dataItem, categoryAxis){return new Date(dataItem*1000);},
-                    //axisColor: "#DADADA",
-                    //dashLength: 1,
-                    // minorGridEnabled: true
+                    minPeriod : "ss"
                 },
-                legend: {
+                legend             : {
                     fontSize: 9
                 },
-                exportConfig : {}
+                exportConfig       : {}
             });
 
             chart.addListener("clickGraphItem", function(e){
@@ -337,11 +332,11 @@ var wptmonitor = (function(window, $, wptmonitor){
 
         function getResultsURL(jobId, startDateTime, interval){
             var params = {
-                currentPage: 1,
-                filterField: "WPTJob.Id",
-                filterValue: jobId,
+                currentPage  : 1,
+                filterField  : "WPTJob.Id",
+                filterValue  : jobId,
                 startDateTime: startDateTime,
-                endDateTime: startDateTime + interval
+                endDateTime  : startDateTime + interval
             };
             console.log(params);
             return "listResults.php?"+$.param(params);
