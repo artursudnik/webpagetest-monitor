@@ -222,7 +222,7 @@ if ($_REQUEST['act'] == 'report') {
   foreach($jobIds as $jobId){
     $responseTimes = getGraphData($userId, $jobId, $startDateTime, $endDateTime, $percentile, $trimAbove, $adjustUsing, $trimBelow);
 
-    $avg = getResultsDataAvg($startDateTime, $endDateTime, $interval, $responseTimes, $fields);
+    $avg = getResultsDataAvg($startDateTime, $endDateTime, $interval, $responseTimes, $fields, $_SESSION['aggregateMethod']);
 
     foreach($availFields as $availField){
       $data = array();
@@ -258,11 +258,11 @@ if ($_REQUEST['act'] == 'report') {
     $allFields[] = 'AvgFirstViewFullyLoadedRequests';
     $allFields[] = 'AvgFirstViewFullyLoadedBytesIn';
 
-    $overallAverage = getResultsDataAvg($startDateTime, $endDateTime, $endDateTime - $startDateTime, $responseTimes, $allFields);
+    $overallAverage = getResultsDataAvg($startDateTime, $endDateTime, $endDateTime - $startDateTime, $responseTimes, $allFields, $_SESSION['aggregateMethod']);
     $overallAverage['Label']=$jobLabel;
     $overallAverages[] = $overallAverage;
 
-    $avgDetail = getResultsDataAvg($startDateTime, $endDateTime, $interval, $responseTimes, $allFields);
+    $avgDetail = getResultsDataAvg($startDateTime, $endDateTime, $interval, $responseTimes, $allFields, $_SESSION['aggregateMethod']);
     $avgDetail['Label']=$jobLabel;
     $averageDetails[] = $avgDetail;
   }
@@ -294,7 +294,7 @@ if ($_REQUEST['act'] == 'download') {
     $datas = getGraphData($userId, $jobId, $startDateTime, $endDateTime, $percentile, $trimAbove, $adjustUsing, $trimBelow);
 
     if ($interval > 1) {
-      $datas = getResultsDataAvg($startDateTime, $endDateTime, $interval, $datas, $flds);
+      $datas = getResultsDataAvg($startDateTime, $endDateTime, $interval, $datas, $flds, $_SESSION['aggregateMethod']);
     }
 
     foreach ($datas as $key => $data) {
