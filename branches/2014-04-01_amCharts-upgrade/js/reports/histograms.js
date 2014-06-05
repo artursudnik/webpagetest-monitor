@@ -331,10 +331,7 @@ var wptmonitor = (function(window, $, wptmonitor){
     }
 
     function getFormParams() {
-        var result = {};
-        var form = $("#updateForm")[0];
-
-        result = {
+        return {
             startYear  : $('select[name="startYear"]').val(),
             startMonth : $('select[name="startMonth"]').val(),
             startDay   : $('select[name="startDay"]').val(),
@@ -348,8 +345,6 @@ var wptmonitor = (function(window, $, wptmonitor){
                 return $(this).val();
             }))
         };
-
-        return result;
     }
 
     wptmonitor.histograms = {
