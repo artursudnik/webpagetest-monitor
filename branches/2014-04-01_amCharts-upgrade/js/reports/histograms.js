@@ -110,14 +110,16 @@ var wptmonitor = (function(window, $, wptmonitor){
         var graphs = [];
 
         for(var i in data.fields) {
-            var field = data.fields[i];
-            graphs.push({
-                id: data.fields[i],
-                title: data.fieldJobLabelMap[field] + " " + data.fieldMetricMap[field],
-                valueField: field,
-                type: 'smoothedLine',
-                fillAlphas: 0.5
-            });
+            if(data.fields.hasOwnProperty(i)){
+                var field = data.fields[i];
+                graphs.push({
+                    id: data.fields[i],
+                    title: data.fieldJobLabelMap[field] + " " + data.fieldMetricMap[field],
+                    valueField: field,
+                    type: 'smoothedLine',
+                    fillAlphas: 0.5
+                });
+            }
         }
 
         var chartScrollbar = {
@@ -211,33 +213,42 @@ var wptmonitor = (function(window, $, wptmonitor){
         var fieldJobIdMap = {};
         var fieldJobLabelMap = {};
         var fieldMetricMap = {};
+        var i, j, k; //iterators
 
         if(maxBucket > minBucket) {
-            for (var i=minBucket-bucketWidth; i <= maxBucket+bucketWidth; i+=bucketWidth) {
+            for (i=minBucket-bucketWidth; i <= maxBucket+bucketWidth; i+=bucketWidth) {
               if(i < 0) {
                   continue;
               }
               dataConverted[i] = {bucket: i};
-              for(var j in data){
-                  for(var k in data[j].fields){
-                      dataConverted[i][data[j].fields[k] + "-" + data[j].jobId] = 0;
+              for(j in data){
+                  if(data.hasOwnProperty(j)){
+                      for(k in data[j].fields){
+                          if(data[j].fields.hasOwnProperty(k)){
+                              dataConverted[i][data[j].fields[k] + "-" + data[j].jobId] = 0;
+                          }
+                      }
                   }
               }
             }
         }
 
         for(var jobIndex in data) {
-            for(var metricIndex in data[jobIndex].datasets){
-                var valueField = data[jobIndex].datasets[metricIndex].metric + "-" + data[jobIndex].jobId;
-                for(var i in data[jobIndex].datasets[metricIndex].series){
-                    var count = data[jobIndex].datasets[metricIndex].series[i].count;
-
-                    dataConverted[data[jobIndex].datasets[metricIndex].series[i].bucket][valueField] = count;
+            if(data.hasOwnProperty(jobIndex)) {
+                for (var metricIndex in data[jobIndex].datasets) {
+                    if(data[jobIndex].datasets.hasOwnProperty(metricIndex)){
+                        var valueField = data[jobIndex].datasets[metricIndex].metric + "-" + data[jobIndex].jobId;
+                        for (i in data[jobIndex].datasets[metricIndex].series) {
+                            if(data[jobIndex].datasets[metricIndex].series.hasOwnProperty(i)){
+                                dataConverted[data[jobIndex].datasets[metricIndex].series[i].bucket][valueField] = data[jobIndex].datasets[metricIndex].series[i].count;
+                            }
+                        }
+                        fields.push(valueField);
+                        fieldJobIdMap[valueField] = data[jobIndex].jobId;
+                        fieldJobLabelMap[valueField] = data[jobIndex].jobLabel;
+                        fieldMetricMap[valueField] = data[jobIndex].datasets[metricIndex].metric;
+                    }
                 }
-                fields.push(valueField);
-                fieldJobIdMap[valueField] = data[jobIndex].jobId;
-                fieldJobLabelMap[valueField] = data[jobIndex].jobLabel;
-                fieldMetricMap[valueField] = data[jobIndex].datasets[metricIndex].metric;
             }
         }
 
@@ -256,8 +267,10 @@ var wptmonitor = (function(window, $, wptmonitor){
         function getMinBucket() {
             var minBucket = null;
             for(var i in data){
-                if(minBucket === null || minBucket > data[i].minBucket) {
-                    minBucket = data[i].minBucket;
+                if(data.hasOwnProperty(i)) {
+                    if (minBucket === null || minBucket > data[i].minBucket) {
+                        minBucket = data[i].minBucket;
+                    }
                 }
             }
             return minBucket;
@@ -266,8 +279,10 @@ var wptmonitor = (function(window, $, wptmonitor){
         function getMaxBucket() {
             var maxBucket = null;
             for(var i in data){
-                if(maxBucket === null || maxBucket < data[i].maxBucket) {
-                    maxBucket = data[i].maxBucket;
+                if(data.hasOwnProperty(i)) {
+                    if (maxBucket === null || maxBucket < data[i].maxBucket) {
+                        maxBucket = data[i].maxBucket;
+                    }
                 }
             }
             return maxBucket;
@@ -277,10 +292,12 @@ var wptmonitor = (function(window, $, wptmonitor){
             var bucketWidth = null;
 
             for(var i in data){
-                if(bucketWidth !== null && bucketWidth !== data[i].bucketWidth) {
-                    throw "Different bucket widths in datasets";
+                if(data.hasOwnProperty(i)){
+                    if(bucketWidth !== null && bucketWidth !== data[i].bucketWidth) {
+                        throw "Different bucket widths in datasets";
+                    }
+                    bucketWidth = data[i].bucketWidth;
                 }
-                bucketWidth = data[i].bucketWidth;
             }
 
             return bucketWidth;
