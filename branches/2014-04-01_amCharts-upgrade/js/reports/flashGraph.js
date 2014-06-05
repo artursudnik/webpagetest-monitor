@@ -151,14 +151,6 @@ var wptmonitor = (function(window, $, wptmonitor){
 
 
     /**
-     *  Returns all possible names of metric fields
-     */
-    function getFormMetricFields(){
-        "use strict";
-        return ['FV_TTFB', 'FV_Render', 'FV_Doc', 'FV_Dom', 'FV_Fully', 'RV_TTFB', 'RV_Render', 'RV_Doc', 'RV_Dom', 'RV_Fully'];
-    }
-
-    /**
      * Converts data returned by server to format that can be consumed by AmCharts Serial chart
      * @param {Array} data
      */
@@ -174,13 +166,15 @@ var wptmonitor = (function(window, $, wptmonitor){
         var i, j, k;
 
         for(i in data.series) {
-            if(previousJobId !== null) {
-                if(data.series[previousJobId].dataSet.length !== data.series[i].dataSet.length) {
-                    throw "Not equal datasets";
+            if(data.series.hasOwnProperty(i)){
+                if(previousJobId !== null) {
+                    if(data.series[previousJobId].dataSet.length !== data.series[i].dataSet.length) {
+                        throw "Not equal datasets";
+                    }
                 }
+                previousJobId = i;
+                numberOfSeries++;
             }
-            previousJobId = i;
-            numberOfSeries++;
         }
 
         /**
@@ -222,13 +216,15 @@ var wptmonitor = (function(window, $, wptmonitor){
             tmpPoint['date'] = data.series[previousJobId].dataSet[i].DateFormatted;
             tmpPoint['timestamp'] = data.series[previousJobId].dataSet[i].UnixTimestamp;
             for(j in data.jobs) {
-                for (k=0; k < data.metrics.length; k++) {
-                    if(data.series[data.jobs[j]].dataSet[i][data.metrics[k]]){
-                        tmpPoint[data.metrics[k] + "-" + data.jobs[j]] = (data.series[data.jobs[j]].dataSet[i][data.metrics[k]]/1000).toFixed(2);
-                        tmpPoint.getJobId      = getJobId;
-                        tmpPoint.getJobName    = getJobName;
-                        tmpPoint.getMetricName = getMetricName;
-                        tmpPoint.getInterval   = getInterval;
+                if(data.jobs.hasOwnProperty(j)) {
+                    for (k = 0; k < data.metrics.length; k++) {
+                        if (data.series[data.jobs[j]].dataSet[i][data.metrics[k]]) {
+                            tmpPoint[data.metrics[k] + "-" + data.jobs[j]] = (data.series[data.jobs[j]].dataSet[i][data.metrics[k]] / 1000).toFixed(2);
+                            tmpPoint.getJobId = getJobId;
+                            tmpPoint.getJobName = getJobName;
+                            tmpPoint.getMetricName = getMetricName;
+                            tmpPoint.getInterval = getInterval;
+                        }
                     }
                 }
             }
@@ -247,27 +243,29 @@ var wptmonitor = (function(window, $, wptmonitor){
     function drawChart(data) {
         "use strict";
 
-        var getMetricName = data.getMetricName || function(a) {return 'No getMetricName function';};
-        var getJobName    = data.getJobName ||    function(a) {return 'No getJobName function';};
-        var getJobId      = data.getJobId ||      function(a) {return 'No getJobId function';};
+        var getMetricName = data.getMetricName || function() {return 'No getMetricName function';};
+        var getJobName    = data.getJobName ||    function() {return 'No getJobName function';};
+        var getJobId      = data.getJobId ||      function() {return 'No getJobId function';};
         var graphs = [];
 
         /**
          *  Prepare graphs configs for all data series
          */
         for(var i in data.valueFields){
-            graphs.push({
-                id:data.valueFields[i],
-                balloonText: "[[category]]<br /><b><span style='font-size:14px;'>"+getMetricName(data.valueFields[i])+": [[value]]</span></b>",
-                bullet: "round",
-                bulletSize: 1,
-                bulletBorderAlpha: 1,
-                bulletColor:"#FFFFFF",
-                hideBulletsCount: 0,
-                title: getJobName(data.valueFields[i]) + " " + getMetricName(data.valueFields[i]),
-                valueField: data.valueFields[i],
-                useLineColorForBulletBorder:true
-            });
+            if(data.valueFields.hasOwnProperty(i)) {
+                graphs.push({
+                    id                         : data.valueFields[i],
+                    balloonText                : "[[category]]<br /><b><span style='font-size:14px;'>" + getMetricName(data.valueFields[i]) + ": [[value]]</span></b>",
+                    bullet                     : "round",
+                    bulletSize                 : 1,
+                    bulletBorderAlpha          : 1,
+                    bulletColor                : "#FFFFFF",
+                    hideBulletsCount           : 0,
+                    title                      : getJobName(data.valueFields[i]) + " " + getMetricName(data.valueFields[i]),
+                    valueField                 : data.valueFields[i],
+                    useLineColorForBulletBorder: true
+                });
+            }
         }
 
         var chartScrollbar = {
