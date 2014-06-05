@@ -4,7 +4,7 @@ var wptmonitor = (function(window, $, wptmonitor){
     var chart;
 
     $(document).ready(function(){
-        $('#histogramButton').on('click', function(e){
+        $('#histogramButton').on('click', function () {
             if(getSelectedJobsCount() == 0){
                 return;
             }
@@ -89,13 +89,6 @@ var wptmonitor = (function(window, $, wptmonitor){
 
     }
 
-    function scrollToForm() {
-        $('html, body').animate({
-            'scrollTop': $("#main").offset().top},
-            'slow',
-            'swing'
-        );
-    }
     function scrollToGraph() {
         var container = $("#histogramsContainer");
         $('html, body').animate({
