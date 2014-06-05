@@ -16,7 +16,7 @@ var wptmonitor = (function(window, $, wptmonitor){
         starth.addEventListener('change',checkInterval, false);
 
 
-        $('#graphJSONButton').on('click', function(e){
+        $('#graphJSONButton').on('click', function(){
             var chartContainerIsHidden = isChartContainerHidden();
             submitFormAJAX()
             .done(function(){
@@ -46,17 +46,10 @@ var wptmonitor = (function(window, $, wptmonitor){
             }
         }
 
-        function scrollToForm() {
-            $('html, body').animate({
-                'scrollTop': $("#main").offset().top},
-                'slow',
-                'swing'
-            );
-        }
-
         function scrollToGraph() {
+            var container = $("#graphContainer");
             $('html, body').animate({
-                'scrollTop': $("#graphContainer").offset().top - $(window).height() + $("#graphContainer").height() },
+                'scrollTop': container.offset().top - $(window).height() + container.height() },
                 1000,
                 'swing'
             );
@@ -97,9 +90,10 @@ var wptmonitor = (function(window, $, wptmonitor){
     function showChartContainer(){
         "use strict";
         var d = $.Deferred();
+        var container = $("#graphContainer");
 
-        if($("#graphContainer").is(":hidden")){
-            $("#graphContainer").slideDown(1000, function(){
+        if(container.is(":hidden")){
+            container.slideDown(1000, function(){
                 d.resolve();
             });
         } else {
@@ -116,7 +110,7 @@ var wptmonitor = (function(window, $, wptmonitor){
     function getChartData(params){
         "use strict";
         var d = $.Deferred();
-        var ajaxRequestPromise = $.ajax({
+        $.ajax({
             url: 'jash/flashGraph.json.php',
             data: params,
             method: "POST"
@@ -129,7 +123,7 @@ var wptmonitor = (function(window, $, wptmonitor){
             } else {
                 d.resolve(data.results);
             }
-        }).error(function(jqxhr, err){
+        }).error(function(jqxhr){
             d.reject({
                 status: jqxhr.status,
                 message: jqxhr.statusText
@@ -151,10 +145,10 @@ var wptmonitor = (function(window, $, wptmonitor){
             })
         ).done(function(data){
             d.resolve(data);
-        }).fail(function(a, b, c){
+        }).fail(function(a){
             alert('Error getting data from the server\n'+a.message+' ('+a.status+')');
             d.reject(a);
-        }).always(function(a, b, c){
+        }).always(function(){
             $('#graphOverlay').fadeOut(600, function(){
                 $(button).removeAttr('disabled');
             });
@@ -185,8 +179,9 @@ var wptmonitor = (function(window, $, wptmonitor){
         var valueFields = [];
         var numberOfSeries = 0;
         var previousJobId = null;
+        var i, j, k;
 
-        for(var i in data.series) {
+        for(i in data.series) {
             if(previousJobId !== null) {
                 if(data.series[previousJobId].dataSet.length !== data.series[i].dataSet.length) {
                     throw "Not equal datasets";
@@ -199,8 +194,8 @@ var wptmonitor = (function(window, $, wptmonitor){
         /**
          *  Iterate all jobs and metrics to create mappings between value fields names and other data
          */
-        for (var k=0; k < data.metrics.length; k++) {
-            for(var i=0; i < data.jobs.length; i++) {
+        for (k=0; k < data.metrics.length; k++) {
+            for(i=0; i < data.jobs.length; i++) {
                 seriesToJobNameMap[data.metrics[k] + "-" + data.jobs[i]] = data.series[data.jobs[i]].jobName;
                 seriesToMetricNameMap[data.metrics[k] + "-" + data.jobs[i]] = data.metrics[k];
                 seriesToJobIdMap[data.metrics[k] + "-" + data.jobs[i]] = data.jobs[i];
@@ -230,12 +225,12 @@ var wptmonitor = (function(window, $, wptmonitor){
         /**
          *  Iterate all points and then all series to put all series in different fields but in one data serie
          */
-        for(var i=0; i<data.series[previousJobId].dataSet.length; i++) {
+        for(i=0; i<data.series[previousJobId].dataSet.length; i++) {
             var tmpPoint = {};
             tmpPoint['date'] = data.series[previousJobId].dataSet[i].DateFormatted;
             tmpPoint['timestamp'] = data.series[previousJobId].dataSet[i].UnixTimestamp;
-            for(var j in data.jobs) {
-                for (var k=0; k < data.metrics.length; k++) {
+            for(j in data.jobs) {
+                for (k=0; k < data.metrics.length; k++) {
                     if(data.series[data.jobs[j]].dataSet[i][data.metrics[k]]){
                         tmpPoint[data.metrics[k] + "-" + data.jobs[j]] = (data.series[data.jobs[j]].dataSet[i][data.metrics[k]]/1000).toFixed(2);
                         tmpPoint.getJobId      = getJobId;
@@ -243,7 +238,7 @@ var wptmonitor = (function(window, $, wptmonitor){
                         tmpPoint.getMetricName = getMetricName;
                         tmpPoint.getInterval   = getInterval;
                     }
-                };
+                }
             }
             chartData.push(tmpPoint);
         }
@@ -351,7 +346,6 @@ var wptmonitor = (function(window, $, wptmonitor){
         }
 
         function getResultsURL(jobId, startDateTime, interval){
-            "listResults.php?currentPage=1&filterField=WPTJob.Id&filterValue=90&startDateTime=1399460400&endDateTime=1399464000";
             var params = {
                 currentPage: 1,
                 filterField: "WPTJob.Id",
