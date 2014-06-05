@@ -329,7 +329,7 @@ var wptmonitor = (function(window, $, wptmonitor){
                 dataDateFormat: "YYYY-MM-DD JJ:NN:SS",
                 categoryAxis: {
                     parseDates: true,
-                    minPeriod: "ss",
+                    minPeriod: "ss"
                     //categoryFunction: function(category, dataItem, categoryAxis){return new Date(dataItem*1000);},
                     //axisColor: "#DADADA",
                     //dashLength: 1,
