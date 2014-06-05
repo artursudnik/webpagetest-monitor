@@ -311,7 +311,7 @@
 {if $action eq 'graph'}
 {literal}
     <script type="text/javascript">
-        var action = "graph";
+        wptmonitor.graph.action = "graph";
     </script>
 {/literal}
 {/if}

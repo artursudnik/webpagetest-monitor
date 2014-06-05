@@ -4,10 +4,9 @@ var wptmonitor = (function(window, $, wptmonitor){
 
     $(document).ready(function() {
         "use strict";
-        var act = "";
-        if(typeof action !== "undefined") {
-            act = action;
-        };
+
+        var act = wptmonitor.graph.action;
+
         $("#updateForm").validate();
         onloadInit();
 
