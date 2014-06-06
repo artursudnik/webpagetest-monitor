@@ -106,21 +106,20 @@ var wptmonitor = (function(window, $, wptmonitor){
             if(data.fields.hasOwnProperty(i)){
                 var field = data.fields[i];
                 graphs.push({
-                    id: data.fields[i],
-                    title: data.fieldJobLabelMap[field] + " " + data.fieldMetricMap[field],
+                    id        : data.fields[i],
+                    title     : data.fieldJobLabelMap[field] + " " + data.fieldMetricMap[field],
                     valueField: field,
-                    type: 'smoothedLine',
+                    type      : 'smoothedLine',
                     fillAlphas: 0.5
                 });
             }
         }
 
         var chartScrollbar = {
-                    autoGridCount: true,
-                    graph: data.fields[0],
-                    "scrollbarHeight": 20
-                    ,hideResizeGrips: true
-                    // ,updateOnReleaseOnly: true
+            autoGridCount    : true,
+            graph            : data.fields[0],
+            "scrollbarHeight": 20, hideResizeGrips: true
+            // ,updateOnReleaseOnly: true
             };
 
         if(chart){
@@ -133,36 +132,38 @@ var wptmonitor = (function(window, $, wptmonitor){
             chart.validateData();
         }else {
             chart = AmCharts.makeChart("histogram", {
-                type: "serial",
-                theme: "none",
-                pathToImages: "js/amcharts/images/",
-                dataProvider: data.dataset,
+                type               : "serial",
+                theme              : "none",
+                pathToImages       : "js/amcharts/images/",
+                dataProvider       : data.dataset,
                 zoomOutOnDataUpdate: false,
-                valueAxes: [{
-                    title: 'samples count',
-                    titleBold: false,
-                    axisAlpha: 0.2,
-                    dashLength: 1,
-                    position: "left",
-                    minimum: 0
-                    // ,unit: "s"
-                }],
-                graphs: graphs,
+                valueAxes: [
+                    {
+                        title     : 'samples count',
+                        titleBold : false,
+                        axisAlpha : 0.2,
+                        dashLength: 1,
+                        position  : "left",
+                        minimum   : 0
+                        // ,unit: "s"
+                    }
+                ],
+                graphs        : graphs,
                 chartScrollbar: chartScrollbar,
                 chartCursor: {
-                    cursorPosition: "mouse",
-                    categoryBalloonDateFormat: "MMM DD JJ:NN:SS"
-                    ,cursorAlpha: 0.5
-                    ,graphBulletSize: 2
+                    cursorPosition           : "mouse",
+                    categoryBalloonDateFormat: "MMM DD JJ:NN:SS",
+                    cursorAlpha              : 0.5,
+                    graphBulletSize          : 2
                 },
                 categoryField: "bucket",
                 categoryAxis: {
                     minorGridEnabled: true,
-                    title: 'time in seconds',
-                    titleBold: false,
-                    minimum: 0,
-                    categoryFunction: function(e){
-                        return (e/1000).toString();
+                    title           : 'time in seconds',
+                    titleBold       : false,
+                    minimum         : 0,
+                    categoryFunction: function (e) {
+                        return (e / 1000).toString();
                     }
                 },
                 legend: {
@@ -250,11 +251,11 @@ var wptmonitor = (function(window, $, wptmonitor){
         });
 
         return {
-            dataset: dataConverted,
-            fields:  fields,
-            fieldJobIdMap: fieldJobIdMap,
+            dataset         : dataConverted,
+            fields          : fields,
+            fieldJobIdMap   : fieldJobIdMap,
             fieldJobLabelMap: fieldJobLabelMap,
-            fieldMetricMap: fieldMetricMap
+            fieldMetricMap  : fieldMetricMap
         };
 
         function getMinBucket() {
@@ -349,7 +350,7 @@ var wptmonitor = (function(window, $, wptmonitor){
 
     wptmonitor.histograms = {
         initialized: true,
-        getChart: function() {
+        getChart   : function () {
             return chart;
         }
     };
