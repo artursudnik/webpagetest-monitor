@@ -197,6 +197,11 @@ var wptmonitor = (function(window, $, wptmonitor){
         return deferred.promise();
     }
 
+    /**
+     *
+     * @param {{bucketWidth, minBucket, maxBucket, jobId, fields: [], datasets: {metric, series: {bucket, count}[], maxBucket, minBucket}[], jobLabel}[]} data
+     * @returns {{dataset: {}[], fields: Array, fieldJobIdMap: {}, fieldJobLabelMap: {}, fieldMetricMap: {}}}
+     */
     function convertHistogramData(data) {
 
         var dataConverted = {};
