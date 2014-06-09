@@ -72,9 +72,9 @@ try{
         $series = $q->fetchArray();
 
         //doctrine returns strings so we have to convert types to proper ones
-        foreach ($series as $key => $value) {
-            $series[$key]['bucket'] = (int)$series[$key]['bucket'];
-            $series[$key]['count']  = (int)$series[$key]['count'];
+        foreach ($series as $key2 => $value) {
+            $series[$key2]['bucket'] = (int)$series[$key2]['bucket'];
+            $series[$key2]['count']  = (int)$series[$key2]['count'];
         }
 
         if(!empty($series)) {
@@ -140,8 +140,6 @@ function sanitizeData($requestArray) {
     $currentMo = (int)date("n");
     $currentD  = (int)date("j");
     $currentH  = (int)date("G");
-    $currentMi = (int)date("i");
-    $currentS  = (int)date("s");
 
     $resultArray['timeFrame']  = @filter_var((int)$requestArray['timeFrame'],    FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 0, 'max_range' => 2419200)));
 
