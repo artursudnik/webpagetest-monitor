@@ -426,7 +426,7 @@ function getResultsData($label, $startDateTime, $endDateTime, $resolution, $resu
     }
     $pointer += $resolution;
   }
-  return samples;
+  return $samples;
 }
 
 function getAverage($startAt, $increment, $data, $field) {
