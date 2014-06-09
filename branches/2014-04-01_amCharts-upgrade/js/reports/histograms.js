@@ -108,6 +108,7 @@ var wptmonitor = (function(window, $, wptmonitor){
                 graphs.push({
                     id        : data.fields[i],
                     title     : data.fieldJobLabelMap[field] + " " + data.fieldMetricMap[field],
+                    balloonText: "<b>[[value]]</b> samples for <b>[[category]]</b> seconds",
                     valueField: field,
                     type      : 'smoothedLine',
                     fillAlphas: 0.5
