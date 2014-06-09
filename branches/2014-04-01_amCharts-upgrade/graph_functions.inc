@@ -211,7 +211,7 @@ function getDataAsAmChartScatterXml($userId,
   $xmlData .= "\n";
   $xmlData .= "<graphs>";
   $xmlData .= "\n";
-  $xmlData .= getChangeNotesAsAmScatterChartXml($userId,$jobIds,$start,$end);
+  $xmlData .= getChangeNotesAsAmScatterChartXml( $userId, $start, $end );
   $jobTable = Doctrine_Core::getTable('WPTJob');
   foreach ($jobIds as $jobId) {
     $job = $jobTable->find($jobId);
@@ -436,10 +436,7 @@ function getChangeNotesAsAmLineChartXml($userId,
   $xmlData .= "\n";
   return $xmlData;
 }
-function getChangeNotesAsAmScatterChartXml($userId,
-                                 $jobIds,
-                                 $start,
-                                 $end) {
+function getChangeNotesAsAmScatterChartXml( $userId, $start, $end ) {
   $xmlData ="";
   $changeNotes = getChangeNoteData( $userId, $start, $end );
   $xmlData .= "<graph title=\"Change Notes\" gid=\"0\">";
