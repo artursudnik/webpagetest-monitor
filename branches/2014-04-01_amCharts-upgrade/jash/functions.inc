@@ -18,7 +18,7 @@ function mapMetricFieldForm2Db($fieldName) {
     if(key_exists($fieldName, $mappingArray)) {
         return $mappingArray[$fieldName];
     }else {
-        throw new Exception("Unknow form field name $fieldName", 1);
+        throw new Exception("Unknown form field name $fieldName", 1);
     }
 }
 
@@ -27,7 +27,7 @@ function mapMetricFieldDb2Form($fieldName){
     if(key_exists($fieldName, $mappingArray)) {
         return $mappingArray[$fieldName];
     }else {
-        throw new Exception("Unknow form field name $fieldName", 1);
+        throw new Exception("Unknown form field name $fieldName", 1);
     }
 }
 
