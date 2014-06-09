@@ -4,7 +4,7 @@ include_once ('monitor.inc');
 include_once ('graph_functions.inc');
 include_once ('firephp/0.3.2/fb.php');
 include_once ('utils.inc');
-include_once ('functions.inc');
+include_once ('jash/functions.inc');
 header('Content-Type: application/json');
 header('Cache-Control: public', TRUE);
 
