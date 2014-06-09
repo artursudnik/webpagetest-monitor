@@ -455,4 +455,3 @@ function getChangeNotesAsAmScatterChartXml($userId,
   $xmlData .= "\n";
   return $xmlData;
 }
-?>
