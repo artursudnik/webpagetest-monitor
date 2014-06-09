@@ -63,38 +63,6 @@ function getResultsDataAvg($startDateTime, $endDateTime, $interval, $datas, $fie
   return $data;
 }
 
-function getMedian($startAt, $increment, &$data, $field) {
-  $tmpData = array();
-
-  foreach ($data as $r) {
-    if ($r['Date'] > $startAt && ($r['Date'] < $startAt + $increment)) {
-      $tmpData[] = $r[$field];
-    }
-  }
-
-  $numberOfElements = count($tmpData);
-
-  sort($tmpData);
-
-  if ($numberOfElements > 0) {
-    if( $numberOfElements == 1) {
-      $result = $tmpData[0];
-    } else {
-      if($numberOfElements%2) {
-        $result = $tmpData[($numberOfElements - 1)/2];
-      } else {
-        $result = ($tmpData[($numberOfElements-1)/2] + $tmpData[$numberOfElements/2])/2;
-      }
-    }
-  } else {
-    $result = NULL;
-  }
-
-  unset($tmpData);
-
-  return $result;
-}
-
 function getPercentile($startAt, $increment, &$data, $field, $percentile) {
   if ($percentile < 0 OR $percentile > 100) {
       throw new Exception("$percentile have to be bigger than 0 and smaller than 100", 1);
