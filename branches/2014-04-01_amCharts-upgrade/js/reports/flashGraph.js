@@ -313,6 +313,7 @@ var wptmonitor = (function(window, $, wptmonitor){
                 dataDateFormat     : "YYYY-MM-DD JJ:NN:SS",
                 categoryAxis       : {
                     parseDates: true,
+                    minorGridEnabled: false,
                     minPeriod : "ss"
                 },
                 legend             : {

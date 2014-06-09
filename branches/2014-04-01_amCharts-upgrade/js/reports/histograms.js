@@ -158,7 +158,7 @@ var wptmonitor = (function(window, $, wptmonitor){
                 },
                 categoryField: "bucket",
                 categoryAxis: {
-                    minorGridEnabled: true,
+                    minorGridEnabled: false,
                     title           : 'time in seconds',
                     titleBold       : false,
                     minimum         : 0,
