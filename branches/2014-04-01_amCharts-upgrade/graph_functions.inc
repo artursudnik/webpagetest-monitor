@@ -64,7 +64,6 @@ function getResultsDataAvg($startDateTime, $endDateTime, $interval, $datas, $fie
 }
 
 function getMedian($startAt, $increment, &$data, $field) {
-  $numberOfElements = 0;
   $tmpData = array();
 
   foreach ($data as $r) {
@@ -100,7 +99,6 @@ function getPercentile($startAt, $increment, &$data, $field, $percentile) {
   if ($percentile < 0 OR $percentile > 100) {
       throw new Exception("$percentile have to be bigger than 0 and smaller than 100", 1);
   }
-  $numberOfElements = 0;
   $tmpData = array();
 
   foreach ($data as $r) {
