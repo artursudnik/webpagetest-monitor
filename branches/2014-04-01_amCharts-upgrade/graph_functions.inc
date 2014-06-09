@@ -141,7 +141,7 @@ function getDataAsAmChartLineXml($userId,
   $xmlData .= "\n";
   $xmlData .= "<graphs>";
   $xmlData .= "\n";
-  $xmlData .= getChangeNotesAsAmLineChartXml($userId,$jobIds,$start,$end);
+  $xmlData .= getChangeNotesAsAmLineChartXml( $userId, $start, $end );
   $jobTable = Doctrine_Core::getTable('WPTJob');
   foreach ($jobIds as $jobId) {
     $job = $jobTable->find($jobId);
@@ -418,10 +418,7 @@ function getAverage($startAt, $increment, $data, $field) {
   }
   return $result;
 }
-function getChangeNotesAsAmLineChartXml($userId,
-                                 $jobIds,
-                                 $start,
-                                 $end) {
+function getChangeNotesAsAmLineChartXml( $userId, $start, $end ) {
   $changeNotes = getChangeNoteData( $userId, $start, $end );
   $xmlData = '';
   $xmlData .= "<graph title=\"Change Notes\" gid=\"0\">";
