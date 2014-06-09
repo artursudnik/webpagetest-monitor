@@ -351,7 +351,7 @@ function getChangeNoteData($user_id, $jobIds, $startDateTime, $endDateTime) {
 }
 
 function getStatusesToNotInclude() {
-    return array(-214702489, -214669720, -214669721, 100, 403, 404, 500, 501, 502, 503, 504, 999, 99996, 99997, 99998, 99999);
+    return array(-214702489, -214669720, -214669721, 100, 403, 404, 500, 501, 502, 503, 504, 999, 99996, 99997, 99998);
 }
 
 function getGraphData($user_id,
