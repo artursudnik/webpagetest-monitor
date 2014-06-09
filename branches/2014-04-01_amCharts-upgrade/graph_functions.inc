@@ -130,6 +130,8 @@ function getPercentile($startAt, $increment, &$data, $field, $percentile) {
  *
  * @param  $userId
  * @param  $jobIds
+ * @param  $availFields
+ * @param  $fields
  * @param  $start
  * @param  $end
  * @param  $percentile
@@ -137,7 +139,7 @@ function getPercentile($startAt, $increment, &$data, $field, $percentile) {
  * @param  $adjustUsing
  * @param  $trimBelow
  * @param  $interval
- * @param int $includeRepeatView
+ * @param  $aggregateMethod
  * @return string
  */
 function getDataAsAmChartLineXml($userId,
@@ -297,6 +299,7 @@ function getDataAsAmChartScatterXml($userId,
  * @param  $startDateTime
  * @param  $endDateTime
  * @param int $interval
+ * @param bool $includeChangeNotes
  * @return array
  */
 function getSeriesDataForMultiJobs($user_id, $jobIds, $startDateTime, $endDateTime, $interval = 0, $includeChangeNotes = true) {
