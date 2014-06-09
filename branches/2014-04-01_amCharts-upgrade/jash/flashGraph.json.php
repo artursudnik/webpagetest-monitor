@@ -48,7 +48,6 @@ try {
         $job = $jobTable->find($jobId);
 
         $resultDataset[$jobId] = getGraphData(
-            $userId,
             $jobId, //jobId
             $sanitizedData['startTimestamp'],
             $sanitizedData['endTimestamp'],

@@ -178,7 +178,7 @@ function getDataAsAmChartLineXml($userId,
   foreach ($jobIds as $jobId) {
     $job = $jobTable->find($jobId);
     $jobName = $job['Label'];
-    $datas = getGraphData($userId, $jobId, $start, $end, $percentile, $trimAbove, $adjustUsing, $trimBelow, $dbFields);
+    $datas = getGraphData( $jobId, $start, $end, $percentile, $trimAbove, $adjustUsing, $trimBelow, $dbFields );
 
     if ($interval > 1) {
       $datas = getResultsDataAvg($start, $end, $interval, $datas, $fields, $aggregateMethod);
@@ -248,7 +248,7 @@ function getDataAsAmChartScatterXml($userId,
   foreach ($jobIds as $jobId) {
     $job = $jobTable->find($jobId);
     $jobName = $job['Label'];
-    $datas = getGraphData($userId, $jobId, $start, $end, $percentile, $trimAbove, $adjustUsing, $trimBelow, $dbFields);
+    $datas = getGraphData( $jobId, $start, $end, $percentile, $trimAbove, $adjustUsing, $trimBelow, $dbFields );
 
     if ($interval > 1) {
       $datas = getResultsDataAvg($start, $end, $interval, $datas, $fields, $aggregateMethod);
@@ -355,15 +355,7 @@ function getStatusesToNotInclude() {
     return array(-214702489, -214669720, -214669721, 100, 403, 404, 500, 501, 502, 503, 504, 999, 99996, 99997, 99998);
 }
 
-function getGraphData($user_id,
-                      $job_id,
-                      $startDateTime,
-                      $endDateTime,
-                      $percentile = 1,
-                      $trimAbove = null,
-                      $adjustUsing,
-                      $trimBelow = null,
-                      $fields = null) {
+function getGraphData( $job_id, $startDateTime, $endDateTime, $percentile = 1, $trimAbove = null, $adjustUsing, $trimBelow = null, $fields = null ) {
   $trimAbove = $trimAbove * 1000;
   $trimBelow = $trimBelow * 1000;
 

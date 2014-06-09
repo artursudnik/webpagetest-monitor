@@ -220,7 +220,7 @@ if ($_REQUEST['act'] == 'report') {
   $overallAverages = array();
   $averageDetails = array();
   foreach($jobIds as $jobId){
-    $responseTimes = getGraphData($userId, $jobId, $startDateTime, $endDateTime, $percentile, $trimAbove, $adjustUsing, $trimBelow);
+    $responseTimes = getGraphData( $jobId, $startDateTime, $endDateTime, $percentile, $trimAbove, $adjustUsing, $trimBelow );
 
     $avg = getResultsDataAvg($startDateTime, $endDateTime, $interval, $responseTimes, $fields, $_SESSION['aggregateMethod']);
 
@@ -291,7 +291,7 @@ if ($_REQUEST['act'] == 'download') {
   foreach ($jobIds as $jobId) {
     $job= $jobTable->find($jobId);
     $jobName = $job['Label'];
-    $datas = getGraphData($userId, $jobId, $startDateTime, $endDateTime, $percentile, $trimAbove, $adjustUsing, $trimBelow);
+    $datas = getGraphData( $jobId, $startDateTime, $endDateTime, $percentile, $trimAbove, $adjustUsing, $trimBelow );
 
     if ($interval > 1) {
       $datas = getResultsDataAvg($startDateTime, $endDateTime, $interval, $datas, $flds, $_SESSION['aggregateMethod']);
