@@ -312,9 +312,9 @@ var wptmonitor = (function(window, $, wptmonitor){
                 categoryField      : "date",
                 dataDateFormat     : "YYYY-MM-DD JJ:NN:SS",
                 categoryAxis       : {
-                    parseDates: true,
+                    parseDates      : true,
                     minorGridEnabled: false,
-                    minPeriod : "ss"
+                    minPeriod       : "ss"
                 },
                 legend             : {
                     fontSize: 9
