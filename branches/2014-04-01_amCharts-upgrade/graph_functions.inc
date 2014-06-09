@@ -329,7 +329,7 @@ function getSeriesDataForMultiJobs($user_id, $jobIds, $startDateTime, $endDateTi
     }
   }
   if ( $includeChangeNotes ){
-    $changeNotes = getChangeNoteData($user_id,$jobIds,$startDateTime,$endDateTime);
+    $changeNotes = getChangeNoteData( $user_id, $startDateTime, $endDateTime );
     foreach ($changeNotes as $note){
       $entry = array();
       $entry['Date'] = $note['Date'];
@@ -340,7 +340,7 @@ function getSeriesDataForMultiJobs($user_id, $jobIds, $startDateTime, $endDateTi
   return $result;
 }
 
-function getChangeNoteData($user_id, $jobIds, $startDateTime, $endDateTime) {
+function getChangeNoteData( $user_id, $startDateTime, $endDateTime ) {
     $q = Doctrine_Query::create()->from('ChangeNote c')
         ->andWhere('c.Date <= ?', $endDateTime)
         ->andWhere('c.Date >= ?', $startDateTime)
@@ -454,7 +454,7 @@ function getChangeNotesAsAmLineChartXml($userId,
                                  $jobIds,
                                  $start,
                                  $end) {
-  $changeNotes = getChangeNoteData($userId, $jobIds, $start, $end);
+  $changeNotes = getChangeNoteData( $userId, $start, $end );
   $xmlData = '';
   $xmlData .= "<graph title=\"Change Notes\" gid=\"0\">";
   $xmlData .= "\n";
@@ -473,7 +473,7 @@ function getChangeNotesAsAmScatterChartXml($userId,
                                  $start,
                                  $end) {
   $xmlData ="";
-  $changeNotes = getChangeNoteData($userId, $jobIds, $start, $end);
+  $changeNotes = getChangeNoteData( $userId, $start, $end );
   $xmlData .= "<graph title=\"Change Notes\" gid=\"0\">";
   $xmlData .= "\n";
 

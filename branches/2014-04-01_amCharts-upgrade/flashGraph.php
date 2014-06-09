@@ -206,7 +206,7 @@ if (!isset($_REQUEST['act'])) {
 
 if ($_REQUEST['act'] == 'report') {
   $series = getSeriesDataForMultiJobs($userId,$jobIds,$startDateTime,$endDateTime,$interval,false);
-  $changeNotes = getChangeNoteData($userId, $jobIds, $startDateTime, $endDateTime);
+  $changeNotes = getChangeNoteData( $userId, $startDateTime, $endDateTime );
   // Add change notes
   $smarty->assign('changeNotes',$changeNotes);
 
