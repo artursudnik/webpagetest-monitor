@@ -7,6 +7,9 @@
  * @param  $endDateTime
  * @param  $interval
  * @param  $datas
+ * @param  $fields
+ * @param  $aggregateMethod
+ * @throws Exception
  * @return array
  */
 function getResultsDataAvg($startDateTime, $endDateTime, $interval, $datas, $fields, $aggregateMethod) {
