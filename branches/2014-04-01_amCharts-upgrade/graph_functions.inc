@@ -113,8 +113,8 @@ function getPercentile($startAt, $increment, &$data, $field, $percentile) {
 
   if ($numberOfElements > 0) {
       $percentilePosition = ($numberOfElements-1)*$percentile/100;
-      $n1 = floor($percentilePosition);
-      $n2 = ceil($percentilePosition);
+      $n1 = (int)floor($percentilePosition);
+      $n2 = (int)ceil($percentilePosition);
       $value = $tmpData[$n1] + ($tmpData[$n2] - $tmpData[$n1]) * $percentile/100;
       return $value;
   } else {
