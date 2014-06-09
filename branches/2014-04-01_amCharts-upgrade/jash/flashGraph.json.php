@@ -141,7 +141,7 @@ function sanitizeData($requestArray) {
 
     $resultArray['aggregateMethod'] = $requestArray['aggregateMethod'];
     $resultArray['job_id'] = array();
-    foreach ($requestArray['job_id'] as $key => $value) {
+    foreach ($requestArray['job_id'] as $value) {
         $resultArray['job_id'][] = (int) $value;
     }
 
@@ -153,7 +153,7 @@ function sanitizeData($requestArray) {
 function serializeFields($fieldsArray){
     $serializedFields = "r.date";
 
-    foreach ($fieldsArray as $key => $value) {
+    foreach ($fieldsArray as $value) {
         $serializedFields .= ", r.".$value;
     }
 
