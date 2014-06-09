@@ -153,8 +153,8 @@ function sanitizeData($requestArray) {
 function serializeFields($fieldsArray){
     $serializedFields = "r.date";
 
-    foreach ($fieldsArray as $value) {
-        $serializedFields .= ", r.".$value;
+    foreach ($fieldsArray as $field) {
+        $serializedFields .= ", r.".$field;
     }
 
     return $serializedFields;
