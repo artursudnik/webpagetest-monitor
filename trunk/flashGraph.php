@@ -2,6 +2,7 @@
 require("login/login.php");
 include 'monitor.inc';
 include_once 'graph_functions.inc';
+include_once 'firephp/0.3.2/fb.php';
 
 $userId = getCurrentUserId();
 date_default_timezone_set($_SESSION['ls_timezone']);
@@ -205,10 +206,10 @@ if (!isset($_REQUEST['act'])) {
 
 if ($_REQUEST['act'] == 'report') {
   $series = getSeriesDataForMultiJobs($userId,$jobIds,$startDateTime,$endDateTime,$interval,false);
-  $changeNotes = getChangeNoteData($userId, $jobIds, $startDateTime, $endDateTime);
+  $changeNotes = getChangeNoteData( $userId, $startDateTime, $endDateTime );
   // Add change notes
   $smarty->assign('changeNotes',$changeNotes);
-  
+
   $timeStamps = array();
 //  foreach($series as $ser){
 //    $timeStamps[]=$ser['Date'];
@@ -219,7 +220,7 @@ if ($_REQUEST['act'] == 'report') {
   $overallAverages = array();
   $averageDetails = array();
   foreach($jobIds as $jobId){
-    $responseTimes = getGraphData($userId, $jobId, $startDateTime, $endDateTime, $percentile, $trimAbove, $adjustUsing, $trimBelow);
+    $responseTimes = getGraphData( $jobId, $startDateTime, $endDateTime, $percentile, $trimAbove, $adjustUsing, $trimBelow );
 
     $avg = getResultsDataAvg($startDateTime, $endDateTime, $interval, $responseTimes, $fields, $_SESSION['aggregateMethod']);
 
@@ -290,7 +291,7 @@ if ($_REQUEST['act'] == 'download') {
   foreach ($jobIds as $jobId) {
     $job= $jobTable->find($jobId);
     $jobName = $job['Label'];
-    $datas = getGraphData($userId, $jobId, $startDateTime, $endDateTime, $percentile, $trimAbove, $adjustUsing, $trimBelow);
+    $datas = getGraphData( $jobId, $startDateTime, $endDateTime, $percentile, $trimAbove, $adjustUsing, $trimBelow );
 
     if ($interval > 1) {
       $datas = getResultsDataAvg($startDateTime, $endDateTime, $interval, $datas, $flds, $_SESSION['aggregateMethod']);
@@ -321,56 +322,7 @@ if ($_REQUEST['act'] == 'download') {
 }
 // ************** Chart Processing **************
 if ($_REQUEST['act'] == 'graph') {
-  $chartType = $_REQUEST['chartType'];
-  $smarty->assign('chartType', $chartType);
-
-  // Use a unique file per user.
-  if ( isset($_REQUEST['cacheKey'])){
-    if ( strlen(trim($_REQUEST['cacheKey'])) < 4) {
-        $cacheKey = $userId . "-" . rand(1000, 9999);
-    }else {
-      $cacheKey = $_REQUEST['cacheKey'];
-    }
-  } else {
-    $cacheKey="";
-  }
-  cleanupDir("graph/cache/",86400);
-  // TODO: Add code to clean up dir
-  $smarty->assign('cacheKey', $cacheKey);
-  $cacheFileName = "graph/cache/" . $cacheKey . ".xml";
-  if (file_exists($cacheFileName)) {
-    unlink($cacheFileName);
-  }
-  $lineChartTemplate = file_get_contents("graph/default_line_chart_settings.xml.template");
-  $scatterChartTemplate = file_get_contents("graph/default_scatter_chart_settings.xml.template");
-
-  if (!file_exists($cacheFileName)) {
-    if (sizeOf($jobIds) > 0) {
-      if ($chartType == "scatter") {
-        $xml = $scatterChartTemplate;
-        $xml .= "<data>";
-        $xml .= getDataAsAmChartScatterXml($userId, $jobIds, $availFields, $fields, $startDateTime, $endDateTime, $percentile, $trimAbove, $adjustUsing, $trimBelow, $interval, $_SESSION['aggregateMethod']);
-      } else {
-        $xml = $lineChartTemplate;
-        $xml .= "<data>";
-        $xml .= getDataAsAmChartLineXml($userId, $jobIds, $availFields, $fields, $startDateTime, $endDateTime, $percentile, $trimAbove, $adjustUsing, $trimBelow, $interval, $_SESSION['aggregateMethod']);
-      }
-      $xml .= "</data>";
-      $xml .= "</settings>";
-      $fp = fopen($cacheFileName, "a+");
-      fwrite($fp, $xml);
-      fclose($fp);
-      $smarty->assign('graphDataFile', $cacheFileName);
-    }
-  }
-
   $smarty->assign('wptResultURL', $wptResult);
-
-  if (isset($_REQUEST['rpc'])) {
-    echo "SUCCESS" . "," . $cacheFileName;
-    exit;
-  }
-
   $smarty->display('report/flashGraph.tpl');
 }
 

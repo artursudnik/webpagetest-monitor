@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
 <head>
 <title>WebPageTest Monitor - Reports</title>
 {include file="headIncludes.tpl"}
 {literal}
+<link rel="stylesheet" href="css/reports/flashGraph.css" type="text/css">
 <style type="text/css">
   label {
     width: 15em;
@@ -11,149 +16,18 @@
     font-weight: normal;
   }
 </style>
-<script type="text/javascript">
-$(document).ready(function() {
-  $("#updateForm").validate();
-});
-function onloadInit() {
-  checkInterval();
-  adjustTimeFrame();
-}
-function adjustTimeFrame(){
-  timeFrameElement = document.getElementById('timeFrame');
-  timeFrameValue = timeFrameElement[timeFrameElement.selectedIndex].value;
-
-  startSelectElement = document.getElementById('startTimeSelect');
-  endSelectElement = document.getElementById('endTimeSelect');
-
-  if ( timeFrameValue > 0 ){
-    startSelectElement.style.visibility='hidden';
-    endSelectElement.style.visibility='hidden';
-  } else {
-    startSelectElement.style.visibility='visible';
-    endSelectElement.style.visibility='visible';
-
-  }
-
-  currentInterval = intervalElement.options[intervalElement.selectedIndex].value;
-  intervalElement = document.getElementById('interval');
-
-  ival = timeFrameValue / 150;
-  interval = 0;
-  if (ival > 300)  interval = 300;
-  if (ival > 900)  interval = 900;
-  if (ival > 1800) interval = 1800;
-  if (ival > 3600) interval = 3600;
-  if (ival > 10800)interval = 10800;
-  if (ival > 21600)interval = 21600;
-  if (ival > 43200)interval = 43200;
-  if (ival > 86400)interval = 86400;
-  if (currentInterval < interval) {
-    //intervalElement.value = interval;
-  }
-
-  //disableIntervalOptionsBelow(interval);
-}
-function checkInterval() {
-  intervalElement = document.getElementById('interval');
-  currentInterval = intervalElement.options[intervalElement.selectedIndex].value;
-  startMonthElement = document.getElementsByName('startMonth')[0];
-  startMonth = startMonthElement.options[startMonthElement.selectedIndex].value;
-  startDayElement = document.getElementsByName('startDay')[0];
-  startDay = startDayElement.options[startDayElement.selectedIndex].value;
-  startYearElement = document.getElementsByName('startYear')[0];
-  startYear = startYearElement.options[startYearElement.selectedIndex].value;
-  startHourElement = document.getElementsByName('startHour')[0];
-  startHour = startHourElement.options[startHourElement.selectedIndex].value;
-  start = ((new Date(startYear, startMonth, startDay, startHour)).getTime()) / 1000;
-
-  endMonthElement = document.getElementsByName('endMonth')[0];
-  endMonth = endMonthElement.options[endMonthElement.selectedIndex].value;
-  endDayElement = document.getElementsByName('endDay')[0];
-  endDay = endDayElement.options[endDayElement.selectedIndex].value;
-  endYearElement = document.getElementsByName('endYear')[0];
-  endYear = endYearElement.options[endYearElement.selectedIndex].value;
-  endHourElement = document.getElementsByName('endHour')[0];
-  endHour = endHourElement.options[endHourElement.selectedIndex].value;
-  end = ((new Date(endYear, endMonth, endDay, endHour)).getTime()) / 1000;
-
-  span = end - start;
-
-  ival = span / 150;
-  interval = 0;
-  if (ival > 300)  interval = 300;
-  if (ival > 900)  interval = 900;
-  if (ival > 1800) interval = 1800;
-  if (ival > 3600) interval = 3600;
-  if (ival > 10800)interval = 10800;
-  if (ival > 21600)interval = 21600;
-  if (ival > 43200)interval = 43200;
-  if (ival > 86400)interval = 86400;
-
-  if (currentInterval < interval) {
-    //intervalElement.value = interval;
-  }
-
-  //disableIntervalOptionsBelow(interval);
-
-}
-function disableIntervalOptionsBelow(value) {
-  // First reenable all of them
-  intervalElement = document.getElementById('interval');
-  for (i = intervalElement.length - 1; i >= 1; i--) {
-    intervalElement.options[i].disabled = false;
-  }
-  for (i = intervalElement.length - 1; i >= 1; i--) {
-    if (intervalElement.options[i].value < value) {
-      intervalElement.options[i].disabled = true;
-    }
-  }
-}
-function validateForm() {
-
-  return checkJobCount();
-}
-// Limit number of jobs to select
-function checkJobCount() {
-  var maxJobs = 8;
-  if ($('#jobs').val() == null) {
-    alert('Please select job(s)');
-    return false;
-  } else  if ($('#jobs').val().length > maxJobs) {
-    alert('Please Select '+maxJobs+' or less jobs');
-    return false;
-  } else {
-    return true;
-  }
-}
-
-
-function updateReport() {
-  if (!validateForm()) {
-    return false;
-  }
-  document.updateForm.act.value="report";
-  document.updateForm.submit();
-}
-function downloadData() {
-  if (!validateForm()) {
-    return false;
-  }
-  document.updateForm.act.value="download";
-  document.updateForm.submit();
-}
-function updateGraph() {
-  if (!validateForm()) {
-    return false;
-  }
-  document.getElementById('graphButton').disabled = true;
-  document.updateForm.act.value="graph";
-  document.updateForm.submit();
-}
-</script>
+<script type="text/javascript" src="js/amcharts/amcharts.js"></script>
+<script type="text/javascript" src="js/amcharts/serial.js"></script>
+<script type="text/javascript" src="js/amcharts/exporting/amexport.js"></script>
+<script type="text/javascript" src="js/amcharts/exporting/rgbcolor.js"></script>
+<script type="text/javascript" src="js/amcharts/exporting/canvg.js"></script>
+<script type="text/javascript" src="js/amcharts/exporting/filesaver.js"></script>
+<script type="text/javascript" src="js/reports/flashGraphOld.js"></script>
+<script type="text/javascript" src="js/reports/flashGraph.js"></script>
+<script type="text/javascript" src="js/reports/histograms.js"></script>
 {/literal}
 </head>
-<body onload="onloadInit();">
+<body>
 <div class="page">
 {include file='header.tpl'}
 {include file='navbar.tpl'}
@@ -192,22 +66,22 @@ function updateGraph() {
         <td style="vertical-align:top">
           <input id="startTime" type="hidden" name="startTime">
           <input id="endTime" type="hidden" name="endTime">
-          <table style="width: 315px">
+          <table style="width: 330px">
             <tr>
               <td style="text-align:right">Time Frame:</td>
               <td>
                 <select id="timeFrame" name="timeFrame" onchange="adjustTimeFrame();">
-                <option {if $timeFrame eq 0}selected="selected"{/if} value="0">Manual</option>
-                <option {if $timeFrame eq 900}selected="selected"{/if} value="900">15 Minutes</option>
-                <option {if $timeFrame eq 1800}selected="selected"{/if} value="1800">30 Minutes</option>
-                <option {if $timeFrame eq 3600}selected="selected"{/if} value="3600">1 Hour</option>
-                <option {if $timeFrame eq 10800}selected="selected"{/if} value="10800">3 Hours</option>
-                <option {if $timeFrame eq 21600}selected="selected"{/if} value="21600">6 Hours</option>
-                <option {if $timeFrame eq 43200}selected="selected"{/if} value="43200">12 Hours</option>
-                <option {if $timeFrame eq 86400}selected="selected"{/if} value="86400">Day</option>
-                <option {if $timeFrame eq 604800}selected="selected"{/if} value="604800">Week</option>
-                <option {if $timeFrame eq 1209600}selected="selected"{/if} value="1209600">2 Weeks</option>
-                <option {if $timeFrame eq 2419200}selected="selected"{/if} value="2419200">4 weeks</option>
+                    <option {if $timeFrame eq 0}selected="selected"{/if} value="0">Manual</option>
+                    <option {if $timeFrame eq 900}selected="selected"{/if} value="900">15 Minutes</option>
+                    <option {if $timeFrame eq 1800}selected="selected"{/if} value="1800">30 Minutes</option>
+                    <option {if $timeFrame eq 3600}selected="selected"{/if} value="3600">1 Hour</option>
+                    <option {if $timeFrame eq 10800}selected="selected"{/if} value="10800">3 Hours</option>
+                    <option {if $timeFrame eq 21600}selected="selected"{/if} value="21600">6 Hours</option>
+                    <option {if $timeFrame eq 43200}selected="selected"{/if} value="43200">12 Hours</option>
+                    <option {if $timeFrame eq 86400}selected="selected"{/if} value="86400">Day</option>
+                    <option {if $timeFrame eq 604800}selected="selected"{/if} value="604800">Week</option>
+                    <option {if $timeFrame eq 1209600}selected="selected"{/if} value="1209600">2 Weeks</option>
+                    <option {if $timeFrame eq 2419200}selected="selected"{/if} value="2419200">4 weeks</option>
                 </select>
               </td>
             </tr>
@@ -222,17 +96,18 @@ function updateGraph() {
             </tr>
             <tr>
               <td style="text-align:right">Interval:</td>
-              <td><select id="interval" name="interval" onchange="checkInterval();">
-                <option {if $interval eq 1}selected="selected"{/if} value="1">Max</option>
-                <option {if $interval eq 300}selected="selected"{/if} value="300">5 Minutes</option>
-                <option {if $interval eq 900}selected="selected"{/if} value="900">15 Minutes</option>
-                <option {if $interval eq 1800}selected="selected"{/if} value="1800">30 Minutes</option>
-                <option {if $interval eq 3600 or $interval eq 0}selected="selected"{/if} value="3600">1 Hour</option>
-                <option {if $interval eq 10800}selected="selected"{/if} value="10800">3 Hours</option>
-                <option {if $interval eq 21600}selected="selected"{/if} value="21600">6 Hours</option>
-                <option {if $interval eq 43200}selected="selected"{/if} value="43200">12 Hours</option>
-                <option {if $interval eq 86400}selected="selected"{/if} value="86400">Daily</option>
-                <option {if $interval eq 604800}selected="selected"{/if} value="604800">Weekly</option>
+              <td>
+                <select id="interval" name="interval" onchange="checkInterval();">
+                    <option {if $interval eq 1}selected="selected"{/if} value="1">Max</option>
+                    <option {if $interval eq 300}selected="selected"{/if} value="300">5 Minutes</option>
+                    <option {if $interval eq 900}selected="selected"{/if} value="900">15 Minutes</option>
+                    <option {if $interval eq 1800}selected="selected"{/if} value="1800">30 Minutes</option>
+                    <option {if $interval eq 3600 or $interval eq 0}selected="selected"{/if} value="3600">1 Hour</option>
+                    <option {if $interval eq 10800}selected="selected"{/if} value="10800">3 Hours</option>
+                    <option {if $interval eq 21600}selected="selected"{/if} value="21600">6 Hours</option>
+                    <option {if $interval eq 43200}selected="selected"{/if} value="43200">12 Hours</option>
+                    <option {if $interval eq 86400}selected="selected"{/if} value="86400">Daily</option>
+                    <option {if $interval eq 604800}selected="selected"{/if} value="604800">Weekly</option>
               </select>&nbsp;
               {*{if $intervalAuto}{$intervalAuto}{/if}*}
               </td>
@@ -274,22 +149,22 @@ function updateGraph() {
               </td>
               <td><select name="adjustUsing">
                 <optgroup label="First view">
-                <option value="AvgFirstViewFirstByte"
-                        {if $adjustUsing eq 'AvgFirstViewFirstByte'}selected="selected"{/if}>Time to first byte
-                </option>
-                <option value="AvgFirstViewStartRender"
-                        {if $adjustUsing eq 'AvgFirstViewStartRender'}selected="selected"{/if}>Start Render
-                </option>
-                <option value="AvgFirstViewDocCompleteTime"
-                        {if $adjustUsing eq 'AvgFirstViewDocCompleteTime'}selected="selected"{/if}>Doc Time
-                </option>
-                <option value="AvgFirstViewDomTime"
-                        {if $adjustUsing eq 'AvgFirstViewDomTime'}selected="selected"{/if}>Dom
-                  Time
-                </option>
-                <option value="AvgFirstViewFullyLoadedTime"
-                        {if $adjustUsing eq 'AvgFirstViewFullyLoadedTime'}selected="selected"{/if}>Fully Loaded
-                </option>
+                    <option value="AvgFirstViewFirstByte"
+                            {if $adjustUsing eq 'AvgFirstViewFirstByte'}selected="selected"{/if}>Time to first byte
+                    </option>
+                    <option value="AvgFirstViewStartRender"
+                            {if $adjustUsing eq 'AvgFirstViewStartRender'}selected="selected"{/if}>Start Render
+                    </option>
+                    <option value="AvgFirstViewDocCompleteTime"
+                            {if $adjustUsing eq 'AvgFirstViewDocCompleteTime'}selected="selected"{/if}>Doc Time
+                    </option>
+                    <option value="AvgFirstViewDomTime"
+                            {if $adjustUsing eq 'AvgFirstViewDomTime'}selected="selected"{/if}>Dom
+                      Time
+                    </option>
+                    <option value="AvgFirstViewFullyLoadedTime"
+                            {if $adjustUsing eq 'AvgFirstViewFullyLoadedTime'}selected="selected"{/if}>Fully Loaded
+                    </option>
                 </optgroup>
                 <optgroup label="Repeat view">
                     <option value="AvgRepeatViewFirstByte"
@@ -308,7 +183,7 @@ function updateGraph() {
                     <option value="AvgRepeatViewFullyLoadedTime"
                             {if $adjustUsing eq 'AvgRepeatViewFullyLoadedTime'}selected="true"{/if}>Fully Loaded
                     </option>
-                </optgroup>                
+                </optgroup>
               </select></td>
             </tr>
             <tr>
@@ -346,15 +221,16 @@ function updateGraph() {
         </td>
       </tr>
       <tr>
-        <td colspan="2">
+        <td>
           <div style="font-size:x-small;">
             {html_checkboxes name="fields" options=$availFieldKeysFV selected=$fieldsToDisplay separator=" "}<br>
             {html_checkboxes name="fields" options=$availFieldKeysRV selected=$fieldsToDisplay separator=" "}
           </div>
         </td>
-        <td>
-          <table style="cellpadding:0px;cellspacing:0px;margin:0px;border-spacing:0px">
+        <td colspan="2">
+          <table style="float:right;cellpadding:0px;cellspacing:0px;margin:0px;border-spacing:0px">
             <tr>
+              <td><input id="histogramButton" type="button" name="histogramButton" value="Histogram" /></td>
               <td><input id="graphButton" type="button" name="action"
                                                     onclick="updateGraph();" value="Graph"
                                                     style="margin:0px;margin-right:3px;"></td>
@@ -362,7 +238,8 @@ function updateGraph() {
                                                     onclick="updateReport();" value="Report"
                                                     style="margin:0px;margin-right:3px;"></td>
               <td><input type="button" name="action" onclick="downloadData();" value="Download"></td>
-              <td><input type="reset" value="Reset" style="margin:0px;"></td>
+              <td><input type="reset" value="Reset"></td>
+              <td><input type="button" id="graphJSONButton" value="Update Graph" style="margin:0px;"/></td>
             </tr>
           </table>
         </td>
@@ -382,46 +259,30 @@ function updateGraph() {
   {*<td align="center"><input type="button" name="action" onclick="shareReport();" value="Share"></td>*}
 {/if}
     {assign var="changeNoteFileName" value=""}
-{if $action eq 'graph'}
-    {if $graphDataFile}
-    {if $chartType eq "scatter"}
+</form>
 
-    {literal}
-      <script type="text/javascript" src="lib/amcharts/amxy/swfobject.js"></script>
-      <div style="width:auto;" align="center" id="flashcontent"><strong>You need to upgrade your Flash
-        Player</strong></div>
-
-    <script type="text/javascript">
-    // <![CDATA[
-    var so = new SWFObject("lib/amcharts/amxy/amxy.swf", "amchart", "100%", "600", "8", "#E2E2E2");
-    so.addVariable("chart_id", "amchart"); // if you have more then one chart in one page, set different chart_id for each chart
-    so.addVariable("path", "lib/amcharts/amxy");
-    so.addVariable("settings_file", escape('{/literal}{$graphDataFile}{literal}'),escape('{/literal}{$changeNoteFileName}{literal}'));
-    so.write("flashcontent");
-    // ]]>
-    </script>
-    {/literal}
-    {else}
-    {literal}
-      <script type="text/javascript" src="lib/amcharts/amline/swfobject.js"></script>
-      <div style="width:auto;" align="center" id="flashcontent"><strong>You need to upgrade your Flash
-        Player</strong></div>
-
-    <script type="text/javascript">
-    // <![CDATA[
-    var so = new SWFObject("lib/amcharts/amline/amline.swf", "amchart", "100%", "600", "8", "#E2E2E2");
-    so.addVariable("chart_id", "amchart"); // if you have more then one chart in one page, set different chart_id for each chart
-    so.addVariable("path", "lib/amcharts/amline");
-    so.addVariable("settings_file", escape('{/literal}{$graphDataFile}{literal}'),escape('{/literal}{$changeNoteFileName}{literal}'));
-    so.write("flashcontent");
-    // ]]>
-    </script>
-    {/literal}
-    {/if}
-      <div><input type="button" value="Save" onclick="exportGraph();"></div><br>
-    {/if}
-{/if}
-    {*<a href="javascript:document.getElementById('abbreviations').style.visibility='visible';">+</a>*}
+<div id="incompMessages">
+    <div class="message">
+        Warning! Your version of Internet Explorer does not support saving graph to file. Use any other modern browser or version 10 or greater of IE.
+    </div>
+</div>
+<div id="histogramsContainer" style="position: relative;">
+    <div id="histogram"></div>
+    <a href="#" id="hideHistograms" class="hide"><img src="img/silkicons/icons/cross.png" alt="Hide graph"/></a>
+    <div id="histogramOverlay">
+        <div style="padding-top: 30%;">
+            Working...
+        </div>
+    </div>
+</div>
+<div id="graphContainer" style="position: relative">
+    <div id="graph"></div>
+    <a href="#" id="hideGraph" class="hide"><img src="img/silkicons/icons/cross.png" alt="Hide graph"/></a>
+    <div id="graphOverlay">
+        <div style="padding-top: 30%;">
+            Working...
+        </div>
+    </div>
     <div id="abbreviations" style="visibility:visible;">
       <table class="pretty">
         <tr style="font-size:x-small;">
@@ -441,33 +302,19 @@ function updateGraph() {
         </tr>
       </table>
     </div>
-  </form>
+</div>
+
 </div>
 </div>
 </div>
 </div>
 </div>
+{if $action eq 'graph'}
 {literal}
-<script type="text/javascript">
-  /**
-   *Called when the chart inits
-   */
-  var flashMovie;
-  function amChartInited(chart_id) {
-    flashMovie = document.getElementById(chart_id);
-    document.getElementById("chartfinished").value = chart_id;
-  }
-  function reloadData() {
-    return flashMovie.reloadAll();
-  }
-  function exportGraph() {
-    flashMovie.exportImage();
-  }
-  endh = document.getElementsByName("endHour")[0];
-  starth = document.getElementsByName("startHour")[0];
-  endh.addEventListener('change',checkInterval, false);
-  starth.addEventListener('change',checkInterval, false);
-</script>
+    <script type="text/javascript">
+        wptmonitor.graph.action = "graph";
+    </script>
 {/literal}
+{/if}
 </body>
 </html>
