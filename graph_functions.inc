@@ -7,6 +7,9 @@
  * @param  $endDateTime
  * @param  $interval
  * @param  $datas
+ * @param  $fields
+ * @param  $aggregateMethod
+ * @throws Exception
  * @return array
  */
 function getResultsDataAvg($startDateTime, $endDateTime, $interval, $datas, $fields, $aggregateMethod) {
@@ -33,12 +36,12 @@ function getResultsDataAvg($startDateTime, $endDateTime, $interval, $datas, $fie
       case '99th':
           $percentile=99;
           break;
-          
+
       default:
           throw new Exception("Unknown aggregate method: $aggregateMethod", 1);
           break;
   }
-  
+
   $pointer = $startDateTime;
 //  $id = $datas[0]['Id'];
   $data = array();
@@ -51,7 +54,7 @@ function getResultsDataAvg($startDateTime, $endDateTime, $interval, $datas, $fie
       if($aggregateMethod == "avg") {
         $entry[$field] = getAverage($pointer, $interval, $datas, $field, $percentile);
       }else {
-        $entry[$field] = getPercentile($pointer, $interval, $datas, $field, $percentile);          
+        $entry[$field] = getPercentile($pointer, $interval, $datas, $field, $percentile);
       }
     }
     $data[] = $entry;
@@ -60,60 +63,26 @@ function getResultsDataAvg($startDateTime, $endDateTime, $interval, $datas, $fie
   return $data;
 }
 
-function getMedian($startAt, $increment, &$data, $field) {
-  $numberOfElements = 0;
-  $tmpData = array();
-  
-  foreach ($data as $r) {
-    if ($r['Date'] > $startAt && ($r['Date'] < $startAt + $increment)) {
-      $tmpData[] = $r[$field];
-    }
-  }
-  
-  $numberOfElements = count($tmpData);
-  
-  sort($tmpData);
-  
-  if ($numberOfElements > 0) {
-    if( $numberOfElements == 1) {
-      $result = $tmpData[0];
-    } else {
-      if($numberOfElements%2) {
-        $result = $tmpData[($numberOfElements - 1)/2];
-      } else {
-        $result = ($tmpData[($numberOfElements-1)/2] + $tmpData[$numberOfElements/2])/2;
-      }
-    }
-  } else {
-    $result = NULL;
-  }
-  
-  unset($tmpData);
-  
-  return $result;
-}
-
 function getPercentile($startAt, $increment, &$data, $field, $percentile) {
   if ($percentile < 0 OR $percentile > 100) {
       throw new Exception("$percentile have to be bigger than 0 and smaller than 100", 1);
   }
-  $numberOfElements = 0;
   $tmpData = array();
-  
+
   foreach ($data as $r) {
     if ($r['Date'] > $startAt && ($r['Date'] < $startAt + $increment)) {
       $tmpData[] = $r[$field];
     }
   }
-  
+
   $numberOfElements = count($tmpData);
-  
+
   sort($tmpData);
-  
+
   if ($numberOfElements > 0) {
       $percentilePosition = ($numberOfElements-1)*$percentile/100;
-      $n1 = floor($percentilePosition);
-      $n2 = ceil($percentilePosition);
+      $n1 = (int)floor($percentilePosition);
+      $n2 = (int)ceil($percentilePosition);
       $value = $tmpData[$n1] + ($tmpData[$n2] - $tmpData[$n1]) * $percentile/100;
       return $value;
   } else {
@@ -127,6 +96,8 @@ function getPercentile($startAt, $increment, &$data, $field, $percentile) {
  *
  * @param  $userId
  * @param  $jobIds
+ * @param  $availFields
+ * @param  $fields
  * @param  $start
  * @param  $end
  * @param  $percentile
@@ -134,7 +105,7 @@ function getPercentile($startAt, $increment, &$data, $field, $percentile) {
  * @param  $adjustUsing
  * @param  $trimBelow
  * @param  $interval
- * @param int $includeRepeatView
+ * @param  $aggregateMethod
  * @return string
  */
 function getDataAsAmChartLineXml($userId,
@@ -170,12 +141,12 @@ function getDataAsAmChartLineXml($userId,
   $xmlData .= "\n";
   $xmlData .= "<graphs>";
   $xmlData .= "\n";
-  $xmlData .= getChangeNotesAsAmLineChartXml($userId,$jobIds,$start,$end);
+  $xmlData .= getChangeNotesAsAmLineChartXml( $userId, $start, $end );
   $jobTable = Doctrine_Core::getTable('WPTJob');
   foreach ($jobIds as $jobId) {
     $job = $jobTable->find($jobId);
     $jobName = $job['Label'];
-    $datas = getGraphData($userId, $jobId, $start, $end, $percentile, $trimAbove, $adjustUsing, $trimBelow, $dbFields);
+    $datas = getGraphData( $jobId, $start, $end, $percentile, $trimAbove, $adjustUsing, $trimBelow, $dbFields );
 
     if ($interval > 1) {
       $datas = getResultsDataAvg($start, $end, $interval, $datas, $fields, $aggregateMethod);
@@ -240,12 +211,12 @@ function getDataAsAmChartScatterXml($userId,
   $xmlData .= "\n";
   $xmlData .= "<graphs>";
   $xmlData .= "\n";
-  $xmlData .= getChangeNotesAsAmScatterChartXml($userId,$jobIds,$start,$end);
+  $xmlData .= getChangeNotesAsAmScatterChartXml( $userId, $start, $end );
   $jobTable = Doctrine_Core::getTable('WPTJob');
   foreach ($jobIds as $jobId) {
     $job = $jobTable->find($jobId);
     $jobName = $job['Label'];
-    $datas = getGraphData($userId, $jobId, $start, $end, $percentile, $trimAbove, $adjustUsing, $trimBelow, $dbFields);
+    $datas = getGraphData( $jobId, $start, $end, $percentile, $trimAbove, $adjustUsing, $trimBelow, $dbFields );
 
     if ($interval > 1) {
       $datas = getResultsDataAvg($start, $end, $interval, $datas, $fields, $aggregateMethod);
@@ -294,6 +265,7 @@ function getDataAsAmChartScatterXml($userId,
  * @param  $startDateTime
  * @param  $endDateTime
  * @param int $interval
+ * @param bool $includeChangeNotes
  * @return array
  */
 function getSeriesDataForMultiJobs($user_id, $jobIds, $startDateTime, $endDateTime, $interval = 0, $includeChangeNotes = true) {
@@ -325,7 +297,7 @@ function getSeriesDataForMultiJobs($user_id, $jobIds, $startDateTime, $endDateTi
     }
   }
   if ( $includeChangeNotes ){
-    $changeNotes = getChangeNoteData($user_id,$jobIds,$startDateTime,$endDateTime);
+    $changeNotes = getChangeNoteData( $user_id, $startDateTime, $endDateTime );
     foreach ($changeNotes as $note){
       $entry = array();
       $entry['Date'] = $note['Date'];
@@ -336,7 +308,7 @@ function getSeriesDataForMultiJobs($user_id, $jobIds, $startDateTime, $endDateTi
   return $result;
 }
 
-function getChangeNoteData($user_id, $jobIds, $startDateTime, $endDateTime) {
+function getChangeNoteData( $user_id, $startDateTime, $endDateTime ) {
     $q = Doctrine_Query::create()->from('ChangeNote c')
         ->andWhere('c.Date <= ?', $endDateTime)
         ->andWhere('c.Date >= ?', $startDateTime)
@@ -347,15 +319,11 @@ function getChangeNoteData($user_id, $jobIds, $startDateTime, $endDateTime) {
     return $result;
 }
 
-function getGraphData($user_id,
-                      $job_id,
-                      $startDateTime,
-                      $endDateTime,
-                      $percentile = 1,
-                      $trimAbove = null,
-                      $adjustUsing,
-                      $trimBelow = null,
-                      $fields = null) {
+function getStatusesToNotInclude() {
+    return array(-214702489, -214669720, -214669721, 100, 403, 404, 500, 501, 502, 503, 504, 999, 99996, 99997, 99998);
+}
+
+function getGraphData( $job_id, $startDateTime, $endDateTime, $percentile = 1, $trimAbove = null, $adjustUsing, $trimBelow = null, $fields = null ) {
   $trimAbove = $trimAbove * 1000;
   $trimBelow = $trimBelow * 1000;
 
@@ -365,11 +333,12 @@ function getGraphData($user_id,
   $q = Doctrine_Query::create()->select($fields)->from('WPTResult r')
       ->where('r.ValidationState < ?', 2)
 //      ->andWhere('r.WPTJob.UserId = ?', $user_id)
-      ->andWhere('r.AvgFirstViewFirstByte > 0')
+      // ->andWhere('r.AvgFirstViewFirstByte > 0')
 //      ->andWhere('r.AvgFirstViewStartRender > 0')
-      ->andWhere('r.AvgFirstViewDocCompleteTime > 0')
-      ->andWhere('r.AvgFirstViewDocCompleteTime != ?', '')
+      // ->andWhere('r.AvgFirstViewDocCompleteTime > 0')
+      // ->andWhere('r.AvgFirstViewDocCompleteTime != ?', '')
       ->andWhere('r.WPTJobId = ?', $job_id)
+      ->andWhereNotIn('r.Status', getStatusesToNotInclude())
       ->andWhere('r.Date <= ?', $endDateTime)
       ->andWhere('r.Date >= ?', $startDateTime);
 
@@ -425,7 +394,7 @@ function getResultsData($label, $startDateTime, $endDateTime, $resolution, $resu
     }
     $pointer += $resolution;
   }
-  return samples;
+  return $samples;
 }
 
 function getAverage($startAt, $increment, $data, $field) {
@@ -449,11 +418,8 @@ function getAverage($startAt, $increment, $data, $field) {
   }
   return $result;
 }
-function getChangeNotesAsAmLineChartXml($userId,
-                                 $jobIds,
-                                 $start,
-                                 $end) {
-  $changeNotes = getChangeNoteData($userId, $jobIds, $start, $end);
+function getChangeNotesAsAmLineChartXml( $userId, $start, $end ) {
+  $changeNotes = getChangeNoteData( $userId, $start, $end );
   $xmlData = '';
   $xmlData .= "<graph title=\"Change Notes\" gid=\"0\">";
   $xmlData .= "\n";
@@ -467,12 +433,9 @@ function getChangeNotesAsAmLineChartXml($userId,
   $xmlData .= "\n";
   return $xmlData;
 }
-function getChangeNotesAsAmScatterChartXml($userId,
-                                 $jobIds,
-                                 $start,
-                                 $end) {
+function getChangeNotesAsAmScatterChartXml( $userId, $start, $end ) {
   $xmlData ="";
-  $changeNotes = getChangeNoteData($userId, $jobIds, $start, $end);
+  $changeNotes = getChangeNoteData( $userId, $start, $end );
   $xmlData .= "<graph title=\"Change Notes\" gid=\"0\">";
   $xmlData .= "\n";
 
@@ -486,4 +449,3 @@ function getChangeNotesAsAmScatterChartXml($userId,
   $xmlData .= "\n";
   return $xmlData;
 }
-?>

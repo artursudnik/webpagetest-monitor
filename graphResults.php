@@ -129,7 +129,7 @@ try
       $job = $q->fetchOne();
       $q->free(true);
       $label = $job['Label'];
-      $result = getGraphData($user_id, $job_id, $startDT, $endDT, $percentile, $trimAbove,$adjustUsing, $trimBelow);
+      $result = getGraphData( $job_id, $startDT, $endDT, $percentile, $trimAbove, $adjustUsing, $trimBelow );
       $job_results[$label]=$result;
     }
 
