@@ -17,7 +17,7 @@ var wptmonitor = (function(window, $, wptmonitor){
                 }
             })
             .fail(function(e){
-                console.error(e);
+                alert(e);
             });
         });
 
@@ -339,7 +339,6 @@ var wptmonitor = (function(window, $, wptmonitor){
                 startDateTime: startDateTime,
                 endDateTime  : startDateTime + interval
             };
-            console.log(params);
             return "listResults.php?"+$.param(params);
         }
         // drawTable(data);

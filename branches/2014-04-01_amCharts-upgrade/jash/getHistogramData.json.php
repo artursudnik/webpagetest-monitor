@@ -120,7 +120,6 @@ try{
     $response['results']['bucketWidth'] = $bucketWidth;
 
 } catch(exception $e) {
-    FB::log($e);
     $response['status'] = 500;
     $response['message'] = $e->getMessage();
     setHttpResponseCode(500);

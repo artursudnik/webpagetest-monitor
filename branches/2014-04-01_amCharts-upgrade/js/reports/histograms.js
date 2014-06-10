@@ -79,7 +79,6 @@ var wptmonitor = (function(window, $, wptmonitor){
                     scrollToGraph();
                 }
             }, 10);
-            console.log(data);
         })
         .fail(function(e){
             deferred.reject(e);
