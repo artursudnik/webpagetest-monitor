@@ -105,12 +105,12 @@ var wptmonitor = (function(window, $, wptmonitor){
             if(data.fields.hasOwnProperty(i)){
                 var field = data.fields[i];
                 graphs.push({
-                    id        : data.fields[i],
-                    title     : data.fieldJobLabelMap[field] + " " + data.fieldMetricMap[field],
-                    balloonText: "<b>[[value]]</b> samples for <b>[[category]]</b> seconds",
-                    valueField: field,
-                    type      : 'smoothedLine',
-                    fillAlphas: 0.5
+                    id         : data.fields[i],
+                    title      : data.fieldJobLabelMap[field] + " " + data.fieldMetricMap[field],
+                    balloonText: "[[title]]<br><b>[[value]]</b> samples for <b>[[category]]</b> seconds",
+                    valueField : field,
+                    type       : 'smoothedLine',
+                    fillAlphas : 0.5
                 });
             }
         }
