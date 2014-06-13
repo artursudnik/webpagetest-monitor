@@ -16,15 +16,15 @@
     font-weight: normal;
   }
 </style>
-<script type="text/javascript" src="js/amcharts/amcharts.js"></script>
-<script type="text/javascript" src="js/amcharts/serial.js"></script>
-<script type="text/javascript" src="js/amcharts/exporting/amexport.js"></script>
-<script type="text/javascript" src="js/amcharts/exporting/rgbcolor.js"></script>
-<script type="text/javascript" src="js/amcharts/exporting/canvg.js"></script>
-<script type="text/javascript" src="js/amcharts/exporting/filesaver.js"></script>
-<script type="text/javascript" src="js/reports/flashGraphOld.js"></script>
-<script type="text/javascript" src="js/reports/flashGraph.js"></script>
-<script type="text/javascript" src="js/reports/histograms.js"></script>
+<script type="text/javascript" src="js/amcharts/amcharts.js?v=1.5"></script>
+<script type="text/javascript" src="js/amcharts/serial.js?v=1.5"></script>
+<script type="text/javascript" src="js/amcharts/exporting/amexport.js?v=1.5"></script>
+<script type="text/javascript" src="js/amcharts/exporting/rgbcolor.js?v=1.5"></script>
+<script type="text/javascript" src="js/amcharts/exporting/canvg.js?v=1.5"></script>
+<script type="text/javascript" src="js/amcharts/exporting/filesaver.js?v=1.5"></script>
+<script type="text/javascript" src="js/reports/flashGraphOld.js?v=1.5"></script>
+<script type="text/javascript" src="js/reports/flashGraph.js?v=1.5"></script>
+<script type="text/javascript" src="js/reports/histograms.js?v=1.5"></script>
 {/literal}
 </head>
 <body>
