@@ -82,6 +82,12 @@ var wptmonitor = (function(window, $, wptmonitor){
         })
         .fail(function(e){
             deferred.reject(e);
+        }).always(function(){
+            setTimeout(function(){
+                $('#histogramOverlay').fadeOut(600, function(){
+                    deferred.resolve();
+                });
+            }, 10);
         });
 
         return deferred.promise();
