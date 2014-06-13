@@ -8,7 +8,7 @@
 <title>WebPageTest Monitor - Reports</title>
 {include file="headIncludes.tpl"}
 {literal}
-<link rel="stylesheet" href="css/reports/flashGraph.css" type="text/css">
+<link rel="stylesheet" href="css/reports/flashGraph.css?v=1.5" type="text/css">
 <style type="text/css">
   label {
     width: 15em;
