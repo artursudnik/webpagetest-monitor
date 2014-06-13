@@ -1,0 +1,5 @@
+<IfModule mod_expires.c>
+    <FilesMatch "\.(css)$">
+        ExpiresDefault "access plus 1 day"
+    </FilesMatch>
+</IfModule>
