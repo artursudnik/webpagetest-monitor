@@ -10,16 +10,16 @@ php_value docref_ext .php
 AddDefaultCharset UTF-8
 
 <IfModule mod_headers.c>
-	<IfModule mod_expires.c>
-		ExpiresActive On
-		<FilesMatch "\.(php)$">
-			Header set Expires "Thu, 15 Apr 1981 20:00:00 GMT"
-			Header set Cache-Control "no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
-			Header set Pragma "no-cache"
-		</FilesMatch>
-	</IfModule>
-	
-	<FilesMatch "\.(php|html|htm)$">
-		Header set X-UA-Compatible IE=edge
-	</FilesMatch>
+    <IfModule mod_expires.c>
+        ExpiresActive On
+        <FilesMatch "\.(php)$">
+            Header set Expires "Thu, 15 Apr 1981 20:00:00 GMT"
+            Header set Cache-Control "no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+            Header set Pragma "no-cache"
+        </FilesMatch>
+    </IfModule>
+
+    <FilesMatch "\.(php|html|htm)$">
+        Header set X-UA-Compatible IE=edge
+    </FilesMatch>
 </IfModule>
