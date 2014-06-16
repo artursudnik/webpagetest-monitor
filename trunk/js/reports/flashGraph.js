@@ -314,7 +314,7 @@ var wptmonitor = (function(window, $, wptmonitor){
                 categoryAxis       : {
                     parseDates      : true,
                     minorGridEnabled: false,
-                    minPeriod       : "ss"
+                    minPeriod       : "mm"
                 },
                 legend             : {
                     fontSize: 9
