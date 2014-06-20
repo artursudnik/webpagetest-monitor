@@ -47,6 +47,10 @@ var wptmonitor = (function(window, $, wptmonitor){
             );
         }
 
+        $(window).bind("beforeunload", function() {
+            return "You are leaving this page.";
+        });
+
     });
 
     function submitFormAJAX() {
