@@ -1,5 +1,6 @@
 # do not integrate into trunk
 
+# prevents caching of the resources
 <IfModule mod_headers.c>
 	<IfModule mod_expires.c>
 		ExpiresActive On
