@@ -305,7 +305,7 @@ function getTestersInformation($host = null){
     $xml = new SimpleXMLElement($resultXml);
     
     foreach ($xml->data->location as $loc) {
-      $id = $loc->id;
+      $id = (string)$loc->id;
       $cnt = 0;
       $agents = array();
       if ( $loc->testers->tester ){
@@ -329,7 +329,7 @@ function getTestersInformation($host = null){
       $testerInfo['XML'] = $loc;
       $testerInfo['Agents'] = $agents;
       $testerInfo['id'] = $id;
-      $testerInformation['"'.$id.'"'] = $testerInfo;
+      $testerInformation[$id] = $testerInfo;
     }
   }
 
@@ -364,13 +364,15 @@ function getLocationInformation($host = null) {
       $location['host'] = $host['Label'];
       $location['hostURL'] = $host['HostURL'];
       $location['id'] = $loc->id;
-      $id = $loc->id;
+      $id = (string)$loc->id;
       $location['Label'] = $loc->Label;
       $location['Browser'] = $loc->Browser;
       $location['PendingTests'] = $loc->PendingTests->Total;
       $location['PendingTestsHighPriority'] = $loc->PendingTests->HighPriority;
       $location['PendingTestsLowPriority'] = $loc->PendingTests->LowPriority;
-      $location['AgentCount'] = $testerInformation['"'.$id.'"']['AgentCount'];
+      if(array_key_exists($id, $testerInformation)) {
+          $location['AgentCount'] = $testerInformation[$id]['AgentCount'];
+      }
       $loc = $locationTable->findOneByLocation($loc->id);
       if (!$location['GreenLimit'] = $loc['QueueThresholdGreenLimit']) {
         $location['GreenLimit'] = 15;
@@ -378,7 +380,7 @@ function getLocationInformation($host = null) {
       if (!$location['YellowLimit'] = $loc['QueueThresholdYellowLimit']) {
         $location['YellowLimit'] = 30;
       }
-      $locations["'".$id."'"] = $location;
+      $locations[$id] = $location;
     }
   }
   //SELECT location, firstviewonly, runs, frequency, (runs * (2-(firstviewonly is not null))*60/frequency) as runrate FROM `wptjob` WHERE active group by location;
