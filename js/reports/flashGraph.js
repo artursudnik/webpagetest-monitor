@@ -3,6 +3,8 @@ var wptmonitor = (function(window, $, wptmonitor){
 
     var chart;
 
+    var preventUnload = true;
+
     $(document).ready(function() {
         "use strict";
 
@@ -48,10 +50,16 @@ var wptmonitor = (function(window, $, wptmonitor){
         }
 
         $(window).bind("beforeunload", function() {
-            return "You are leaving this page.";
+            if(preventUnload){
+                return "You are leaving this page.";
+            }
         });
 
     });
+
+    function doNotPreventUnloadConfirmation(){
+        preventUnload = false;
+    }
 
     function submitFormAJAX() {
         "use strict";
@@ -360,7 +368,10 @@ var wptmonitor = (function(window, $, wptmonitor){
 
     window.getChart      = function(){return chart;};
 
-    wptmonitor.graph = {initialized: true};
+    wptmonitor.graph = {
+        initialized: true,
+        doNotPreventUnloadConfirmation: doNotPreventUnloadConfirmation
+    };
 
     return wptmonitor;
 })(window, jQuery, wptmonitor || {});
