@@ -6,6 +6,7 @@ var wptmonitor = (function(window, $, wptmonitor){
     $(document).ready(function(){
         $('#histogramButton').on('click', function () {
             if(getSelectedJobsCount() == 0){
+                alert('Please select job(s).');
                 return;
             }
             var button = $(this);
