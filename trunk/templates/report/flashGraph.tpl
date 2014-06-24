@@ -232,7 +232,7 @@
               <input type="button" id="graphJSONButton" value="Graph" style="margin:0px;"/>
               {if $smarty.session.ls_admin}
                   <input id="graphButton" type="button" name="action"
-                                                        onclick="updateGraph();" value="Graph">
+                                                        onclick="updateGraph();" value="Graph (reload)">
                   <input id="reportButton" type="button" name="action"
                                                         onclick="updateReport();" value="Report">
                   <input type="button" name="action" onclick="downloadData();" value="Download">
