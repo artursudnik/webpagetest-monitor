@@ -159,6 +159,7 @@ var wptmonitor = (function(window, $, wptmonitor){
         }
         document.getElementById('graphButton').disabled = true;
         document.updateForm.act.value="graph";
+        window.wptmonitor.graph.doNotPreventUnloadConfirmation();
         document.updateForm.submit();
     }
 
