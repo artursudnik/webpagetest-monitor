@@ -229,11 +229,13 @@
         </td>
         <td colspan="2" style="text-align: center">
               <input id="histogramButton" type="button" name="histogramButton" value="Histogram" />
-              <input id="graphButton" type="button" name="action"
-                                                    onclick="updateGraph();" value="Graph">
-              <input id="reportButton" type="button" name="action"
-                                                    onclick="updateReport();" value="Report">
-              <input type="button" name="action" onclick="downloadData();" value="Download">
+              {if $smarty.session.ls_admin}
+                  <input id="graphButton" type="button" name="action"
+                                                        onclick="updateGraph();" value="Graph">
+                  <input id="reportButton" type="button" name="action"
+                                                        onclick="updateReport();" value="Report">
+                  <input type="button" name="action" onclick="downloadData();" value="Download">
+              {/if}
               <input type="reset" value="Reset">
               <input type="button" id="graphJSONButton" value="Update Graph" style="margin:0px;"/>
         </td>
