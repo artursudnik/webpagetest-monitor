@@ -113,7 +113,7 @@
               </td>
             </tr>
             <tr>
-              <td colspan="1" style="text-align:right">
+              <td style="text-align:right">
                 Chart type:
               </td>
               <td>
@@ -124,7 +124,7 @@
               </td>
             </tr>
             <tr>
-                <td align="right">
+                <td style="text-align:right">
                     Aggregate:
                 </td>
                 <td>
