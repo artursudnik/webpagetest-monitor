@@ -229,6 +229,7 @@
         </td>
         <td colspan="2" style="text-align: center">
               <input id="histogramButton" type="button" name="histogramButton" value="Histogram" />
+              <input type="button" id="graphJSONButton" value="Graph" style="margin:0px;"/>
               {if $smarty.session.ls_admin}
                   <input id="graphButton" type="button" name="action"
                                                         onclick="updateGraph();" value="Graph">
@@ -237,7 +238,6 @@
                   <input type="button" name="action" onclick="downloadData();" value="Download">
               {/if}
               <input type="reset" value="Reset">
-              <input type="button" id="graphJSONButton" value="Update Graph" style="margin:0px;"/>
         </td>
       </tr>
     </table>
