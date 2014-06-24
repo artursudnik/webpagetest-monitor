@@ -8,7 +8,7 @@
 <title>WebPageTest Monitor - Reports</title>
 {include file="headIncludes.tpl"}
 {literal}
-<link rel="stylesheet" href="css/reports/flashGraph.css?v=1.5" type="text/css">
+<link rel="stylesheet" href="css/reports/flashGraph.css?v=1.6" type="text/css">
 <style type="text/css">
   label {
     width: 15em;
@@ -16,15 +16,15 @@
     font-weight: normal;
   }
 </style>
-<script type="text/javascript" src="js/amcharts/amcharts.js?v=1.5"></script>
-<script type="text/javascript" src="js/amcharts/serial.js?v=1.5"></script>
-<script type="text/javascript" src="js/amcharts/exporting/amexport.js?v=1.5"></script>
-<script type="text/javascript" src="js/amcharts/exporting/rgbcolor.js?v=1.5"></script>
-<script type="text/javascript" src="js/amcharts/exporting/canvg.js?v=1.5"></script>
-<script type="text/javascript" src="js/amcharts/exporting/filesaver.js?v=1.5"></script>
-<script type="text/javascript" src="js/reports/flashGraphOld.js?v=1.5"></script>
-<script type="text/javascript" src="js/reports/flashGraph.js?v=1.5"></script>
-<script type="text/javascript" src="js/reports/histograms.js?v=1.5"></script>
+<script type="text/javascript" src="js/amcharts/amcharts.js?v=1.6"></script>
+<script type="text/javascript" src="js/amcharts/serial.js?v=1.6"></script>
+<script type="text/javascript" src="js/amcharts/exporting/amexport.js?v=1.6"></script>
+<script type="text/javascript" src="js/amcharts/exporting/rgbcolor.js?v=1.6"></script>
+<script type="text/javascript" src="js/amcharts/exporting/canvg.js?v=1.6"></script>
+<script type="text/javascript" src="js/amcharts/exporting/filesaver.js?v=1.6"></script>
+<script type="text/javascript" src="js/reports/flashGraphOld.js?v=1.6"></script>
+<script type="text/javascript" src="js/reports/flashGraph.js?v=1.6"></script>
+<script type="text/javascript" src="js/reports/histograms.js?v=1.6"></script>
 {/literal}
 </head>
 <body>
