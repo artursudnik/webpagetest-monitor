@@ -11,6 +11,9 @@ var wptmonitor = (function(window, $, wptmonitor){
         var act = wptmonitor.graph.action;
 
         $('#graphJSONButton').on('click', function(){
+            if(!checkJobCount()) {
+                return;
+            }
             var chartContainerIsHidden = isChartContainerHidden();
             submitFormAJAX()
             .done(function(){
@@ -66,27 +69,23 @@ var wptmonitor = (function(window, $, wptmonitor){
         var deferred=$.Deferred();
         var serializedFormData = $('#updateForm').serializeArray();
 
-        if(!checkJobCount()) {
-            deferred.reject("No jobs selected");
-        } else {
-            getChartDataWithGUIBehavior(serializedFormData)
-            .done(function(d){
-                try {
-                    d = convertData2avgCharts(d);
-                    drawChart(d);
-                } catch(e) {
-                    alert('Error occured while drawing chart: ' + e);
-                    deferred.reject(e);
-                    return;
-                }
+        getChartDataWithGUIBehavior(serializedFormData)
+        .done(function(d){
+            try {
+                d = convertData2avgCharts(d);
+                drawChart(d);
+            } catch(e) {
+                alert('Error occured while drawing chart: ' + e);
+                deferred.reject(e);
+                return;
+            }
 
-                deferred.resolve();
+            deferred.resolve();
 
-            })
-            .fail(function(a){
-                deferred.reject(a.message);
-            });
-        }
+        })
+        .fail(function(a){
+            deferred.reject(a.message);
+        });
 
         return deferred.promise();
     }
