@@ -228,20 +228,16 @@
           </div>
         </td>
         <td colspan="2">
-          <table style="float:right;cellpadding:0px;cellspacing:0px;margin:0px;border-spacing:0px">
-            <tr>
-              <td><input id="histogramButton" type="button" name="histogramButton" value="Histogram" /></td>
-              <td><input id="graphButton" type="button" name="action"
+              <input id="histogramButton" type="button" name="histogramButton" value="Histogram" />
+              <input id="graphButton" type="button" name="action"
                                                     onclick="updateGraph();" value="Graph"
-                                                    style="margin:0px;margin-right:3px;"></td>
-              <td><input id="reportButton" type="button" name="action"
+                                                    style="margin:0px;margin-right:3px;">
+              <input id="reportButton" type="button" name="action"
                                                     onclick="updateReport();" value="Report"
-                                                    style="margin:0px;margin-right:3px;"></td>
-              <td><input type="button" name="action" onclick="downloadData();" value="Download"></td>
-              <td><input type="reset" value="Reset"></td>
-              <td><input type="button" id="graphJSONButton" value="Update Graph" style="margin:0px;"/></td>
-            </tr>
-          </table>
+                                                    style="margin:0px;margin-right:3px;">
+              <input type="button" name="action" onclick="downloadData();" value="Download">
+              <input type="reset" value="Reset">
+              <input type="button" id="graphJSONButton" value="Update Graph" style="margin:0px;"/>
         </td>
       </tr>
     </table>
