@@ -227,14 +227,12 @@
             {html_checkboxes name="fields" options=$availFieldKeysRV selected=$fieldsToDisplay separator=" "}
           </div>
         </td>
-        <td colspan="2">
+        <td colspan="2" style="text-align: center">
               <input id="histogramButton" type="button" name="histogramButton" value="Histogram" />
               <input id="graphButton" type="button" name="action"
-                                                    onclick="updateGraph();" value="Graph"
-                                                    style="margin:0px;margin-right:3px;">
+                                                    onclick="updateGraph();" value="Graph">
               <input id="reportButton" type="button" name="action"
-                                                    onclick="updateReport();" value="Report"
-                                                    style="margin:0px;margin-right:3px;">
+                                                    onclick="updateReport();" value="Report">
               <input type="button" name="action" onclick="downloadData();" value="Download">
               <input type="reset" value="Reset">
               <input type="button" id="graphJSONButton" value="Update Graph" style="margin:0px;"/>
