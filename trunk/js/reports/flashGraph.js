@@ -117,7 +117,6 @@ var wptmonitor = (function(window, $, wptmonitor){
             data: params,
             method: "POST"
         }).done(function(data){
-            console.log(data);
             if(data.status !== 200) {
                 d.reject('Server-side error: ' + data.status + ' ' + data.message);
             } else {
