@@ -75,16 +75,15 @@ var wptmonitor = (function(window, $, wptmonitor){
                 d = convertData2avgCharts(d);
                 drawChart(d);
             } catch(e) {
-                alert('Error occured while drawing chart: ' + e);
-                deferred.reject(e);
+                deferred.reject('Error occured while drawing chart: ' + e);
                 return;
             }
 
             deferred.resolve();
 
         })
-        .fail(function(a){
-            deferred.reject(a.message);
+        .fail(function(error){
+            deferred.reject(error);
         });
 
         return deferred.promise();
@@ -118,19 +117,19 @@ var wptmonitor = (function(window, $, wptmonitor){
             data: params,
             method: "POST"
         }).done(function(data){
+            console.log(data);
             if(data.status !== 200) {
-                d.reject({
-                    status:  data.status,
-                    message: data.message
-                });
+                d.reject('Server-side error: ' + data.status + ' ' + data.message);
             } else {
                 d.resolve(data.results);
             }
-        }).error(function(jqxhr){
-            d.reject({
-                status: jqxhr.status,
-                message: jqxhr.statusText
-            });
+        }).error(function(jqxhr, textStatus, errorThrown){
+            switch (textStatus) {
+                case 'parsererror':
+                    d.reject('Wrong response from server: parsererror');
+                default:
+                    d.reject(textStatus);
+            }
         });
         return d.promise();
     }
@@ -148,9 +147,8 @@ var wptmonitor = (function(window, $, wptmonitor){
             })
         ).done(function(data){
             d.resolve(data);
-        }).fail(function(a){
-            alert('Error getting data from the server\n'+a.message+' ('+a.status+')');
-            d.reject(a);
+        }).fail(function(e){
+            d.reject(e);
         }).always(function(){
             $('#graphOverlay').fadeOut(600, function(){
                 $(button).removeAttr('disabled');
