@@ -5,7 +5,7 @@
 <!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
 <head>
-{assign var="version" value="1.8"}
+{assign var="version" value="1.9"}
 <title>WebPageTest Monitor - Reports</title>
 {include file="headIncludes.tpl"}
 <link rel="stylesheet" href="css/reports/flashGraph.css?v={$version}" type="text/css">
