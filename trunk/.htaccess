@@ -10,6 +10,7 @@ php_value docref_ext .php
 AddDefaultCharset UTF-8
 
 <IfModule mod_headers.c>
+    Header unset ETag
     <FilesMatch "\.(php|html|htm)$">
         Header set X-UA-Compatible IE=edge
     </FilesMatch>
