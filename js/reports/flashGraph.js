@@ -6,8 +6,6 @@ var wptmonitor = (function(window, $, wptmonitor){
     var preventUnload = true;
 
     $(document).ready(function() {
-        "use strict";
-
         var act = wptmonitor.graph.action;
 
         $('#graphJSONButton').on('click', function(){
@@ -65,7 +63,6 @@ var wptmonitor = (function(window, $, wptmonitor){
     }
 
     function submitFormAJAX() {
-        "use strict";
         var deferred=$.Deferred();
         var serializedFormData = $('#updateForm').serializeArray();
 
@@ -90,7 +87,6 @@ var wptmonitor = (function(window, $, wptmonitor){
     }
 
     function showChartContainer(){
-        "use strict";
         var d = $.Deferred();
         var container = $("#graphContainer");
 
@@ -110,7 +106,6 @@ var wptmonitor = (function(window, $, wptmonitor){
     }
 
     function getChartData(params){
-        "use strict";
         var d = $.Deferred();
         getServersideMaxExecutionTime()
             .done(function(maxExecutionTime){
@@ -166,7 +161,6 @@ var wptmonitor = (function(window, $, wptmonitor){
 
 
     function getChartDataWithGUIBehavior(params){
-        "use strict";
         var d = $.Deferred();
         var button = $("#graphJSONButton");
 
@@ -195,7 +189,6 @@ var wptmonitor = (function(window, $, wptmonitor){
      * @param {Array} data
      */
     function convertData2avgCharts (data) {
-        "use strict";
         var chartData = [];
         var seriesToJobNameMap = {};
         var seriesToMetricNameMap = {};
@@ -281,8 +274,6 @@ var wptmonitor = (function(window, $, wptmonitor){
     }
 
     function drawChart(data) {
-        "use strict";
-
         var getMetricName = data.getMetricName || function() {return 'No getMetricName function';};
         var getJobName    = data.getJobName ||    function() {return 'No getJobName function';};
         var getJobId      = data.getJobId ||      function() {return 'No getJobId function';};
