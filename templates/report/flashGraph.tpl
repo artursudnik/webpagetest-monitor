@@ -5,27 +5,28 @@
 <!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
 <head>
+{assign var="version" value="1.8"}
 <title>WebPageTest Monitor - Reports</title>
 {include file="headIncludes.tpl"}
-{literal}
-<link rel="stylesheet" href="css/reports/flashGraph.css?v=1.8" type="text/css">
+<link rel="stylesheet" href="css/reports/flashGraph.css?v={$version}" type="text/css">
 <style type="text/css">
+  {literal}
   label {
     width: 15em;
     float: none;
     font-weight: normal;
   }
+  {/literal}
 </style>
-<script type="text/javascript" src="js/amcharts/amcharts.js?v=1.8"></script>
-<script type="text/javascript" src="js/amcharts/serial.js?v=1.8"></script>
-<script type="text/javascript" src="js/amcharts/exporting/amexport.js?v=1.8"></script>
-<script type="text/javascript" src="js/amcharts/exporting/rgbcolor.js?v=1.8"></script>
-<script type="text/javascript" src="js/amcharts/exporting/canvg.js?v=1.8"></script>
-<script type="text/javascript" src="js/amcharts/exporting/filesaver.js?v=1.8"></script>
-<script type="text/javascript" src="js/reports/flashGraphOld.js?v=1.8"></script>
-<script type="text/javascript" src="js/reports/flashGraph.js?v=1.8"></script>
-<script type="text/javascript" src="js/reports/histograms.js?v=1.8"></script>
-{/literal}
+<script type="text/javascript" src="js/amcharts/amcharts.js?v={$version}"></script>
+<script type="text/javascript" src="js/amcharts/serial.js?v={$version}"></script>
+<script type="text/javascript" src="js/amcharts/exporting/amexport.js?v={$version}"></script>
+<script type="text/javascript" src="js/amcharts/exporting/rgbcolor.js?v={$version}"></script>
+<script type="text/javascript" src="js/amcharts/exporting/canvg.js?v={$version}"></script>
+<script type="text/javascript" src="js/amcharts/exporting/filesaver.js?v={$version}"></script>
+<script type="text/javascript" src="js/reports/flashGraphOld.js?v={$version}"></script>
+<script type="text/javascript" src="js/reports/flashGraph.js?v={$version}"></script>
+<script type="text/javascript" src="js/reports/histograms.js?v={$version}"></script>
 </head>
 <body>
 <div class="page">
