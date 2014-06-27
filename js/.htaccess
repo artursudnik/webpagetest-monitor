@@ -1,6 +1,7 @@
 Options -Indexes
 
 <IfModule mod_expires.c>
+    ExpiresActive On
     <FilesMatch "\.(js)$">
         ExpiresDefault "access plus 1 day"
     </FilesMatch>
