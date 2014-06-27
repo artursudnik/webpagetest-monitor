@@ -112,26 +112,59 @@ var wptmonitor = (function(window, $, wptmonitor){
     function getChartData(params){
         "use strict";
         var d = $.Deferred();
-        $.ajax({
-            url: 'jash/flashGraph.json.php',
-            data: params,
-            method: "POST"
-        }).done(function(data){
-            if(data.status !== 200) {
-                d.reject('Server-side error: ' + data.status + ' ' + data.message);
-            } else {
-                d.resolve(data.results);
-            }
-        }).error(function(jqxhr, textStatus, errorThrown){
-            switch (textStatus) {
-                case 'parsererror':
-                    d.reject('Wrong response from server: parsererror');
-                default:
-                    d.reject(textStatus);
-            }
-        });
+        getServersideMaxExecutionTime()
+            .done(function(maxExecutionTime){
+                console.log(maxExecutionTime);
+                $.ajax({
+                    url: 'jash/flashGraph.json.php',
+                    data: params,
+                    method: "POST",
+                    timeout: maxExecutionTime * 1000
+                }).done(function(data){
+                    if(data.status !== 200) {
+                        d.reject('Server-side error: ' + data.status + ' ' + data.message);
+                    } else {
+                        d.resolve(data.results);
+                    }
+                }).error(function(jqxhr, textStatus, errorThrown){
+                    switch (textStatus) {
+                        case 'parsererror':
+                            d.reject('Wrong response from server: parsererror');
+                        default:
+                            d.reject(textStatus);
+                    }
+                });
+            }).fail(function(e){
+                d.reject('Error while getting execution time limit from server: ' + e);
+            });
+
         return d.promise();
     }
+
+    var getServersideMaxExecutionTime = (function(){
+        var maxExecTime;
+        var lastChecked;
+        var validTime = 60; //in seconds
+        return function(){
+            var d = $.Deferred();
+            if(maxExecTime === undefined || (new Date()) - lastChecked > validTime * 1000) {
+                lastChecked = new Date();
+                $.ajax({
+                    url: 'jash/flashGraph.json.php',
+                    data: {action: 'getMaxExecutionTime'}
+                }).done(function(data){
+                    maxExecTime=data.results.max_execution_time;
+                    d.resolve(maxExecTime);
+                }).error(function(jqxhr, textStatus, errorThrown){
+                    d.reject(textStatus);
+                });
+            }else{
+                d.resolve(maxExecTime);
+            }
+            return d.promise();
+        }
+    })();
+
 
     function getChartDataWithGUIBehavior(params){
         "use strict";
