@@ -114,7 +114,6 @@ var wptmonitor = (function(window, $, wptmonitor){
         var d = $.Deferred();
         getServersideMaxExecutionTime()
             .done(function(maxExecutionTime){
-                console.log(maxExecutionTime);
                 $.ajax({
                     url: 'jash/flashGraph.json.php',
                     data: params,
