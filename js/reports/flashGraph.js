@@ -137,24 +137,17 @@ var wptmonitor = (function(window, $, wptmonitor){
 
     var getServersideMaxExecutionTime = (function(){
         var maxExecTime;
-        var lastChecked;
-        var validTime = 60; //in seconds
         return function(){
             var d = $.Deferred();
-            if(maxExecTime === undefined || (new Date()) - lastChecked > validTime * 1000) {
-                lastChecked = new Date();
-                $.ajax({
-                    url: 'jash/flashGraph.json.php',
-                    data: {action: 'getMaxExecutionTime'}
-                }).done(function(data){
-                    maxExecTime=data.results.max_execution_time;
-                    d.resolve(maxExecTime);
-                }).error(function(jqxhr, textStatus, errorThrown){
-                    d.reject(textStatus);
-                });
-            }else{
+            $.ajax({
+                url: 'jash/flashGraph.json.php',
+                data: {action: 'getMaxExecutionTime'}
+            }).done(function(data){
+                maxExecTime=data.results.max_execution_time;
                 d.resolve(maxExecTime);
-            }
+            }).error(function(jqxhr, textStatus, errorThrown){
+                d.reject(textStatus);
+            });
             return d.promise();
         }
     })();
