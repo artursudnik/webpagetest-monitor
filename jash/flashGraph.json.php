@@ -24,6 +24,8 @@ if(null === $userId = getCurrentUserId()) {
 }
 
 if(array_key_exists('action', $_GET) && $_GET['action'] == 'getMaxExecutionTime') {
+    header("Expires: ".gmdate("D, d M Y H:i:s", time() + 60)." GMT");
+    header("Pragma: cache");
     $response['status'] = 200;
     $response['message'] = 'OK';
     $response['results'] = array('max_execution_time' => ini_get('max_execution_time'));
