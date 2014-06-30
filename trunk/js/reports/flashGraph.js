@@ -124,6 +124,7 @@ var wptmonitor = (function(window, $, wptmonitor){
                     switch (textStatus) {
                         case 'parsererror':
                             d.reject('Wrong response from server: parsererror');
+                            break;
                         default:
                             d.reject(textStatus);
                     }
