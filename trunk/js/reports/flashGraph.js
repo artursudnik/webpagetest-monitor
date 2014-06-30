@@ -125,6 +125,9 @@ var wptmonitor = (function(window, $, wptmonitor){
                         case 'parsererror':
                             d.reject('Wrong response from server: parsererror');
                             break;
+                        case 'timeout':
+                            d.reject('Server side processing time limit ('+maxExecutionTime+'s) exceeded.');
+                            break;
                         default:
                             d.reject(textStatus);
                     }
