@@ -47,18 +47,18 @@
     display: none;
 }
 
-html.ie6 #incompMessages,
-html.ie7 #incompMessages,
-html.ie8 #incompMessages,
-html.ie9 #incompMessages
+body.ie6 #incompMessages,
+body.ie7 #incompMessages,
+body.ie8 #incompMessages,
+body.ie9 #incompMessages
 {
     display:block;
 }
 
-html.ie6 #incompMessages,
-html.ie7 #incompMessages .message,
-html.ie8 #incompMessages .message,
-html.ie9 #incompMessages .message
+body.ie6 #incompMessages,
+body.ie7 #incompMessages .message,
+body.ie8 #incompMessages .message,
+body.ie9 #incompMessages .message
 {
     display: block;
 }
