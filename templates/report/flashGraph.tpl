@@ -195,8 +195,44 @@
                            name="trimBelow" size="6" value="{$trimBelow}">
                 </div>
             </fieldset>
-            <fieldset id="histogramFieldset" class="wptmon">
+            <fieldset id="histogramFieldset" class="wptmon" style="visibility: hidden">
                 <legend>Histogram</legend>
+                <div>
+                    <label for="histogramMinLimit">Minimum value:</label>
+                    {*<input type="text" class="number" size="6" id="histogramMinLimit" name="histogramMinLimit"/>*}
+                    <select id="histogramMinLimit" name="histogramMinLimit">
+                        <option value="0">0</option>
+                        <option value="0.5">0.5</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="250">250</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="histogramMaxLimit">Maximum value:</label>
+                    {*<input type="text" class="number" size="6"*}
+                           {*id="histogramMaxLimit"*}
+                           {*name="histogramMaxLimit"/>*}
+                    <select id="histogramMaxLimit"
+                            name="histogramMaxLimit">
+                        <option value="0">0</option>
+                        <option value="0.5">0.5</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="250">250</option>
+                        <option value="-1" selected="">unlimited</option>
+                    </select>
+                </div>
             </fieldset>
         </td>
       </tr>
