@@ -58,7 +58,7 @@ try{
         ->where('r.ValidationState < ?', 2)
         // ->andWhere("$field is not null")
         ->andWhere("$field > 0")
-        ->andWhere("$field < 60000")
+        ->andWhere("$field < ?", $requestDataSanitized['maxLimit']*1000)
         ->andWhere("date > ?", $requestDataSanitized['startTimestamp'])
         ->andWhere("date < ?", $requestDataSanitized['endTimestamp'])
         // ->andWhere('r.AvgFirstViewFirstByte > 0')
@@ -154,6 +154,8 @@ function sanitizeData($requestArray) {
 
     $resultArray['width']      = @filter_var((int)$requestArray['width'], FILTER_VALIDATE_INT, array('options' => array('default' => 100, 'min_range' => 10)));
     $resultArray['job']        = @filter_var((int)$requestArray['job'],   FILTER_VALIDATE_INT, array('options' => array('default' => 0, 'min_range' => 1)));
+
+    $resultArray['maxLimit']   = @filter_var((int)$requestArray['maxLimit'], FILTER_VALIDATE_INT, array('options' => array('default' => 120, 'min_range' => 0)));
 
     return $resultArray;
 }
