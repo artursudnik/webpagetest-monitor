@@ -1,3 +1,39 @@
+fieldset.wptmon {
+    padding: 0 2px;
+}
+
+fieldset.wptmon label {
+    float: left;
+    text-align: right;
+    width: 67px;
+    padding-right: 3px;
+    margin-top: 2px;
+}
+
+fieldset.wptmon input, fieldset.wptmon select {
+    float: left;
+}
+
+fieldset.wptmon div {
+    margin-bottom: 2px;
+    overflow: auto;
+}
+
+fieldset.wptmon select {
+    margin: 0;
+}
+
+#timeframeFieldset label{
+    width: 30px;
+}
+
+#timeframeFieldset{float: left}
+
+#timeframeFieldset, #graphFilteringFieldset{width: 270px}
+
+
+#graphFieldset, #histogramFieldset, #graphFilteringFieldset{float: left}
+
 #histogramsContainer {
     display: none;
     background-color: #fff;
