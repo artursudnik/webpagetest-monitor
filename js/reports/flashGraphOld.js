@@ -170,5 +170,6 @@ var wptmonitor = (function(window, $, wptmonitor){
     window.checkJobCount    = checkJobCount;
     window.checkInterval    = checkInterval;
     window.adjustTimeFrame  = adjustTimeFrame;
+    window.validateForm     = validateForm;
 
 })(window, jQuery, wptmonitor || {});
