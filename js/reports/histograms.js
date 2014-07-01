@@ -1,6 +1,10 @@
 var wptmonitor = (function(window, $, wptmonitor){
     "use strict";
 
+    var config = {
+        histogramMaxLimit : 60 // in seconds
+    };
+
     var chart;
 
     $(document).ready(function(){
@@ -317,6 +321,7 @@ var wptmonitor = (function(window, $, wptmonitor){
         var params = getFormParams();
 
         params.job = jobId;
+        params.maxLimit = config.histogramMaxLimit;
 
         $.ajax({
            url: 'jash/getHistogramData.json.php',
