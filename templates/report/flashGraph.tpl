@@ -40,7 +40,7 @@
     <tr>
       <td>
         <form name="folderForm">
-        <a href="listFolders.php?folder=Job"><b>Folder:</b></a> <select name="folderId" onchange="wptmonitor.graph.doNotPreventUnloadConfirmation(); document.folderForm.submit();">
+        <label for="folderId"><a href="listFolders.php?folder=Job"><b>Folder:</b></a></label> <select id="folderId" name="folderId" onchange="wptmonitor.graph.doNotPreventUnloadConfirmation(); document.folderForm.submit();">
       {html_select_tree permission=$smarty.const.PERMISSION_READ shares=$shares tree=$folderTree selected=$folderId}
   </select>
   </form>
@@ -62,14 +62,14 @@
                   size="7"
                   style="width:440px; height:280px">{html_options options=$jobs selected=$job_ids}</select>
 
-          <div style="font-size:x-small;">Select up to 3 jobs</div>
+          <div style="font-size:x-small;"><label for="jobs">Select up to 3 jobs</label></div>
         </td>
         <td style="vertical-align:top">
           <input id="startTime" type="hidden" name="startTime">
           <input id="endTime" type="hidden" name="endTime">
           <table style="width: 330px">
             <tr>
-              <td style="text-align:right">Time Frame:</td>
+              <td style="text-align:right"><label for="timeFrame">Time Frame:</label></td>
               <td>
                 <select id="timeFrame" name="timeFrame" onchange="adjustTimeFrame();">
                     <option {if $timeFrame eq 0}selected="selected"{/if} value="0">Manual</option>
@@ -96,7 +96,7 @@
               <td>{html_select_date start_year='2010' onchange='checkInterval();' prefix='end' time=$endTime} {html_select_time prefix='end' time=$endTime display_minutes=false display_seconds=false}</td>
             </tr>
             <tr>
-              <td style="text-align:right">Interval:</td>
+              <td style="text-align:right"><label for="interval">Interval:</label></td>
               <td>
                 <select id="interval" name="interval" onchange="checkInterval();">
                     <option {if $interval eq 1}selected="selected"{/if} value="1">Max</option>
@@ -115,7 +115,7 @@
             </tr>
             <tr>
               <td style="text-align:right">
-                Chart type:
+                <label for="chartType">Chart type:</label>
               </td>
               <td>
                 <select id="chartType" name="chartType" >
@@ -126,7 +126,7 @@
             </tr>
             <tr>
                 <td style="text-align:right">
-                    Aggregate:
+                    <label for="aggregateMethod">Aggregate:</label>
                 </td>
                 <td>
                     <select id="aggregateMethod" name="aggregateMethod">
@@ -142,13 +142,13 @@
             </tr>
           </table>
         </td>
-        <td style="vertical-align:top; padding:0%">
+        <td style="vertical-align:top; padding:0">
           <table style="float: right">
             <tr>
               <td colspan="1" style="text-align:right">
-                Filter Using:
+                <label for="adjustUsing">Filter Using:</label>
               </td>
-              <td><select name="adjustUsing">
+              <td><select id="adjustUsing" name="adjustUsing">
                 <optgroup label="First view">
                     <option value="AvgFirstViewFirstByte"
                             {if $adjustUsing eq 'AvgFirstViewFirstByte'}selected="selected"{/if}>Time to first byte
@@ -169,47 +169,48 @@
                 </optgroup>
                 <optgroup label="Repeat view">
                     <option value="AvgRepeatViewFirstByte"
-                            {if $adjustUsing eq 'AvgRepeatViewFirstByte'}selected="true"{/if}>Time to first byte
+                            {if $adjustUsing eq 'AvgRepeatViewFirstByte'}selected=""{/if}>Time to first byte
                     </option>
                     <option value="AvgRepeatViewStartRender"
-                            {if $adjustUsing eq 'AvgRepeatViewStartRender'}selected="true"{/if}>Start Render
+                            {if $adjustUsing eq 'AvgRepeatViewStartRender'}selected=""{/if}>Start Render
                     </option>
                     <option value="AvgRepeatViewDocCompleteTime"
-                            {if $adjustUsing eq 'AvgRepeatViewDocCompleteTime'}selected="true"{/if}>Doc Time
+                            {if $adjustUsing eq 'AvgRepeatViewDocCompleteTime'}selected=""{/if}>Doc Time
                     </option>
                     <option value="AvgRepeatViewDomTime"
-                            {if $adjustUsing eq 'AvgRepeatViewDomTime'}selected="true"{/if}>Dom
+                            {if $adjustUsing eq 'AvgRepeatViewDomTime'}selected=""{/if}>Dom
                       Time
                     </option>
                     <option value="AvgRepeatViewFullyLoadedTime"
-                            {if $adjustUsing eq 'AvgRepeatViewFullyLoadedTime'}selected="true"{/if}>Fully Loaded
+                            {if $adjustUsing eq 'AvgRepeatViewFullyLoadedTime'}selected=""{/if}>Fully Loaded
                     </option>
                 </optgroup>
               </select></td>
             </tr>
             <tr>
               <td style="text-align:right">
-                Percentile:
+                  <label for="percentile">Percentile:</label>
               </td>
-              <td><select name="percentile">
-                <option {if $percentile eq "1"}selected="selected"{/if} value="1">Max</option>
-                <option {if $percentile eq "0.95"}selected="selected"{/if} value="0.95">95th</option>
-                <option {if $percentile eq "0.9"}selected="selected"{/if} value="0.9">90th</option>
-                <option {if $percentile eq "0.8"}selected="selected"{/if} value="0.8">80th</option>
-                <option {if $percentile eq "0.7"}selected="selected"{/if} value="0.7">70th</option>
-                <option {if $percentile eq "0.6"}selected="selected"{/if} value="0.6">60th</option>
-                <option {if $percentile eq "0.5"}selected="selected"{/if} value="0.5">50th</option>
-              </select>
+              <td>
+                  <select id="percentile" name="percentile">
+                    <option {if $percentile eq "1"}selected="selected"{/if} value="1">Max</option>
+                    <option {if $percentile eq "0.95"}selected="selected"{/if} value="0.95">95th</option>
+                    <option {if $percentile eq "0.9"}selected="selected"{/if} value="0.9">90th</option>
+                    <option {if $percentile eq "0.8"}selected="selected"{/if} value="0.8">80th</option>
+                    <option {if $percentile eq "0.7"}selected="selected"{/if} value="0.7">70th</option>
+                    <option {if $percentile eq "0.6"}selected="selected"{/if} value="0.6">60th</option>
+                    <option {if $percentile eq "0.5"}selected="selected"{/if} value="0.5">50th</option>
+                  </select>
               </td>
             </tr>
             <tr>
-              <td style="text-align:right">Trim above:</td>
+              <td style="text-align:right"><label for="trimAbove">Trim above:</label></td>
               <td><input class="number" id="trimAbove" type="text"
                          name="trimAbove" size="6" value="{$trimAbove}">
               </td>
             </tr>
             <tr>
-              <td style="text-align:right">Trim below:</td>
+              <td style="text-align:right"><label for="trimBelow">Trim below:</label></td>
               <td><input class="number" id="trimBelow" type="text"
                          name="trimBelow" size="6" value="{$trimBelow}">
               </td>
@@ -230,7 +231,7 @@
         </td>
         <td colspan="2" style="text-align: center">
               <input id="histogramButton" type="button" name="histogramButton" value="Histogram" />
-              <input type="button" id="graphJSONButton" value="Graph" style="margin:0px;"/>
+              <input type="button" id="graphJSONButton" value="Graph" style="margin:0"/>
               {if $smarty.session.ls_admin}
                   <input id="graphButton" type="button" name="action"
                                                         onclick="updateGraph();" value="Graph (reload)">
@@ -246,7 +247,7 @@
 {include file='report/report.tpl'}
 <br>
 <div style="padding:15px;background-color:#f5f5f5;">
-  <h4>Share URL:</h4> <textarea onClick="javascript:this.focus();this.select();" readonly="true" id="shareUrl" style="width:100%;height:75px"></textarea>
+  <h4><label for="shareUrl">Share URL:</label></h4> <textarea onClick="this.focus();this.select();" readonly="" id="shareUrl" style="width:100%;height:75px"></textarea>
 </div><br>
 <script>
   loc = document.location.toString();
