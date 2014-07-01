@@ -34,6 +34,10 @@ fieldset.wptmon select {
 
 #graphFieldset, #histogramFieldset, #graphFilteringFieldset{float: left}
 
+#histogramFieldset label{
+    width: 88px
+}
+
 #histogramsContainer {
     display: none;
     background-color: #fff;
