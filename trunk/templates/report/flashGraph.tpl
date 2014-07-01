@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
-<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
-<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<html>
 <head>
 {assign var="version" value="1.9"}
 <title>WebPageTest Monitor - Reports</title>
@@ -28,7 +24,11 @@
 <script type="text/javascript" src="js/reports/flashGraph.js?v={$version}"></script>
 <script type="text/javascript" src="js/reports/histograms.js?v={$version}"></script>
 </head>
-<body>
+<!--[if lt IE 7 ]> <body class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <body class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <body class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <body class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <body class=""> <!--<![endif]-->
 <div class="page">
 {include file='header.tpl'}
 {include file='navbar.tpl'}
