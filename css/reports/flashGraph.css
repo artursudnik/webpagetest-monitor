@@ -40,6 +40,18 @@ fieldset.wptmon select {
     width: 97px
 }
 
+#metricsFieldset tr.head th{
+    width: 40px;
+}
+
+#metricsFieldset th.firstCol{
+    text-align: right;
+}
+
+#metricsFieldset td {
+    text-align: center;
+}
+
 fieldset .badValue label {
     color: #ff0000;
 }
