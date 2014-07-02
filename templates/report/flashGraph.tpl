@@ -206,7 +206,7 @@
                                      name="trimBelow" size="6" value="{$trimBelow}">
                           </div>
                           <div>
-                              <label style="width: 95px">Display scrollbar:</label>
+                              <label for="displayGraphScrollbar" style="width: 95px">Display scrollbar:</label>
                               <input type="checkbox" checked="" id="displayGraphScrollbar" name="displayGraphScrollbar"/>
                           </div>
                       </fieldset>
@@ -244,7 +244,7 @@
                           </div>
                           <div></div>
                           <div>
-                              <label>Display scrollbar:</label>
+                              <label for="displayHistogramScrollbar">Display scrollbar:</label>
                               <input type="checkbox" id="displayHistogramScrollbar" name="displayHistogramScrollbar" checked=""/>
                           </div>
                       </fieldset>
