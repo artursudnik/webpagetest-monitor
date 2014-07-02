@@ -194,6 +194,10 @@
                     <input class="number" id="trimBelow" type="text"
                            name="trimBelow" size="6" value="{$trimBelow}">
                 </div>
+                <div>
+                    <label style="width: 95px">Display scrollbar:</label>
+                    <input type="checkbox" checked="" id="displayGraphScrollbar" name="displayGraphScrollbar"/>
+                </div>
             </fieldset>
             <fieldset id="histogramFieldset" class="wptmon">
                 <legend>Histogram</legend>
@@ -227,6 +231,7 @@
                         <option value="-1" selected="">unlimited</option>
                     </select>
                 </div>
+                <div></div>
                 <div>
                     <label>Display scrollbar:</label>
                     <input type="checkbox" id="displayHistogramScrollbar" name="displayHistogramScrollbar" checked=""/>
