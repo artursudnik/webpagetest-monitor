@@ -58,7 +58,7 @@ try{
         ->where('r.ValidationState < ?', 2)
         // ->andWhere("$field is not null")
         ->andWhere("$field > 0")
-        ->andWhere("$field < ?", $requestDataSanitized['maxLimit']*1000)
+
         ->andWhere("date > ?", $requestDataSanitized['startTimestamp'])
         ->andWhere("date < ?", $requestDataSanitized['endTimestamp'])
         // ->andWhere('r.AvgFirstViewFirstByte > 0')
@@ -68,6 +68,14 @@ try{
         ->andWhereNotIn('r.Status', getStatusesToNotInclude())
         ->groupBy("bucket")
         ->orderBy("bucket");
+
+        if($requestDataSanitized['histMinLimit'] > 0) {
+            $q->andWhere("$field >= ?", $requestDataSanitized['histMinLimit']*1000);
+        }
+
+        if($requestDataSanitized['histMaxLimit'] > 0) {
+            $q->andWhere("$field <= ?", $requestDataSanitized['histMaxLimit']*1000);
+        }
 
         $series = $q->fetchArray();
 
@@ -155,7 +163,8 @@ function sanitizeData($requestArray) {
     $resultArray['width']      = @filter_var((int)$requestArray['width'], FILTER_VALIDATE_INT, array('options' => array('default' => 100, 'min_range' => 10)));
     $resultArray['job']        = @filter_var((int)$requestArray['job'],   FILTER_VALIDATE_INT, array('options' => array('default' => 0, 'min_range' => 1)));
 
-    $resultArray['maxLimit']   = @filter_var((int)$requestArray['maxLimit'], FILTER_VALIDATE_INT, array('options' => array('default' => 120, 'min_range' => 0)));
+    $resultArray['histMinLimit']   = @filter_var((int)$requestArray['histMinLimit'], FILTER_VALIDATE_INT, array('options' => array('default' => 0, 'min_range' => 0)));
+    $resultArray['histMaxLimit']   = @filter_var((int)$requestArray['histMaxLimit'], FILTER_VALIDATE_INT, array('options' => array('default' => -1, 'min_range' => -1)));
 
     return $resultArray;
 }
