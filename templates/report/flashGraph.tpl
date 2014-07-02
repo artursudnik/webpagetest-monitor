@@ -195,7 +195,7 @@
                            name="trimBelow" size="6" value="{$trimBelow}">
                 </div>
             </fieldset>
-            <fieldset id="histogramFieldset" class="wptmon" style="visibility: hidden">
+            <fieldset id="histogramFieldset" class="wptmon">
                 <legend>Histogram</legend>
                 <div>
                     <label for="histogramMinLimit">Minimum value:</label>

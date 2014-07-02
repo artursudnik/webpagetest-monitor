@@ -321,7 +321,6 @@ var wptmonitor = (function(window, $, wptmonitor){
         var params = getFormParams();
 
         params.job = jobId;
-        params.maxLimit = config.histogramMaxLimit;
 
         $.ajax({
            url: 'jash/getHistogramData.json.php',
@@ -361,7 +360,9 @@ var wptmonitor = (function(window, $, wptmonitor){
             timeFrame  : $("#timeFrame").val(),
             field      : $.makeArray($("input[name='fields[]']:checked").map(function(){
                 return $(this).val();
-            }))
+            })),
+            histMinLimit: $('select[name="histogramMinLimit"]').val(),
+            histMaxLimit: $('select[name="histogramMaxLimit"]').val()
         };
     }
 
