@@ -366,7 +366,8 @@ var wptmonitor = (function(window, $, wptmonitor){
                 return $(this).val();
             })),
             histMinLimit: $('select[name="histogramMinLimit"]').val(),
-            histMaxLimit: $('select[name="histogramMaxLimit"]').val()
+            histMaxLimit: $('select[name="histogramMaxLimit"]').val(),
+            histogramResolution: $('select[name="histogramResolution"]').val()
         };
     }
 
