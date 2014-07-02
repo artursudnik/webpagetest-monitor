@@ -251,13 +251,38 @@
                               <input type="checkbox" id="displayHistogramScrollbar" name="displayHistogramScrollbar" checked=""/>
                           </div>
                       </fieldset>
+                      <fieldset id="metricsFieldset" style="float: left; width: 300px">
+                          <legend>Metrics</legend>
+                          <table>
+                              <tr class="head">
+                                  <th></th>
+                                  <th>TTFB</th>
+                                  <th>Render</th>
+                                  <th>Doc</th>
+                                  <th>Dom</th>
+                                  <th>Fully</th>
+                                  <th></th>
+                              </tr>
+                              <tr>
+                                  <th class="firstCol">FV</th>
+                                  <td>
+                                      {html_checkboxes name="fields" values=$availFieldKeysFV selected=$fieldsToDisplay separator="</td><td>" labels=false}
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <th class="firstCol">RV</th>
+                                  <td>
+                                      {html_checkboxes name="fields" values=$availFieldKeysRV selected=$fieldsToDisplay separator="</td><td>" labels=false}
+                                  </td>
+                              </tr>
+                          </table>
+                      </fieldset>
                   </td>
               </tr>
               <tr>
                   <td>
                       <div style="font-size:x-small;">
-                          {html_checkboxes name="fields" options=$availFieldKeysFV selected=$fieldsToDisplay separator=" "}<br>
-                          {html_checkboxes name="fields" options=$availFieldKeysRV selected=$fieldsToDisplay separator=" "}
+
                       </div>
                   </td>
                   <td style="text-align: center">
