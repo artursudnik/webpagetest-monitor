@@ -17,6 +17,7 @@ fieldset.wptmon input, fieldset.wptmon select {
 fieldset.wptmon div {
     margin-bottom: 2px;
     overflow: auto;
+    height: 20px;
 }
 
 fieldset.wptmon select {
