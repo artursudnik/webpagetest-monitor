@@ -211,7 +211,7 @@ var wptmonitor = (function(window, $, wptmonitor){
     /**
      *
      * @param {{bucketWidth, minBucket, maxBucket, jobId, fields: [], datasets: {metric, series: {bucket, count}[], maxBucket, minBucket}[], jobLabel}[]} data
-     * @returns {{dataset: {}[], fields: Array, fieldJobIdMap: {}, fieldJobLabelMap: {}, fieldMetricMap: {}}}
+     * @returns {{dataset: {}, fields: Array, fieldJobIdMap: {}, fieldJobLabelMap: {}, fieldMetricMap: {}}}
      */
     function convertHistogramData(data) {
 
