@@ -199,7 +199,6 @@
                 <legend>Histogram</legend>
                 <div>
                     <label for="histogramMinLimit">Minimum value:</label>
-                    {*<input type="text" class="number" size="6" id="histogramMinLimit" name="histogramMinLimit"/>*}
                     <select id="histogramMinLimit" name="histogramMinLimit">
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -214,9 +213,6 @@
                 </div>
                 <div>
                     <label for="histogramMaxLimit">Maximum value:</label>
-                    {*<input type="text" class="number" size="6"*}
-                           {*id="histogramMaxLimit"*}
-                           {*name="histogramMaxLimit"/>*}
                     <select id="histogramMaxLimit"
                             name="histogramMaxLimit">
                         <option value="0">0</option>
