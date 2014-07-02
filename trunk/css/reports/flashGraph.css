@@ -28,19 +28,22 @@ fieldset.wptmon select {
     width: 30px;
 }
 
-#timeframeFieldset{float: left}
+#timeframeFieldset, #graphFieldset, #histogramFieldset, #graphFilteringFieldset, #metricsFieldset{float: left}
 
-#timeframeFieldset, #graphFilteringFieldset{width: 270px}
+#timeframeFieldset, #graphFilteringFieldset, #metricsFieldset{width: 270px}
 
-#graphFieldset, #histogramFieldset{width: 190px}
+#graphFieldset, #histogramFieldset, #actionFieldset{width: 190px}
 
-#graphFieldset, #histogramFieldset, #graphFilteringFieldset{float: left}
 
 #histogramFieldset label{
     width: 97px
 }
 
-#metricsFieldset tr.head th{
+#metricsFieldset table {
+    border-collapse: collapse;
+}
+
+#metricsFieldset td input[type="checkbox"]{
     width: 40px;
 }
 

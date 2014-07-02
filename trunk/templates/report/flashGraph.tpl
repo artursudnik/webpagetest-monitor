@@ -251,7 +251,7 @@
                               <input type="checkbox" id="displayHistogramScrollbar" name="displayHistogramScrollbar" checked=""/>
                           </div>
                       </fieldset>
-                      <fieldset id="metricsFieldset" style="float: left; width: 300px">
+                      <fieldset id="metricsFieldset" class="wptmon">
                           <legend>Metrics</legend>
                           <table>
                               <tr class="head">
@@ -277,6 +277,19 @@
                               </tr>
                           </table>
                       </fieldset>
+                      <fieldset id="actionFieldset" class="wptmon">
+                          <legend>Action</legend>
+                          <input id="histogramButton" type="button" name="histogramButton" value="Histogram" />
+                          <input type="button" id="graphJSONButton" value="Graph" style="margin:0"/>
+                          {if $smarty.session.ls_admin}
+                              <input id="graphButton" type="button" name="action"
+                                     onclick="updateGraph();" value="Graph (reload)">
+                              <input id="reportButton" type="button" name="action"
+                                     onclick="updateReport();" value="Report">
+                              <input type="button" name="action" onclick="downloadData();" value="Download">
+                          {/if}
+                          <input type="reset" value="Reset">
+                      </fieldset>
                   </td>
               </tr>
               <tr>
@@ -286,16 +299,7 @@
                       </div>
                   </td>
                   <td style="text-align: center">
-                      <input id="histogramButton" type="button" name="histogramButton" value="Histogram" />
-                      <input type="button" id="graphJSONButton" value="Graph" style="margin:0"/>
-                      {if $smarty.session.ls_admin}
-                          <input id="graphButton" type="button" name="action"
-                                 onclick="updateGraph();" value="Graph (reload)">
-                          <input id="reportButton" type="button" name="action"
-                                 onclick="updateReport();" value="Report">
-                          <input type="button" name="action" onclick="downloadData();" value="Download">
-                      {/if}
-                      <input type="reset" value="Reset">
+
                   </td>
               </tr>
           </table>
