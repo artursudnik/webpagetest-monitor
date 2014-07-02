@@ -213,6 +213,10 @@
                       <fieldset id="histogramFieldset" class="wptmon">
                           <legend>Histogram</legend>
                           <div>
+                              <label for="histogramResolution">Resolution:</label>
+                              {html_options options=$histogramResolutionOptions name=histogramResolution id=histogramResolution selected="100"}
+                          </div>
+                          <div>
                               <label for="histogramMinLimit">Minimum value:</label>
                               <select id="histogramMinLimit" name="histogramMinLimit">
                                   <option value="0">0</option>
@@ -242,7 +246,6 @@
                                   <option value="-1" selected="">unlimited</option>
                               </select>
                           </div>
-                          <div></div>
                           <div>
                               <label for="displayHistogramScrollbar">Display scrollbar:</label>
                               <input type="checkbox" id="displayHistogramScrollbar" name="displayHistogramScrollbar" checked=""/>
