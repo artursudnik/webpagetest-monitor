@@ -69,7 +69,7 @@
                       <select onchange="checkJobCount();" id="jobs" multiple="multiple"
                               name="job_id[]"
                               size="7"
-                              style="width:440px; height:280px">{html_options options=$jobs selected=$job_ids}</select>
+                              style="width:440px; height:285px">{html_options options=$jobs selected=$job_ids}</select>
 
                       <div style="font-size:x-small;"><label for="jobs">Select up to 3 jobs</label></div>
                   </td>
@@ -280,7 +280,7 @@
                       <fieldset id="actionFieldset" class="wptmon">
                           <legend>Action</legend>
                           <input id="histogramButton" type="button" name="histogramButton" value="Histogram" />
-                          <input type="button" id="graphJSONButton" value="Graph" style="margin:0"/>
+                          <input type="button" id="graphJSONButton" value="Graph" />
                           {if $smarty.session.ls_admin}
                               <input id="graphButton" type="button" name="action"
                                      onclick="updateGraph();" value="Graph (reload)">

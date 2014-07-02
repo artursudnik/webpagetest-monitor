@@ -30,10 +30,13 @@ fieldset.wptmon select {
 
 #timeframeFieldset, #graphFieldset, #histogramFieldset, #graphFilteringFieldset, #metricsFieldset{float: left}
 
-#timeframeFieldset, #graphFilteringFieldset, #metricsFieldset{width: 270px}
+#timeframeFieldset, #graphFilteringFieldset, #metricsFieldset{width: 290px}
 
-#graphFieldset, #histogramFieldset, #actionFieldset{width: 190px}
+#graphFieldset, #histogramFieldset, #actionFieldset{width: 235px}
 
+#metricsFieldset, #actionFieldset {
+    height: 90px
+}
 
 #histogramFieldset label{
     width: 97px
