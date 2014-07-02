@@ -128,6 +128,9 @@ $availFieldKeysFV = array('FV_TTFB' => 'FV_TTFB', 'FV_Render' => 'FV_Render', 'F
 $availFieldKeysRV = array('RV_TTFB' => 'RV_TTFB', 'RV_Render' => 'RV_Render', 'RV_Doc' => 'RV_Doc', 'RV_Dom' => 'RV_Dom', 'RV_Fully' => 'RV_Fully');
 $smarty->assign('availFieldKeysFV', $availFieldKeysFV);
 $smarty->assign('availFieldKeysRV', $availFieldKeysRV);
+
+$histogramResolutionOptions = array(10 => '10ms', 25 => '25ms', 50 => '50ms', 100 => '100ms', 250 => '250ms', 500 => '0.5s', 1000 => '1s');
+$smarty->assign('histogramResolutionOptions', $histogramResolutionOptions);
 // Process fields to display
 if ( isset($_REQUEST['fields'])){
   $fieldsToDisplay = $_REQUEST['fields'];
