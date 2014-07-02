@@ -227,6 +227,10 @@
                         <option value="-1" selected="">unlimited</option>
                     </select>
                 </div>
+                <div>
+                    <label>Display scrollbar:</label>
+                    <input type="checkbox" id="displayHistogramScrollbar" name="displayHistogramScrollbar" checked=""/>
+                </div>
             </fieldset>
         </td>
       </tr>

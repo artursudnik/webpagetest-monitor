@@ -31,11 +31,12 @@ fieldset.wptmon select {
 
 #timeframeFieldset, #graphFilteringFieldset{width: 270px}
 
+#graphFieldset, #histogramFieldset{width: 190px}
 
 #graphFieldset, #histogramFieldset, #graphFilteringFieldset{float: left}
 
 #histogramFieldset label{
-    width: 88px
+    width: 97px
 }
 
 #histogramsContainer {
