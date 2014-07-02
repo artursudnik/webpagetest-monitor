@@ -105,6 +105,10 @@ var wptmonitor = (function(window, $, wptmonitor){
         return $("#graphContainer").is(":hidden");
     }
 
+    function scrollbarToBeDisplayed(){
+        return $('input[name="displayGraphScrollbar"]').prop('checked');
+    }
+
     function getChartData(params){
         var d = $.Deferred();
         getServersideMaxExecutionTime()
@@ -296,12 +300,17 @@ var wptmonitor = (function(window, $, wptmonitor){
             }
         }
 
-        var chartScrollbar = {
-            autoGridCount    : true,
-            graph            : data.valueFields[0],
-            "scrollbarHeight": 20, hideResizeGrips: true
-            // ,updateOnReleaseOnly: true
-        };
+        var chartScrollbar;
+
+        if(scrollbarToBeDisplayed()){
+            chartScrollbar = {
+                autoGridCount    : true,
+                graph            : data.valueFields[0],
+                "scrollbarHeight": 20, hideResizeGrips: true
+                // ,updateOnReleaseOnly: true
+            }
+        }
+
 
         if(chart){
             /**
