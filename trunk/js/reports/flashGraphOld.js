@@ -95,6 +95,15 @@ var wptmonitor = (function(window, $, wptmonitor){
             //intervalElement.value = interval;
         }
 
+        if(start >= end) {
+            alert('Warning! Start time is not smaller that end date.');
+            $('#startTimeSelect').addClass('badValue');
+            $('#endTimeSelect').addClass('badValue');
+        } else {
+            $('#startTimeSelect').removeClass('badValue');
+            $('#endTimeSelect').removeClass('badValue');
+        }
+
         //disableIntervalOptionsBelow(interval);
 
     }

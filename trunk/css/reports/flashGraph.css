@@ -40,6 +40,10 @@ fieldset.wptmon select {
     width: 97px
 }
 
+fieldset .badValue label {
+    color: #ff0000;
+}
+
 #histogramsContainer {
     display: none;
     background-color: #fff;
