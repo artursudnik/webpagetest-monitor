@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    {assign var="version" value="1.12"}
+    {assign var="version" value="1.13"}
     <title>WebPageTest Monitor - Reports</title>
     {include file="headIncludes.tpl"}
     <link rel="stylesheet" href="css/reports/flashGraph.css?v={$version}" type="text/css">
