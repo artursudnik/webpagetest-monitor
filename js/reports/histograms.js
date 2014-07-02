@@ -126,12 +126,16 @@ var wptmonitor = (function(window, $, wptmonitor){
             }
         }
 
-        var chartScrollbar = {
-            autoGridCount    : true,
-            graph            : data.fields[0],
-            "scrollbarHeight": 20, hideResizeGrips: true
-            // ,updateOnReleaseOnly: true
+        var chartScrollbar;
+
+        if(scrollbarToBeDisplayed()) {
+            chartScrollbar = {
+                autoGridCount    : true,
+                graph            : data.fields[0],
+                "scrollbarHeight": 20, hideResizeGrips: true
+                // ,updateOnReleaseOnly: true
             };
+        }
 
         if(chart){
             chart.dataProvider = data.dataset;
@@ -364,6 +368,10 @@ var wptmonitor = (function(window, $, wptmonitor){
             histMinLimit: $('select[name="histogramMinLimit"]').val(),
             histMaxLimit: $('select[name="histogramMaxLimit"]').val()
         };
+    }
+
+    function scrollbarToBeDisplayed() {
+        return $('input[name="displayHistogramScrollbar"]').prop('checked');
     }
 
     wptmonitor.histograms = {
