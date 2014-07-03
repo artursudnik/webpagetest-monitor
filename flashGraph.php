@@ -164,8 +164,6 @@ if (isset($fieldsToDisplay) && sizeof($fieldsToDisplay) > 0) {
   }
 }
 
-FB::log($fieldsToDisplay);
-
 $smarty->assign('fieldsToDisplay', $fieldsToDisplay);
 // End field handling
 if ( isset($_REQUEST['job_id']) ){
