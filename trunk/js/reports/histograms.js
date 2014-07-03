@@ -1,10 +1,6 @@
 var wptmonitor = (function(window, $, wptmonitor){
     "use strict";
 
-    var config = {
-        histogramMaxLimit : 60 // in seconds
-    };
-
     var chart;
 
     $(document).ready(function(){
