@@ -186,6 +186,10 @@ var wptmonitor = (function(window, $, wptmonitor){
                 },
                 exportConfig : {}
             });
+
+            chart.addListener('init', function(){
+                console.log('init');
+            });
         }
     }
 
