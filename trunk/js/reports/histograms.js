@@ -2,6 +2,8 @@ var wptmonitor = (function(window, $, wptmonitor){
     "use strict";
 
     var chart;
+    var zoomOutOnce = false;
+    var previousResolution;
 
     $(document).ready(function(){
         $('#histogramButton').on('click', function () {
@@ -34,6 +36,9 @@ var wptmonitor = (function(window, $, wptmonitor){
                 $('#histogram').empty();
                 chart = null;
             });
+        });
+        $('#histogramResolution').change(function(){
+            resolutionChangedHandler();
         });
     });
 
@@ -139,7 +144,10 @@ var wptmonitor = (function(window, $, wptmonitor){
 
             chart.removeChartScrollbar();
             chart.chartScrollbar = chartScrollbar;
-
+            chart.zoomOutOnDataUpdate = zoomOutOnce;
+            if(zoomOutOnce) {
+                zoomOutOnce = false;
+            }
             chart.validateData();
         }else {
             chart = AmCharts.makeChart("histogram", {
@@ -183,6 +191,7 @@ var wptmonitor = (function(window, $, wptmonitor){
                 exportConfig : {}
             });
         }
+        previousResolution = $('select[name="histogramResolution"]').val();
     }
 
     function getHistogramDataForJobs(jobId) {
@@ -371,11 +380,22 @@ var wptmonitor = (function(window, $, wptmonitor){
         return $('input[name="displayHistogramScrollbar"]').prop('checked');
     }
 
+    function resolutionChangedHandler(){
+        console.log($('select[name="histogramResolution"]').val(), previousResolution);
+        if(chart && $('select[name="histogramResolution"]').val() !== previousResolution) {
+            console.log('zoomOutAfterNextRedraw');
+            zoomOutOnce = true;
+        } else {
+            zoomOutOnce = false;
+        }
+    }
+
     wptmonitor.histograms = {
         initialized: true,
         getChart   : function () {
             return chart;
-        }
+        },
+        resolutionChangedHandler: resolutionChangedHandler
     };
 
     return wptmonitor;
