@@ -104,97 +104,86 @@ var wptmonitor = (function(window, $, wptmonitor){
         );
     }
 
-    var drawChart = (function(){
-        var previousResolution;
-        return function(data) {
-            var currentResolution = $('select[name="histogramResolution"]').val();
-            var graphs = [];
+    function drawChart(data) {
 
-            for(var i in data.fields) {
-                if(data.fields.hasOwnProperty(i)){
-                    var field = data.fields[i];
-                    graphs.push({
-                        id         : data.fields[i],
-                        title      : data.fieldJobLabelMap[field] + " " + data.fieldMetricMap[field],
-                        balloonText: "[[title]]<br><b>[[value]]</b> samples for <b>[[category]]</b> seconds",
-                        valueField : field,
-                        type       : 'smoothedLine',
-                        fillAlphas : 0.5
-                    });
-                }
-            }
+        var graphs = [];
 
-            var chartScrollbar;
-
-            if(scrollbarToBeDisplayed()) {
-                chartScrollbar = {
-                    autoGridCount    : true,
-                    graph            : data.fields[0],
-                    "scrollbarHeight": 20, hideResizeGrips: true
-                    // ,updateOnReleaseOnly: true
-                };
-            }
-
-            if(chart){
-                chart.dataProvider = data.dataset;
-                chart.graphs = graphs;
-
-                chart.removeChartScrollbar();
-                chart.chartScrollbar = chartScrollbar;
-
-                if(previousResolution != currentResolution) {
-                    chart.addListener('dataUpdated', function(){
-                        chart.zoomOut();
-                    });
-                }
-
-                chart.validateData();
-            }else {
-                chart = AmCharts.makeChart("histogram", {
-                    type               : "serial",
-                    theme              : "none",
-                    pathToImages       : "js/amcharts/images/",
-                    dataProvider       : data.dataset,
-                    zoomOutOnDataUpdate: false,
-                    valueAxes: [
-                        {
-                            title     : 'samples count',
-                            titleBold : false,
-                            axisAlpha : 0.2,
-                            dashLength: 1,
-                            position  : "left",
-                            minimum   : 0
-                            // ,unit: "s"
-                        }
-                    ],
-                    graphs        : graphs,
-                    chartScrollbar: chartScrollbar,
-                    chartCursor: {
-                        cursorPosition           : "mouse",
-                        categoryBalloonDateFormat: "MMM DD JJ:NN:SS",
-                        cursorAlpha              : 0.5,
-                        graphBulletSize          : 2
-                    },
-                    categoryField: "bucket",
-                    categoryAxis: {
-                        minorGridEnabled: false,
-                        title           : 'time in seconds',
-                        titleBold       : false,
-                        minimum         : 0,
-                        categoryFunction: function (e) {
-                            return (e / 1000).toString();
-                        }
-                    },
-                    legend: {
-                        fontSize: 9
-                    },
-                    exportConfig : {}
+        for(var i in data.fields) {
+            if(data.fields.hasOwnProperty(i)){
+                var field = data.fields[i];
+                graphs.push({
+                    id         : data.fields[i],
+                    title      : data.fieldJobLabelMap[field] + " " + data.fieldMetricMap[field],
+                    balloonText: "[[title]]<br><b>[[value]]</b> samples for <b>[[category]]</b> seconds",
+                    valueField : field,
+                    type       : 'smoothedLine',
+                    fillAlphas : 0.5
                 });
             }
-
-            previousResolution = currentResolution;
         }
-    })();
+
+        var chartScrollbar;
+
+        if(scrollbarToBeDisplayed()) {
+            chartScrollbar = {
+                autoGridCount    : true,
+                graph            : data.fields[0],
+                "scrollbarHeight": 20, hideResizeGrips: true
+                // ,updateOnReleaseOnly: true
+            };
+        }
+
+        if(chart){
+            chart.dataProvider = data.dataset;
+            chart.graphs = graphs;
+
+            chart.removeChartScrollbar();
+            chart.chartScrollbar = chartScrollbar;
+
+            chart.validateData();
+        }else {
+            chart = AmCharts.makeChart("histogram", {
+                type               : "serial",
+                theme              : "none",
+                pathToImages       : "js/amcharts/images/",
+                dataProvider       : data.dataset,
+                zoomOutOnDataUpdate: false,
+                valueAxes: [
+                    {
+                        title     : 'samples count',
+                        titleBold : false,
+                        axisAlpha : 0.2,
+                        dashLength: 1,
+                        position  : "left",
+                        minimum   : 0
+                        // ,unit: "s"
+                    }
+                ],
+                graphs        : graphs,
+                chartScrollbar: chartScrollbar,
+                chartCursor: {
+                    cursorPosition           : "mouse",
+                    categoryBalloonDateFormat: "MMM DD JJ:NN:SS",
+                    cursorAlpha              : 0.5,
+                    graphBulletSize          : 2
+                },
+                categoryField: "bucket",
+                categoryAxis: {
+                    minorGridEnabled: false,
+                    title           : 'time in seconds',
+                    titleBold       : false,
+                    minimum         : 0,
+                    categoryFunction: function (e) {
+                        return (e / 1000).toString();
+                    }
+                },
+                legend: {
+                    fontSize: 9
+                },
+                exportConfig : {}
+            });
+        }
+    }
 
     function getHistogramDataForJobs(jobId) {
         var deferred = $.Deferred();
