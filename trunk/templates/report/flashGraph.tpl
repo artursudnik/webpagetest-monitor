@@ -292,16 +292,6 @@
                       </fieldset>
                   </td>
               </tr>
-              <tr>
-                  <td>
-                      <div style="font-size:x-small;">
-
-                      </div>
-                  </td>
-                  <td style="text-align: center">
-
-                  </td>
-              </tr>
           </table>
           {if $action eq 'report'}
               {include file='report/report.tpl'}
