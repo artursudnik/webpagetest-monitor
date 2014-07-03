@@ -111,6 +111,7 @@ var wptmonitor = (function(window, $, wptmonitor){
     var drawChart = (function(){
         var previousResolution;
         return function(data) {
+            var currentResolution = $('select[name="histogramResolution"]').val();
             var graphs = [];
 
             for(var i in data.fields) {
@@ -145,7 +146,7 @@ var wptmonitor = (function(window, $, wptmonitor){
                 chart.removeChartScrollbar();
                 chart.chartScrollbar = chartScrollbar;
 
-                if(previousResolution != $('select[name="histogramResolution"]').val()) {
+                if(previousResolution != currentResolution) {
                     chart.addListener('dataUpdated', function(){
                         chart.zoomOut();
                     });
@@ -195,7 +196,7 @@ var wptmonitor = (function(window, $, wptmonitor){
                 });
             }
 
-            previousResolution = $('select[name="histogramResolution"]').val();
+            previousResolution = currentResolution;
         }
     })();
 
