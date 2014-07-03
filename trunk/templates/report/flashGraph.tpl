@@ -108,7 +108,7 @@
                       <fieldset id="graphFieldset" class="wptmon">
                           <legend>Graph</legend>
                           <div>
-                              <label for="interval">Interval:</label>
+                              <label for="interval">Resolution:</label>
                               <select id="interval" name="interval" onchange="checkInterval();">
                                   <option {if $interval eq 1}selected="selected"{/if} value="1">Max</option>
                                   <option {if $interval eq 300}selected="selected"{/if} value="300">5 Minutes</option>
@@ -123,7 +123,7 @@
                               </select>
                           </div>
                           <div>
-                              <label for="aggregateMethod">Aggregate:</label>
+                              <label for="aggregateMethod">Aggregate with:</label>
                               <select id="aggregateMethod" name="aggregateMethod">
                                   <option value="avg"  {if $aggregateMethod eq  "avg"}selected="selected"{/if}>Average</option>
                                   <option value="25th" {if $aggregateMethod eq "25th"}selected="selected"{/if}>25th percentile</option>

@@ -38,7 +38,8 @@ fieldset.wptmon select {
     height: 90px
 }
 
-#histogramFieldset label{
+#histogramFieldset label,
+#graphFieldset label {
     width: 97px
 }
 
