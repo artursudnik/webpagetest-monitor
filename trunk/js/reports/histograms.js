@@ -381,9 +381,7 @@ var wptmonitor = (function(window, $, wptmonitor){
     }
 
     function resolutionChangedHandler(){
-        console.log($('select[name="histogramResolution"]').val(), previousResolution);
         if(chart && $('select[name="histogramResolution"]').val() !== previousResolution) {
-            console.log('zoomOutAfterNextRedraw');
             zoomOutOnce = true;
         } else {
             zoomOutOnce = false;
