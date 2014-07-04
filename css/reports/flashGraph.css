@@ -76,6 +76,14 @@ fieldset .badValue label {
     color: #ff0000;
 }
 
+#interval.notSafe, #interval option.notSafe{
+    color: #ff0000;
+}
+
+#interval option.safe{
+    color: #222222;
+}
+
 #histogramsContainer {
     display: none;
     background-color: #fff;

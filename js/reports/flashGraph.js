@@ -33,6 +33,24 @@ var wptmonitor = (function(window, $, wptmonitor){
             });
         });
 
+        $('#timeFrame').on('change', function(){
+            markUnsafeResolutions();
+        });
+
+        $('#startTimeSelect').find('select').on('change', function(){
+            markUnsafeResolutions();
+        });
+
+        $('#endTimeSelect').find('select').on('change', function(){
+            markUnsafeResolutions();
+        });
+
+        $('#interval').on('change', function(){
+            markUnsafeResolutions();
+        });
+
+        markUnsafeResolutions();
+
         if(act && act === "graph") {
             if(getJobCount() > 0){
                 setTimeout(function(){
@@ -389,6 +407,76 @@ var wptmonitor = (function(window, $, wptmonitor){
         else {count = val.length;}
 
         return count;
+    }
+
+    var getResolutionOptionsValues = (function(){
+        var values;
+
+        return function() {
+            if(values === undefined) {
+                values = $('#interval').find('option').map(function(){
+                    return this.value;
+                });
+            }
+            return values;
+        }
+    })();
+
+
+    function getStartEndTimeDifference() {
+        var start, end;
+        var formValues =  {
+            startYear : parseInt($('select[name="startYear"]').val()),
+            startMonth: parseInt($('select[name="startMonth"]').val()),
+            startDay  : parseInt($('select[name="startDay"]').val()),
+            startHour : parseInt($('select[name="startHour"]').val()),
+            endYear   : parseInt($('select[name="endYear"]').val()),
+            endMonth  : parseInt($('select[name="endMonth"]').val()),
+            endDay    : parseInt($('select[name="endDay"]').val()),
+            endHour   : parseInt($('select[name="endHour"]').val())
+        };
+        var timeDifference;
+        var timeFramePresetValue = $('#timeFrame').val();
+
+        if(timeFramePresetValue == 0) {
+            start = new Date(formValues.startYear, formValues.startMonth - 1, formValues.startDay, formValues.startHour);
+            end   = new Date(formValues.endYear, formValues.endMonth - 1, formValues.endDay, formValues.endHour);
+            timeDifference = (end - start) / 1000;
+        } else {
+            timeDifference = timeFramePresetValue;
+        }
+
+        return timeDifference;
+    }
+
+    function getSafeInterval(){
+        var safeNumberOfGraphPoints = 300;
+        var timeFrameInSeconds = getStartEndTimeDifference();
+        return timeFrameInSeconds/safeNumberOfGraphPoints;
+    }
+
+    function markUnsafeResolutions() {
+        var safeInterval = getSafeInterval();
+        var intervalSelect = $('#interval');
+
+        intervalSelect.find('option')
+            .removeClass('notSafe')
+            .removeClass('safe');
+
+        intervalSelect.find('option').filter(function(){
+            return this.value < safeInterval;
+        }).addClass('notSafe');
+
+        intervalSelect.find('option').filter(function(){
+            return this.value >= safeInterval;
+        }).addClass('safe');
+
+        if(intervalSelect.val() < safeInterval) {
+            intervalSelect.addClass('notSafe');
+        }else {
+            intervalSelect.removeClass('notSafe');
+        }
+
     }
 
     window.getChart      = function(){return chart;};
