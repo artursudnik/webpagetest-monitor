@@ -112,7 +112,6 @@
                           <div>
                               <label for="interval">Resolution:</label>
                               <select id="interval" name="interval" onchange="checkInterval();">
-                                  <option {if $interval eq 1}selected="selected"{/if} value="1">Max</option>
                                   <option {if $interval eq 300}selected="selected"{/if} value="300">5 Minutes</option>
                                   <option {if $interval eq 900}selected="selected"{/if} value="900">15 Minutes</option>
                                   <option {if $interval eq 1800}selected="selected"{/if} value="1800">30 Minutes</option>
