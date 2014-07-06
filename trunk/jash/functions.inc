@@ -6,7 +6,7 @@ function mapFields($fieldsArray) {
 
     $mappedArray = array();
 
-    foreach ($fieldsArray as $key => $value) {
+    foreach ($fieldsArray as $value) {
         $mappedArray[] = mapMetricFieldForm2Db($value);
     }
 
@@ -15,7 +15,7 @@ function mapFields($fieldsArray) {
 
 function mapMetricFieldForm2Db($fieldName) {
     $mappingArray = getMetricsFieldsMappingsForm2Db();
-    if(key_exists($fieldName, $mappingArray)) {
+    if(array_key_exists($fieldName, $mappingArray)) {
         return $mappingArray[$fieldName];
     }else {
         throw new Exception("Unknown form field name $fieldName", 1);
@@ -51,11 +51,11 @@ function getMetricsFieldsMappingsDb2Form(){
 }
 
 function addTimestamps($requestArray) {
-    if(!key_exists('timeFrame', $requestArray) OR $requestArray['timeFrame'] == 0){
+    if(!array_key_exists('timeFrame', $requestArray) OR $requestArray['timeFrame'] == 0){
         $requestArray['startTimestamp'] = mktime($requestArray['startHour'], 0, 0, $requestArray['startMonth'], $requestArray['startDay'], $requestArray['startYear']);
         $requestArray['endTimestamp']   = mktime($requestArray['endHour'], 59, 59,   $requestArray['endMonth'],   $requestArray['endDay'],   $requestArray['endYear']);
     } else {
-        $requestArray['endTimestamp'] = gmdate('U') + 3600;
+        $requestArray['endTimestamp'] = (int)gmdate('U') + 3600;
         $requestArray['startTimestamp'] = $requestArray['endTimestamp'] - $requestArray['timeFrame'];
         // FB::log($requestArray['endTimestamp'] - $requestArray['startTimestamp']);
     }
@@ -71,7 +71,7 @@ function addTimestamps($requestArray) {
         'endYear'
     );
 
-    foreach ($keysToDelete as $key => $value) {
+    foreach ($keysToDelete as $value) {
         unset($requestArray[$value]);
     }
 
