@@ -396,14 +396,14 @@ function getLocationInformation($host = null) {
 
     $location['runRate'] = $res['runrate'];
     if(empty($location['Label'])) {
-        $location['host'] = '['.']';
-        $location['Label'] = '['.$loc->Label.']';
-        $location['Browser'] = '['.$loc->Browser.']';
-        $location['id'] = '['.$loc->Location.']';
-        $location['AgentCount'] = '['. 0 .']';
-        $location['PendingTests'] = '['. 0 .']';
-        $location['PendingTestsHighPriority'] = '['. 0 .']';
-        $location['PendingTestsLowPriority'] = '['. 0 .']';
+        $location['host']                       = '';
+        $location['Label']                      = '['.$loc->Label.']';
+        $location['Browser']                    = '['.$loc->Browser.']';
+        $location['id']                         = '['.$loc->Location.']';
+        $location['AgentCount']                 = '['. 0 .']';
+        $location['PendingTests']               = '['. 0 .']';
+        $location['PendingTestsHighPriority']   = '['. 0 .']';
+        $location['PendingTestsLowPriority']    = '['. 0 .']';
     }
   }
 
