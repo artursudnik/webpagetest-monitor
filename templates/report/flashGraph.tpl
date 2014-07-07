@@ -6,13 +6,13 @@
     {include file="headIncludes.tpl"}
     <link rel="stylesheet" href="css/reports/flashGraph.css?v={$version}" type="text/css">
     <style type="text/css">
-      {literal}
-      label {
-        width: 15em;
-        float: none;
-        font-weight: normal;
-      }
-      {/literal}
+        {literal}
+        label {
+            width: 15em;
+            float: none;
+            font-weight: normal;
+        }
+        {/literal}
     </style>
     <script type="text/javascript" src="js/amcharts/amcharts.js?v={$version}"></script>
     <script type="text/javascript" src="js/amcharts/serial.js?v={$version}"></script>
