@@ -134,6 +134,15 @@ fieldset .badValue label {
     display: none;
 }
 
+#abbreviations table.pretty{
+    background-color: transparent;
+    margin-bottom: 10px;
+}
+
+#abbreviations table.pretty th, #abbreviations table.pretty td {
+    padding-top: 0;
+}
+
 body.ie6 #incompMessages,
 body.ie7 #incompMessages,
 body.ie8 #incompMessages,

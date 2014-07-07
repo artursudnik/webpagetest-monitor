@@ -320,6 +320,25 @@
                         Warning! Your version of Internet Explorer does not support saving graph to file. Use any other modern browser or version 10 or greater of IE.
                     </div>
                 </div>
+                <div id="abbreviations" style="visibility:visible;">
+                    <table class="pretty">
+                        <tr style="font-size:x-small;">
+                            <td><strong>FV</strong> - First View</td>
+                            <td>|</td>
+                            <td><strong>RV</strong> - Repeat View</td>
+                            <td>|</td>
+                            <td><strong>TTFB</strong> - Time to first byte</td>
+                            <td>|</td>
+                            <td><strong>Render</strong> - Start rendering</td>
+                            <td>|</td>
+                            <td><strong>DOM</strong> - Dom Marker Time</td>
+                            <td>|</td>
+                            <td><strong>Doc</strong> - Document loaded</td>
+                            <td>|</td>
+                            <td><strong>Fully</strong> - Fully loaded</td>
+                        </tr>
+                    </table>
+                </div>
                 <div id="histogramsContainer" style="position: relative;">
                     <div id="histogram"></div>
                     <a href="#" id="hideHistograms" class="hide"><img src="img/silkicons/icons/cross.png" alt="Hide graph"/></a>
@@ -336,25 +355,6 @@
                     <div style="padding-top: 30%;">
                         Working...
                     </div>
-                </div>
-                <div id="abbreviations" style="visibility:visible;">
-                  <table class="pretty">
-                    <tr style="font-size:x-small;">
-                      <td><strong>FV</strong> - First View</td>
-                      <td>|</td>
-                      <td><strong>RV</strong> - Repeat View</td>
-                      <td>|</td>
-                      <td><strong>TTFB</strong> - Time to first byte</td>
-                      <td>|</td>
-                      <td><strong>Render</strong> - Start rendering</td>
-                      <td>|</td>
-                      <td><strong>DOM</strong> - Dom Marker Time</td>
-                      <td>|</td>
-                      <td><strong>Doc</strong> - Document loaded</td>
-                      <td>|</td>
-                      <td><strong>Fully</strong> - Fully loaded</td>
-                    </tr>
-                  </table>
                 </div>
             </div>
 
