@@ -390,7 +390,21 @@ function getLocationInformation($host = null) {
 
   $result = $q->fetchArray();
   foreach ($result as $res){
-    $locations["'".$res['Location']."'"]['runRate'] = $res['runrate'];
+    $loc = $locationTable->findOneByLocation($res['Location']);
+
+    $location = &$locations["'".$res['Location']."'"];
+
+    $location['runRate'] = $res['runrate'];
+    if(empty($location['Label'])) {
+        $location['host'] = '['.']';
+        $location['Label'] = '['.$loc->Label.']';
+        $location['Browser'] = '['.$loc->Browser.']';
+        $location['id'] = '['.$loc->Location.']';
+        $location['AgentCount'] = '['. 0 .']';
+        $location['PendingTests'] = '['. 0 .']';
+        $location['PendingTestsHighPriority'] = '['. 0 .']';
+        $location['PendingTestsLowPriority'] = '['. 0 .']';
+    }
   }
 
 
