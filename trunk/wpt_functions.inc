@@ -305,10 +305,10 @@ function generateRandomNumber($from = 0, $to = 10000) {
  *
  * @param int $min Minumum number of months from now
  * @param int $max maximum number of months from now
- * @return void
+ * @return int
  */
 function generateRandomFutureMonth($min, $max) {
-    $month = Date('n');
+    $month = (int)Date('n');
     $r     = rand((int)$min, (int)$max);
 
     return $month+$r;
