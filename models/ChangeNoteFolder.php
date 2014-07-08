@@ -21,5 +21,3 @@ class ChangeNoteFolder extends Doctrine_Record {
     );
   }
 }
-
-?>

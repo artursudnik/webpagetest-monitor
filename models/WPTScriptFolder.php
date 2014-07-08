@@ -21,5 +21,3 @@ class WPTScriptFolder extends Doctrine_Record {
     );
   }
 }
-
-?>

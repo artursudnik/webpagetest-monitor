@@ -34,5 +34,3 @@ class Alert extends Doctrine_Record {
     ));
   }
 }
-
-?>

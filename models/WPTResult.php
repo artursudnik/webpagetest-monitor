@@ -112,4 +112,3 @@ class WPTResult extends Doctrine_Record
         );
     }
 }
-?>

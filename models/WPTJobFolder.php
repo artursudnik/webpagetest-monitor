@@ -21,5 +21,3 @@ class WPTJobFolder extends Doctrine_Record {
     );
   }
 }
-
-?>
