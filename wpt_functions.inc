@@ -268,7 +268,6 @@ function processTokens($script) {
             $result[$key] = generateRandomDate($params[0], $params[1], $params[2]);
             continue;
         }
-
     }
 
     return $result;
