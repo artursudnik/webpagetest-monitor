@@ -13,4 +13,3 @@ class WPTJob_Alert extends Doctrine_Record {
 
   }
 }
-?>

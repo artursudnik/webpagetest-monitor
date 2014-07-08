@@ -20,5 +20,3 @@ class WPTHost extends Doctrine_Record {
     ));
   }
 }
-
-?>

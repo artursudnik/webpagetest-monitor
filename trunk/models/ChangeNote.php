@@ -26,5 +26,3 @@ class ChangeNote extends Doctrine_Record {
     ));
   }
 }
-
-?>

@@ -26,5 +26,3 @@ class WPTLocation extends Doctrine_Record {
         );
   }
 }
-
-?>

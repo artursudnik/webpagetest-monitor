@@ -47,5 +47,3 @@ class WPTScript extends Doctrine_Record {
 
   }
 }
-
-?>

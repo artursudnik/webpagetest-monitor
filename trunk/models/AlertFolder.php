@@ -21,5 +21,3 @@ class AlertFolder extends Doctrine_Record {
     );
   }
 }
-
-?>

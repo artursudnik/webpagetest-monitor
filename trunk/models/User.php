@@ -32,5 +32,3 @@ class User extends Doctrine_Record{
     );
   }
 }
-
-?>

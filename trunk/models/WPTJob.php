@@ -68,5 +68,3 @@ class WPTJob extends Doctrine_Record {
 
   }
 }
-
-?>

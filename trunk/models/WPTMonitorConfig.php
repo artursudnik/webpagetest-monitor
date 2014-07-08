@@ -18,5 +18,3 @@ class WPTMonitorConfig extends Doctrine_Record{
   public function setUp() {
   }
 }
-
-?>
