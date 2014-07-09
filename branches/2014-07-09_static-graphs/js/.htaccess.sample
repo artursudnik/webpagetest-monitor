@@ -1,0 +1,11 @@
+# do not integrate into trunk
+
+# prevents caching of the resources
+<IfModule mod_headers.c>
+	<IfModule mod_expires.c>
+		ExpiresActive On
+			Header set Expires "Thu, 15 Apr 1981 20:00:00 GMT"
+			Header set Cache-Control "no-store, no-cache, must-revalidate, post-check=0, pre-check=0"
+			Header set Pragma "no-cache"
+	</IfModule>
+</IfModule>

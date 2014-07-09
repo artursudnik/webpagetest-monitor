@@ -1,0 +1,158 @@
+fieldset.wptmon {
+    padding: 0 2px;
+}
+
+fieldset.wptmon label {
+    float: left;
+    text-align: right;
+    width: 67px;
+    padding-right: 3px;
+    margin-top: 2px;
+}
+
+fieldset.wptmon input,
+fieldset.wptmon select {
+    float: left;
+}
+
+fieldset.wptmon div {
+    margin-bottom: 2px;
+    overflow: auto;
+    height: 20px;
+}
+
+fieldset.wptmon select {
+    margin: 0;
+}
+
+#timeframeFieldset label {
+    width: 30px;
+}
+
+#timeframeFieldset,
+#graphFieldset,
+#histogramFieldset,
+#graphFilteringFieldset,
+#metricsFieldset {
+    float: left
+}
+
+#timeframeFieldset,
+#graphFilteringFieldset,
+#metricsFieldset {
+    width: 290px
+}
+
+#graphFieldset,
+#histogramFieldset,
+#actionFieldset { width: 235px }
+
+#metricsFieldset, #actionFieldset {
+    height: 90px
+}
+
+#histogramFieldset label,
+#graphFieldset label {
+    width: 97px
+}
+
+#metricsFieldset table {
+    border-collapse: collapse;
+}
+
+#metricsFieldset td input[type="checkbox"] {
+    width: 40px;
+}
+
+#metricsFieldset th.firstCol {
+    text-align: right;
+}
+
+#metricsFieldset td {
+    text-align: center;
+}
+
+fieldset .badValue label {
+    color: #ff0000;
+}
+
+#interval.notSafe, #interval option.notSafe{
+    color: #ff0000;
+}
+
+#interval option.safe{
+    color: #222222;
+}
+
+#histogramsContainer {
+    display: none;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+
+#histogram {
+    height: 600px;
+}
+
+#graphContainer {
+    display: none;
+    background-color: #fff;
+}
+
+#graph {
+    height: 600px;
+}
+
+#histogramOverlay,
+#graphOverlay {
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #999;
+    text-align: center;
+    font-size: 200px;
+}
+
+.hide {
+    display: block;
+    line-height: 0.8;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+}
+
+#incompMessages {
+    margin: 20px 0 0;
+    text-align: center;
+    color: #f00;
+    font-weight: bold;
+}
+
+#incompMessages {
+    display: none;
+}
+
+#abbreviations table.pretty{
+    background-color: transparent;
+    margin-bottom: 10px;
+}
+
+#abbreviations table.pretty th, #abbreviations table.pretty td {
+    padding-top: 0;
+}
+
+body.ie6 #incompMessages,
+body.ie7 #incompMessages,
+body.ie8 #incompMessages,
+body.ie9 #incompMessages {
+    display: block;
+}
+
+body.ie6 #incompMessages,
+body.ie7 #incompMessages .message,
+body.ie8 #incompMessages .message,
+body.ie9 #incompMessages .message {
+    display: block;
+}

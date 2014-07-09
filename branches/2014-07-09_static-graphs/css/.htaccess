@@ -1,0 +1,8 @@
+Options -Indexes
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    <FilesMatch "\.(css)$">
+        ExpiresDefault "access plus 1 day"
+    </FilesMatch>
+</IfModule>
