@@ -2,6 +2,7 @@
 var wptmonitor = (function(window, $, wptmonitor){
 
     var chart;
+    var lastData;
 
     var preventUnload = true;
 
@@ -31,6 +32,16 @@ var wptmonitor = (function(window, $, wptmonitor){
                 $('#graph').empty();
                 chart = null;
             });
+        });
+
+        $("#getGraphStaticLink").click(function(e){
+            e.preventDefault();
+            $.ajax({
+                       url : 'jash/createStaticGraph.php',
+                       type: 'POST',
+                       data: {chartData: JSON.stringify(lastData)}
+                   }
+            );
         });
 
         $('#timeFrame').on('change', function(){
@@ -86,6 +97,7 @@ var wptmonitor = (function(window, $, wptmonitor){
 
         getChartDataWithGUIBehavior(serializedFormData)
         .done(function(d){
+            lastData = d;
             try {
                 d = convertData2avgCharts(d);
                 drawChart(d);
