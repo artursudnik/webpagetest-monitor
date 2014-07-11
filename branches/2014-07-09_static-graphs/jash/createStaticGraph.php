@@ -21,7 +21,6 @@ switch ($_POST['chartType']) {
 }
 
 
-const ORGANIZE_IN_SUBFOLDERS=false;
 
 $filePath='graph/staticGraphData/'.$chartType.'/';
 
@@ -29,11 +28,7 @@ $data=$_POST['chartData'];
 
 $filename=generateFileName($data);
 
-if(ORGANIZE_IN_SUBFOLDERS){
-    $subPath=generateSubDirs($filename);
-}else {
-    $subPath='';
-}
+$subPath=generateSubDirs($filename);
 
 if(! file_exists($filePath . $subPath)){
     mkdir($filePath . $subPath, 0777, true);
