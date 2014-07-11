@@ -21,6 +21,10 @@
         var graphType = '{$graphType}';
         switch(graphType) {
             case 'graph':
+                $(function(){
+                    $('#graphContainer').show();
+                    wptmonitor.graph.drawChart(data);
+                });
                 break;
             case 'histogram':
                 break;
