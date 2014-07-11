@@ -7,11 +7,22 @@ include_once('jash/functions.inc');
 
 header('Content-Type: application/json');
 header('Cache-Control: public', TRUE);
-header('Content-Encoding: gzip');
+
+switch ($_POST['chartType']) {
+    case 'graph':
+        $chartType = 'graph';
+        break;
+    case 'histogram':
+        $chartType = 'histogram';
+        break;
+    default:
+        die('bad data');
+}
+
 
 const ORGANIZE_IN_SUBFOLDERS=false;
 
-$filePath='graph/staticGraphData/';
+$filePath='graph/staticGraphData/'.$chartType.'/';
 
 $data=$_POST['chartData'];
 

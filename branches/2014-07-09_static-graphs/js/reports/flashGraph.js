@@ -39,7 +39,10 @@ var wptmonitor = (function(window, $, wptmonitor){
             $.ajax({
                        url : 'jash/createStaticGraph.php',
                        type: 'POST',
-                       data: {chartData: JSON.stringify(lastData)}
+                       data: {
+                           chartData: JSON.stringify(lastData),
+                           chartType: 'graph'
+                       }
                    }
             );
         });
