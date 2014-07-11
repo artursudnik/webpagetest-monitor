@@ -6,10 +6,6 @@ var wptmonitor = (function(window, $, wptmonitor){
 
     var preventUnload = true;
 
-    $(document).ready(function(){
-        initialize();
-    });
-
     function initialize() {
         var act = wptmonitor.graph.action;
 
@@ -503,7 +499,10 @@ var wptmonitor = (function(window, $, wptmonitor){
     window.getChart      = function(){return chart;};
 
     wptmonitor.graph = {
-        initialized: true,
+        initialized                   : true,
+        initializeInteractive         : function(){
+            initialize()
+        },
         doNotPreventUnloadConfirmation: doNotPreventUnloadConfirmation
     };
 

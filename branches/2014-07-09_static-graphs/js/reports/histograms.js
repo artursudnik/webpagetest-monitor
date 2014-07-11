@@ -5,7 +5,7 @@ var wptmonitor = (function(window, $, wptmonitor){
     var zoomOutOnce = false;
     var previousResolution;
 
-    $(document).ready(function(){
+    function initialize(){
         $('#histogramButton').on('click', function () {
             if(getSelectedJobsCount() == 0){
                 alert('Please select job(s).');
@@ -17,12 +17,12 @@ var wptmonitor = (function(window, $, wptmonitor){
 
             try{
                 drawHistogramForJobs(selectedJobs)
-                .always(function(){
-                    button.removeAttr('disabled');
-                })
-                .fail(function(e){
-                    alert(e);
-                });
+                    .always(function(){
+                                button.removeAttr('disabled');
+                            })
+                    .fail(function(e){
+                              alert(e);
+                          });
             }catch(e){
                 alert("Error: " + e);
                 button.removeAttr('disabled');
@@ -40,8 +40,7 @@ var wptmonitor = (function(window, $, wptmonitor){
         $('#histogramResolution').change(function(){
             resolutionChangedHandler();
         });
-    });
-
+    }
 
     function isHistogramContainerHidden() {
         return $("#histogramsContainer").is(":hidden");
@@ -388,6 +387,7 @@ var wptmonitor = (function(window, $, wptmonitor){
 
     wptmonitor.histograms = {
         initialized: true,
+        initializeInteractive: initialize,
         getChart   : function () {
             return chart;
         },
