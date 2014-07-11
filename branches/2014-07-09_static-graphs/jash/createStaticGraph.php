@@ -46,6 +46,14 @@ if($file){
     gzclose($file);
 }
 
+$graphId = explode('.', $filename);
+
+echo json_encode(
+    array(
+        'staticGraphUrl' => 'staticGraph.php?id='.$graphId[0]
+    )
+);
+
 /**
  * Nothing executes below
  */
