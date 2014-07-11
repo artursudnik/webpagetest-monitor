@@ -4,6 +4,7 @@ chdir('..');
 
 include_once('utils.inc');
 include_once('jash/functions.inc');
+include_once('jash/staticGraphFunctions.inc');
 
 header('Content-Type: application/json');
 header('Cache-Control: public', TRUE);
@@ -66,7 +67,3 @@ function generateFileName($data)
     return md5($data . $salt) . '.json.gz';
 }
 
-function generateSubDirs($filename)
-{
-    return substr($filename, 0, 2) . '/' . substr($filename, 2, 2) . '/';
-}
