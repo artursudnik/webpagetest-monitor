@@ -50,7 +50,7 @@ $graphId = explode('.', $filename);
 
 echo json_encode(
     array(
-        'staticGraphUrl' => 'staticGraph.php?id='.$graphId[0]
+        'staticGraphUrl' => 'staticGraph.php?id='.$graphId[0].'&type='.$chartType
     )
 );
 
