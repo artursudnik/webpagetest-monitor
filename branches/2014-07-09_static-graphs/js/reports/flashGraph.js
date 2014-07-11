@@ -43,8 +43,10 @@ var wptmonitor = (function(window, $, wptmonitor){
                            chartData: JSON.stringify(lastData),
                            chartType: 'graph'
                        }
-                   }
-            );
+                   })
+                .done(function(data){
+                          window.open(data.staticGraphUrl)
+                      });
         });
 
         $('#timeFrame').on('change', function(){
