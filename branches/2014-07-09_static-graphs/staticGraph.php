@@ -4,6 +4,7 @@
 include 'monitor.inc';
 include_once 'graph_functions.inc';
 include_once 'jash/functions.inc';
+include_once 'jash/staticGraphFunctions.inc';
 include_once 'firephp/0.3.2/fb.php';
 
 switch ($_GET['type']) {
@@ -20,6 +21,14 @@ switch ($_GET['type']) {
 
 }
 
+$filePath='graph/staticGraphData/'.$graphType.'/';
+
+$fileName = $_GET['id'].'.json.gz';
+
+$fileContent = implode(gzfile($filePath.generateSubDirs($fileName).$fileName));
+
+
+$smarty->assign('data', $fileContent);
 $smarty->assign('graphType', $graphType);
 
 $smarty->display('report/staticGraph.tpl');

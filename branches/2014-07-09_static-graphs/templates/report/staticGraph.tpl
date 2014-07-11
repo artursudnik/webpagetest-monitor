@@ -25,6 +25,7 @@
             case 'histogram':
                 break;
         }
+        var data={$data};
     </script>
 </head>
 <!--[if lt IE 7 ]> <body class="ie6"> <![endif]-->
