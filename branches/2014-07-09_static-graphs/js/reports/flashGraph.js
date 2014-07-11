@@ -6,7 +6,11 @@ var wptmonitor = (function(window, $, wptmonitor){
 
     var preventUnload = true;
 
-    $(document).ready(function() {
+    $(document).ready(function(){
+        initialize();
+    });
+
+    function initialize() {
         var act = wptmonitor.graph.action;
 
         $('#graphJSONButton').on('click', function(){
@@ -15,14 +19,14 @@ var wptmonitor = (function(window, $, wptmonitor){
             }
             var chartContainerIsHidden = isChartContainerHidden();
             submitFormAJAX()
-            .done(function(){
-                if(chartContainerIsHidden){
-                    scrollToGraph();
-                }
-            })
-            .fail(function(e){
-                alert(e);
-            });
+                .done(function(){
+                          if(chartContainerIsHidden){
+                              scrollToGraph();
+                          }
+                      })
+                .fail(function(e){
+                          alert(e);
+                      });
         });
 
         $('#hideGraph').click(function(e){
@@ -78,9 +82,9 @@ var wptmonitor = (function(window, $, wptmonitor){
         function scrollToGraph() {
             var container = $("#graphContainer");
             $('html, body').animate({
-                'scrollTop': container.offset().top - $(window).height() + container.height() },
-                1000,
-                'swing'
+                                        'scrollTop': container.offset().top - $(window).height() + container.height() },
+                                    1000,
+                                    'swing'
             );
         }
 
@@ -90,7 +94,7 @@ var wptmonitor = (function(window, $, wptmonitor){
             }
         });
 
-    });
+    }
 
     function doNotPreventUnloadConfirmation(){
         preventUnload = false;
