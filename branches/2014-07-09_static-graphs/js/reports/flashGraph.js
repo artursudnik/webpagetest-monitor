@@ -503,6 +503,7 @@ var wptmonitor = (function(window, $, wptmonitor){
         initializeInteractive         : function(){
             initialize()
         },
+        drawChart: function(d){drawChart(convertData2avgCharts(d))},
         doNotPreventUnloadConfirmation: doNotPreventUnloadConfirmation
     };
 
