@@ -1,3 +1,18 @@
 body {
     font-family: sans-serif;
 }
+
+#pageContainer {
+    width: 1000px;
+    margin: 10px auto 0;
+    border: #d3d3d3 1px solid;
+    overflow: auto;
+}
+
+#histogramsContainer, #graphContainer {
+    height: 660px;
+}
+
+#abbreviations{
+    margin: 0 auto 5px;
+}

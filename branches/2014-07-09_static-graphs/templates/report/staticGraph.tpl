@@ -33,13 +33,13 @@
 <!--[if IE 9 ]>    <body class="ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <body class=""> <!--<![endif]-->
 
-<div id="incompMessages">
-    <div class="message">
-        Warning! Your version of Internet Explorer does not support saving graph to file. Use any other modern browser or version 10 or greater of IE.
+<div id="pageContainer">
+    <div id="incompMessages">
+        <div class="message">
+            Warning! Your version of Internet Explorer does not support saving graph to file. Use any other modern browser or version 10 or greater of IE.
+        </div>
     </div>
-</div>
-<div id="abbreviations" style="visibility:visible;">
-    <table class="pretty">
+    <table id="abbreviations">
         <tr style="font-size:x-small;">
             <td><strong>FV</strong> - First View</td>
             <td>|</td>
@@ -56,25 +56,11 @@
             <td><strong>Fully</strong> - Fully loaded</td>
         </tr>
     </table>
-</div>
-<div id="histogramsContainer" style="position: relative;">
-    <div id="histogram"></div>
-    <a href="#" id="hideHistograms" class="hide"><img src="img/silkicons/icons/cross.png" alt="Hide graph"/></a>
-    <a href="#" id="getHistogramStaticGraphLink">get link</a>
-    <div id="histogramOverlay">
-        <div style="padding-top: 30%;">
-            Working...
-        </div>
+    <div id="histogramsContainer" style="position: relative;">
+        <div id="histogram"></div>
     </div>
-</div>
-<div id="graphContainer" style="position: relative">
-    <div id="graph"></div>
-    <a href="#" id="hideGraph" class="hide"><img src="img/silkicons/icons/cross.png" alt="Hide graph"/></a>
-    <a href="#" id="getGraphStaticLink">get link</a>
-    <div id="graphOverlay">
-        <div style="padding-top: 30%;">
-            Working...
-        </div>
+    <div id="graphContainer" style="position: relative">
+        <div id="graph"></div>
     </div>
 </div>
 
