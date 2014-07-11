@@ -17,6 +17,15 @@
     {*<script type="text/javascript" src="js/reports/flashGraphOld.js?v={$version}"></script>*}
     <script type="text/javascript" src="js/reports/flashGraph.js?v={$version}"></script>
     <script type="text/javascript" src="js/reports/histograms.js?v={$version}"></script>
+    <script type="text/javascript">
+        var graphType = '{$graphType}';
+        switch(graphType) {
+            case 'graph':
+                break;
+            case 'histogram':
+                break;
+        }
+    </script>
 </head>
 <!--[if lt IE 7 ]> <body class="ie6"> <![endif]-->
 <!--[if IE 7 ]>    <body class="ie7"> <![endif]-->
