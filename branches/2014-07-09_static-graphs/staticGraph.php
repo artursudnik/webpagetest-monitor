@@ -25,6 +25,12 @@ $filePath='graph/staticGraphData/'.$graphType.'/';
 
 $fileName = $_GET['id'].'.json.gz';
 
+if(!file_exists($filePath.generateSubDirs($fileName).$fileName)) {
+    setHttpResponseCode('404');
+    echo 'Data missing';
+    die();
+}
+
 $fileContent = implode(gzfile($filePath.generateSubDirs($fileName).$fileName));
 
 
