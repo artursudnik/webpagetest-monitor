@@ -27,6 +27,10 @@
                 });
                 break;
             case 'histogram':
+                $(function(){
+                    $('#histogramsContainer').show();
+                    wptmonitor.histograms.drawChart(data);
+                });
                 break;
         }
         var data={$data};

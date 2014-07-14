@@ -2,6 +2,7 @@ var wptmonitor = (function(window, $, wptmonitor){
     "use strict";
 
     var chart;
+    var lastData;
     var zoomOutOnce = false;
     var previousResolution;
 
@@ -39,6 +40,21 @@ var wptmonitor = (function(window, $, wptmonitor){
         });
         $('#histogramResolution').change(function(){
             resolutionChangedHandler();
+        });
+
+        $("#getHistogramStaticGraphLink").click(function(e){
+            e.preventDefault();
+            $.ajax({
+                       url : 'jash/createStaticGraph.php',
+                       type: 'POST',
+                       data: {
+                           chartData: JSON.stringify(lastData),
+                           chartType: 'histogram'
+                       }
+                   })
+                .done(function(data){
+                          window.open(data.staticGraphUrl)
+                      });
         });
     }
 
@@ -376,7 +392,7 @@ var wptmonitor = (function(window, $, wptmonitor){
     }
 
     function scrollbarToBeDisplayed() {
-        return $('input[name="displayHistogramScrollbar"]').prop('checked');
+        return $('input[name="displayHistogramScrollbar"]').prop('checked') || true;
     }
 
     function resolutionChangedHandler(){
@@ -391,6 +407,7 @@ var wptmonitor = (function(window, $, wptmonitor){
         getChart   : function () {
             return chart;
         },
+        drawChart: drawChart,
         resolutionChangedHandler: resolutionChangedHandler
     };
 
