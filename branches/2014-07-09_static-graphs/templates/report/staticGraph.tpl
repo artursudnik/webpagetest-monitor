@@ -52,7 +52,7 @@
         <p>Chart created: {$graphCreationDate}</p>
     </div>
     <table id="abbreviations">
-        <tr style="font-size:x-small;">
+        <tr>
             <td><strong>FV</strong> - First View</td>
             <td>|</td>
             <td><strong>RV</strong> - Repeat View</td>
