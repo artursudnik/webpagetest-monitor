@@ -16,3 +16,8 @@ body {
 #abbreviations{
     margin: 0 auto 5px;
 }
+
+#chartInfo {
+    margin: 10px;
+    font-size: 10px;
+}

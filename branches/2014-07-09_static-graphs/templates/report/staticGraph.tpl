@@ -48,6 +48,9 @@
             Warning! Your version of Internet Explorer does not support saving graph to file. Use any other modern browser or version 10 or greater of IE.
         </div>
     </div>
+    <div id="chartInfo">
+        <p>Chart created: {$graphCreationDate}</p>
+    </div>
     <table id="abbreviations">
         <tr style="font-size:x-small;">
             <td><strong>FV</strong> - First View</td>

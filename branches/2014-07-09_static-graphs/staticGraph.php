@@ -33,8 +33,10 @@ if(!file_exists($filePath.generateSubDirs($fileName).$fileName)) {
 
 $fileContent = implode(gzfile($filePath.generateSubDirs($fileName).$fileName));
 
+$graphCreationDate = date("Y-m-d H:i:s", filemtime($filePath.generateSubDirs($fileName).$fileName));
 
 $smarty->assign('data', $fileContent);
 $smarty->assign('graphType', $graphType);
+$smarty->assign('graphCreationDate', $graphCreationDate);
 
 $smarty->display('report/staticGraph.tpl');
