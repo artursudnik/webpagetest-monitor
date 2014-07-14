@@ -129,7 +129,7 @@ var wptmonitor = (function(window, $, wptmonitor){
 
     function getChartData(params){
         var d = $.Deferred();
-        getServersideMaxExecutionTime()
+        getServerSideMaxExecutionTime()
             .done(function(maxExecutionTime){
                 $.ajax({
                     url: 'jash/flashGraph.json.php',
@@ -161,7 +161,7 @@ var wptmonitor = (function(window, $, wptmonitor){
         return d.promise();
     }
 
-    var getServersideMaxExecutionTime = (function(){
+    var getServerSideMaxExecutionTime = (function(){
         var maxExecTime;
         return function(){
             var d = $.Deferred();
