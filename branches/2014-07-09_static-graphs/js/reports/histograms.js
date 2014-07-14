@@ -81,7 +81,10 @@ var wptmonitor = (function(window, $, wptmonitor){
         var histogramContainerWasHidden = isHistogramContainerHidden();
 
         $.when(
-            getHistogramDataForJobs(jobId),
+            getHistogramDataForJobs(jobId)
+                .done(function(data){
+                                      lastData = data;
+                                  }),
             showHistogramContainer().done(function(){
                 $('#histogramOverlay').fadeIn(100);
             })
