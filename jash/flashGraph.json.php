@@ -119,7 +119,7 @@ function getResultsDataAvgMod($startDateTime, $endDateTime, $interval, $datas, $
         unset($results[$key]['Date']);
 
         foreach (getMetricsFieldsMappingsDb2Form() as $dbFieldName => $formFieldName) {
-            if(key_exists($dbFieldName, $value)){
+            if(array_key_exists($dbFieldName, $value)){
                 $results[$key][mapMetricFieldDb2Form($dbFieldName)] = $value[$dbFieldName];
                 unset($results[$key][$dbFieldName]);
             }

@@ -19,7 +19,7 @@ function getDelaysForLocationsAggregated($options = array()) {
         if($options['sort'] == 'delay'); {
             $order = 'ORDER BY MaximumDelay';
         }
-        if(key_exists('sortDir', $options)) {
+        if(array_key_exists('sortDir', $options)) {
             switch ($options['sortDir']) {
                 case 'asc':
                     $order .= ' ASC';
