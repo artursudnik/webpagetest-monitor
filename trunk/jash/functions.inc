@@ -24,7 +24,7 @@ function mapMetricFieldForm2Db($fieldName) {
 
 function mapMetricFieldDb2Form($fieldName){
     $mappingArray = getMetricsFieldsMappingsDb2Form();
-    if(key_exists($fieldName, $mappingArray)) {
+    if(array_key_exists($fieldName, $mappingArray)) {
         return $mappingArray[$fieldName];
     }else {
         throw new Exception("Unknown form field name $fieldName", 1);
