@@ -101,7 +101,13 @@ echo json_encode($response);
 die();
 
 /**
- * FUNCTIONS DECLARATIONS
+ * @param $startDateTime integer
+ * @param $endDateTime integer
+ * @param $interval integer
+ * @param $datas array
+ * @param $fields array
+ * @param $aggregateMethod
+ * @return array
  */
 
 function getResultsDataAvgMod($startDateTime, $endDateTime, $interval, $datas, $fields, $aggregateMethod) {
@@ -124,6 +130,10 @@ function getResultsDataAvgMod($startDateTime, $endDateTime, $interval, $datas, $
     return $results;
 }
 
+/**
+ * @param $requestArray array
+ * @return array
+ */
 function sanitizeData($requestArray) {
     $resultArray = array();
 
@@ -156,6 +166,10 @@ function sanitizeData($requestArray) {
     return $resultArray;
 }
 
+/**
+ * @param $fieldsArray array
+ * @return string
+ */
 function serializeFields($fieldsArray){
     $serializedFields = "r.date";
 

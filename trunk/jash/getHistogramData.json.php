@@ -140,6 +140,10 @@ echo json_encode($response);
 
 die();
 
+/**
+ * @param $requestArray array
+ * @return array
+ */
 function sanitizeData($requestArray) {
     $resultArray = array();
 
