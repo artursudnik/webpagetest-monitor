@@ -3,12 +3,12 @@
  * Given a start time, end time, and interval return averages for the fields in $datas
  * that are not Id or Date
  *
- * @param  $startDateTime
- * @param  $endDateTime
- * @param  $interval
- * @param  $datas
- * @param  $fields
- * @param  $aggregateMethod
+ * @param $startDateTime integer
+ * @param $endDateTime integer
+ * @param $interval integer
+ * @param $datas array
+ * @param $fields array
+ * @param $aggregateMethod string
  * @throws Exception
  * @return array
  */
