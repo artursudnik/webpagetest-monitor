@@ -33,7 +33,8 @@ fieldset.wptmon select {
 #graphFieldset,
 #histogramFieldset,
 #graphFilteringFieldset,
-#metricsFieldset {
+#metricsFieldset,
+#actionFieldset {
     float: left
 }
 
