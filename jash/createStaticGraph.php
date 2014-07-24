@@ -3,6 +3,7 @@
 chdir('..');
 
 include_once('utils.inc');
+include 'firephp/0.3.2/fb.php';
 include_once('jash/functions.inc');
 include_once('jash/staticGraphFunctions.inc');
 
@@ -42,13 +43,23 @@ if($file){
     gzclose($file);
 }
 
-$graphId = explode('.', $filename);
+if(file_exists($filePath . $subPath . $filename)) {
+    $graphId = explode('.', $filename);
 
-echo json_encode(
-    array(
-        'staticGraphUrl' => 'staticGraph.php?id='.$graphId[0].'&type='.$chartType
-    )
-);
+    echo json_encode(
+        array(
+            'staticGraphUrl' => 'staticGraph.php?id='.$graphId[0].'&type='.$chartType
+        )
+    );
+
+}else {
+    echo json_encode(
+        array(
+            'errorMessage' => 'There is a problem writing data to server filesystem.'
+        )
+    );
+}
+
 
 /**
  * Nothing executes below
