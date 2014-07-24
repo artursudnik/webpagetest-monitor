@@ -17,6 +17,7 @@ touch graph/cache
 chown www-data:www-data graph/cache
 chown www-data:www-data graph/cache/*.xml
 chown www-data:www-data graph/cache/.xml
+chown www-data:www-data graph/staticGraphData
 
 touch db/wpt_monitor.sqlite
 chown www-data:www-data db/wpt_monitor.sqlite

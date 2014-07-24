@@ -2,10 +2,11 @@
 var wptmonitor = (function(window, $, wptmonitor){
 
     var chart;
+    var lastData;
 
     var preventUnload = true;
 
-    $(document).ready(function() {
+    function initialize() {
         var act = wptmonitor.graph.action;
 
         $('#graphJSONButton').on('click', function(){
@@ -14,14 +15,14 @@ var wptmonitor = (function(window, $, wptmonitor){
             }
             var chartContainerIsHidden = isChartContainerHidden();
             submitFormAJAX()
-            .done(function(){
-                if(chartContainerIsHidden){
-                    scrollToGraph();
-                }
-            })
-            .fail(function(e){
-                alert(e);
-            });
+                .done(function(){
+                          if(chartContainerIsHidden){
+                              scrollToGraph();
+                          }
+                      })
+                .fail(function(e){
+                          alert(e);
+                      });
         });
 
         $('#hideGraph').click(function(e){
@@ -31,6 +32,21 @@ var wptmonitor = (function(window, $, wptmonitor){
                 $('#graph').empty();
                 chart = null;
             });
+        });
+
+        $("#getGraphStaticLink").click(function(e){
+            e.preventDefault();
+            $.ajax({
+                       url : 'jash/createStaticGraph.php',
+                       type: 'POST',
+                       data: {
+                           chartData: JSON.stringify(lastData),
+                           chartType: 'graph'
+                       }
+                   })
+                .done(function(data){
+                          window.open(data.staticGraphUrl)
+                      });
         });
 
         $('#timeFrame').on('change', function(){
@@ -62,9 +78,9 @@ var wptmonitor = (function(window, $, wptmonitor){
         function scrollToGraph() {
             var container = $("#graphContainer");
             $('html, body').animate({
-                'scrollTop': container.offset().top - $(window).height() + container.height() },
-                1000,
-                'swing'
+                                        'scrollTop': container.offset().top - $(window).height() + container.height() },
+                                    1000,
+                                    'swing'
             );
         }
 
@@ -74,7 +90,7 @@ var wptmonitor = (function(window, $, wptmonitor){
             }
         });
 
-    });
+    }
 
     function doNotPreventUnloadConfirmation(){
         preventUnload = false;
@@ -86,6 +102,7 @@ var wptmonitor = (function(window, $, wptmonitor){
 
         getChartDataWithGUIBehavior(serializedFormData)
         .done(function(d){
+            lastData = d;
             try {
                 d = convertData2avgCharts(d);
                 drawChart(d);
@@ -124,7 +141,7 @@ var wptmonitor = (function(window, $, wptmonitor){
     }
 
     function scrollbarToBeDisplayed(){
-        return $('input[name="displayGraphScrollbar"]').prop('checked');
+        return $('input[name="displayGraphScrollbar"]').prop('checked') || true;
     }
 
     function getChartData(params){
@@ -482,7 +499,11 @@ var wptmonitor = (function(window, $, wptmonitor){
     window.getChart      = function(){return chart;};
 
     wptmonitor.graph = {
-        initialized: true,
+        initialized                   : true,
+        initializeInteractive         : function(){
+            initialize()
+        },
+        drawChart: function(d){drawChart(convertData2avgCharts(d))},
         doNotPreventUnloadConfirmation: doNotPreventUnloadConfirmation
     };
 
