@@ -23,6 +23,12 @@
     <script type="text/javascript" src="js/reports/flashGraphOld.js?v={$version}"></script>
     <script type="text/javascript" src="js/reports/flashGraph.js?v={$version}"></script>
     <script type="text/javascript" src="js/reports/histograms.js?v={$version}"></script>
+    <script type="text/javascript">
+        $(function(){
+            wptmonitor.graph.initializeInteractive();
+            wptmonitor.histograms.initializeInteractive();
+        })
+    </script>
 </head>
 <!--[if lt IE 7 ]> <body class="ie6"> <![endif]-->
 <!--[if IE 7 ]>    <body class="ie7"> <![endif]-->
@@ -342,6 +348,7 @@
                 <div id="histogramsContainer" style="position: relative;">
                     <div id="histogram"></div>
                     <a href="#" id="hideHistograms" class="hide"><img src="img/silkicons/icons/cross.png" alt="Hide graph"/></a>
+                    <a href="#" id="getHistogramStaticGraphLink">get link</a>
                     <div id="histogramOverlay">
                         <div style="padding-top: 30%;">
                             Working...
@@ -351,6 +358,7 @@
                 <div id="graphContainer" style="position: relative">
                 <div id="graph"></div>
                 <a href="#" id="hideGraph" class="hide"><img src="img/silkicons/icons/cross.png" alt="Hide graph"/></a>
+                <a href="#" id="getGraphStaticLink">get link</a>
                 <div id="graphOverlay">
                     <div style="padding-top: 30%;">
                         Working...
