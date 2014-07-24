@@ -44,9 +44,13 @@ var wptmonitor = (function(window, $, wptmonitor){
                            chartType: 'graph'
                        }
                    })
-                .done(function(data){
-                          window.open(data.staticGraphUrl)
-                      });
+                .done(function (data) {
+                    if (data.errorMessage) {
+                        alert(data.errorMessage);
+                    } else if(data.staticGraphUrl){
+                        window.open(data.staticGraphUrl)
+                    }
+                });
         });
 
         $('#timeFrame').on('change', function(){
