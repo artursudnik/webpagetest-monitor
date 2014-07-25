@@ -252,21 +252,21 @@ var wptmonitor = (function(window, $, wptmonitor){
         var fieldMetricMap = {};
         var i, j, k; //iterators
 
-        if(maxBucket > minBucket) {
-            for (i=minBucket-bucketWidth; i <= maxBucket+bucketWidth; i+=bucketWidth) {
-              if(i < 0) {
-                  continue;
-              }
-              dataConverted[i] = {bucket: i};
-              for(j in data){
-                  if(data.hasOwnProperty(j)){
-                      for(k in data[j].fields){
-                          if(data[j].fields.hasOwnProperty(k)){
-                              dataConverted[i][data[j].fields[k] + "-" + data[j].jobId] = 0;
-                          }
-                      }
-                  }
-              }
+        if(maxBucket > minBucket){
+            for(i = minBucket - bucketWidth; i <= maxBucket + bucketWidth; i += bucketWidth){
+                if(i < 0){
+                    continue;
+                }
+                dataConverted[i] = {bucket: i};
+                for(j in data){
+                    if(data.hasOwnProperty(j)){
+                        for(k in data[j].fields){
+                            if(data[j].fields.hasOwnProperty(k)){
+                                dataConverted[i][data[j].fields[k] + "-" + data[j].jobId] = 0;
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -350,12 +350,12 @@ var wptmonitor = (function(window, $, wptmonitor){
         params.job = jobId;
 
         $.ajax({
-           url: 'jash/getHistogramData.json.php',
-           data: params
+            url : 'jash/getHistogramData.json.php',
+            data: params
         }).done(function(data){
-            if(data.status !== 200) {
+            if(data.status !== 200){
                 deferred.reject(data.message);
-            } else {
+            }else{
                 deferred.resolve(data.results);
             }
         }).error(function(jqxhr, errorType, exception){
@@ -409,12 +409,12 @@ var wptmonitor = (function(window, $, wptmonitor){
     }
 
     wptmonitor.histograms = {
-        initialized: true,
-        initializeInteractive: initialize,
-        getChart   : function () {
+        initialized             : true,
+        initializeInteractive   : initialize,
+        getChart                : function(){
             return chart;
         },
-        drawChart: drawChart,
+        drawChart               : drawChart,
         resolutionChangedHandler: resolutionChangedHandler
     };
 
