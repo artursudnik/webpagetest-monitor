@@ -212,23 +212,23 @@ var wptmonitor = (function(window, $, wptmonitor){
         previousResolution = $('select[name="histogramResolution"]').val();
     }
 
-    function getHistogramDataForJobs(jobId) {
+    function getHistogramDataForJobs(jobId){
         var deferred = $.Deferred();
         $.when.apply($, $(jobId).map(function(){
-                    return getHistogramDataForJob(this);
-                }))
-                .done(function(){
-                    try{
-                        var dataConverted = convertHistogramData(arguments);
-                        deferred.resolve(dataConverted);
-                    }catch(e) {
-                        deferred.reject(e);
-                        throw e;
-                    }
-                })
-                .fail(function(e){
+                return getHistogramDataForJob(this);
+            }))
+            .done(function(){
+                try{
+                    var dataConverted = convertHistogramData(arguments);
+                    deferred.resolve(dataConverted);
+                }catch(e){
                     deferred.reject(e);
-                });
+                    throw e;
+                }
+            })
+            .fail(function(e){
+                deferred.reject(e);
+            });
         return deferred.promise();
     }
 
