@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    {assign var="version" value="1.20"}
+    {assign var="version" value="1.21"}
     <title>WebPageTest Monitor - Static graphical results</title>
     {*<link rel="stylesheet" href="css/pagestyle.css" type="text/css">*}
     <link rel="stylesheet" href="css/html5-doctor-reset-stylesheet.css?v={$version}" type="text/css">
