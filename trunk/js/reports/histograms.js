@@ -226,9 +226,6 @@ var wptmonitor = (function(window, $, wptmonitor){
                         throw e;
                     }
                 })
-                .always(function(){
-
-                })
                 .fail(function(e){
                     deferred.reject(e);
                 });
