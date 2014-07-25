@@ -145,7 +145,11 @@ var wptmonitor = (function(window, $, wptmonitor){
     }
 
     function scrollbarToBeDisplayed(){
-        return $('input[name="displayGraphScrollbar"]').prop('checked') || true;
+        var checkbox = $('input[name="displayGraphScrollbar"]');
+        if(checkbox === undefined) {
+            return true;
+        }
+        return checkbox.prop('checked');
     }
 
     function getChartData(params){

@@ -395,7 +395,11 @@ var wptmonitor = (function(window, $, wptmonitor){
     }
 
     function scrollbarToBeDisplayed() {
-        return $('input[name="displayHistogramScrollbar"]').prop('checked') || true;
+        var checkbox = $('input[name="displayHistogramScrollbar"]');
+        if(checkbox === undefined) {
+            return true;
+        }
+        return checkbox.prop('checked');
     }
 
     function resolutionChangedHandler(){
