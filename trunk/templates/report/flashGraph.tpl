@@ -214,7 +214,7 @@
                                   </div>
                                   <div>
                                       <label for="displayGraphScrollbar" style="width: 95px">Display scrollbar:</label>
-                                      <input type="checkbox" checked="" id="displayGraphScrollbar" name="displayGraphScrollbar"/>
+                                      <input type="checkbox" id="displayGraphScrollbar" name="displayGraphScrollbar"/>
                                   </div>
                               </fieldset>
                               <fieldset id="histogramFieldset" class="wptmon">
@@ -255,7 +255,7 @@
                                   </div>
                                   <div>
                                       <label for="displayHistogramScrollbar">Display scrollbar:</label>
-                                      <input type="checkbox" id="displayHistogramScrollbar" name="displayHistogramScrollbar" checked=""/>
+                                      <input type="checkbox" id="displayHistogramScrollbar" name="displayHistogramScrollbar"/>
                                   </div>
                               </fieldset>
                               <fieldset id="metricsFieldset" class="wptmon">
