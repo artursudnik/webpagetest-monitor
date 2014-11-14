@@ -88,16 +88,17 @@
                                       <label for="timeFrame"></label>
                                       <select id="timeFrame" name="timeFrame" onchange="adjustTimeFrame();">
                                           <option {if $timeFrame eq 0}selected="selected"{/if} value="0">Custom</option>
-                                          <option {if $timeFrame eq 900}selected="selected"{/if} value="900">15 Minutes</option>
-                                          <option {if $timeFrame eq 1800}selected="selected"{/if} value="1800">30 Minutes</option>
-                                          <option {if $timeFrame eq 3600}selected="selected"{/if} value="3600">1 Hour</option>
+                                          {*<option {if $timeFrame eq 900}selected="selected"{/if} value="900">15 Minutes</option>*}
+                                          {*<option {if $timeFrame eq 1800}selected="selected"{/if} value="1800">30 Minutes</option>*}
+                                          {*<option {if $timeFrame eq 3600}selected="selected"{/if} value="3600">1 Hour</option>*}
                                           <option {if $timeFrame eq 10800}selected="selected"{/if} value="10800">3 Hours</option>
                                           <option {if $timeFrame eq 21600}selected="selected"{/if} value="21600">6 Hours</option>
                                           <option {if $timeFrame eq 43200}selected="selected"{/if} value="43200">12 Hours</option>
-                                          <option {if $timeFrame eq 86400}selected="selected"{/if} value="86400">Day</option>
-                                          <option {if $timeFrame eq 604800}selected="selected"{/if} value="604800">Week</option>
+                                          <option {if $timeFrame eq 86400}selected="selected"{/if} value="86400">1 Day</option>
+                                          <option {if $timeFrame eq 86400}selected="selected"{/if} value="86400">2 Days</option>
+                                          <option {if $timeFrame eq 604800}selected="selected"{/if} value="604800">1 Week</option>
                                           <option {if $timeFrame eq 1209600}selected="selected"{/if} value="1209600">2 Weeks</option>
-                                          <option {if $timeFrame eq 2419200}selected="selected"{/if} value="2419200">4 weeks</option>
+                                          <option {if $timeFrame eq 2419200}selected="selected"{/if} value="2419200">1 month</option>
                                           <option {if $timeFrame eq 5184000}selected="selected"{/if} value="5184000">2 months</option>
                                           <option {if $timeFrame eq 15768000}selected="selected"{/if} value="15768000">6 months</option>
                                       </select>
