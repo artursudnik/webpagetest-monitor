@@ -33,7 +33,7 @@ $smarty->assign('aggregateMethod', $_SESSION['aggregateMethod']);
       $_SESSION['showInactiveJobsGraph'] = false;
     }
    } else if ( !isset($_SESSION['showInactiveJobsGraph'] ) ){
-    $_SESSION['showInactiveJobsGraph'] = true;
+    $_SESSION['showInactiveJobsGraph'] = false;
   }
   $showInactiveJobs = $_SESSION['showInactiveJobsGraph'];
   $smarty->assign('showInactiveJobsGraph', $showInactiveJobs);
