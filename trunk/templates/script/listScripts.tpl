@@ -109,12 +109,9 @@
                   <table>
                     <tr>
                       {if $hasUpdatePermission}
-                      <form action="editScript.php">
-                        <input type="hidden" name="id" value="{$res.Id}">
                         <td style="padding:1px">
-                          <input class="actionIcon" type="image" src="img/edit_icon.png" title="Edit" alt="Edit" value="Edit">
+                          <a class="actionIcon" href="editScript.php?id={$res.Id}"><img src="img/edit_icon.png"/></a>
                         </td>
-                      </form>
                       {/if}
                       {if $hasCreateDeletePermission}
                       <form action="deleteScript.php" name="deleteScript" onsubmit="return confirm('Confirm Deletion')">
