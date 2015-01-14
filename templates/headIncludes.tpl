@@ -1,3 +1,4 @@
+<link rel="icon" type="img/png" href="img/favicon.png">
 <link rel="stylesheet" href="css/pagestyle.css?v=1.6" type="text/css">
 <link rel="stylesheet" href="css/button.css?v=1.6" type="text/css">
 
