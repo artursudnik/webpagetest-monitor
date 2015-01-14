@@ -224,14 +224,9 @@
                   <table>
                     <tr>
                     {if $hasUpdatePermission}
-                      <form action="editJob.php">
-                        <input type="hidden" name="id" value="{$res.Id}">
-                        <input type="hidden" name="folderId" value="{$res.WPTJobFolderId}">
                         <td style="padding:1px">
-                          <input class="actionIcon" type="image" src="img/edit_icon.png" title="Edit" alt="Edit" value="Edit">
-                            <a class="actionIcon" href="editJob.php?id={$res.Id}&folderId={$res.WPTJobFolderId}"><img src="img/edit_icon.png" alt="edit job"/></a>
+                          <a class="actionIcon" href="editJob.php?id={$res.Id}&folderId={$res.WPTJobFolderId}"><img src="img/edit_icon.png" alt="edit job"/></a>
                         </td>
-                      </form>
                     {/if}
                     {if $hasCreateDeletePermission}
                       <form action="deleteJob.php" name="deleteJob" onsubmit="return confirm('Confirm Deletion')">
