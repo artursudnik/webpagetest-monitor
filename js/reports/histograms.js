@@ -206,7 +206,11 @@ var wptmonitor = (function(window, $, wptmonitor){
                 legend: {
                     fontSize: 9
                 },
-                exportConfig : {}
+                amExport : {
+                    top    : undefined,
+                    bottom : 4,
+                    right  : 4
+                }
             });
         }
         previousResolution = $('select[name="histogramResolution"]').val();
