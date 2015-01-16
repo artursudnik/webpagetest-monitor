@@ -282,7 +282,7 @@
       <input class="actionIcon" type="image" src="img/Text.gif" width="17"></form>
   </td>
   <td><a target="_blank" title="{$res.WPTResultId}"
-         href={$res.WPTHost}{$wptResultURL}{$res.WPTResultId}><img src="img/favicon.ico" width="17"
+         href={$res.WPTHost}{$wptResultURL}{$res.WPTResultId}><img src="img/favicon.png" width="17"
                                                                    title="Show WPT Result"></a></td>
   <td><input type="checkbox" name="selectedResult" id="selectedResult" value="{$res.Id}"></td>
   <td align="right" style="padding-bottom:0%;vertical-align:top;">{$res.WPTBandwidthDown}<br>{$res.WPTBandwidthUp}<br>{$res.DialerId}</td>
