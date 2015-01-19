@@ -259,15 +259,7 @@
                       </td>
                       <td style="padding:1px">
                       {if $hasExecutePermission}
-                        <form action="processJob.php">
-                          <input type="hidden" name=force value=on>
-                          <input type="hidden" name=priority value=1>
-                          <input type="hidden" name="job_id[]" value="{$res.Id}">
-                          <input type="hidden" name="forward_to"
-                                 value="listResults.php?orderBy=Date&orderByDir=DESC&filterField=WPTJob.Id&filterValue={$res.Id}"/>
-                          <input class="actionIcon" type="image" src="img/execute_icon.png" title="Execute job now."
-                                 value="Exec"/>
-                        </form>
+                          <a class="actionIcon" href="processJob.php?force=on&amp;priority=1&amp;job_id[]={$res.Id}&amp;forward_to={'listResults.php?orderBy=Date&orderByDir=DESC&filterField=WPTJob.Id&filterValue='|escape:'url'}{$res.Id|escape:'url'}"><img src="img/execute_icon.png"></a>
                       {/if}
                       </td>
                       </td></tr>
