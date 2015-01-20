@@ -180,6 +180,7 @@ textarea {overflow-x: hidden;width: 400px;height: 100px;padding: 3px;}
 /* shared table themes */
 table.pretty { margin-left:auto; margin-right:auto; background-color: #fff; border-collapse: collapse; border: 0px white solid; }
 table.pretty th, table.pretty td { padding: 0.4em; vertical-align:middle;}
+table.pretty th.icon, table.pretty td.icon {padding: 0; text-align: center}
 table.pretty th { background:#aaaaaa; }
 table.pretty th.empty { background: #fff; border-top:1px white solid; border-left:1px white solid; }
 table.pretty th.border, table.pretty td.border { border-left: 2px black solid; }

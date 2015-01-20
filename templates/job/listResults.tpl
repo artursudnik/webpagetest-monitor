@@ -186,8 +186,8 @@
   </th>
 </tr>
 <tr>
-  <th align="left" colspan="4"></th>
-  <th><input type="checkbox" id="toggleAllDisplayedResults"></th>
+  <th class="icon" align="left" colspan="4"></th>
+  <th class="icon"><input type="checkbox" id="toggleAllDisplayedResults"></th>
   <th align="right">
     <a title="WPT Remote Agent Dialer ID" href="?orderBy=DialerId">{if $orderResultsBy eq "DialerId"}
     <b>{/if}Agent</a>{if $orderResultsBy eq "DialerId"}</b><a
@@ -257,7 +257,7 @@
 {if $eo == "even"} {assign var="eo" value="odd"} {else} {assign var="eo" value= "even"}{/if}
 <tr class="monitoringJobRow {$eo}">
   {if $res.Status eq '100' || $res.Status eq '910'}
-    <td>
+    <td class="icon">
       <form action="processJob.php">
         <input type="hidden" name="result_id" value="{$res.WPTResultId}">
         <input type="hidden" name="forward_to" value="listResults.php">
@@ -265,9 +265,9 @@
       </form>
     </td>
   {else}
-    <td colspan="1"></td>
+    <td class="icon"></td>
   {/if}
-  <td>
+  <td class="icon">
     <form action="deleteResult.php" onsubmit="return confirm('Confirm Deletion')">
       <input type="hidden" name="result_id" value="{$res.Id}">
         <input type="hidden" name="forward_to" value="listResults.php">
@@ -275,16 +275,16 @@
     </form>
   </td>
 
-  <td style="paddin-left:0em">
+  <td class="icon" style="paddin-left:0em">
     <form target="_blank" title="View log file" action=jobProcessorLog.php>
       <input type=hidden name=wptResultId value={$res.WPTResultId}>
       <input type="hidden" name="timeStamp" value="{$res.Date}">
       <input class="actionIcon" type="image" src="img/Text.gif" width="17"></form>
   </td>
-  <td><a target="_blank" title="{$res.WPTResultId}"
+  <td class="icon"><a target="_blank" title="{$res.WPTResultId}"
          href={$res.WPTHost}{$wptResultURL}{$res.WPTResultId}><img src="img/favicon.png" width="17"
                                                                    title="Show WPT Result"></a></td>
-  <td><input type="checkbox" name="selectedResult" id="selectedResult" value="{$res.Id}"></td>
+  <td class="icon"><input type="checkbox" name="selectedResult" id="selectedResult" value="{$res.Id}"></td>
   <td align="right" style="padding-bottom:0%;vertical-align:top;">{$res.WPTBandwidthDown}<br>{$res.WPTBandwidthUp}<br>{$res.DialerId}</td>
   <td align="right" style="padding-bottom:0%;vertical-align:top;">{$res.WPTBandwidthLatency}<br>{$res.WPTBandwidthPacketLoss}<br>
     {if $res.ValidationState eq 1}<img title="{$res.Id} - Valid Result" src=img/Valid.png>
