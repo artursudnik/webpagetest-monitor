@@ -15,7 +15,7 @@ fieldset.wptmon select {
     float: left;
 }
 
-fieldset.wptmon div {
+fieldset.wptmon>div {
     margin-bottom: 2px;
     overflow: auto;
     height: 20px;
@@ -24,6 +24,28 @@ fieldset.wptmon div {
 fieldset.wptmon select {
     margin: 0;
 }
+
+#actionFieldset>div{
+    height: 33px;
+}
+
+#actionFieldset button::-moz-focus-inner,
+#actionFieldset input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+#actionFieldset input{
+    margin: 1px;
+    padding: 1px;
+}
+
+input#histogramButton, input#graphJSONButton {
+    padding: 6px;
+    font-weight: bold;
+}
+
+
 
 #timeframeFieldset label {
     width: 30px;
@@ -77,11 +99,11 @@ fieldset .badValue label {
     color: #ff0000;
 }
 
-#interval.notSafe, #interval option.notSafe{
+#interval.notSafe, #interval option.notSafe {
     color: #ff0000;
 }
 
-#interval option.safe{
+#interval option.safe {
     color: #222222;
 }
 
@@ -135,7 +157,7 @@ fieldset .badValue label {
     display: none;
 }
 
-#abbreviations table.pretty{
+#abbreviations table.pretty {
     background-color: transparent;
     margin-bottom: 10px;
 }

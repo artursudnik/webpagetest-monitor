@@ -287,11 +287,12 @@
                               </fieldset>
                               <fieldset id="actionFieldset" class="wptmon">
                                   <legend>Action</legend>
-                                  <input id="histogramButton" type="button" name="histogramButton" value="Histogram" />
-                                  <input type="button" id="graphJSONButton" value="Graph" />
+                                  <div>
+                                      <input id="histogramButton" type="button" name="histogramButton" value="Histogram" />
+                                      <input type="button" id="graphJSONButton" value="Graph" />
+                                      <input id="graphButton" type="button" name="action" onclick="updateGraph();" value="Graph (reload)">
+                                  </div>
                                   {if $smarty.session.ls_admin}
-                                      <input id="graphButton" type="button" name="action"
-                                             onclick="updateGraph();" value="Graph (reload)">
                                       <input id="reportButton" type="button" name="action"
                                              onclick="updateReport();" value="Report">
                                       <input type="button" name="action" onclick="downloadData();" value="Download">
