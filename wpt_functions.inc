@@ -821,10 +821,10 @@ function processResultsForAll($resultId = null) {
                         }
                     }
                 }
-                if($result['AvgFirstViewLoadTime'] = 0
-                    && $result['AvgFirstViewFirstByte'] = 0
-                        && $result['AvgFirstViewDocCompleteTime'] = 0
-                            && $result['AvgFirstViewStartRender'] = 0
+                if($result['AvgFirstViewLoadTime'] == 0
+                    && $result['AvgFirstViewFirstByte'] == 0
+                        && $result['AvgFirstViewDocCompleteTime'] == 0
+                            && $result['AvgFirstViewStartRender'] == 0
                 ) {
                     $result['ValidationState'] = 2;
                 }
