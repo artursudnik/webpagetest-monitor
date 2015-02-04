@@ -415,7 +415,7 @@ function processJobsForUser($userId, $jobId = null, $force = false, $runLabel = 
                     $queueSize     = $location['PendingTests'];
                     $threshold     = getLocationThreshold($location['hostURL'], $location['id']);
 
-                    if($threshold != 0 && ( $queueSize && $threshold && ( $queueSize>$threshold ) )) {
+                    if($threshold != 0 && ( $queueSize && $threshold && ( $queueSize>$threshold ) ) && !$force) {
                         logOutput("[INFO] [ProcessJob] Skipping job due to high load on location: " . $location['hostURL'] . " " . $location['id'] . " queue size: " . $queueSize . " greater than the threshold: " . $threshold);
                         $skipJobSubmission = true;
                         break;
