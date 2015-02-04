@@ -97,7 +97,7 @@
                                           <option {if $timeFrame eq 43200}selected="selected"{/if} value="43200">12 Hours</option>
                                           <option label="" disabled="">--------------</option>
                                           <option {if $timeFrame eq 86400}selected="selected"{/if} value="86400">1 Day</option>
-                                          <option {if $timeFrame eq 86400}selected="selected"{/if} value="172800">2 Days</option>
+                                          <option {if $timeFrame eq 172800}selected="selected"{/if} value="172800">2 Days</option>
                                           <option label="" disabled="">--------------</option>
                                           <option {if $timeFrame eq 604800}selected="selected"{/if} value="604800">1 Week</option>
                                           <option {if $timeFrame eq 1209600}selected="selected"{/if} value="1209600">2 Weeks</option>
