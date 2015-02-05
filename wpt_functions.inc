@@ -791,6 +791,7 @@ function processResultsForAll($resultId = null) {
                     saveWPTAssets($wptResultId, $resultXml);
                 }
                 if($result['Validate']) {
+                    //TODO: add validations based on number of http requests, bytes loaded, minimum loading time etc
                     $validationRequest    = $result['ValidationRequest'];
                     $validationType       = $result['ValidationType'];
                     $validationMarkAs     = $result['ValidationMarkAs'];
