@@ -837,44 +837,28 @@ function processResultsForAll($resultId = null) {
                     if($pageData) {
                         $pageDataArray = delimitedToArray($pageData, "\t", true);
                         if($pageDataArray) {
-                            $result['AvgFirstViewDocCompleteTime']     = array_sum(getArrayFor($pageDataArray,
-                                                                                               'Doc Complete Time (ms)'));
-                            $result['AvgFirstViewDocCompleteRequests'] = array_sum(getArrayFor($pageDataArray,
-                                                                                               'Requests (Doc)'));
-                            $result['AvgFirstViewDocCompleteBytesIn']  = array_sum(getArrayFor($pageDataArray,
-                                                                                               'Bytes In (Doc)'));
-                            $result['AvgFirstViewFullyLoadedTime']     = array_sum(getArrayFor($pageDataArray,
-                                                                                               'Activity Time(ms)'));
-                            $result['AvgFirstViewFullyLoadedRequests'] = array_sum(getArrayFor($pageDataArray,
-                                                                                               'Requests'));
-                            $result['AvgFirstViewFullyLoadedBytesIn']  = array_sum(getArrayFor($pageDataArray,
-                                                                                               'Bytes In'));
-                            $result['AvgFirstViewFirstByte']           = array_sum(getArrayFor($pageDataArray,
-                                                                                               'Time to First Byte (ms)'));
-                            $result['AvgFirstViewStartRender']         = array_sum(getArrayFor($pageDataArray,
-                                                                                               'Time to Start Render (ms)'));
+                            $result['AvgFirstViewDocCompleteTime']     = array_sum(getArrayFor($pageDataArray, 'Doc Complete Time (ms)'));
+                            $result['AvgFirstViewDocCompleteRequests'] = array_sum(getArrayFor($pageDataArray, 'Requests (Doc)'));
+                            $result['AvgFirstViewDocCompleteBytesIn']  = array_sum(getArrayFor($pageDataArray, 'Bytes In (Doc)'));
+                            $result['AvgFirstViewFullyLoadedTime']     = array_sum(getArrayFor($pageDataArray, 'Activity Time(ms)'));
+                            $result['AvgFirstViewFullyLoadedRequests'] = array_sum(getArrayFor($pageDataArray, 'Requests'));
+                            $result['AvgFirstViewFullyLoadedBytesIn']  = array_sum(getArrayFor($pageDataArray, 'Bytes In'));
+                            $result['AvgFirstViewFirstByte']           = array_sum(getArrayFor($pageDataArray, 'Time to First Byte (ms)'));
+                            $result['AvgFirstViewStartRender']         = array_sum(getArrayFor($pageDataArray, 'Time to Start Render (ms)'));
                         }
                     }
                     $pageDataRepeatView = file_get_contents($pageDataLocationRepeatView);
                     if($pageDataRepeatView) {
                         $pageDataArrayRepeatView = delimitedToArray($pageDataRepeatView, "\t", true);
                         if($pageDataArrayRepeatView) {
-                            $result['AvgRepeatViewDocCompleteTime']     = array_sum(getArrayFor($pageDataArrayRepeatView,
-                                                                                                'Doc Complete Time (ms)'));
-                            $result['AvgRepeatViewDocCompleteRequests'] = array_sum(getArrayFor($pageDataArrayRepeatView,
-                                                                                                'Requests (Doc)'));
-                            $result['AvgRepeatViewDocCompleteBytesIn']  = array_sum(getArrayFor($pageDataArrayRepeatView,
-                                                                                                'Bytes In (Doc)'));
-                            $result['AvgRepeatViewFullyLoadedTime']     = array_sum(getArrayFor($pageDataArrayRepeatView,
-                                                                                                'Activity Time(ms)'));
-                            $result['AvgRepeatViewFullyLoadedRequests'] = array_sum(getArrayFor($pageDataArrayRepeatView,
-                                                                                                'Requests'));
-                            $result['AvgRepeatViewFullyLoadedBytesIn']  = array_sum(getArrayFor($pageDataArrayRepeatView,
-                                                                                                'Bytes In'));
-                            $result['AvgRepeatViewFirstByte']           = array_sum(getArrayFor($pageDataArray,
-                                                                                                'Time to Repeat Byte (ms)'));
-                            $result['AvgRepeatViewStartRender']         = array_sum(getArrayFor($pageDataArray,
-                                                                                                'Time to Start Render (ms)'));
+                            $result['AvgRepeatViewDocCompleteTime']     = array_sum(getArrayFor($pageDataArrayRepeatView, 'Doc Complete Time (ms)'));
+                            $result['AvgRepeatViewDocCompleteRequests'] = array_sum(getArrayFor($pageDataArrayRepeatView, 'Requests (Doc)'));
+                            $result['AvgRepeatViewDocCompleteBytesIn']  = array_sum(getArrayFor($pageDataArrayRepeatView, 'Bytes In (Doc)'));
+                            $result['AvgRepeatViewFullyLoadedTime']     = array_sum(getArrayFor($pageDataArrayRepeatView, 'Activity Time(ms)'));
+                            $result['AvgRepeatViewFullyLoadedRequests'] = array_sum(getArrayFor($pageDataArrayRepeatView, 'Requests'));
+                            $result['AvgRepeatViewFullyLoadedBytesIn']  = array_sum(getArrayFor($pageDataArrayRepeatView, 'Bytes In'));
+                            $result['AvgRepeatViewFirstByte']           = array_sum(getArrayFor($pageDataArray, 'Time to Repeat Byte (ms)'));
+                            $result['AvgRepeatViewStartRender']         = array_sum(getArrayFor($pageDataArray, 'Time to Start Render (ms)'));
                         }
                     }
                 }
