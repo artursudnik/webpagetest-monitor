@@ -358,7 +358,7 @@ function getWptConfigFor($key) {
 function getWptLocations() {
     $q = Doctrine_Query::create()
                        ->from('WPTLocation l');
-    $q->orderBy('location');
+    $q->orderBy('label');
     $locations = $q->execute();
     $q->free(true);
 
