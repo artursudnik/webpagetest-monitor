@@ -34,7 +34,8 @@ $smarty->assign('runRateInfo', $runRateInfo);
 $smarty->assign('delayedLocationsAggregated', getDelaysForLocationsAggregated(
     array(
         'sort'    => 'delay',
-        'sortDir' => 'desc'
+        'sortDir' => 'desc',
+        'jobProcessorFrequency' => 60
     )
 ));
 $smarty->display('host/wptHostStatus.tpl');
