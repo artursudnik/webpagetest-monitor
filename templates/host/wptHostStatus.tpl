@@ -20,6 +20,7 @@
                         <th align="left">ID</th>
                         <th align="left">Label</th>
                         <th align="left">Browser</th>
+                        <th>Active Jobs</th>
                         <th align="right">Run Rate *</th>
                         <th align="right">Testers</th>
                         <th align="right">In Queue</th>
@@ -38,6 +39,7 @@
                                 <td><a href="#{$location.id}">{$location.id}</a></td>
                                 <td>{$location.Label}</td>
                                 <td>{$location.Browser}</td>
+                                <td align="right">{$location.activeJobs|default:''}</td>
                                 <td align="right">{if isset($location.runRate)}{$location.runRate|number_format}{/if}</td>
                                 <td align="right">{$location.AgentCount}</td>
                                 <td align="right">{$location.PendingTests}</td>

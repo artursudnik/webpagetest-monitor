@@ -208,7 +208,7 @@ function getLocationThreshold($host, $location) {
   if (function_exists('logOutput')) {
 	logOutput("[INFO] [ProcessJob] [getLocationThreshold] host: $host location: $location threshold: $queueThreshold");
   }
- 
+
   $q->free(true);
   return $queueThreshold;
 }
@@ -303,7 +303,7 @@ function getTestersInformation($host = null){
       continue;
     }
     $xml = new SimpleXMLElement($resultXml);
-    
+
     foreach ($xml->data->location as $loc) {
       $id = $loc->id;
       $cnt = 0;
@@ -337,78 +337,88 @@ function getTestersInformation($host = null){
 }
 
 function getLocationInformation($host = null) {
-  $testerInformation = getTestersInformation($host);
-  if ($host == null) {
-    $q = Doctrine_Query::create()->from('WPTHost h')->setHydrationMode(Doctrine_Core::HYDRATE_ARRAY);
-    $hosts = $q->fetchArray();
-    $q->free(true);
-  } else {
-    $q = Doctrine_Query::create()->from('WPTHost h')
-        ->where('h.HostURL = ?', $host)->setHydrationMode(Doctrine_Core::HYDRATE_ARRAY);
-    $host = $q->fetchOne();
-    $hosts[] = $host;
-  }
-
-  $locationTable = Doctrine_Core::getTable('WPTLocation');
-
-  $locations = array();
-  foreach ($hosts as $host) {
-    $location = array();
-    $resultXml = @file_get_contents($host['HostURL'] . "/getLocations.php?f=xml");
-    if (!$resultXml) {
-        logOutput("[ERROR] [getTestersInformation] Failed to retrieve locations information");
-      continue;
+    $testerInformation = getTestersInformation($host);
+    if($host == null) {
+        $q = Doctrine_Query::create()
+                           ->from('WPTHost h')
+                           ->setHydrationMode(Doctrine_Core::HYDRATE_ARRAY);
+        $hosts = $q->fetchArray();
+        $q->free(true);
+    }else {
+        $q = Doctrine_Query::create()
+                           ->from('WPTHost h')
+                           ->where('h.HostURL = ?', $host)
+                           ->setHydrationMode(Doctrine_Core::HYDRATE_ARRAY);
+        $host    = $q->fetchOne();
+        $hosts[] = $host;
     }
-    $xml = new SimpleXMLElement($resultXml);
-    foreach ($xml->data->location as $loc) {
-      $location['host'] = $host['Label'];
-      $location['hostURL'] = $host['HostURL'];
-      $location['id'] = $loc->id;
-      $id = $loc->id;
-      $location['Label'] = $loc->Label;
-      $location['Browser'] = $loc->Browser;
-      $location['PendingTests'] = $loc->PendingTests->Total;
-      $location['PendingTestsHighPriority'] = $loc->PendingTests->HighPriority;
-      $location['PendingTestsLowPriority'] = $loc->PendingTests->LowPriority;
-      $location['AgentCount'] = $testerInformation['"'.$id.'"']['AgentCount'];
-      $loc = $locationTable->findOneByLocation($loc->id);
-      if (!$location['GreenLimit'] = $loc['QueueThresholdGreenLimit']) {
-        $location['GreenLimit'] = 15;
-      }
-      if (!$location['YellowLimit'] = $loc['QueueThresholdYellowLimit']) {
-        $location['YellowLimit'] = 30;
-      }
-      $locations["'".$id."'"] = $location;
+
+    $locationTable = Doctrine_Core::getTable('WPTLocation');
+
+    $locations = array();
+    foreach ($hosts as $host) {
+        $location  = array();
+        $resultXml = @file_get_contents($host['HostURL'] . "/getLocations.php?f=xml");
+        if(!$resultXml) {
+            logOutput("[ERROR] [getTestersInformation] Failed to retrieve locations information");
+            continue;
+        }
+        $xml = new SimpleXMLElement($resultXml);
+        foreach ($xml->data->location as $loc) {
+            $location['host']                     = $host['Label'];
+            $location['hostURL']                  = $host['HostURL'];
+            $location['id']                       = $loc->id;
+            $id                                   = $loc->id;
+            $location['Label']                    = $loc->Label;
+            $location['Browser']                  = $loc->Browser;
+            $location['PendingTests']             = $loc->PendingTests->Total;
+            $location['PendingTestsHighPriority'] = $loc->PendingTests->HighPriority;
+            $location['PendingTestsLowPriority']  = $loc->PendingTests->LowPriority;
+            $location['AgentCount']               = $testerInformation['"' . $id . '"']['AgentCount'];
+            $loc                                  = $locationTable->findOneByLocation($loc->id);
+            if(!$location['GreenLimit'] = $loc['QueueThresholdGreenLimit']) {
+                $location['GreenLimit'] = 15;
+            }
+            if(!$location['YellowLimit'] = $loc['QueueThresholdYellowLimit']) {
+                $location['YellowLimit'] = 30;
+            }
+            $locations["'" . $id . "'"] = $location;
+        }
     }
-  }
-  //SELECT location, firstviewonly, runs, frequency, (runs * (2-(firstviewonly is not null))*60/frequency) as runrate FROM `wptjob` WHERE active group by location;
-  $q = Doctrine_Query::create()->select('j.Location, j.FirstViewOnly, SUM(j.Runs * (2-(FirstViewOnly is not null)) * 60/j.Frequency) as runrate')
-      ->from('WPTJob j')
-      ->where('j.Active = ?',true)
-      ->orderBy('j.Location')
-      ->groupBy('j.Location');
+    //SELECT location, firstviewonly, runs, frequency, (runs * (2-(firstviewonly is not null))*60/frequency) as runrate FROM `wptjob` WHERE active group by location;
+    $q = Doctrine_Query::create()
+                       ->select('j.Location,'
+                                .'j.FirstViewOnly,'
+                                .'count(*) as activeJobs,'
+                                .'count(DISTINCT wptjobfolderid) as activeJobsInFolders,'
+                                .'SUM(j.Runs * (2-(FirstViewOnly is not null)) * 60/j.Frequency) as runrate')
+                       ->from('WPTJob j')
+                       ->where('j.Active = ?', true)
+                       ->orderBy('j.Location')
+                       ->groupBy('j.Location');
 
-  $result = $q->fetchArray();
-  foreach ($result as $res){
-    $loc = $locationTable->findOneByLocation($res['Location']);
+    $result = $q->fetchArray();
+    foreach ($result as $res) {
+        $loc = $locationTable->findOneByLocation($res['Location']);
 
-    $location = &$locations["'".$res['Location']."'"];
+        $location = &$locations["'" . $res['Location'] . "'"];
 
-    $location['runRate'] = $res['runrate'];
-    if(empty($location['Label'])) {
-        $location['host']                       = '';
-        $location['Label']                      = '['.$loc->Label.']';
-        $location['Browser']                    = '['.$loc->Browser.']';
-        $location['id']                         = '['.$loc->Location.']';
-        $location['AgentCount']                 = '['. 0 .']';
-        $location['PendingTests']               = '['. 0 .']';
-        $location['PendingTestsHighPriority']   = '['. 0 .']';
-        $location['PendingTestsLowPriority']    = '['. 0 .']';
+        $location['runRate'] = $res['runrate'];
+        $location['activeJobs'] = $res['activeJobs'];
+        if(empty( $location['Label'] )) {
+            $location['host']                     = '';
+            $location['Label']                    = '[' . $loc->Label . ']';
+            $location['Browser']                  = '[' . $loc->Browser . ']';
+            $location['id']                       = '[' . $loc->Location . ']';
+            $location['AgentCount']               = '[' . 0 . ']';
+            $location['PendingTests']             = '[' . 0 . ']';
+            $location['PendingTestsHighPriority'] = '[' . 0 . ']';
+            $location['PendingTestsLowPriority']  = '[' . 0 . ']';
+        }
     }
-  }
 
 
-  return $locations;
+    return $locations;
 }
 
 function logOutput($msg, $file="jobProcessor_log.html") {
