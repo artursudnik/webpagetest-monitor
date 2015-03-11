@@ -39,12 +39,12 @@
                                 <td><a href="#{$location.id}">{$location.id}</a></td>
                                 <td>{$location.Label}</td>
                                 <td>{$location.Browser}</td>
-                                <td align="right">{$location.activeJobs|default:''}</td>
-                                <td align="right">{if isset($location.runRate)}{$location.runRate|number_format}{/if}</td>
-                                <td align="right">{$location.AgentCount}</td>
-                                <td align="right">{$location.PendingTests}</td>
-                                <td align="right">{$location.PendingTestsHighPriority}</td>
-                                <td align="right">{$location.PendingTestsLowPriority}</td>
+                                <td align="center">{$location.activeJobs|default:''}</td>
+                                <td align="center">{if isset($location.runRate)}{$location.runRate|number_format}{/if}</td>
+                                <td align="center">{$location.AgentCount}</td>
+                                <td align="center">{$location.PendingTests}</td>
+                                <td align="center">{$location.PendingTestsHighPriority}</td>
+                                <td align="center">{$location.PendingTestsLowPriority}</td>
                                 <td style="opacity:0.6;background-color:{$bgcolor}"></td>
                             </tr>
                         {/foreach}
