@@ -8,6 +8,10 @@ include_once ('jash/functions.inc');
 header('Content-Type: application/json');
 header('Cache-Control: public', TRUE);
 
+if ($_SESSION['ls_admin']){
+    ini_set('max_execution_time', 120);
+}
+
 $requestData = $_POST;
 
 $response = array(
