@@ -714,14 +714,15 @@ function processResultsForAll($resultId = null) {
                         if($header == "Dialer ID") {
                             $dialerId = $line[$key];
                         }
-                        if($header == "Error Code") {
-                            // Ignore the 99999.
-                            //            if (!$line[$key] == "99999"){
-                            $errorCode = $line[$key];
-                            //            }
-                        }
+//                        if($header == "Error Code") {
+//                            // Ignore the 99999.
+//                            //            if (!$line[$key] == "99999"){
+//                            $errorCode = $line[$key];
+//                            //            }
+//                        }
                     }
                 }
+                $errorCode = $xml->data->run[0]->firstView->results->result;
                 if($errorCode) {
                     $status = $errorCode;
                 }else {
