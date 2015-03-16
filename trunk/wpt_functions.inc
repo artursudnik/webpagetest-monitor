@@ -722,7 +722,7 @@ function processResultsForAll($resultId = null) {
 //                        }
                     }
                 }
-                $errorCode = $xml->data->run[0]->firstView->results->result;
+                $errorCode = (int)$xml->data->run[0]->firstView->results->result;
                 if($errorCode) {
                     $status = $errorCode;
                 }else {
