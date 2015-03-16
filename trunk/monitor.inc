@@ -63,6 +63,7 @@ $wptResultStatusCodes['905']   = "Job Submission Failed";
 $wptResultStatusCodes['910']   = "Max Download Attempts Exceeded";
 $wptResultStatusCodes['990']   = "X-SL-CompState: Uncompiled";
 $wptResultStatusCodes['999']   = "Test data missing";
+$wptResultStatusCodes['99996'] = "Test Failed waiting for specified DOM element/End condition";
 $wptResultStatusCodes['99997'] = "Test Timed Out (no content errors)";
 $wptResultStatusCodes['99998'] = "Test Timed Out (content errors)";
 $wptResultStatusCodes['99999'] = "Individual requests failed";
