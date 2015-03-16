@@ -154,8 +154,8 @@ try
   }
 
   if ( $resultsFilterField && $resultsFilterValue ) {
-    if ( $resultsFilterField == "WPTJob.Id" ) {
-      $q->andWhere( 'r.' . $resultsFilterField . '= ?', $resultsFilterValue )
+    if ( $resultsFilterField == "WPTJob.Id" or $resultsFilterField == "Status") {
+      $q->andWhere( 'r.' . $resultsFilterField . '= ?', (int)$resultsFilterValue )
               ->andWhere( 'r.Date < ?', $endDateTime )
               ->andWhere( 'r.Date > ?', $startDateTime );
     } else {
