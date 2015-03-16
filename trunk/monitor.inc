@@ -55,15 +55,17 @@
   $wptResultStatusCodes['100']="Pending";
   $wptResultStatusCodes['200']="Complete";
   $wptResultStatusCodes['404']="HTTP 404";
+  $wptResultStatusCodes['407'] = "HTTP 407";
   $wptResultStatusCodes['500']="HTTP 500";
   $wptResultStatusCodes['503']="HTTP 503";
   $wptResultStatusCodes['900']="Timeout";
   $wptResultStatusCodes['905']="Job Submission Failed";
   $wptResultStatusCodes['910']="Max Download Attempts Exceeded";
   $wptResultStatusCodes['990']="X-SL-CompState: Uncompiled";
-  $wptResultStatusCodes['999']="Other";
-  $wptResultStatusCodes['99998']="Other";
-  $wptResultStatusCodes['99999']="Other";
+  $wptResultStatusCodes['999'] = "Test data missing";
+  $wptResultStatusCodes['99997'] = "Test Timed Out (no content errors)";
+  $wptResultStatusCodes['99998'] = "Test Timed Out (content errors)";
+  $wptResultStatusCodes['99999'] = "Individual requests failed";
 
   $wptValidationStateCodes['1']="Valid";
   $wptValidationStateCodes['2']="Invalid";
