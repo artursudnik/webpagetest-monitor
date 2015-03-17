@@ -74,7 +74,10 @@
 <div class="content">
 <table style="border-collapse:collapse" width="100%" border=0>
   <tr>
-    <td valign="top"><h2 class="cufon-dincond_black">Results</h2></td>
+    <td valign="top">
+        <h2 class="cufon-dincond_black">Results</h2>
+        <a href="listResults.php?onlyErrors=1">list errors</a>
+    </td>
     <td align="left" valign="top" colspan="2" rowspan="2">
       <table>
         <tr>
@@ -255,7 +258,7 @@
 {assign var="eo" value="odd"}
 {foreach from=$result item=res}
 {if $eo == "even"} {assign var="eo" value="odd"} {else} {assign var="eo" value= "even"}{/if}
-<tr class="monitoringJobRow {$eo}">
+<tr class="monitoringJobRow {$eo} status-{$res.Status}">
   {if $res.Status eq '100' || $res.Status eq '910'}
     <td class="icon">
       <form action="processJob.php">

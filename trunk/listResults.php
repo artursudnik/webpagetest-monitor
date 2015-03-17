@@ -167,6 +167,9 @@ try
     $q->andWhere( 'r.Date < ?', $endDateTime )
             ->andWhere( 'r.Date > ?', $startDateTime );
   }
+  if(key_exists('onlyErrors', $_GET)) {
+      $q->andWhere('r.status not in (100, 200, 407, 99999)');
+  }
   $pager = new Doctrine_Pager( $q, $resultsCurrentPage, $resultsPerPage );
   $result = $pager->execute();
   $smarty->assign( 'wptResultURL', $wptResult );

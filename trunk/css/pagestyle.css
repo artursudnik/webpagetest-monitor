@@ -186,6 +186,22 @@ table.pretty th.empty { background: #fff; border-top:1px white solid; border-lef
 table.pretty th.border, table.pretty td.border { border-left: 2px black solid; }
 table.pretty tr.even { background: #d3d3d3; }
 table.pretty tr.odd { background: white; }
+table.pretty tr.status-100 {opacity: 0.2}
+
+table.pretty tr.status-404 { opacity: 0.4; background-color: #fbb; color: #ff0000 }
+table.pretty tr.status-500,
+table.pretty tr.status-501,
+table.pretty tr.status-502,
+table.pretty tr.status-503
+{ opacity: 0.4; background-color: #ff4500; color: #ffa500 }
+
+
+/*table.pretty tr.status-99999 { opacity: 0.4; background-color: #fafad2 }*/
+table.pretty tr.status-999,
+table.pretty tr.status-99998
+{ opacity: 0.4; background-color: #9370db }
+
+table.pretty td a {color: inherit;}
 
 /* details page */
 #headers {text-align: left; width:930px; overflow:hidden;}
