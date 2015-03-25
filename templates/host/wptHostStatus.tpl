@@ -92,7 +92,7 @@
                             <th align="center">PC</th>
                             <th align="right">EC2 Instance</th>
                             <th align="center">Launch Time</th>
-                            <th align="center"><a title="EC2 State as of last query">EC2 State</a> (<a href="?cache=false">refresh</a>)<br>({$lastEc2StatusCheck|date_format:"Y/m/d - H:i:s"})</a></th>
+                            <th align="center"><a title="EC2 State as of last query">EC2 State</a> (<a href="?cache=false">refresh</a>)<br>({$lastEc2StatusCheck|date_format:"Y/m/d - H:i:s"})</th>
                             <th align="center">IP</th>
                             <th align="right">Busy</th>
                             <th align="right">Last Check</th>
