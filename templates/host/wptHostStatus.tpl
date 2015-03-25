@@ -158,5 +158,12 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(function(){
+        setTimeout(function(){
+            location.href = location.href + "";
+        },60000);
+    })
+</script>
 </body>
 </html>
