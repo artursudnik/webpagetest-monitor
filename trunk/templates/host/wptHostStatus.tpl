@@ -16,17 +16,19 @@
                     <h2 class="cufon-dincond_black">Queue Status</h2>
                     <table class="pretty" style="border-collapse:collapse" width="100%">
                         <thead>
-                        <th align="left">Host</th>
-                        <th align="left">ID</th>
-                        <th align="left">Label</th>
-                        <th align="left">Browser</th>
-                        <th>Active Jobs</th>
-                        <th align="right">Run Rate *</th>
-                        <th align="right">Testers</th>
-                        <th align="right">In Queue</th>
-                        <th align="right">High</th>
-                        <th align="right">Low</th>
-                        <th></th>
+                        <tr>
+                            <th align="left">Host</th>
+                            <th align="left">ID</th>
+                            <th align="left">Label</th>
+                            <th align="left">Browser</th>
+                            <th>Active Jobs</th>
+                            <th align="right">Run Rate *</th>
+                            <th align="right">Testers</th>
+                            <th align="right">In Queue</th>
+                            <th align="right">High</th>
+                            <th align="right">Low</th>
+                            <th></th>
+                        </tr>
                         </thead>
                         {assign var="eo" value="odd"}
                         {foreach from=$locations item=location}
@@ -54,11 +56,13 @@
                         <h2>Queue Delays</h2>
                         <table class="pretty">
                             <thead>
-                            <th>Location</th>
-                            <th>Agent</th>
-                            <th>#jobs</th>
-                            <th>Maximum delay<br>of job</th>
-                            <th></th>
+                            <tr>
+                                <th>Location</th>
+                                <th>Agent</th>
+                                <th>#jobs</th>
+                                <th>Maximum delay<br>of job</th>
+                                <th></th>
+                            </tr>
                             </thead>
                             <tbody>
                             {foreach from=$delayedLocationsAggregated item=delayedLocation}
@@ -82,20 +86,26 @@
                     <h2 class="cufon-dincond_black">Tester Status</h2>
                     <table class="pretty" style="border-collapse:collapse" width="100%">
                         <thead>
-                        <th></th>
-                        <th align="right">Tester</th>
-                        <th align="center">PC</th>
-                        <th align="right">EC2 Instance</th>
-                        <th align="center">Launch Time</th>
-                        <th align="center"><a title="EC2 State as of last query">EC2 State (<a href="?cache=false">refresh</a>)</a><br>({$lastEc2StatusCheck|date_format:"Y/m/d - H:i:s"})</a></th>
-                        <th align="center">IP</th>
-                        <th align="right">Busy</th>
-                        <th align="right">Last Check</th>
-                        <th align="right">Last Work</th>
+                        <tr>
+                            <th></th>
+                            <th align="right">Tester</th>
+                            <th align="center">PC</th>
+                            <th align="right">EC2 Instance</th>
+                            <th align="center">Launch Time</th>
+                            <th align="center"><a title="EC2 State as of last query">EC2 State</a> (<a href="?cache=false">refresh</a>)<br>({$lastEc2StatusCheck|date_format:"Y/m/d - H:i:s"})</a></th>
+                            <th align="center">IP</th>
+                            <th align="right">Busy</th>
+                            <th align="right">Last Check</th>
+                            <th align="right">Last Work</th>
+                        </tr>
                         </thead>
                         {foreach from=$testers item=tester}
-                            <tr><a name="{$tester.id}"></a>
-                                <td colspan="10" nowrap="nowrap" bgcolor="#f5f5dc"><h4 style="font-size: medium;">{$tester.id}</h4></td>
+                            <tr>
+                                <td colspan="10" nowrap="nowrap" bgcolor="#f5f5dc">
+                                    <h4 style="font-size: medium;">
+                                        <a name="{$tester.id}"></a>{$tester.id}
+                                    </h4>
+                                </td>
                             </tr>
                             {assign var="eo" value="odd"}
                             {foreach from=$tester.Agents item=agent}
@@ -121,10 +131,12 @@
                     <h2 class="cufon-dincond_black">User Status</h2>
                     <table class="pretty" style="border-collapse::collapse" width="100%">
                         <thead>
-                        <th align="left">Username</th>
-                        <th align="right">Jobs</th>
-                        <th align="right">Active Jobs</th>
-                        <th align="right">Run Rate *</th>
+                        <tr>
+                            <th align="left">Username</th>
+                            <th align="right">Jobs</th>
+                            <th align="right">Active Jobs</th>
+                            <th align="right">Run Rate *</th>
+                        </tr>
                         </thead>
                         {assign var="eo" value="odd"}
                         {*{foreach $runRateInfo.runRatePerUser as $user=>$runRate}*}
