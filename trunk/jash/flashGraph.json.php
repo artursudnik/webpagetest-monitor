@@ -27,6 +27,8 @@ if(null === $userId = getCurrentUserId()) {
     die();
 }
 
+session_write_close();
+
 if(array_key_exists('action', $_GET) && $_GET['action'] == 'getMaxExecutionTime') {
     header("Expires: ".gmdate("D, d M Y H:i:s", time() + 60)." GMT");
     header_remove("Pragma");

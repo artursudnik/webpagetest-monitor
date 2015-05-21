@@ -24,6 +24,8 @@ if(null === $userId = getCurrentUserId()) {
     die();
 }
 
+session_write_close();
+
 try{
     $requestDataSanitized = sanitizeData($requestData);
 
