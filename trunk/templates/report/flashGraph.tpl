@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="x-ua-compatible" content="IE=Edge"/>
     {assign var="version" value="2.3"}
     <title>WebPageTest Monitor - Reports</title>
     {include file="headIncludes.tpl"}
@@ -75,7 +76,7 @@
                               <select onchange="checkJobCount();" id="jobs" multiple="multiple"
                                       name="job_id[]"
                                       size="7"
-                                      style="width:440px; height:285px">{html_options options=$jobs selected=$job_ids}</select>
+                                      style="width:440px; height:282px">{html_options options=$jobs selected=$job_ids}</select>
 
                               <div style="font-size:x-small;"><label for="jobs">Select up to 3 jobs</label></div>
                           </td>
