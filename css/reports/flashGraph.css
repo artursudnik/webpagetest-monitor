@@ -1,5 +1,6 @@
 fieldset.wptmon {
     padding: 0 2px;
+    border: 1px solid #aaaaaa;
 }
 
 fieldset.wptmon label {
