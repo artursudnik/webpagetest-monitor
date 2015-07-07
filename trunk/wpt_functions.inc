@@ -136,19 +136,20 @@ function submitWPTRequest($wptHost,
     $resultStatus['statusText'] = "Success";
     $baseURL                    = getBaseURL();
     // Defaults to -1 indicating failure
-    $wptResultId        = "-1";
-    $req                = new HttpRequest( $wptHost, HTTP_METH_POST );
-    $params             = array();
-    $params['agent']    = 'wptmonitor';
-    $params['callback'] = $baseURL . '/wptCallBack.php';
-    $params['url']      = $urlToTest;
-    $params['f']        = $format;
-    $params['label']    = $label;
-    $params['runs']     = $runs;
-    $params['fvonly']   = $fvonly;
-    $params['video']    = $video;
-    $params['private']  = $private;
-    $params['priority'] = $priority;
+    $wptResultId         = "-1";
+    $req                 = new HttpRequest($wptHost, HTTP_METH_POST);
+    $params              = array();
+    $params['agent']     = 'wptmonitor';
+    $params['callback']  = $baseURL . '/wptCallBack.php';
+    $params['url']       = $urlToTest;
+    $params['f']         = $format;
+    $params['label']     = $label;
+    $params['runs']      = $runs;
+    $params['fvonly']    = $fvonly;
+    $params['video']     = $video;
+    $params['private']   = $private;
+    $params['priority']  = $priority;
+    $params['ignoreSSL'] = 1;
     if($bwDown != null && $bwUp != null && $latency != null && $plr != null) {
         $params['location'] .= $remoteAgentId . '.custom';
         $params['bwDown']  = $bwDown;
