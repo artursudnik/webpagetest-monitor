@@ -115,6 +115,12 @@ var wptmonitor = (function(window, $, wptmonitor){
                 return;
             }
 
+            var $scrollbarCheckbox = $('input[name="displayGraphScrollbar"]');
+
+            $scrollbarCheckbox.on('change', function(){
+                drawChart(d);
+            });
+
             deferred.resolve();
 
         })
