@@ -95,6 +95,13 @@ var wptmonitor = (function(window, $, wptmonitor){
             }catch(e) {
                 deferred.reject(e);
             }
+
+            var $scrollbarCheckbox = $('input[name="displayHistogramScrollbar"]');
+
+            $scrollbarCheckbox.on('change', function(){
+                drawChart(data);
+            });
+
             setTimeout(function(){
                 $('#histogramOverlay').fadeOut(600, function(){
                     deferred.resolve();
