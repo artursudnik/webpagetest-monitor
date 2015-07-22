@@ -301,7 +301,7 @@ var wptmonitor = (function(window, $, wptmonitor){
             for(j in data.jobs) {
                 if(data.jobs.hasOwnProperty(j)) {
                     for (k = 0; k < data.metrics.length; k++) {
-                        if (data.series[data.jobs[j]].dataSet[i][data.metrics[k]]) {
+                        if (data.series[data.jobs[j]].dataSet[i][data.metrics[k]] !== null) {
                             tmpPoint[data.metrics[k] + "-" + data.jobs[j]] = (data.series[data.jobs[j]].dataSet[i][data.metrics[k]] / 1000).toFixed(2);
                             tmpPoint.getJobId = getJobId;
                             tmpPoint.getJobName = getJobName;
