@@ -149,7 +149,7 @@ function submitWPTRequest($wptHost,
     $params['video']     = $video;
     $params['private']   = $private;
     $params['priority']  = $priority;
-    $params['ignoreSSL'] = 1;
+    // $params['ignoreSSL'] = 1;
     if($bwDown != null && $bwUp != null && $latency != null && $plr != null) {
         $params['location'] .= $remoteAgentId . '.custom';
         $params['bwDown']  = $bwDown;
