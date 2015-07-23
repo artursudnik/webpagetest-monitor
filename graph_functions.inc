@@ -320,7 +320,7 @@ function getChangeNoteData( $user_id, $startDateTime, $endDateTime ) {
 }
 
 function getStatusesToNotInclude() {
-    return array(-214702489, -214669720, -214669721, 100, 403, 404, 500, 501, 502, 503, 504, 999, 99996, 99997, 99998);
+    return array(-214702489, -214669720, -214669721, 100, 403, 404, 500, 501, 502, 503, 504, 910, 999, 99996, 99997, 99998);
 }
 
 function getGraphData( $job_id, $startDateTime, $endDateTime, $percentile = 1, $trimAbove = null, $adjustUsing, $trimBelow = null, $fields = null ) {
@@ -337,6 +337,7 @@ function getGraphData( $job_id, $startDateTime, $endDateTime, $percentile = 1, $
 //      ->andWhere('r.AvgFirstViewStartRender > 0')
       // ->andWhere('r.AvgFirstViewDocCompleteTime > 0')
       // ->andWhere('r.AvgFirstViewDocCompleteTime != ?', '')
+//      ->andWhere('r.AvgFirstViewFullyLoadedTime > 0')
       ->andWhere('r.WPTJobId = ?', $job_id)
       ->andWhereNotIn('r.Status', getStatusesToNotInclude())
       ->andWhere('r.Date <= ?', $endDateTime)
