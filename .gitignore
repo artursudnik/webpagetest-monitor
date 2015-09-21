@@ -1,0 +1,10 @@
+templates_c/*.tpl.php
+QueueStatus.ini
+.idea/.htaccess
+jobProcessor_log.html
+settings/*.ini
+db/*
+!db/.htaccess
+
+
+
