@@ -5,6 +5,7 @@ jobProcessor_log.html
 settings/*.ini
 db/*
 !db/.htaccess
+graph/cache
 
 
 
