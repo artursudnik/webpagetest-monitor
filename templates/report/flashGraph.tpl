@@ -137,6 +137,7 @@
                                           <option {if $interval eq 43200}selected="selected"{/if} value="43200">12 Hours</option>
                                           <option {if $interval eq 86400}selected="selected"{/if} value="86400">Daily</option>
                                           <option {if $interval eq 604800}selected="selected"{/if} value="604800">Weekly</option>
+                                          <option {if $interval eq 2592000}selected="selected"{/if} value="2592000">Monthly</option>
                                       </select>
                                   </div>
                                   <div>
