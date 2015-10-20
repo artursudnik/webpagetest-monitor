@@ -3,8 +3,8 @@
     <li><a href="index.php">Home</a></li>
     <li><a href="listJobs.php?currentPage=1">Jobs</a></li>
     <li><a href="listScripts.php?currentPage=1">Scripts</a></li>
-    <li><a href="listAlerts.php?currentPage=1">Alerts</a></li>
-    <li><a href="listChangeNotes.php">Notes</a></li>
+    {*<li><a href="listAlerts.php?currentPage=1">Alerts</a></li>*}
+    {*<li><a href="listChangeNotes.php">Notes</a></li>*}
     <li><a href="flashGraph.php">Reports</a></li>
     <li><a href="listResults.php?currentPage=1">Results</a></li>
     <li><a href="listFolders.php?currentPage=1">Folders</a></li>
