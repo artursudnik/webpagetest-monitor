@@ -1,6 +1,7 @@
 templates_c/*.tpl.php
 QueueStatus.ini
-.idea/.htaccess
+.idea/*
+!.idea/codeStyleSettings.xml
 jobProcessor_log.html
 settings/*.ini
 db/*
