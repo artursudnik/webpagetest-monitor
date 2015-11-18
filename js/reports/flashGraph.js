@@ -377,7 +377,7 @@ var wptmonitor = (function(window, $, wptmonitor){
             chart = AmCharts.makeChart("graph", {
                 type               : "serial",
                 theme              : "none",
-                pathToImages       : "js/amcharts/images/",
+                pathToImages       : "js/amcharts-3.13.1/images/",
                 dataProvider       : data.series,
                 zoomOutOnDataUpdate: false,
                 valueAxes          : [

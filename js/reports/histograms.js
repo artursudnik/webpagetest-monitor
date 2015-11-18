@@ -178,7 +178,7 @@ var wptmonitor = (function(window, $, wptmonitor){
             chart = AmCharts.makeChart("histogram", {
                 type               : "serial",
                 theme              : "none",
-                pathToImages       : "js/amcharts/images/",
+                pathToImages       : "js/amcharts-3.13.1/images/",
                 dataProvider       : data.dataset,
                 zoomOutOnDataUpdate: false,
                 valueAxes: [

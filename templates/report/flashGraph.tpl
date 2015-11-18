@@ -15,12 +15,12 @@
         }
         {/literal}
     </style>
-    <script type="text/javascript" src="js/amcharts/amcharts.js?v={$version}"></script>
-    <script type="text/javascript" src="js/amcharts/serial.js?v={$version}"></script>
-    <script type="text/javascript" src="js/amcharts/exporting/amexport.js?v={$version}"></script>
-    <script type="text/javascript" src="js/amcharts/exporting/rgbcolor.js?v={$version}"></script>
-    <script type="text/javascript" src="js/amcharts/exporting/canvg.js?v={$version}"></script>
-    <script type="text/javascript" src="js/amcharts/exporting/filesaver.js?v={$version}"></script>
+    <script type="text/javascript" src="js/amcharts-3.13.1/amcharts.js"></script>
+    <script type="text/javascript" src="js/amcharts-3.13.1/serial.js"></script>
+    <script type="text/javascript" src="js/amcharts-3.13.1/exporting/amexport.js"></script>
+    <script type="text/javascript" src="js/amcharts-3.13.1/exporting/rgbcolor.js"></script>
+    <script type="text/javascript" src="js/amcharts-3.13.1/exporting/canvg.js"></script>
+    <script type="text/javascript" src="js/amcharts-3.13.1/exporting/filesaver.js"></script>
     <script type="text/javascript" src="js/reports/flashGraphOld.js?v={$version}"></script>
     <script type="text/javascript" src="js/reports/flashGraph.js?v={$version}"></script>
     <script type="text/javascript" src="js/reports/histograms.js?v={$version}"></script>
