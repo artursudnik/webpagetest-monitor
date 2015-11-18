@@ -409,7 +409,20 @@ var wptmonitor = (function(window, $, wptmonitor){
                     enabled : true,
                     libs    : {
                         path : "js/amcharts-3.17.3/plugins/export/libs/"
-                    }
+                    },
+                    menu : [{
+                        class : "export-main",
+                        menu  : [{
+                            "format" : "SVG",
+                            "label"  : "Save as SVG",
+                            "title"  : "Export chart to SVG"
+                        }, {
+                            "format" : "PNG",
+                            "label"  : "Save as PNG",
+                            "title"  : "Export chart to PNG"
+                        }]
+                    }],
+                    position : "bottom-right"
                 }
             });
 
