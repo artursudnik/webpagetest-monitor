@@ -377,7 +377,7 @@ var wptmonitor = (function(window, $, wptmonitor){
             chart = AmCharts.makeChart("graph", {
                 type               : "serial",
                 theme              : "none",
-                pathToImages       : "js/amcharts-3.13.1/images/",
+                pathToImages       : "js/amcharts-3.17.3/images/",
                 dataProvider       : data.series,
                 zoomOutOnDataUpdate: false,
                 valueAxes          : [
@@ -405,10 +405,11 @@ var wptmonitor = (function(window, $, wptmonitor){
                 legend             : {
                     fontSize: 9
                 },
-                amExport : {
-                    top       : undefined,
-                    bottom    : 4,
-                    right     : 4
+                export : {
+                    enabled : true,
+                    libs    : {
+                        path : "js/amcharts-3.17.3/plugins/export/libs/"
+                    }
                 }
             });
 

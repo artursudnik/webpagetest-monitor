@@ -6,6 +6,7 @@
     <title>WebPageTest Monitor - Reports</title>
     {include file="headIncludes.tpl"}
     <link rel="stylesheet" href="css/reports/flashGraph.css?v={$version}" type="text/css">
+    <link rel="stylesheet" href="js/amcharts-3.17.3/plugins/export/export.css" type="text/css">
     <style type="text/css">
         {literal}
         label {
@@ -15,12 +16,9 @@
         }
         {/literal}
     </style>
-    <script type="text/javascript" src="js/amcharts-3.13.1/amcharts.js"></script>
-    <script type="text/javascript" src="js/amcharts-3.13.1/serial.js"></script>
-    <script type="text/javascript" src="js/amcharts-3.13.1/exporting/amexport.js"></script>
-    <script type="text/javascript" src="js/amcharts-3.13.1/exporting/rgbcolor.js"></script>
-    <script type="text/javascript" src="js/amcharts-3.13.1/exporting/canvg.js"></script>
-    <script type="text/javascript" src="js/amcharts-3.13.1/exporting/filesaver.js"></script>
+    <script type="text/javascript" src="js/amcharts-3.17.3/amcharts.js"></script>
+    <script type="text/javascript" src="js/amcharts-3.17.3/serial.js"></script>
+    <script type="text/javascript" src="js/amcharts-3.17.3/plugins/export/export.js"></script>
     <script type="text/javascript" src="js/reports/flashGraphOld.js?v={$version}"></script>
     <script type="text/javascript" src="js/reports/flashGraph.js?v={$version}"></script>
     <script type="text/javascript" src="js/reports/histograms.js?v={$version}"></script>
