@@ -158,7 +158,7 @@ if (isset($fieldsToDisplay) && sizeof($fieldsToDisplay) > 0) {
   }
 } else {
   //  $fields = $availFields;
-  $fields["RV_Fully"] = $availFields['RV_Fully'];
+  $fields["FV_Fully"] = $availFields['FV_Fully']; // default selection
   foreach ($fields as $key => $field) {
     $fieldsToDisplay[] = $key;
   }
