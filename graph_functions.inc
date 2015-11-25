@@ -108,153 +108,153 @@ function getPercentile($startAt, $increment, &$data, $field, $percentile) {
  * @param  $aggregateMethod
  * @return string
  */
-function getDataAsAmChartLineXml($userId,
-                                 $jobIds,
-                                 $availFields,
-                                 $fields,
-                                 $start,
-                                 $end,
-                                 $percentile,
-                                 $trimAbove,
-                                 $adjustUsing,
-                                 $trimBelow,
-                                 $interval,
-                                 $aggregateMethod) {
-  $dbFields = "r.Date";
-  foreach ($availFields as $field) {
-    $dbFields .= ",r." . $field;
-  }
-  $gid = 1;
+//function getDataAsAmChartLineXml($userId,
+//                                 $jobIds,
+//                                 $availFields,
+//                                 $fields,
+//                                 $start,
+//                                 $end,
+//                                 $percentile,
+//                                 $trimAbove,
+//                                 $adjustUsing,
+//                                 $trimBelow,
+//                                 $interval,
+//                                 $aggregateMethod) {
+//  $dbFields = "r.Date";
+//  foreach ($availFields as $field) {
+//    $dbFields .= ",r." . $field;
+//  }
+//  $gid = 1;
+//
+//  $xmlData = "";
+//  $xmlData .= "<chart>";
+//  $xmlData .= "\n";
+//  $xmlData .= "<series>";
+//  $xmlData .= "\n";
+//  $seriesData = getSeriesDataForMultiJobs($userId, $jobIds, $start, $end, $interval);
+//
+//  foreach ($seriesData as $data) {
+//    $xmlData .= "<value xid=\"" . $data['Date'] . "\">" . date('m/d H:i', $data['Date']) . "</value>";
+//    $xmlData .= "\n";
+//  }
+//  $xmlData .= "</series>";
+//  $xmlData .= "\n";
+//  $xmlData .= "<graphs>";
+//  $xmlData .= "\n";
+//  $xmlData .= getChangeNotesAsAmLineChartXml( $userId, $start, $end );
+//  $jobTable = Doctrine_Core::getTable('WPTJob');
+//  foreach ($jobIds as $jobId) {
+//    $job = $jobTable->find($jobId);
+//    $jobName = $job['Label'];
+//    $datas = getGraphData( $jobId, $start, $end, $percentile, $trimAbove, $adjustUsing, $trimBelow, $dbFields );
+//
+//    if ($interval > 1) {
+//      $datas = getResultsDataAvg($start, $end, $interval, $datas, $fields, $aggregateMethod);
+//    }
+//
+//    foreach ($fields as $key => $field) {
+//      $xmlGraphData = "";
+//      $hasData = false;
+//      foreach ($datas as $data) {
+//        if ($data[$field] == 0) {
+//          continue;
+//        } else {
+//          $hasData = true;
+//          $value = $data[$field] / 1000;
+//          $edt=$data['Date']+$interval;
+//          $xmlGraphData .= "<value bullet_size=\"4\" bullet=\"round\" xid=\"" . $data['Date']
+//              . "\" url=\"listResults.php?currentPage=1&amp;filterField=WPTJob.Id&amp;filterValue=".$jobId
+//              ."&amp;startDateTime=" . $data['Date']
+//              ."&amp;endDateTime=".$edt."\">"
+//              . number_format($value,3) . "</value>";
+//          $xmlGraphData .= "\n";
+//        }
+//      }
+//      if ($hasData) {
+//        $xmlData .= "<graph title=\"" . $jobName . "\n" . $key . "\" gid=\"" . $gid++ . "\">";
+//            $xmlData .= "\n";
+//        $xmlData .= $xmlGraphData;
+//        $xmlData .= "\n";
+//        $xmlData .= "</graph>";
+//        $xmlData .= "\n";
+//      }
+//    }
+//  }
+//  $xmlData .= "</graphs>";
+//  $xmlData .= "\n";
+//  $xmlData .= "</chart>";
+//  return $xmlData;
+//}
 
-  $xmlData = "";
-  $xmlData .= "<chart>";
-  $xmlData .= "\n";
-  $xmlData .= "<series>";
-  $xmlData .= "\n";
-  $seriesData = getSeriesDataForMultiJobs($userId, $jobIds, $start, $end, $interval);
 
-  foreach ($seriesData as $data) {
-    $xmlData .= "<value xid=\"" . $data['Date'] . "\">" . date('m/d H:i', $data['Date']) . "</value>";
-    $xmlData .= "\n";
-  }
-  $xmlData .= "</series>";
-  $xmlData .= "\n";
-  $xmlData .= "<graphs>";
-  $xmlData .= "\n";
-  $xmlData .= getChangeNotesAsAmLineChartXml( $userId, $start, $end );
-  $jobTable = Doctrine_Core::getTable('WPTJob');
-  foreach ($jobIds as $jobId) {
-    $job = $jobTable->find($jobId);
-    $jobName = $job['Label'];
-    $datas = getGraphData( $jobId, $start, $end, $percentile, $trimAbove, $adjustUsing, $trimBelow, $dbFields );
-
-    if ($interval > 1) {
-      $datas = getResultsDataAvg($start, $end, $interval, $datas, $fields, $aggregateMethod);
-    }
-
-    foreach ($fields as $key => $field) {
-      $xmlGraphData = "";
-      $hasData = false;
-      foreach ($datas as $data) {
-        if ($data[$field] == 0) {
-          continue;
-        } else {
-          $hasData = true;
-          $value = $data[$field] / 1000;
-          $edt=$data['Date']+$interval;
-          $xmlGraphData .= "<value bullet_size=\"4\" bullet=\"round\" xid=\"" . $data['Date']
-              . "\" url=\"listResults.php?currentPage=1&amp;filterField=WPTJob.Id&amp;filterValue=".$jobId
-              ."&amp;startDateTime=" . $data['Date']
-              ."&amp;endDateTime=".$edt."\">"
-              . number_format($value,3) . "</value>";
-          $xmlGraphData .= "\n";
-        }
-      }
-      if ($hasData) {
-        $xmlData .= "<graph title=\"" . $jobName . "\n" . $key . "\" gid=\"" . $gid++ . "\">";
-            $xmlData .= "\n";
-        $xmlData .= $xmlGraphData;
-        $xmlData .= "\n";
-        $xmlData .= "</graph>";
-        $xmlData .= "\n";
-      }
-    }
-  }
-  $xmlData .= "</graphs>";
-  $xmlData .= "\n";
-  $xmlData .= "</chart>";
-  return $xmlData;
-}
-
-
-function getDataAsAmChartScatterXml($userId,
-                                    $jobIds,
-                                    $availFields,
-                                    $fields,
-                                    $start,
-                                    $end,
-                                    $percentile,
-                                    $trimAbove,
-                                    $adjustUsing,
-                                    $trimBelow,
-                                    $interval,
-                                    $aggregateMethod) {
-  $dbFields = "r.Date";
-
-  foreach ($availFields as $field) {
-    $dbFields .= ",r." . $field;
-  }
-  $gid = 1;
-
-  $xmlData = "";
-  $xmlData .= "<chart>";
-  $xmlData .= "\n";
-  $xmlData .= "<graphs>";
-  $xmlData .= "\n";
-  $xmlData .= getChangeNotesAsAmScatterChartXml( $userId, $start, $end );
-  $jobTable = Doctrine_Core::getTable('WPTJob');
-  foreach ($jobIds as $jobId) {
-    $job = $jobTable->find($jobId);
-    $jobName = $job['Label'];
-    $datas = getGraphData( $jobId, $start, $end, $percentile, $trimAbove, $adjustUsing, $trimBelow, $dbFields );
-
-    if ($interval > 1) {
-      $datas = getResultsDataAvg($start, $end, $interval, $datas, $fields, $aggregateMethod);
-    }
-    foreach ($fields as $key => $field) {
-      $xmlGraphData = "";
-      $hasData = false;
-      foreach ($datas as $data) {
-        if ($data[$field] == 0) {
-          continue;
-        } else {
-          $hasData = 1;
-          $value = $data[$field] / 1000;
-          $edt=$data['Date']+$interval;
-
-          $xmlGraphData .= "<point x=\"" . date("Y-m-d H:i", $data['Date'])
-              . "\" url=\"listResults.php?currentPage=1&amp;filterField=WPTJob.Id&amp;filterValue=".$jobId
-              ."&amp;startDateTime=" . $data['Date']
-              ."&amp;endDateTime=".$edt
-              ."\" y=\"" . number_format($value,3). "\"></point>";
-          $xmlGraphData .= "\n";
-        }
-      }
-      if ($hasData) {
-        $xmlData .= "<graph width=\"0\" title=\"" . $jobName . "\n" . $key . "\" gid=\"" . $gid++ . "\">";
-        $xmlData .= "\n";
-        $xmlData .= $xmlGraphData;
-        $xmlData .= "\n";
-        $xmlData .= "</graph>";
-        $xmlData .= "\n";
-      }
-    }
-  }
-  $xmlData .= "</graphs>";
-  $xmlData .= "\n";
-  $xmlData .= "</chart>";
-  return $xmlData;
-}
+//function getDataAsAmChartScatterXml($userId,
+//                                    $jobIds,
+//                                    $availFields,
+//                                    $fields,
+//                                    $start,
+//                                    $end,
+//                                    $percentile,
+//                                    $trimAbove,
+//                                    $adjustUsing,
+//                                    $trimBelow,
+//                                    $interval,
+//                                    $aggregateMethod) {
+//  $dbFields = "r.Date";
+//
+//  foreach ($availFields as $field) {
+//    $dbFields .= ",r." . $field;
+//  }
+//  $gid = 1;
+//
+//  $xmlData = "";
+//  $xmlData .= "<chart>";
+//  $xmlData .= "\n";
+//  $xmlData .= "<graphs>";
+//  $xmlData .= "\n";
+//  $xmlData .= getChangeNotesAsAmScatterChartXml( $userId, $start, $end );
+//  $jobTable = Doctrine_Core::getTable('WPTJob');
+//  foreach ($jobIds as $jobId) {
+//    $job = $jobTable->find($jobId);
+//    $jobName = $job['Label'];
+//    $datas = getGraphData( $jobId, $start, $end, $percentile, $trimAbove, $adjustUsing, $trimBelow, $dbFields );
+//
+//    if ($interval > 1) {
+//      $datas = getResultsDataAvg($start, $end, $interval, $datas, $fields, $aggregateMethod);
+//    }
+//    foreach ($fields as $key => $field) {
+//      $xmlGraphData = "";
+//      $hasData = false;
+//      foreach ($datas as $data) {
+//        if ($data[$field] == 0) {
+//          continue;
+//        } else {
+//          $hasData = 1;
+//          $value = $data[$field] / 1000;
+//          $edt=$data['Date']+$interval;
+//
+//          $xmlGraphData .= "<point x=\"" . date("Y-m-d H:i", $data['Date'])
+//              . "\" url=\"listResults.php?currentPage=1&amp;filterField=WPTJob.Id&amp;filterValue=".$jobId
+//              ."&amp;startDateTime=" . $data['Date']
+//              ."&amp;endDateTime=".$edt
+//              ."\" y=\"" . number_format($value,3). "\"></point>";
+//          $xmlGraphData .= "\n";
+//        }
+//      }
+//      if ($hasData) {
+//        $xmlData .= "<graph width=\"0\" title=\"" . $jobName . "\n" . $key . "\" gid=\"" . $gid++ . "\">";
+//        $xmlData .= "\n";
+//        $xmlData .= $xmlGraphData;
+//        $xmlData .= "\n";
+//        $xmlData .= "</graph>";
+//        $xmlData .= "\n";
+//      }
+//    }
+//  }
+//  $xmlData .= "</graphs>";
+//  $xmlData .= "\n";
+//  $xmlData .= "</chart>";
+//  return $xmlData;
+//}
 
 /**
  * Scans through the results to get time stamps for each point, removing duplicates.
