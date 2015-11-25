@@ -170,7 +170,7 @@
     <a href="?orderBy=Date&orderByDir={$orderResultsByDirectionInv}">{if $orderResultsByDirection eq "ASC"}
       <img width="10" height="10" src='img/Up.png'>{else}<img width="10" height="10"
                                                               src='img/Down.png'>{/if}</a>{/if}</th>
-  <th align="left" colspan="4" style="padding-bottom:0%;vertical-align:bottom;">
+  <th align="left" colspan="5" style="padding-bottom:0%;vertical-align:bottom;">
     <a href="?orderBy=WPTJob.Label">{if $orderResultsBy eq "WPTJob.Label"}<b>{/if}
       Job</a>{if $orderResultsBy eq "WPTJob.Label"}</b><a
       href="?orderBy=WPTJob.Label&orderByDir={$orderResultsByDirectionInv}">{if $orderResultsByDirection eq "ASC"}
@@ -217,6 +217,7 @@
   {*<th align="right">TTFB</th>*}
   <th align="right">Render</th>
   <th align="right">DomTime</th>
+  <th align="right">SI</th>
   <th style="opacity:0.7;background-color:#fdf5e6;" align="right"><a
       href="?orderBy=AvgFirstViewDocCompleteTime">{if $orderResultsBy eq "AvgFirstViewDocCompleteTime"}
   <b>{/if}Time</a>{if $orderResultsBy eq "AvgFirstViewDocCompleteTime"}</b><a
@@ -307,6 +308,8 @@
     <hr>{$res.AvgRepeatViewStartRender/1000}</td>
   <td align="right" valign="top">{$res.AvgFirstViewDomTime/1000}
     <hr>{$res.AvgRepeatViewDomTime/1000}</td>
+  <td align="right" valign="top">{$res.AvgFirstViewSpeedIndex|default:'-'}
+  <hr>{$res.AvgRepeatViewSpeedIndex|default:'-'}</td>
   <td style="opacity:0.7;background-color:#fdf5e6;" align="right"
       valign="top">{$res.AvgFirstViewDocCompleteTime/1000}
     <hr>{$res.AvgRepeatViewDocCompleteTime/1000}</td>

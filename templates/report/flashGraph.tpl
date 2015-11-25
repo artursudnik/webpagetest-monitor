@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="x-ua-compatible" content="IE=Edge"/>
-    {assign var="version" value="2.7"}
+    {assign var="version" value="2.8"}
     <title>WebPageTest Monitor - Reports</title>
     {include file="headIncludes.tpl"}
     <link rel="stylesheet" href="css/reports/flashGraph.css?v={$version}" type="text/css">
@@ -273,10 +273,11 @@
                                       <tr class="head">
                                           <th></th>
                                           <th>TTFB</th>
-                                          <th>Render</th>
+                                          <th>Rdr</th>
                                           <th>Doc</th>
                                           <th>Dom</th>
                                           <th>Fully</th>
+                                          <th><a target="_blank" title="Speed Index concept explanation" href="https://sites.google.com/a/webpagetest.org/docs/using-webpagetest/metrics/speed-index">SI</a></th>
                                           <th></th>
                                       </tr>
                                       <tr>

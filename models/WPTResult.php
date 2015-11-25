@@ -48,6 +48,7 @@ class WPTResult extends Doctrine_Record
     $this->hasColumn('AvgFirstViewFullyLoadedTime', 'integer', 12);
     $this->hasColumn('AvgFirstViewFullyLoadedRequests', 'integer', 4);
     $this->hasColumn('AvgFirstViewFullyLoadedBytesIn', 'integer', 12);
+    $this->hasColumn('AvgFirstViewSpeedIndex', 'integer', 12);
 
 //    $this->hasColumn('AvgFirstViewScoreCache', 'integer', 4);
 //    $this->hasColumn('AvgFirstViewScoreCdn', 'integer', 4);
@@ -69,6 +70,7 @@ class WPTResult extends Doctrine_Record
     $this->hasColumn('AvgRepeatViewFullyLoadedTime', 'integer',12);
     $this->hasColumn('AvgRepeatViewFullyLoadedRequests', 'integer', 4);
     $this->hasColumn('AvgRepeatViewFullyLoadedBytesIn', 'integer', 12);
+    $this->hasColumn('AvgRepeatViewSpeedIndex', 'integer', 12);
 
 //    $this->hasColumn('AvgRepeatViewScoreCache', 'integer', 4);
 //    $this->hasColumn('AvgRepeatViewScoreCdn', 'integer', 4);

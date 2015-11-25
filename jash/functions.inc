@@ -38,11 +38,13 @@ function getMetricsFieldsMappingsForm2Db() {
         'FV_Doc'      => 'AvgFirstViewDocCompleteTime',
         'FV_Dom'      => 'AvgFirstViewDomTime',
         'FV_Fully'    => 'AvgFirstViewFullyLoadedTime',
+        'FV_SI'       => 'AvgFirstViewSpeedIndex',
         'RV_TTFB'     => 'AvgRepeatViewFirstByte',
         'RV_Render'   => 'AvgRepeatViewStartRender',
         'RV_Doc'      => 'AvgRepeatViewDocCompleteTime',
         'RV_Dom'      => 'AvgRepeatViewDomTime',
-        'RV_Fully'    => 'AvgRepeatViewFullyLoadedTime'
+        'RV_Fully'    => 'AvgRepeatViewFullyLoadedTime',
+        'RV_SI'       => 'AvgRepeatViewSpeedIndex'
     );
 }
 

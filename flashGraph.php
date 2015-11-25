@@ -125,10 +125,10 @@ $smarty->assign('jobs', $jobArray);
 // Start field handling
 // Add availabe field keys
 //$availFieldKeysFV = array('FV_TTFB' => 'FV_TTFB', 'FV_Render' => 'FV_Render', 'FV_Doc' => 'FV_Doc', 'FV_Dom' => 'FV_Dom', 'FV_Fully' => 'FV_Fully');
-$availFieldKeysFV = array('FV_TTFB', 'FV_Render', 'FV_Doc', 'FV_Dom', 'FV_Fully');
+$availFieldKeysFV = array('FV_TTFB', 'FV_Render', 'FV_Doc', 'FV_Dom', 'FV_Fully', 'FV_SI');
 
 //$availFieldKeysRV = array('RV_TTFB' => 'RV_TTFB', 'RV_Render' => 'RV_Render', 'RV_Doc' => 'RV_Doc', 'RV_Dom' => 'RV_Dom', 'RV_Fully' => 'RV_Fully');
-$availFieldKeysRV = array('RV_TTFB', 'RV_Render', 'RV_Doc', 'RV_Dom', 'RV_Fully');
+$availFieldKeysRV = array('RV_TTFB', 'RV_Render', 'RV_Doc', 'RV_Dom', 'RV_Fully', 'RV_SI');
 $smarty->assign('availFieldKeysFV', $availFieldKeysFV);
 $smarty->assign('availFieldKeysRV', $availFieldKeysRV);
 

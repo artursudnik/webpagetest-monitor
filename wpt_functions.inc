@@ -766,6 +766,7 @@ function processResultsForAll($resultId = null) {
                     $result['AvgFirstViewFullyLoadedTime']     = $avgFV->fullyLoaded;
                     $result['AvgFirstViewFullyLoadedRequests'] = $avgFV->requests;
                     $result['AvgFirstViewFullyLoadedBytesIn']  = $avgFV->bytesIn;
+                    $result['AvgFirstViewSpeedIndex']          = $avgFV->SpeedIndex;
                 }
                 if($avgRV) {
                     $result['AvgRepeatViewLoadTime']            = $avgRV->loadTime;
@@ -778,6 +779,7 @@ function processResultsForAll($resultId = null) {
                     $result['AvgRepeatViewFullyLoadedTime']     = $avgRV->fullyLoaded;
                     $result['AvgRepeatViewFullyLoadedRequests'] = $avgRV->requests;
                     $result['AvgRepeatViewFullyLoadedBytesIn']  = $avgRV->bytesIn;
+                    $result['AvgRepeatViewSpeedIndex']          = $avgRV->SpeedIndex;
                 }
 
 

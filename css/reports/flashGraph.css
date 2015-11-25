@@ -64,7 +64,7 @@ input#histogramButton, input#graphJSONButton {
 #timeframeFieldset,
 #graphFilteringFieldset,
 #metricsFieldset {
-    width: 290px
+    width: 320px
 }
 
 #graphFieldset,
