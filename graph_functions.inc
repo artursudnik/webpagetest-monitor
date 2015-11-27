@@ -325,7 +325,7 @@ function getStatusesToNotInclude() {
     return array(-214702489, -214669720, -214669721, 100, 403, 404, 500, 501, 502, 503, 504, 910, 999, 99996, 99997, 99998);
 }
 
-function getGraphData( $job_id, $startDateTime, $endDateTime, $percentile = 1, $trimAbove = null, $adjustUsing, $trimBelow = null, $fields = null ) {
+function getGraphData( $job_id, $startDateTime, $endDateTime, $percentile = 1, $trimAbove = null, $adjustUsing, $trimBelow = null, $todStartHour, $todEndHour, $fields = null ) {
   $trimAbove = $trimAbove * 1000;
   $trimBelow = $trimBelow * 1000;
 
@@ -344,6 +344,13 @@ function getGraphData( $job_id, $startDateTime, $endDateTime, $percentile = 1, $
       ->andWhereNotIn('r.Status', getStatusesToNotInclude())
       ->andWhere('r.Date <= ?', $endDateTime)
       ->andWhere('r.Date >= ?', $startDateTime);
+      // Including only working hours
+
+    if($todStartHour < $todEndHour) {
+        $q->andWhere('hour(from_unixtime(r.Date)) >= ? AND hour(from_unixtime(r.Date)) < ?', array($todStartHour, $todEndHour));
+    } elseif ($todStartHour > $todEndHour) {
+        $q->andWhere('hour(from_unixtime(r.Date)) >= ? OR hour(from_unixtime(r.Date)) < ?', array($todStartHour, $todEndHour));
+    }
 
   if ($trimAbove) {
     $q->andWhere('r.' . $adjustUsing . ' < ?', $trimAbove);

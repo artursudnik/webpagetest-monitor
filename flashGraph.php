@@ -90,6 +90,22 @@ $smarty->assign('startTime', $startDateTime);
 $smarty->assign('endTime', $endDateTime);
 // End start/end times
 
+if(!isset($_REQUEST['todStartHour'])) {
+    $todStartHour = 0;
+} else {
+    $todStartHour = (int)$_REQUEST['todStartHour'];
+}
+
+if(!isset($_REQUEST['todEndHour'])) {
+    $todEndHour = 0;
+} else {
+    $todEndHour = (int)$_REQUEST['todEndHour'];
+}
+
+
+$smarty->assign('todStartHourTimestamp', mktime($todStartHour));
+$smarty->assign('todEndHourTimestamp', mktime($todEndHour));
+
 // Create jobs list
 $q = Doctrine_Query::create()->select('j.Id, j.Label')
         ->from('WPTJob j')
@@ -227,7 +243,7 @@ if ($_REQUEST['act'] == 'report') {
   $overallAverages = array();
   $averageDetails = array();
   foreach($jobIds as $jobId){
-    $responseTimes = getGraphData( $jobId, $startDateTime, $endDateTime, $percentile, $trimAbove, $adjustUsing, $trimBelow );
+    $responseTimes = getGraphData( $jobId, $startDateTime, $endDateTime, $percentile, $trimAbove, $adjustUsing, $trimBelow, $todStartHour, $todEndHour );
 
     $avg = getResultsDataAvg($startDateTime, $endDateTime, $interval, $responseTimes, $fields, $_SESSION['aggregateMethod']);
 
@@ -298,7 +314,7 @@ if ($_REQUEST['act'] == 'download') {
   foreach ($jobIds as $jobId) {
     $job= $jobTable->find($jobId);
     $jobName = $job['Label'];
-    $datas = getGraphData( $jobId, $startDateTime, $endDateTime, $percentile, $trimAbove, $adjustUsing, $trimBelow );
+    $datas = getGraphData( $jobId, $startDateTime, $endDateTime, $percentile, $trimAbove, $adjustUsing, $trimBelow, $todStartHour, $todEndHour );
 
     if ($interval > 1) {
       $datas = getResultsDataAvg($startDateTime, $endDateTime, $interval, $datas, $flds, $_SESSION['aggregateMethod']);

@@ -398,21 +398,23 @@ var wptmonitor = (function(window, $, wptmonitor){
 
     function getFormParams() {
         return {
-            startYear  : $('select[name="startYear"]').val(),
-            startMonth : $('select[name="startMonth"]').val(),
-            startDay   : $('select[name="startDay"]').val(),
-            startHour  : $('select[name="startHour"]').val(),
-            endYear    : $('select[name="endYear"]').val(),
-            endMonth   : $('select[name="endMonth"]').val(),
-            endDay     : $('select[name="endDay"]').val(),
-            endHour    : $('select[name="endHour"]').val(),
-            timeFrame  : $("#timeFrame").val(),
-            field      : $.makeArray($("input[name='fields[]']:checked").map(function(){
+            startYear           : $('select[name="startYear"]').val(),
+            startMonth          : $('select[name="startMonth"]').val(),
+            startDay            : $('select[name="startDay"]').val(),
+            startHour           : $('select[name="startHour"]').val(),
+            endYear             : $('select[name="endYear"]').val(),
+            endMonth            : $('select[name="endMonth"]').val(),
+            endDay              : $('select[name="endDay"]').val(),
+            endHour             : $('select[name="endHour"]').val(),
+            timeFrame           : $("#timeFrame").val(),
+            todStartHour        : $('select[name="todStartHour"]').val(),
+            todEndHour          : $('select[name="todEndHour"]').val(),
+            field               : $.makeArray($("input[name='fields[]']:checked").map(function(){
                 return $(this).val();
             })),
-            histMinLimit: $('select[name="histogramMinLimit"]').val(),
-            histMaxLimit: $('select[name="histogramMaxLimit"]').val(),
-            histogramResolution: $('select[name="histogramResolution"]').val()
+            histMinLimit        : $('select[name="histogramMinLimit"]').val(),
+            histMaxLimit        : $('select[name="histogramMaxLimit"]').val(),
+            histogramResolution : $('select[name="histogramResolution"]').val()
         };
     }
 

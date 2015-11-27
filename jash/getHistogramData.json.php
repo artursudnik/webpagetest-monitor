@@ -66,8 +66,15 @@ try{
         // ->andWhere('r.AvgFirstViewFirstByte > 0')
         // ->andWhere('r.AvgFirstViewDocCompleteTime > 0')
         // ->andWhere('r.AvgFirstViewDocCompleteTime != ?', '')
-        ->andWhere('r.WPTJobId = ?', $requestDataSanitized['job'])
-        ->andWhereNotIn('r.Status', getStatusesToNotInclude())
+        ->andWhere('r.WPTJobId = ?', $requestDataSanitized['job']);
+        // Including only working hours
+        if($requestDataSanitized['todStartHour'] < $requestDataSanitized['todEndHour']) {
+            $q->andWhere('hour(from_unixtime(r.Date)) >= ? AND hour(from_unixtime(r.Date)) < ?', array($requestDataSanitized['todStartHour'], $requestDataSanitized['todEndHour']));
+        } elseif($requestDataSanitized['todStartHour'] > $requestDataSanitized['todEndHour']) {
+            $q->andWhere('hour(from_unixtime(r.Date)) >= ? OR hour(from_unixtime(r.Date)) < ?', array($requestDataSanitized['todStartHour'], $requestDataSanitized['todEndHour']));
+        }
+
+        $q->andWhereNotIn('r.Status', getStatusesToNotInclude())
         ->groupBy("bucket")
         ->orderBy("bucket");
 
@@ -165,6 +172,10 @@ function sanitizeData($requestArray) {
     $resultArray['endMonth']   = @filter_var((int)$requestArray['endMonth'],   FILTER_VALIDATE_INT, array('options' => array('default' => $currentMo, 'min_range' => 1, 'max_range' => 12)));
     $resultArray['endYear']    = @filter_var((int)$requestArray['endYear'],    FILTER_VALIDATE_INT, array('options' => array('default' => $currentY)));
     $resultArray['endHour']    = @filter_var((int)$requestArray['endHour'],    FILTER_VALIDATE_INT, array('options' => array('default' => $currentH, 'min_range' => 0, 'max_range' => 23)));
+
+    $resultArray['todStartHour']  = filter_var((int)$requestArray['todStartHour'], FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 0, 'max_range' => 23)));
+    $resultArray['todEndHour']  = filter_var((int)$requestArray['todEndHour'],     FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 0, 'max_range' => 23)));
+
 
     $resultArray['width']      = @filter_var((int)$requestArray['histogramResolution'], FILTER_VALIDATE_INT, array('options' => array('default' => 100, 'min_range' => 10)));
     $resultArray['job']        = @filter_var((int)$requestArray['job'],   FILTER_VALIDATE_INT, array('options' => array('default' => 0, 'min_range' => 1)));

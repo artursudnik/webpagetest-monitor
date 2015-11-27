@@ -46,9 +46,13 @@ input#histogramButton, input#graphJSONButton {
     font-weight: bold;
 }
 
+input#todSelectionReset {
+    margin-left: 10px;
+    height: 18px;
+}
 
 
-#timeframeFieldset label {
+fieldset#timeframeFieldset label {
     width: 30px;
 }
 
@@ -61,6 +65,10 @@ input#histogramButton, input#graphJSONButton {
     float: left
 }
 
+#timeframeFieldset {
+    height: 98px;
+}
+
 #timeframeFieldset,
 #graphFilteringFieldset,
 #metricsFieldset {
@@ -68,8 +76,9 @@ input#histogramButton, input#graphJSONButton {
 }
 
 #graphFieldset,
+#timeOfDayFieldset,
 #histogramFieldset,
-#actionFieldset { width: 235px }
+#actionFieldset { width: 260px }
 
 #metricsFieldset, #actionFieldset {
     height: 90px
@@ -79,6 +88,11 @@ input#histogramButton, input#graphJSONButton {
 #graphFieldset label {
     width: 97px
 }
+
+#timeOfDayFieldset label {
+    width: 33px;
+}
+
 
 #metricsFieldset table {
     border-collapse: collapse;
@@ -100,7 +114,8 @@ fieldset .badValue label {
     color: #ff0000;
 }
 
-#interval.notSafe, #interval option.notSafe {
+#interval.notSafe, #interval option.notSafe,
+#timeOfDaySelect.selected * {
     color: #ff0000;
 }
 

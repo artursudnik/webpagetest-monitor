@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="x-ua-compatible" content="IE=Edge"/>
-    {assign var="version" value="2.8"}
+    {assign var="version" value="2.10"}
     <title>WebPageTest Monitor - Reports</title>
     {include file="headIncludes.tpl"}
     <link rel="stylesheet" href="css/reports/flashGraph.css?v={$version}" type="text/css">
@@ -121,6 +121,16 @@
                                       {html_select_time prefix='end' time=$endTime display_minutes=false display_seconds=false}
                                   </div>
                               </fieldset>
+                              <fieldset id="timeOfDayFieldset" class="wptmon">
+                                  <legend>Time of day</legend>
+                                  <div id="timeOfDaySelect">
+                                      <label title="time of day">Start:</label>
+                                      {html_select_time prefix="todStart" time=$todStartHourTimestamp use_24_hours=true minute_interval="15" display_minutes=false display_seconds=false}
+                                      <label title="time of day">End:</label>
+                                      {html_select_time prefix="todEnd" time=$todEndHourTimestamp use_24_hours=true minute_interval="15" display_minutes=false display_seconds=false}
+                                      <input id="todSelectionReset" type="button" value="Reset">
+                                  </div>
+                              </fieldset>
                               <fieldset id="graphFieldset" class="wptmon">
                                   <legend>Graph</legend>
                                   <div>
@@ -150,7 +160,7 @@
                                           <option value="99th" {if $aggregateMethod eq "99th"}selected="selected"{/if}>99th percentile</option>
                                       </select>
                                   </div>
-                                  <div style="visibility: hidden">
+                                  <div style="display: none">
                                       <label for="chartType">Chart type:</label>
                                       <select id="chartType" name="chartType" >
                                           <option {if $chartType eq "Line"}selected="selected"{/if} value="line">Line</option>

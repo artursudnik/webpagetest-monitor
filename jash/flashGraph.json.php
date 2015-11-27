@@ -68,6 +68,8 @@ try {
             $sanitizedData['trimAbove'],
             $sanitizedData['adjustUsing'], // adjustUsing
             $sanitizedData['trimBelow'],
+            $sanitizedData['todStartHour'],
+            $sanitizedData['todEndHour'],
             $fieldsSerialized
         );
 
@@ -152,6 +154,9 @@ function sanitizeData($requestArray) {
     $resultArray['endMonth']   = filter_var((int)$requestArray['endMonth'],   FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 1, 'max_range' => 12)));
     $resultArray['endYear']    = filter_var((int)$requestArray['endYear'],    FILTER_VALIDATE_INT);
     $resultArray['endHour']    = filter_var((int)$requestArray['endHour'],    FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 0, 'max_range' => 23)));
+
+    $resultArray['todStartHour']  = filter_var((int)$requestArray['todStartHour'], FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 0, 'max_range' => 23)));
+    $resultArray['todEndHour']  = filter_var((int)$requestArray['todEndHour'],     FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 0, 'max_range' => 23)));
 
     $resultArray['timeFrame']  = filter_var((int)$requestArray['timeFrame'],    FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 0, 'max_range' => 31536000)));
 

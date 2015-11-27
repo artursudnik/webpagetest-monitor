@@ -8,6 +8,29 @@ var wptmonitor = (function(window, $, wptmonitor){
 
     function initialize() {
         var act = wptmonitor.graph.action;
+        var $updateForm = $('#updateForm');
+        $('#todSelectionReset').on('click', function(){
+            $updateForm.find('select[name=todStartHour]').val('00');
+            $updateForm.find('select[name=todEndHour]').val('00');
+            timeOfDaySelectionChangeHandler();
+        });
+
+        $updateForm.find('select[name=todStartHour]').on('change', timeOfDaySelectionChangeHandler);
+        $updateForm.find('select[name=todEndHour]').on('change', timeOfDaySelectionChangeHandler);
+
+        function timeOfDaySelectionChangeHandler() {
+            var $todStartHour = $updateForm.find('select[name=todStartHour]');
+            var $todEndHour = $updateForm.find('select[name=todEndHour]');
+
+            console.log($todStartHour.val(), $todEndHour.val());
+
+            if($todStartHour.val() != $todEndHour.val()) {
+                $('#timeOfDaySelect').addClass('selected');
+            } else {
+                $('#timeOfDaySelect').removeClass('selected');
+            }
+        }
+
 
         $('#graphJSONButton').on('click', function(){
             if(!checkJobCount()) {
