@@ -71,7 +71,9 @@ function getPercentile($startAt, $increment, &$data, $field, $percentile) {
 
   foreach ($data as $r) {
     if ($r['Date'] > $startAt && ($r['Date'] < $startAt + $increment)) {
-      $tmpData[] = $r[$field];
+        if($r[$field] !== null) {
+            $tmpData[] = $r[$field];
+        }
     }
   }
 
@@ -401,18 +403,22 @@ function getResultsData($label, $startDateTime, $endDateTime, $resolution, $resu
 function getAverage($startAt, $increment, $data, $field) {
   $total = 0;
   $count = 0;
+  $countNotNull = 0;
 
   foreach ($data as $r) {
     if ($r['Date'] > $startAt && ($r['Date'] < $startAt + $increment)) {
       if ($field == 'AvgFirstViewDocCompleteTime-AvgFirstViewDomTime') {
         $total = ($total + ($r['AvgFirstViewDocCompleteTime'] - $r['AvgFirstViewDomTime']));
-      } else {
+        $countNotNull++;
+        $count++;
+      } elseif($r[$field] !== null) {
         $total = ($total + $r[$field]);
+        $countNotNull++;
+        $count++;
       }
-      $count++;
     }
   }
-  if ($count > 0) {
+  if ($count > 0 && $countNotNull > 0) {
     $result = $total / $count;
   } else {
     $result = NULL;
