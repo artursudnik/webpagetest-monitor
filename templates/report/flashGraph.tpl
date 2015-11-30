@@ -364,6 +364,8 @@
                             <td><strong>Doc</strong> - Document loaded</td>
                             <td>|</td>
                             <td><strong>Fully</strong> - Fully loaded</td>
+                            <td>|</td>
+                            <td><strong>SI</strong> - <a title="Speed Index" target="_blank" href="https://sites.google.com/a/webpagetest.org/docs/using-webpagetest/metrics/speed-index">Speed Index</a></td>
                         </tr>
                     </table>
                 </div>
