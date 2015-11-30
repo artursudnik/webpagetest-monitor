@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="x-ua-compatible" content="IE=Edge"/>
-    {assign var="version" value="2.10"}
+    {assign var="version" value="2.11"}
     <title>WebPageTest Monitor - Reports</title>
     {include file="headIncludes.tpl"}
     <link rel="stylesheet" href="css/reports/flashGraph.css?v={$version}" type="text/css">
