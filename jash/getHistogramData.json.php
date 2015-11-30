@@ -177,7 +177,7 @@ function sanitizeData($requestArray) {
     $resultArray['todEndHour']  = filter_var((int)$requestArray['todEndHour'],     FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 0, 'max_range' => 23)));
 
 
-    $resultArray['width']      = @filter_var((int)$requestArray['histogramResolution'], FILTER_VALIDATE_INT, array('options' => array('default' => 100, 'min_range' => 10)));
+    $resultArray['width']      = @filter_var((int)$requestArray['histogramResolution'], FILTER_VALIDATE_INT, array('options' => array('default' => 100, 'min_range' => 1)));
     $resultArray['job']        = @filter_var((int)$requestArray['job'],   FILTER_VALIDATE_INT, array('options' => array('default' => 0, 'min_range' => 1)));
 
     $resultArray['histMinLimit']   = @filter_var((int)$requestArray['histMinLimit'], FILTER_VALIDATE_INT, array('options' => array('default' => 0, 'min_range' => 0)));
