@@ -1,6 +1,7 @@
 fieldset.wptmon {
     padding: 0 2px;
     border: 1px solid #aaaaaa;
+    float: left;
 }
 
 fieldset.wptmon label {
@@ -54,16 +55,6 @@ input#todSelectionReset {
 
 fieldset#timeframeFieldset label {
     width: 30px;
-}
-
-#timeframeFieldset,
-#timeOfDayFieldset,
-#graphFieldset,
-#histogramFieldset,
-#graphFilteringFieldset,
-#metricsFieldset,
-#actionFieldset {
-    float: left
 }
 
 #timeframeFieldset {
