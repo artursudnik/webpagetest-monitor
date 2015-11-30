@@ -161,7 +161,7 @@ function sanitizeData($requestArray) {
     $currentD  = (int)date("j");
     $currentH  = (int)date("G");
 
-    $resultArray['timeFrame']  = @filter_var((int)$requestArray['timeFrame'],    FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 0, 'max_range' => 31536000)));
+    $resultArray['timeFrame']  = @filter_var((int)$requestArray['timeFrame'],    FILTER_VALIDATE_INT, array('options' =>array('default' => 0, 'min_range' => 0, 'max_range' => 47304000)));
 
     $resultArray['startDay']   = @filter_var((int)$requestArray['startDay'],   FILTER_VALIDATE_INT, array('options' => array('default' => 1, 'min_range' => 1, 'max_range' => 31)));
     $resultArray['startMonth'] = @filter_var((int)$requestArray['startMonth'], FILTER_VALIDATE_INT, array('options' => array('default' => 1, 'min_range' => 1, 'max_range' => 12)));

@@ -108,6 +108,7 @@
                                           <option {if $timeFrame eq 15768000}selected="selected"{/if} value="15768000">6 months</option>
                                           <option label="" disabled="">--------------</option>
                                           <option {if $timeFrame eq 31536000}selected="selected"{/if} value="31536000">1 year</option>
+                                          <option {if $timeFrame eq 47304000}selected="selected"{/if} value="47304000">1,5 year</option>
                                       </select>
                                   </div>
                                   <div id="startTimeSelect">
