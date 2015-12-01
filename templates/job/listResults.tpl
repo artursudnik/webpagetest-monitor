@@ -152,7 +152,7 @@
 </table>
 <table id="monitoringJobList" class="pretty" width="100%">
 <tr>
-  <th colspan="5"></th>
+  <th colspan="4"></th>
   <th align="right" style="padding-bottom:0%;vertical-align:bottom;">
     BWDown<br>BWUp
   </th>
@@ -189,7 +189,7 @@
   </th>
 </tr>
 <tr>
-  <th class="icon" align="left" colspan="4"></th>
+  <th class="icon" align="left" colspan="3"></th>
   <th class="icon"><input type="checkbox" id="toggleAllDisplayedResults"></th>
   <th align="right">
     <a title="WPT Remote Agent Dialer ID" href="?orderBy=DialerId">{if $orderResultsBy eq "DialerId"}
@@ -279,12 +279,6 @@
     </form>
   </td>
 
-  <td class="icon" style="paddin-left:0em">
-    <form target="_blank" title="View log file" action=jobProcessorLog.php>
-      <input type=hidden name=wptResultId value={$res.WPTResultId}>
-      <input type="hidden" name="timeStamp" value="{$res.Date}">
-      <input class="actionIcon" type="image" src="img/Text.gif" width="17"></form>
-  </td>
   <td class="icon"><a target="_blank" title="{$res.WPTResultId}"
          href={$res.WPTHost}{$wptResultURL}{$res.WPTResultId}><img src="img/favicon.png" width="17"
                                                                    title="Show WPT Result"></a></td>
