@@ -74,9 +74,7 @@
                               <select onchange="checkJobCount();" id="jobs" multiple="multiple"
                                       name="job_id[]"
                                       size="7"
-                                      style="width:440px; height:282px">{html_options options=$jobs selected=$job_ids}</select>
-
-                              <div style="font-size:x-small;"><label for="jobs">Select up to 3 jobs</label></div>
+                                      style="width:440px; height:298px">{html_options options=$jobs selected=$job_ids}</select>
                           </td>
                           <td style="vertical-align:top">
                               <fieldset id="timeframeFieldset" class="wptmon">
