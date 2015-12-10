@@ -90,8 +90,8 @@
     $selectFields = 'j.Active, j.Id, j.Label, j.Host, j.Location, j.Frequency, j.LastRun, a.Id, COUNT(r.Id) AS ResultCount, f.Label';
 
     $q = Doctrine_Query::create()->select($selectFields)->from('WPTJob j, j.WPTResult r')
-                                ->orderBy($orderJobsBy)
-                                ->groupBy('j.Id');
+                                 ->groupBy('j.Id')
+                                 ->orderBy($orderJobsBy);
 
     if ( !$showInactiveJobs ){
       $q->andWhere('j.Active = ?', true);
