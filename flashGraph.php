@@ -20,7 +20,7 @@ $smarty->assign('chartType', 'Line');
 if (isset($_GET['aggregateMethod'])) {
 	$_SESSION['aggregateMethod'] = $_GET['aggregateMethod'];
 } elseif(!isset($_SESSION['aggregateMethod'])) {
-	$_SESSION['aggregateMethod'] = "50th";
+	$_SESSION['aggregateMethod'] = "avg";
 }
 
 $smarty->assign('aggregateMethod', $_SESSION['aggregateMethod']);
