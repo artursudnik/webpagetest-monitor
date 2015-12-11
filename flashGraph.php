@@ -119,7 +119,6 @@ $q = Doctrine_Query::create()->select('j.Id, j.Label')
     if (!$showInactiveJobs){
       $q->andWhere('j.Active = ?',true);
     }
-    $q->orderBy('j.Label');
 
 //if ($folderId > -1) {
 //  $q->andWhere('j.WPTJobFolderId = ?', $folderId);
