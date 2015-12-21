@@ -121,7 +121,7 @@
                                   </div>
                               </fieldset>
                               <fieldset id="timeOfDayFieldset" class="wptmon">
-                                  <legend>Time of day</legend>
+                                  <legend>Time of day (CET)</legend>
                                   <div id="timeOfDaySelect">
                                       <label title="time of day">Start:</label>
                                       {html_select_time prefix="todStart" time=$todStartHourTimestamp use_24_hours=true minute_interval="15" display_minutes=false display_seconds=false}
