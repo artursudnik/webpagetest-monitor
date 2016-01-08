@@ -8,6 +8,8 @@ if(!array_key_exists('ls_timezone', $_SESSION)) {
 }
 date_default_timezone_set($_SESSION['ls_timezone']);
 
+$dataConn->execute("SET time_zone = '" . $_SESSION['ls_timezone'] . "'");
+
 // Check to see if we are to impersonate
 if(array_key_exists('impId', $_REQUEST) && array_key_exists('ls_admin', $_SESSION)) {
     $_SESSION['ls_impersonate_id'] = $_REQUEST['impId'];
