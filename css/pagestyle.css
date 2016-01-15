@@ -189,6 +189,7 @@ table.pretty tr.odd { background: white; }
 table.pretty tr.status-100 {opacity: 0.2}
 
 table.pretty tr.status-404 { opacity: 0.4; background-color: #fbb; color: #ff0000 }
+table.pretty tr.status--214669721,
 table.pretty tr.status-500,
 table.pretty tr.status-501,
 table.pretty tr.status-502,
