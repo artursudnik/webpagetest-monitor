@@ -7,13 +7,11 @@
     <link rel="stylesheet" href="css/html5-doctor-reset-stylesheet.css?v={$version}" type="text/css">
     <link rel="stylesheet" href="css/reports/staticGraph.css?v={$version}" type="text/css">
     <link rel="stylesheet" href="css/reports/flashGraph.css?v={$version}" type="text/css">
+    <link rel="stylesheet" href="js/amcharts-3.17.3/plugins/export/export.css" type="text/css">
     <script src="js/jquery-1.11.0.js" type="text/javascript"></script>
-    <script type="text/javascript" src="js/amcharts/amcharts.js?v={$version}"></script>
-    <script type="text/javascript" src="js/amcharts/serial.js?v={$version}"></script>
-    <script type="text/javascript" src="js/amcharts/exporting/amexport.js?v={$version}"></script>
-    <script type="text/javascript" src="js/amcharts/exporting/rgbcolor.js?v={$version}"></script>
-    <script type="text/javascript" src="js/amcharts/exporting/canvg.js?v={$version}"></script>
-    <script type="text/javascript" src="js/amcharts/exporting/filesaver.js?v={$version}"></script>
+    <script type="text/javascript" src="js/amcharts-3.17.3/amcharts.js"></script>
+    <script type="text/javascript" src="js/amcharts-3.17.3/serial.js"></script>
+    <script type="text/javascript" src="js/amcharts-3.17.3/plugins/export/export.js"></script>
     {*<script type="text/javascript" src="js/reports/flashGraphOld.js?v={$version}"></script>*}
     <script type="text/javascript" src="js/reports/flashGraph.js?v={$version}"></script>
     <script type="text/javascript" src="js/reports/histograms.js?v={$version}"></script>
