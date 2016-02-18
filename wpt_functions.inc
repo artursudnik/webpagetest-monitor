@@ -767,6 +767,12 @@ function processResultsForAll($resultId = null) {
                     $result['AvgFirstViewFullyLoadedRequests'] = $avgFV->requests;
                     $result['AvgFirstViewFullyLoadedBytesIn']  = $avgFV->bytesIn;
                     $result['AvgFirstViewSpeedIndex']          = $avgFV->SpeedIndex;
+                    if($avgFV->userTimes->count() > 0){
+                        $userTimes = json_encode($avgFV->userTimes, JSON_NUMERIC_CHECK);
+                        if(strlen($userTimes) < 2000) {
+                            $result['AvgFirstViewUserTimes']       = $userTimes;
+                        }
+                    }
                 }
                 if($avgRV) {
                     $result['AvgRepeatViewLoadTime']            = $avgRV->loadTime;
@@ -780,6 +786,12 @@ function processResultsForAll($resultId = null) {
                     $result['AvgRepeatViewFullyLoadedRequests'] = $avgRV->requests;
                     $result['AvgRepeatViewFullyLoadedBytesIn']  = $avgRV->bytesIn;
                     $result['AvgRepeatViewSpeedIndex']          = $avgRV->SpeedIndex;
+                    if($avgRV->userTimes->count() > 0) {
+                        $userTimes = json_encode($avgRV->userTimes, JSON_NUMERIC_CHECK);
+                        if(strlen($userTimes) < 2000) {
+                            $result['AvgRepeatViewUserTimes']       = $userTimes;
+                        }
+                    }
                 }
 
 
