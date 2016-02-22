@@ -6,7 +6,7 @@ var wptmonitor = (function(window, $, wptmonitor){
 
     var preventUnload = true;
 
-    function initialize() {
+    function initialize(){
         var act = wptmonitor.graph.action;
         var $updateForm = $('#updateForm');
         $('#todSelectionReset').on('click', function(){
@@ -18,34 +18,34 @@ var wptmonitor = (function(window, $, wptmonitor){
         $updateForm.find('select[name=todStartHour]').on('change', timeOfDaySelectionChangeHandler);
         $updateForm.find('select[name=todEndHour]').on('change', timeOfDaySelectionChangeHandler);
 
-        function timeOfDaySelectionChangeHandler() {
+        function timeOfDaySelectionChangeHandler(){
             var $todStartHour = $updateForm.find('select[name=todStartHour]');
             var $todEndHour = $updateForm.find('select[name=todEndHour]');
 
             console.log($todStartHour.val(), $todEndHour.val());
 
-            if($todStartHour.val() != $todEndHour.val()) {
+            if($todStartHour.val() != $todEndHour.val()){
                 $('#timeOfDaySelect').addClass('selected');
-            } else {
+            }else{
                 $('#timeOfDaySelect').removeClass('selected');
             }
         }
 
 
         $('#graphJSONButton').on('click', function(){
-            if(!checkJobCount()) {
+            if(!checkJobCount()){
                 return;
             }
             var chartContainerIsHidden = isChartContainerHidden();
             submitFormAJAX()
                 .done(function(){
-                          if(chartContainerIsHidden){
-                              scrollToGraph();
-                          }
-                      })
+                    if(chartContainerIsHidden){
+                        scrollToGraph();
+                    }
+                })
                 .fail(function(e){
-                          alert(e);
-                      });
+                    alert(e);
+                });
         });
 
         $('#hideGraph').click(function(e){
@@ -60,17 +60,17 @@ var wptmonitor = (function(window, $, wptmonitor){
         $("#getGraphStaticLink").click(function(e){
             e.preventDefault();
             $.ajax({
-                       url : 'jash/createStaticGraph.php',
-                       type: 'POST',
-                       data: {
-                           chartData: JSON.stringify(lastData),
-                           chartType: 'graph'
-                       }
-                   })
-                .done(function (data) {
-                    if (data.errorMessage) {
+                url  : 'jash/createStaticGraph.php',
+                type : 'POST',
+                data : {
+                    chartData : JSON.stringify(lastData),
+                    chartType : 'graph'
+                }
+            })
+                .done(function(data){
+                    if(data.errorMessage){
                         alert(data.errorMessage);
-                    } else if(data.staticGraphUrl){
+                    }else if(data.staticGraphUrl){
                         window.open(data.staticGraphUrl)
                     }
                 });
@@ -94,7 +94,7 @@ var wptmonitor = (function(window, $, wptmonitor){
 
         markUnsafeResolutions();
 
-        if(act && act === "graph") {
+        if(act && act === "graph"){
             if(getJobCount() > 0){
                 setTimeout(function(){
                     $('#graphJSONButton').trigger('click');
@@ -102,16 +102,17 @@ var wptmonitor = (function(window, $, wptmonitor){
             }
         }
 
-        function scrollToGraph() {
+        function scrollToGraph(){
             var container = $("#graphContainer");
             $('html, body').animate({
-                                        'scrollTop': container.offset().top - $(window).height() + container.height() },
-                                    1000,
-                                    'swing'
+                    'scrollTop' : container.offset().top - $(window).height() + container.height()
+                },
+                1000,
+                'swing'
             );
         }
 
-        $(window).bind("beforeunload", function() {
+        $(window).bind("beforeunload", function(){
             if(preventUnload){
                 return "You are leaving this page.";
             }
@@ -123,33 +124,33 @@ var wptmonitor = (function(window, $, wptmonitor){
         preventUnload = false;
     }
 
-    function submitFormAJAX() {
-        var deferred=$.Deferred();
+    function submitFormAJAX(){
+        var deferred = $.Deferred();
         var serializedFormData = $('#updateForm').serializeArray();
 
         getChartDataWithGUIBehavior(serializedFormData)
-        .done(function(d){
-            lastData = d;
-            try {
-                d = convertData2avgCharts(d);
-                drawChart(d);
-            } catch(e) {
-                deferred.reject('Error occured while drawing chart: ' + e);
-                return;
-            }
+            .done(function(d){
+                lastData = d;
+                try{
+                    d = convertData2avgCharts(d);
+                    drawChart(d);
+                }catch(e){
+                    deferred.reject('Error occured while drawing chart: ' + e);
+                    return;
+                }
 
-            var $scrollbarCheckbox = $('input[name="displayGraphScrollbar"]');
+                var $scrollbarCheckbox = $('input[name="displayGraphScrollbar"]');
 
-            $scrollbarCheckbox.on('change', function(){
-                drawChart(d);
+                $scrollbarCheckbox.on('change', function(){
+                    drawChart(d);
+                });
+
+                deferred.resolve();
+
+            })
+            .fail(function(error){
+                deferred.reject(error);
             });
-
-            deferred.resolve();
-
-        })
-        .fail(function(error){
-            deferred.reject(error);
-        });
 
         return deferred.promise();
     }
@@ -162,20 +163,20 @@ var wptmonitor = (function(window, $, wptmonitor){
             container.slideDown(1000, function(){
                 d.resolve();
             });
-        } else {
+        }else{
             d.resolve();
         }
 
         return d.promise();
     }
 
-    function isChartContainerHidden() {
+    function isChartContainerHidden(){
         return $("#graphContainer").is(":hidden");
     }
 
     function scrollbarToBeDisplayed(){
         var checkbox = $('input[name="displayGraphScrollbar"]');
-        if(checkbox === undefined) {
+        if(checkbox === undefined){
             return true;
         }
         return checkbox.prop('checked');
@@ -186,23 +187,23 @@ var wptmonitor = (function(window, $, wptmonitor){
         getServerSideMaxExecutionTime()
             .done(function(maxExecutionTime){
                 $.ajax({
-                    url: 'jash/flashGraph.json.php',
-                    data: params,
-                    method: "POST",
-                    timeout: maxExecutionTime * 1000
+                    url     : 'jash/flashGraph.json.php',
+                    data    : params,
+                    method  : "POST",
+                    timeout : maxExecutionTime * 1000
                 }).done(function(data){
-                    if(data.status !== 200) {
+                    if(data.status !== 200){
                         d.reject('Server-side error: ' + data.status + ' ' + data.message);
-                    } else {
+                    }else{
                         d.resolve(data.results);
                     }
                 }).error(function(jqxhr, textStatus, errorThrown){
-                    switch (textStatus) {
+                    switch(textStatus){
                         case 'parsererror':
                             d.reject('Wrong response from server: parsererror');
                             break;
                         case 'timeout':
-                            d.reject('Server side processing time limit ('+maxExecutionTime+'s) exceeded.');
+                            d.reject('Server side processing time limit (' + maxExecutionTime + 's) exceeded.');
                             break;
                         default:
                             d.reject(textStatus);
@@ -220,10 +221,10 @@ var wptmonitor = (function(window, $, wptmonitor){
         return function(){
             var d = $.Deferred();
             $.ajax({
-                url: 'jash/flashGraph.json.php',
-                data: {action: 'getMaxExecutionTime'}
+                url  : 'jash/flashGraph.json.php',
+                data : {action : 'getMaxExecutionTime'}
             }).done(function(data){
-                maxExecTime=data.results.max_execution_time;
+                maxExecTime = data.results.max_execution_time;
                 d.resolve(maxExecTime);
             }).error(function(jqxhr, textStatus, errorThrown){
                 d.reject(textStatus);
@@ -240,18 +241,18 @@ var wptmonitor = (function(window, $, wptmonitor){
         $.when(
             getChartData(params),
             $(button).attr('disabled', 'disabled')
-            ,showChartContainer().done(function(){
+            , showChartContainer().done(function(){
                 $('#graphOverlay').fadeIn(100);
             })
         ).done(function(data){
-            d.resolve(data);
-        }).fail(function(e){
-            d.reject(e);
-        }).always(function(){
-            $('#graphOverlay').fadeOut(600, function(){
-                $(button).removeAttr('disabled');
+                d.resolve(data);
+            }).fail(function(e){
+                d.reject(e);
+            }).always(function(){
+                $('#graphOverlay').fadeOut(600, function(){
+                    $(button).removeAttr('disabled');
+                });
             });
-        });
 
         return d.promise();
     }
@@ -261,20 +262,20 @@ var wptmonitor = (function(window, $, wptmonitor){
      * Converts data returned by server to format that can be consumed by AmCharts Serial chart
      * @param {Array} data
      */
-    function convertData2avgCharts (data) {
+    function convertData2avgCharts(data){
         var chartData = [];
         var seriesToJobNameMap = {};
         var seriesToMetricNameMap = {};
-        var seriesToJobIdMap ={};
+        var seriesToJobIdMap = {};
         var valueFields = [];
         var numberOfSeries = 0;
         var previousJobId = null;
         var i, j, k;
 
-        for(i in data.series) {
+        for(i in data.series){
             if(data.series.hasOwnProperty(i)){
-                if(previousJobId !== null) {
-                    if(data.series[previousJobId].dataSet.length !== data.series[i].dataSet.length) {
+                if(previousJobId !== null){
+                    if(data.series[previousJobId].dataSet.length !== data.series[i].dataSet.length){
                         throw "Not equal datasets";
                     }
                 }
@@ -286,8 +287,8 @@ var wptmonitor = (function(window, $, wptmonitor){
         /**
          *  Iterate all jobs and metrics to create mappings between value fields names and other data
          */
-        for (k=0; k < data.metrics.length; k++) {
-            for(i=0; i < data.jobs.length; i++) {
+        for(k = 0; k < data.metrics.length; k++){
+            for(i = 0; i < data.jobs.length; i++){
                 seriesToJobNameMap[data.metrics[k] + "-" + data.jobs[i]] = data.series[data.jobs[i]].jobName;
                 seriesToMetricNameMap[data.metrics[k] + "-" + data.jobs[i]] = data.metrics[k];
                 seriesToJobIdMap[data.metrics[k] + "-" + data.jobs[i]] = data.jobs[i];
@@ -298,18 +299,18 @@ var wptmonitor = (function(window, $, wptmonitor){
         /**
          *  Functions to be put on every data point to be accessible from click event handler
          */
-        var getJobName    = function(seriesName){
+        var getJobName = function(seriesName){
             return seriesToJobNameMap[seriesName];
         };
 
         var getMetricName = function(seriesName){
             return seriesToMetricNameMap[seriesName];
         };
-        var getJobId      = function(seriesName){
+        var getJobId = function(seriesName){
             return seriesToJobIdMap[seriesName];
         };
 
-        var getInterval   = function(){
+        var getInterval = function(){
             return data.interval;
         };
 
@@ -317,15 +318,15 @@ var wptmonitor = (function(window, $, wptmonitor){
         /**
          *  Iterate all points and then all series to put all series in different fields but in one data serie
          */
-        for(i=0; i<data.series[previousJobId].dataSet.length; i++) {
+        for(i = 0; i < data.series[previousJobId].dataSet.length; i++){
             var tmpPoint = {},
                 tmpValue;
             tmpPoint['date'] = data.series[previousJobId].dataSet[i].DateFormatted;
             tmpPoint['timestamp'] = data.series[previousJobId].dataSet[i].UnixTimestamp;
-            for(j in data.jobs) {
-                if(data.jobs.hasOwnProperty(j)) {
-                    for (k = 0; k < data.metrics.length; k++) {
-                        if (data.series[data.jobs[j]].dataSet[i][data.metrics[k]] !== null) {
+            for(j in data.jobs){
+                if(data.jobs.hasOwnProperty(j)){
+                    for(k = 0; k < data.metrics.length; k++){
+                        if(data.series[data.jobs[j]].dataSet[i][data.metrics[k]] !== null){
                             tmpValue = data.series[data.jobs[j]].dataSet[i][data.metrics[k]] / 1000;
                             tmpPoint[data.metrics[k] + "-" + data.jobs[j]] = (tmpValue).toPrecision(3);
                             tmpPoint.getJobId = getJobId;
@@ -340,36 +341,48 @@ var wptmonitor = (function(window, $, wptmonitor){
         }
 
         return {
-            getJobName    : function(seriesName){return seriesToJobNameMap[seriesName];},
-            getMetricName : function(seriesName){return seriesToMetricNameMap[seriesName];},
-            getJobId      : function(seriesName){return seriesToJobIdMap[seriesName];},
-            valueFields: valueFields,
-            series: chartData
+            getJobName    : function(seriesName){
+                return seriesToJobNameMap[seriesName];
+            },
+            getMetricName : function(seriesName){
+                return seriesToMetricNameMap[seriesName];
+            },
+            getJobId      : function(seriesName){
+                return seriesToJobIdMap[seriesName];
+            },
+            valueFields   : valueFields,
+            series        : chartData
         };
     }
 
-    function drawChart(data) {
-        var getMetricName = data.getMetricName || function() {return 'No getMetricName function';};
-        var getJobName    = data.getJobName ||    function() {return 'No getJobName function';};
-        var getJobId      = data.getJobId ||      function() {return 'No getJobId function';};
+    function drawChart(data){
+        var getMetricName = data.getMetricName || function(){
+                return 'No getMetricName function';
+            };
+        var getJobName = data.getJobName || function(){
+                return 'No getJobName function';
+            };
+        var getJobId = data.getJobId || function(){
+                return 'No getJobId function';
+            };
         var graphs = [];
 
         /**
          *  Prepare graphs configs for all data series
          */
         for(var i in data.valueFields){
-            if(data.valueFields.hasOwnProperty(i)) {
+            if(data.valueFields.hasOwnProperty(i)){
                 graphs.push({
-                    id                         : data.valueFields[i],
-                    balloonText                : "[[category]]<br /><b><span style='font-size:14px;'>" + getMetricName(data.valueFields[i]) + ": [[value]]</span></b>",
-                    bullet                     : "round",
-                    bulletSize                 : 1,
-                    bulletBorderAlpha          : 1,
-                    bulletColor                : "#FFFFFF",
-                    hideBulletsCount           : 0,
-                    title                      : getJobName(data.valueFields[i]) + " " + getMetricName(data.valueFields[i]),
-                    valueField                 : data.valueFields[i],
-                    useLineColorForBulletBorder: true
+                    id                          : data.valueFields[i],
+                    balloonText                 : "[[category]]<br /><b><span style='font-size:14px;'>" + getMetricName(data.valueFields[i]) + ": [[value]]</span></b>",
+                    bullet                      : "round",
+                    bulletSize                  : 1,
+                    bulletBorderAlpha           : 1,
+                    bulletColor                 : "#FFFFFF",
+                    hideBulletsCount            : 0,
+                    title                       : getJobName(data.valueFields[i]) + " " + getMetricName(data.valueFields[i]),
+                    valueField                  : data.valueFields[i],
+                    useLineColorForBulletBorder : true
                 });
             }
         }
@@ -378,9 +391,9 @@ var wptmonitor = (function(window, $, wptmonitor){
 
         if(scrollbarToBeDisplayed()){
             chartScrollbar = {
-                autoGridCount    : true,
-                graph            : data.valueFields[0],
-                "scrollbarHeight": 20, hideResizeGrips: true
+                autoGridCount     : true,
+                graph             : data.valueFields[0],
+                "scrollbarHeight" : 20, hideResizeGrips : true
                 // ,updateOnReleaseOnly: true
             }
         }
@@ -397,45 +410,45 @@ var wptmonitor = (function(window, $, wptmonitor){
             chart.chartScrollbar = chartScrollbar;
 
             chart.validateData();
-        } else {
+        }else{
             // chart is instantiated from scratch
             chart = AmCharts.makeChart("graph", {
-                type               : "serial",
-                theme              : "none",
-                pathToImages       : "js/amcharts-3.17.3/images/",
-                dataProvider       : data.series,
-                zoomOutOnDataUpdate: false,
-                valueAxes          : [
+                type                : "serial",
+                theme               : "none",
+                pathToImages        : "js/amcharts-3.17.3/images/",
+                dataProvider        : data.series,
+                zoomOutOnDataUpdate : false,
+                valueAxes           : [
                     {
-                        axisAlpha : 0.2,
-                        dashLength: 1,
-                        position  : "left",
-                        minimum   : 0,
-                        unit      : "s"
+                        axisAlpha  : 0.2,
+                        dashLength : 1,
+                        position   : "left",
+                        minimum    : 0,
+                        unit       : "s"
                     }
                 ],
-                graphs             : graphs,
-                chartScrollbar     : chartScrollbar,
-                chartCursor        : {
-                    cursorPosition           : "mouse",
-                    categoryBalloonDateFormat: "MMM DD JJ:NN:SS", cursorAlpha: 0.5, graphBulletSize: 2
+                graphs              : graphs,
+                chartScrollbar      : chartScrollbar,
+                chartCursor         : {
+                    cursorPosition            : "mouse",
+                    categoryBalloonDateFormat : "MMM DD JJ:NN:SS", cursorAlpha : 0.5, graphBulletSize : 2
                 },
-                categoryField      : "date",
-                dataDateFormat     : "YYYY-MM-DD JJ:NN:SS",
-                categoryAxis       : {
-                    parseDates      : true,
-                    minorGridEnabled: false,
-                    minPeriod       : "mm"
+                categoryField       : "date",
+                dataDateFormat      : "YYYY-MM-DD JJ:NN:SS",
+                categoryAxis        : {
+                    parseDates       : true,
+                    minorGridEnabled : false,
+                    minPeriod        : "mm"
                 },
-                legend             : {
-                    fontSize: 9
+                legend              : {
+                    fontSize : 9
                 },
-                export : {
-                    enabled : true,
-                    libs    : {
+                export              : {
+                    enabled  : true,
+                    libs     : {
                         path : "js/amcharts-3.17.3/plugins/export/libs/"
                     },
-                    menu : [{
+                    menu     : [{
                         class : "export-main",
                         menu  : [{
                             "format" : "SVG",
@@ -462,13 +475,13 @@ var wptmonitor = (function(window, $, wptmonitor){
 
         function getResultsURL(jobId, startDateTime, interval){
             var params = {
-                currentPage  : 1,
-                filterField  : "WPTJob.Id",
-                filterValue  : jobId,
-                startDateTime: startDateTime,
-                endDateTime  : startDateTime + interval
+                currentPage   : 1,
+                filterField   : "WPTJob.Id",
+                filterValue   : jobId,
+                startDateTime : startDateTime,
+                endDateTime   : startDateTime + interval
             };
-            return "listResults.php?"+$.param(params);
+            return "listResults.php?" + $.param(params);
         }
         // drawTable(data);
     }
@@ -477,8 +490,12 @@ var wptmonitor = (function(window, $, wptmonitor){
         var val = $('#jobs').val();
         var count;
 
-        if(val === null) {count = 0;}
-        else {count = val.length;}
+        if(val === null){
+            count = 0;
+        }
+        else{
+            count = val.length;
+        }
 
         return count;
     }
@@ -486,8 +503,8 @@ var wptmonitor = (function(window, $, wptmonitor){
     var getResolutionOptionsValues = (function(){
         var values;
 
-        return function() {
-            if(values === undefined) {
+        return function(){
+            if(values === undefined){
                 values = $('#interval').find('option').map(function(){
                     return this.value;
                 });
@@ -497,26 +514,26 @@ var wptmonitor = (function(window, $, wptmonitor){
     })();
 
 
-    function getStartEndTimeDifference() {
+    function getStartEndTimeDifference(){
         var start, end;
-        var formValues =  {
-            startYear : parseInt($('select[name="startYear"]').val()),
-            startMonth: parseInt($('select[name="startMonth"]').val()),
-            startDay  : parseInt($('select[name="startDay"]').val()),
-            startHour : parseInt($('select[name="startHour"]').val()),
-            endYear   : parseInt($('select[name="endYear"]').val()),
-            endMonth  : parseInt($('select[name="endMonth"]').val()),
-            endDay    : parseInt($('select[name="endDay"]').val()),
-            endHour   : parseInt($('select[name="endHour"]').val())
+        var formValues = {
+            startYear  : parseInt($('select[name="startYear"]').val()),
+            startMonth : parseInt($('select[name="startMonth"]').val()),
+            startDay   : parseInt($('select[name="startDay"]').val()),
+            startHour  : parseInt($('select[name="startHour"]').val()),
+            endYear    : parseInt($('select[name="endYear"]').val()),
+            endMonth   : parseInt($('select[name="endMonth"]').val()),
+            endDay     : parseInt($('select[name="endDay"]').val()),
+            endHour    : parseInt($('select[name="endHour"]').val())
         };
         var timeDifference;
         var timeFramePresetValue = $('#timeFrame').val();
 
-        if(timeFramePresetValue == 0) {
+        if(timeFramePresetValue == 0){
             start = new Date(formValues.startYear, formValues.startMonth - 1, formValues.startDay, formValues.startHour);
-            end   = new Date(formValues.endYear, formValues.endMonth - 1, formValues.endDay, formValues.endHour);
+            end = new Date(formValues.endYear, formValues.endMonth - 1, formValues.endDay, formValues.endHour);
             timeDifference = (end - start) / 1000;
-        } else {
+        }else{
             timeDifference = timeFramePresetValue;
         }
 
@@ -526,10 +543,10 @@ var wptmonitor = (function(window, $, wptmonitor){
     function getSafeInterval(){
         var safeNumberOfGraphPoints = 300;
         var timeFrameInSeconds = getStartEndTimeDifference();
-        return timeFrameInSeconds/safeNumberOfGraphPoints;
+        return timeFrameInSeconds / safeNumberOfGraphPoints;
     }
 
-    function markUnsafeResolutions() {
+    function markUnsafeResolutions(){
         var safeInterval = getSafeInterval();
         var intervalSelect = $('#interval');
 
@@ -545,23 +562,27 @@ var wptmonitor = (function(window, $, wptmonitor){
             return this.value >= safeInterval;
         }).addClass('safe');
 
-        if(intervalSelect.val() < safeInterval) {
+        if(intervalSelect.val() < safeInterval){
             intervalSelect.addClass('notSafe');
-        }else {
+        }else{
             intervalSelect.removeClass('notSafe');
         }
 
     }
 
-    window.getChart      = function(){return chart;};
+    window.getChart = function(){
+        return chart;
+    };
 
     wptmonitor.graph = {
-        initialized                   : true,
-        initializeInteractive         : function(){
+        initialized                    : true,
+        initializeInteractive          : function(){
             initialize()
         },
-        drawChart: function(d){drawChart(convertData2avgCharts(d))},
-        doNotPreventUnloadConfirmation: doNotPreventUnloadConfirmation
+        drawChart                      : function(d){
+            drawChart(convertData2avgCharts(d));
+        },
+        doNotPreventUnloadConfirmation : doNotPreventUnloadConfirmation
     };
 
     return wptmonitor;

@@ -7,23 +7,27 @@ var wptmonitor = (function(window, $, wptmonitor){
     var previousResolution;
 
     function initialize(){
-        $('#histogramButton').on('click', function () {
+        $('#histogramButton').on('click', function(){
             if(getSelectedJobsCount() == 0){
                 alert('Please select job(s).');
                 return;
             }
             var button = $(this);
             button.attr('disabled', 'disabled');
-            var selectedJobs = $.makeArray($('#updateForm').find('select#jobs option:selected').map(function(){return this.value;}));
+            var selectedJobs = $.makeArray($('#updateForm')
+                .find('select#jobs option:selected')
+                .map(function(){
+                    return this.value;
+                }));
 
             try{
                 drawHistogramForJobs(selectedJobs)
                     .always(function(){
-                                button.removeAttr('disabled');
-                            })
+                        button.removeAttr('disabled');
+                    })
                     .fail(function(e){
-                              alert(e);
-                          });
+                        alert(e);
+                    });
             }catch(e){
                 alert("Error: " + e);
                 button.removeAttr('disabled');
@@ -45,20 +49,20 @@ var wptmonitor = (function(window, $, wptmonitor){
         $("#getHistogramStaticGraphLink").click(function(e){
             e.preventDefault();
             $.ajax({
-                       url : 'jash/createStaticGraph.php',
-                       type: 'POST',
-                       data: {
-                           chartData: JSON.stringify(lastData),
-                           chartType: 'histogram'
-                       }
-                   })
+                url  : 'jash/createStaticGraph.php',
+                type : 'POST',
+                data : {
+                    chartData : JSON.stringify(lastData),
+                    chartType : 'histogram'
+                }
+            })
                 .done(function(data){
-                          window.open(data.staticGraphUrl)
-                      });
+                    window.open(data.staticGraphUrl)
+                });
         });
     }
 
-    function isHistogramContainerHidden() {
+    function isHistogramContainerHidden(){
         return $("#histogramsContainer").is(":hidden");
     }
 
@@ -69,96 +73,97 @@ var wptmonitor = (function(window, $, wptmonitor){
             container.slideDown(1000, function(){
                 deferred.resolve();
             });
-        } else {
+        }else{
             deferred.resolve();
         }
 
         return deferred.promise();
     }
 
-    function drawHistogramForJobs(jobId) {
+    function drawHistogramForJobs(jobId){
         var deferred = $.Deferred();
         var histogramContainerWasHidden = isHistogramContainerHidden();
 
         $.when(
             getHistogramDataForJobs(jobId)
                 .done(function(data){
-                                      lastData = data;
-                                  }),
+                    lastData = data;
+                }),
             showHistogramContainer().done(function(){
                 $('#histogramOverlay').fadeIn(100);
             })
         )
-        .done(function(data){
-            try{
-                drawChart(data);
-            }catch(e) {
-                deferred.reject(e);
-            }
-
-            var $scrollbarCheckbox = $('input[name="displayHistogramScrollbar"]');
-
-            $scrollbarCheckbox.on('change', function(){
-                drawChart(data);
-            });
-
-            setTimeout(function(){
-                $('#histogramOverlay').fadeOut(600, function(){
-                    deferred.resolve();
-                });
-                if(histogramContainerWasHidden){
-                    scrollToGraph();
+            .done(function(data){
+                try{
+                    drawChart(data);
+                }catch(e){
+                    deferred.reject(e);
                 }
-            }, 10);
-        })
-        .fail(function(e){
-            deferred.reject(e);
-        }).always(function(){
-            setTimeout(function(){
-                $('#histogramOverlay').fadeOut(600, function(){
-                    deferred.resolve();
+
+                var $scrollbarCheckbox = $('input[name="displayHistogramScrollbar"]');
+
+                $scrollbarCheckbox.on('change', function(){
+                    drawChart(data);
                 });
-            }, 10);
-        });
+
+                setTimeout(function(){
+                    $('#histogramOverlay').fadeOut(600, function(){
+                        deferred.resolve();
+                    });
+                    if(histogramContainerWasHidden){
+                        scrollToGraph();
+                    }
+                }, 10);
+            })
+            .fail(function(e){
+                deferred.reject(e);
+            }).always(function(){
+                setTimeout(function(){
+                    $('#histogramOverlay').fadeOut(600, function(){
+                        deferred.resolve();
+                    });
+                }, 10);
+            });
 
         return deferred.promise();
 
     }
 
-    function scrollToGraph() {
+    function scrollToGraph(){
         var container = $("#histogramsContainer");
         $('html, body').animate({
-            'scrollTop': container.offset().top - $(window).height() + container.height() },
+                'scrollTop' : container.offset().top - $(window).height() + container.height()
+            },
             1000,
             'swing'
         );
     }
 
-    function drawChart(data) {
+    function drawChart(data){
 
         var graphs = [];
 
-        for(var i in data.fields) {
+        for(var i in data.fields){
             if(data.fields.hasOwnProperty(i)){
                 var field = data.fields[i];
                 graphs.push({
-                    id         : data.fields[i],
-                    title      : data.fieldJobLabelMap[field] + " " + data.fieldMetricMap[field],
-                    balloonText: "[[title]]<br><b>[[value]]</b> samples for <b>[[category]]</b> seconds",
-                    valueField : field,
-                    type       : 'smoothedLine',
-                    fillAlphas : 0.5
+                    id          : data.fields[i],
+                    title       : data.fieldJobLabelMap[field] + " " + data.fieldMetricMap[field],
+                    balloonText : "[[title]]<br><b>[[value]]</b> samples for <b>[[category]]</b> seconds",
+                    valueField  : field,
+                    type        : 'smoothedLine',
+                    fillAlphas  : 0.5
                 });
             }
         }
 
         var chartScrollbar;
 
-        if(scrollbarToBeDisplayed()) {
+        if(scrollbarToBeDisplayed()){
             chartScrollbar = {
-                autoGridCount    : true,
-                graph            : data.fields[0],
-                "scrollbarHeight": 20, hideResizeGrips: true
+                autoGridCount     : true,
+                graph             : data.fields[0],
+                "scrollbarHeight" : 20, hideResizeGrips : true
                 // ,updateOnReleaseOnly: true
             };
         }
@@ -170,55 +175,55 @@ var wptmonitor = (function(window, $, wptmonitor){
             chart.removeChartScrollbar();
             chart.chartScrollbar = chartScrollbar;
             chart.zoomOutOnDataUpdate = zoomOutOnce;
-            if(zoomOutOnce) {
+            if(zoomOutOnce){
                 zoomOutOnce = false;
             }
             chart.validateData();
-        }else {
+        }else{
             chart = AmCharts.makeChart("histogram", {
-                type               : "serial",
-                theme              : "none",
-                pathToImages       : "js/amcharts-3.17.3/images/",
-                dataProvider       : data.dataset,
-                zoomOutOnDataUpdate: false,
-                valueAxes: [
+                type                : "serial",
+                theme               : "none",
+                pathToImages        : "js/amcharts-3.17.3/images/",
+                dataProvider        : data.dataset,
+                zoomOutOnDataUpdate : false,
+                valueAxes           : [
                     {
-                        title     : 'samples count',
-                        titleBold : false,
-                        axisAlpha : 0.2,
-                        dashLength: 1,
-                        position  : "left",
-                        minimum   : 0
+                        title      : 'samples count',
+                        titleBold  : false,
+                        axisAlpha  : 0.2,
+                        dashLength : 1,
+                        position   : "left",
+                        minimum    : 0
                         // ,unit: "s"
                     }
                 ],
-                graphs        : graphs,
-                chartScrollbar: chartScrollbar,
-                chartCursor: {
-                    cursorPosition           : "mouse",
-                    categoryBalloonDateFormat: "MMM DD JJ:NN:SS",
-                    cursorAlpha              : 0.5,
-                    graphBulletSize          : 2
+                graphs              : graphs,
+                chartScrollbar      : chartScrollbar,
+                chartCursor         : {
+                    cursorPosition            : "mouse",
+                    categoryBalloonDateFormat : "MMM DD JJ:NN:SS",
+                    cursorAlpha               : 0.5,
+                    graphBulletSize           : 2
                 },
-                categoryField: "bucket",
-                categoryAxis: {
-                    minorGridEnabled: false,
-                    title           : 'time in seconds',
-                    titleBold       : false,
-                    minimum         : 0,
-                    categoryFunction: function (e) {
+                categoryField       : "bucket",
+                categoryAxis        : {
+                    minorGridEnabled : false,
+                    title            : 'time in seconds',
+                    titleBold        : false,
+                    minimum          : 0,
+                    categoryFunction : function(e){
                         return (e / 1000).toString();
                     }
                 },
-                legend: {
-                    fontSize: 9
+                legend              : {
+                    fontSize : 9
                 },
-                export : {
-                    enabled : true,
-                    libs    : {
+                export              : {
+                    enabled  : true,
+                    libs     : {
                         path : "js/amcharts-3.17.3/plugins/export/libs/"
                     },
-                    menu : [{
+                    menu     : [{
                         class : "export-main",
                         menu  : [{
                             "format" : "SVG",
@@ -240,8 +245,8 @@ var wptmonitor = (function(window, $, wptmonitor){
     function getHistogramDataForJobs(jobId){
         var deferred = $.Deferred();
         $.when.apply($, $(jobId).map(function(){
-                return getHistogramDataForJob(this);
-            }))
+            return getHistogramDataForJob(this);
+        }))
             .done(function(){
                 try{
                     var dataConverted = convertHistogramData(arguments);
@@ -262,7 +267,7 @@ var wptmonitor = (function(window, $, wptmonitor){
      * @param {{bucketWidth, minBucket, maxBucket, jobId, fields: [], datasets: {metric, series: {bucket, count}[], maxBucket, minBucket}[], jobLabel}[]} data
      * @returns {{dataset: {}, fields: Array, fieldJobIdMap: {}, fieldJobLabelMap: {}, fieldMetricMap: {}}}
      */
-    function convertHistogramData(data) {
+    function convertHistogramData(data){
 
         var dataConverted = {};
         var minBucket = getMinBucket();
@@ -279,7 +284,7 @@ var wptmonitor = (function(window, $, wptmonitor){
                 if(i < 0){
                     continue;
                 }
-                dataConverted[i] = {bucket: i};
+                dataConverted[i] = {bucket : i};
                 for(j in data){
                     if(data.hasOwnProperty(j)){
                         for(k in data[j].fields){
@@ -292,12 +297,12 @@ var wptmonitor = (function(window, $, wptmonitor){
             }
         }
 
-        for(var jobIndex in data) {
-            if(data.hasOwnProperty(jobIndex)) {
-                for (var metricIndex in data[jobIndex].datasets) {
+        for(var jobIndex in data){
+            if(data.hasOwnProperty(jobIndex)){
+                for(var metricIndex in data[jobIndex].datasets){
                     if(data[jobIndex].datasets.hasOwnProperty(metricIndex)){
                         var valueField = data[jobIndex].datasets[metricIndex].metric + "-" + data[jobIndex].jobId;
-                        for (i in data[jobIndex].datasets[metricIndex].series) {
+                        for(i in data[jobIndex].datasets[metricIndex].series){
                             if(data[jobIndex].datasets[metricIndex].series.hasOwnProperty(i)){
                                 dataConverted[data[jobIndex].datasets[metricIndex].series[i].bucket][valueField] = data[jobIndex].datasets[metricIndex].series[i].count;
                             }
@@ -316,18 +321,18 @@ var wptmonitor = (function(window, $, wptmonitor){
         });
 
         return {
-            dataset         : dataConverted,
-            fields          : fields,
-            fieldJobIdMap   : fieldJobIdMap,
-            fieldJobLabelMap: fieldJobLabelMap,
-            fieldMetricMap  : fieldMetricMap
+            dataset          : dataConverted,
+            fields           : fields,
+            fieldJobIdMap    : fieldJobIdMap,
+            fieldJobLabelMap : fieldJobLabelMap,
+            fieldMetricMap   : fieldMetricMap
         };
 
-        function getMinBucket() {
+        function getMinBucket(){
             var minBucket = null;
             for(var i in data){
-                if(data.hasOwnProperty(i)) {
-                    if (minBucket === null || minBucket > data[i].minBucket) {
+                if(data.hasOwnProperty(i)){
+                    if(minBucket === null || minBucket > data[i].minBucket){
                         minBucket = data[i].minBucket;
                     }
                 }
@@ -335,11 +340,11 @@ var wptmonitor = (function(window, $, wptmonitor){
             return minBucket;
         }
 
-        function getMaxBucket() {
+        function getMaxBucket(){
             var maxBucket = null;
             for(var i in data){
-                if(data.hasOwnProperty(i)) {
-                    if (maxBucket === null || maxBucket < data[i].maxBucket) {
+                if(data.hasOwnProperty(i)){
+                    if(maxBucket === null || maxBucket < data[i].maxBucket){
                         maxBucket = data[i].maxBucket;
                     }
                 }
@@ -347,12 +352,12 @@ var wptmonitor = (function(window, $, wptmonitor){
             return maxBucket;
         }
 
-        function getBucketWidth() {
+        function getBucketWidth(){
             var bucketWidth = null;
 
             for(var i in data){
                 if(data.hasOwnProperty(i)){
-                    if(bucketWidth !== null && bucketWidth !== data[i].bucketWidth) {
+                    if(bucketWidth !== null && bucketWidth !== data[i].bucketWidth){
                         throw "Different bucket widths in datasets";
                     }
                     bucketWidth = data[i].bucketWidth;
@@ -364,7 +369,7 @@ var wptmonitor = (function(window, $, wptmonitor){
 
     }
 
-    function getHistogramDataForJob(jobId) {
+    function getHistogramDataForJob(jobId){
         var deferred = $.Deferred();
 
         var params = getFormParams();
@@ -372,8 +377,8 @@ var wptmonitor = (function(window, $, wptmonitor){
         params.job = jobId;
 
         $.ajax({
-            url : 'jash/getHistogramData.json.php',
-            data: params
+            url  : 'jash/getHistogramData.json.php',
+            data : params
         }).done(function(data){
             if(data.status !== 200){
                 deferred.reject(data.message);
@@ -388,15 +393,15 @@ var wptmonitor = (function(window, $, wptmonitor){
         return deferred.promise();
     }
 
-    function getSelectedJobsCount() {
+    function getSelectedJobsCount(){
         var val = $('#jobs').val();
-        if(val == null) {
+        if(val == null){
             return 0;
         }
         return val.length;
     }
 
-    function getFormParams() {
+    function getFormParams(){
         return {
             startYear           : $('select[name="startYear"]').val(),
             startMonth          : $('select[name="startMonth"]').val(),
@@ -418,28 +423,28 @@ var wptmonitor = (function(window, $, wptmonitor){
         };
     }
 
-    function scrollbarToBeDisplayed() {
+    function scrollbarToBeDisplayed(){
         var checkbox = $('input[name="displayHistogramScrollbar"]');
-        if(checkbox === undefined) {
+        if(checkbox === undefined){
             return true;
         }
         return checkbox.prop('checked');
     }
 
     function resolutionChangedHandler(){
-        if(chart) {
+        if(chart){
             zoomOutOnce = $('select[name="histogramResolution"]').val() !== previousResolution;
         }
     }
 
     wptmonitor.histograms = {
-        initialized             : true,
-        initializeInteractive   : initialize,
-        getChart                : function(){
+        initialized              : true,
+        initializeInteractive    : initialize,
+        getChart                 : function(){
             return chart;
         },
-        drawChart               : drawChart,
-        resolutionChangedHandler: resolutionChangedHandler
+        drawChart                : drawChart,
+        resolutionChangedHandler : resolutionChangedHandler
     };
 
     return wptmonitor;
