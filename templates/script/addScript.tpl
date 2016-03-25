@@ -31,7 +31,7 @@
             {/if}
             <form method="post" class="cmxform" action="updateScript.php" id="updateForm">
               <input type="hidden" name="id" value="{$script.Id}">
-              <table>
+              <table style="width: 100%">
                 <tr>
                   <td align="right"><label>Folder</label></td>
                   <td>
@@ -53,17 +53,17 @@
                 <tr>
                   <td align="right"><label for="url">URL</label></td>
                   <td><input type="text" id="url" name="url" value="{$script.URL}" class="required url"
-                             style="width:500px;"></td>
+                             style="width:100%"></td>
                 </tr>
                 <tr>
                   <td align="right"><label for="urlscript">Data Script</label></td>
                   <td><textarea id="urlscript" name="urlscript"
-                                style="height:80px;width:500px">{$script.URLScript}</textarea></td>
+                                style="height:80px;width:100%">{$script.URLScript}</textarea></td>
                 </tr>
                 <tr>
                   <td align="right"><label for="navigationscript">Navigation Script</label></td>
                   <td><textarea id="navigationscript" name="navigationscript"
-                                style="height:180px;width:500px">{$script.NavigationScript}</textarea></td>
+                                style="height:180px;width:100%">{$script.NavigationScript}</textarea></td>
                 </tr>
                 <tr>
                   <td></td>
