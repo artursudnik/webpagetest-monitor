@@ -137,7 +137,6 @@ function submitWPTRequest($wptHost,
     $baseURL                    = getBaseURL();
     // Defaults to -1 indicating failure
     $wptResultId         = "-1";
-    $req                 = new HttpRequest($wptHost, HTTP_METH_POST);
     $params              = array();
     $params['agent']     = 'wptmonitor';
     $params['callback']  = $baseURL . '/wptCallBack.php';
@@ -168,43 +167,24 @@ function submitWPTRequest($wptHost,
     if($navscript) {
         $params['script'] = $navscript;
     }
-    $req->addQueryData($params);
+
+    $responseXml = '';
 
     try {
-        $response = $req->send();
-        /**
-         *
-         * <?xml version="1.0" encoding="UTF-8"?>
-         * <response>
-         * <statusCode>400</statusCode>
-         * <statusText>WPT Monitor is not intended to be used against this instance of WebPagetest.</statusText>
-         * </response>
-         *
-         *
-         * <?xml version="1.0" encoding="UTF-8"?>
-         * <response>
-         * <statusCode>400</statusCode>
-         * <statusText>Invalid Script.  Please contact us if you need help with your test script.</statusText>
-         * </response>
-         *
-         *
-         * <?xml version="1.0" encoding="UTF-8"?>
-         * <response>
-         * <statusCode>200</statusCode>
-         * <statusText>Ok</statusText>
-         * <data>
-         * <testId>101014_3A3</testId>
-         * <xmlUrl>http://wpt.mtvly.com/xmlResult/101014_3A3/</xmlUrl>
-         * <userUrl>http://wpt.mtvly.com/result/101014_3A3/</userUrl>
-         * </data>
-         * </response>
-         */
-        $responseCode = $req->getResponseCode();
-        $responseXml  = $req->getResponseBody();
+        $options = array(
+            'http'  => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query($params)
+            )
+        );
 
-        if($responseCode != 200) {
-            $resultStatus['statusText'] = "Job Submission failed with http response code: " . $responseCode;
-            logOutput("[ERROR] [submitWPTRequest] Job Submission failed with http response code: " . $responseCode);
+        $context     = stream_context_create($options);
+        $responseXml = file_get_contents($wptHost, false, $context);
+
+        if($responseXml === FALSE) {
+            $resultStatus['statusText'] = "Job Submission failed";
+            logOutput("[ERROR] [submitWPTRequest] Job Submission failed");
         }else {
             $xml = new SimpleXMLElement( $responseXml );
             if($xml->statusCode == "200") {
@@ -214,7 +194,7 @@ function submitWPTRequest($wptHost,
                 logOutput("[ERROR] [submitWPTRequest] Job Submission failed with message: " . $xml->statusText);
             }
         }
-    }catch (HttpException $ex) {
+    }catch (Exception $ex) {
         $resultStatus['statusText'] = "Exception: " . $ex->getMessage();
         logOutput("[ERROR] [submitWPTRequest] Exception: " . $ex->getMessage() . " " . $responseXml);
     }
