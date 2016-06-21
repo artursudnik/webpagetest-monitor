@@ -8,7 +8,12 @@ if(!array_key_exists('ls_timezone', $_SESSION)) {
 }
 date_default_timezone_set($_SESSION['ls_timezone']);
 
-$dataConn->execute("SET time_zone = '" . $_SESSION['ls_timezone'] . "'");
+try{
+    // when calling install.php and database does not exists yet, Doctrine throws an exception
+    $dataConn->execute("SET time_zone = '" . $_SESSION['ls_timezone'] . "'");
+} catch(Exception $e){
+    //TODO: Handle exception in an acceptable way
+}
 
 // Check to see if we are to impersonate
 if(array_key_exists('impId', $_REQUEST) && array_key_exists('ls_admin', $_SESSION)) {
