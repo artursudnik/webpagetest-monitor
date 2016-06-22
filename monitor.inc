@@ -13,6 +13,7 @@ try{
     $dataConn->execute("SET time_zone = '" . $_SESSION['ls_timezone'] . "'");
 } catch(Exception $e){
     //TODO: Handle exception in an acceptable way
+    trigger_error('Error during setting time_zone: "' . $e->getMessage() . '"');
 }
 
 // Check to see if we are to impersonate
