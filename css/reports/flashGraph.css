@@ -52,6 +52,12 @@ input#todSelectionReset {
     height: 18px;
 }
 
+input#trimAbove, input#trimBelow {
+    height: 16px;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
 
 fieldset#timeframeFieldset label {
     width: 30px;
